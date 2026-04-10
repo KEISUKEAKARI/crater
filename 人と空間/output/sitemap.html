@@ -84,13 +84,13 @@
       position: relative;
     }
 
-    /* ページ群の上に横線を擬似要素で描く */
+    /* ページ群の上に横線を擬似要素で描く（5列 = 各列20%、中心は10%〜90%） */
     .pages::before {
       content: '';
       position: absolute;
       top: 0;
-      left: calc(12.5%);
-      right: calc(12.5%);
+      left: 10%;
+      right: 10%;
       height: 2px;
       background: #bbb;
     }
@@ -204,6 +204,51 @@
       position: absolute;
       left: 0;
       color: #bbb;
+    }
+
+    /* スマホ：縦並びレイアウト */
+    @media (max-width: 600px) {
+      body {
+        padding: 40px 20px;
+      }
+
+      .sitemap {
+        max-width: 240px;
+      }
+
+      /* 横線を非表示 */
+      .pages::before {
+        display: none;
+      }
+
+      /* ページ群を縦に並べる */
+      .pages {
+        flex-direction: column;
+        align-items: center;
+        max-width: 240px;
+        gap: 0;
+      }
+
+      /* 各列を中央揃えに */
+      .page-col {
+        width: 100%;
+        align-items: center;
+      }
+
+      /* 縦線の高さを少し増やして間隔を確保 */
+      .line-col {
+        height: 24px;
+      }
+
+      .page-box {
+        width: 80%;
+        max-width: 200px;
+      }
+
+      .sub-box {
+        width: 80%;
+        max-width: 180px;
+      }
     }
   </style>
 </head>
