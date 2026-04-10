@@ -171,27 +171,27 @@
     }
 
     .child-card {
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 8px 10px;
+      background: white;
+      border: 2px solid #1e2d3d;
+      border-radius: 8px;
+      padding: 12px 10px;
       width: 90%;
-      max-width: 140px;
+      max-width: 160px;
       text-align: center;
     }
 
     .child-card .child-en {
       font-size: 9px;
       color: #888;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       display: block;
       margin-bottom: 2px;
     }
 
     .child-card .child-ja {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
-      color: #555;
+      color: #1e2d3d;
       display: block;
     }
 
@@ -301,9 +301,12 @@
         font-size: 11px;
       }
 
-      /* 送信完了：スマホでは線なしのシンプルカード */
+      /* 送信完了：スマホでは区切り線で分けて同じカードデザイン */
       .child-section {
         margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #e0e0e0;
+        width: 100%;
       }
 
       .child-line {
@@ -313,27 +316,26 @@
       .child-card {
         width: 100%;
         max-width: 100%;
-        text-align: left;
-        padding: 8px 0 0 0;
-        background: none;
         border: none;
-        border-top: 1px solid #e0e0e0;
         border-radius: 0;
-      }
-
-      .child-card .child-en,
-      .child-card .child-ja {
-        display: inline;
+        padding: 0;
+        background: none;
+        text-align: left;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
       }
 
       .child-card .child-en {
+        display: inline;
         font-size: 9px;
-        margin-right: 6px;
+        margin-bottom: 0;
       }
 
       .child-card .child-ja {
-        font-size: 13px;
-        color: #555;
+        display: inline;
+        font-size: 14px;
+        color: #1e2d3d;
       }
     }
   </style>
