@@ -193,6 +193,7 @@
       font-weight: 600;
       color: #1e2d3d;
       display: block;
+      white-space: nowrap;
     }
 
     /* 注記 */
@@ -259,21 +260,25 @@
         gap: 10px;
       }
 
+      /* page-col はカードなし（中のpage-card/child-cardが各自カード） */
       .page-col {
         width: 100%;
         align-items: stretch;
+        background: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        gap: 10px;
+      }
+
+      /* page-card をカード化 */
+      .page-card {
+        width: 100%;
+        max-width: 100%;
         background: white;
         border: 2px solid #1e2d3d;
         border-radius: 8px;
         padding: 14px;
-      }
-
-      .page-card {
-        width: 100%;
-        max-width: 100%;
-        border: none;
-        border-radius: 0;
-        padding: 0;
       }
 
       .page-box {
@@ -301,11 +306,8 @@
         font-size: 11px;
       }
 
-      /* 送信完了：スマホでは区切り線で分けて同じカードデザイン */
+      /* 送信完了：独立カードとして表示 */
       .child-section {
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #e0e0e0;
         width: 100%;
       }
 
@@ -316,10 +318,10 @@
       .child-card {
         width: 100%;
         max-width: 100%;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        background: none;
+        background: white;
+        border: 2px solid #1e2d3d;
+        border-radius: 8px;
+        padding: 14px;
         text-align: left;
         display: flex;
         align-items: baseline;
@@ -330,12 +332,15 @@
         display: inline;
         font-size: 9px;
         margin-bottom: 0;
+        white-space: nowrap;
       }
 
       .child-card .child-ja {
         display: inline;
         font-size: 14px;
+        font-weight: 600;
         color: #1e2d3d;
+        white-space: normal;
       }
     }
   </style>
