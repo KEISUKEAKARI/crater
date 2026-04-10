@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人と空間 サイトマップ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
+      background: #f4f4f4;
+      padding: 60px 40px;
+      color: #333;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .header .logo-mark {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* サイトマップ全体 */
+    .sitemap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* TOPページ */
+    .top-page {
+      background: #1e2d3d;
+      color: white;
+      padding: 20px 60px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      position: relative;
+    }
+
+    /* 縦線（TOPから） */
+    .line-down {
+      width: 2px;
+      height: 40px;
+      background: #bbb;
+    }
+
+    /* 横線（ページ群をつなぐ） */
+    .horizontal-line {
+      width: 700px;
+      height: 2px;
+      background: #bbb;
+      position: relative;
+    }
+
+    /* ページ群 */
+    .pages {
+      display: flex;
+      gap: 0;
+      width: 700px;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* 各ページ列 */
+    .page-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+    }
+
+    /* 縦線（横線からページへ） */
+    .line-col {
+      width: 2px;
+      height: 30px;
+      background: #bbb;
+    }
+
+    /* ページボックス */
+    .page-box {
+      background: white;
+      border: 2px solid #1e2d3d;
+      border-radius: 6px;
+      padding: 14px 20px;
+      text-align: center;
+      width: 140px;
+    }
+
+    .page-box .page-en {
+      font-size: 10px;
+      color: #888;
+      letter-spacing: 0.15em;
+      margin-bottom: 4px;
+    }
+
+    .page-box .page-ja {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e2d3d;
+    }
+
+    /* サブページ */
+    .sub-pages {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin-top: 0;
+    }
+
+    .sub-line {
+      width: 2px;
+      height: 20px;
+      background: #ccc;
+    }
+
+    .sub-box {
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #555;
+      width: 130px;
+      text-align: center;
+    }
+
+    .sub-box + .sub-line {
+      display: block;
+    }
+
+    /* 注記 */
+    .notes {
+      max-width: 900px;
+      margin: 60px auto 0;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+    }
+
+    .notes h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e2d3d;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    .notes ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .notes li {
+      font-size: 13px;
+      color: #555;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .notes li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo-mark">HUMAN AND SPACE</div>
+    <h1>人と空間 コーポレートサイト</h1>
+    <p>サイトマップ v1.0　2026年4月</p>
+  </div>
+
+  <div class="sitemap">
+
+    <!-- TOPページ -->
+    <div class="top-page">TOP（ホーム）</div>
+    <div class="line-down"></div>
+
+    <!-- 横線 -->
+    <div class="horizontal-line"></div>
+
+    <!-- 各ページ列 -->
+    <div class="pages">
+
+      <!-- 私たちについて -->
+      <div class="page-col">
+        <div class="line-col"></div>
+        <div class="page-box">
+          <div class="page-en">ABOUT</div>
+          <div class="page-ja">私たちについて</div>
+        </div>
+        <div class="sub-pages">
+          <div class="sub-line"></div>
+          <div class="sub-box">ミッション</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">会社概要</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">メンバー</div>
+        </div>
+      </div>
+
+      <!-- サービス -->
+      <div class="page-col">
+        <div class="line-col"></div>
+        <div class="page-box">
+          <div class="page-en">SERVICES</div>
+          <div class="page-ja">サービス</div>
+        </div>
+        <div class="sub-pages">
+          <div class="sub-line"></div>
+          <div class="sub-box">CX調査</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">空間品質調査</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">AIカメラ・DX</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">コンサルティング</div>
+        </div>
+      </div>
+
+      <!-- 事例 -->
+      <div class="page-col">
+        <div class="line-col"></div>
+        <div class="page-box">
+          <div class="page-en">CASES</div>
+          <div class="page-ja">事例</div>
+        </div>
+        <div class="sub-pages">
+          <div class="sub-line"></div>
+          <div class="sub-box">百貨店</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">ライフスタイル</div>
+          <div class="sub-line"></div>
+          <div class="sub-box">アパレル</div>
+        </div>
+      </div>
+
+      <!-- お問い合わせ -->
+      <div class="page-col">
+        <div class="line-col"></div>
+        <div class="page-box">
+          <div class="page-en">CONTACT</div>
+          <div class="page-ja">お問い合わせ</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 注記 -->
+  <div class="notes">
+    <h2>設計メモ</h2>
+    <ul>
+      <li>サービスは概要のみ1ページにまとめる（詳細は問い合わせ後に資料で対応）</li>
+      <li>事例は資料記載の3ケース（百貨店・ライフスタイルショップ・アパレル）をベース</li>
+      <li>コラム・ニュースは今回なし</li>
+      <li>目的：ブランディング＋問い合わせ獲得</li>
+    </ul>
+  </div>
+
+</body>
+</html>
