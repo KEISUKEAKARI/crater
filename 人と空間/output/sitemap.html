@@ -71,11 +71,7 @@
 
     /* 横線（ページ群をつなぐ） */
     .horizontal-line {
-      width: 100%;
-      max-width: 700px;
-      height: 2px;
-      background: #bbb;
-      position: relative;
+      display: none;
     }
 
     /* ページ群 */
@@ -86,6 +82,17 @@
       max-width: 700px;
       justify-content: space-between;
       position: relative;
+    }
+
+    /* ページ群の上に横線を擬似要素で描く */
+    .pages::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 2px;
+      background: #bbb;
     }
 
     /* 各ページ列 */
