@@ -71,7 +71,8 @@
 
     /* 横線（ページ群をつなぐ） */
     .horizontal-line {
-      width: 700px;
+      width: 100%;
+      max-width: 700px;
       height: 2px;
       background: #bbb;
       position: relative;
@@ -81,7 +82,8 @@
     .pages {
       display: flex;
       gap: 0;
-      width: 700px;
+      width: 100%;
+      max-width: 700px;
       justify-content: space-between;
       position: relative;
     }
@@ -93,6 +95,7 @@
       align-items: center;
       gap: 0;
       flex: 1;
+      min-width: 0;
     }
 
     /* 縦線（横線からページへ） */
@@ -107,9 +110,10 @@
       background: white;
       border: 2px solid #1e2d3d;
       border-radius: 6px;
-      padding: 14px 20px;
+      padding: 10px 6px;
       text-align: center;
-      width: 140px;
+      width: 90%;
+      max-width: 140px;
     }
 
     .page-box .page-en {
@@ -144,10 +148,11 @@
       background: #f9f9f9;
       border: 1px solid #ccc;
       border-radius: 4px;
-      padding: 8px 14px;
-      font-size: 12px;
+      padding: 8px 6px;
+      font-size: 11px;
       color: #555;
-      width: 130px;
+      width: 90%;
+      max-width: 130px;
       text-align: center;
     }
 
