@@ -1,0 +1,42 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "oyama-jinja",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080", "-d", "/Users/cratermacbookpro/Projects/claude/oyama-jinja"],
+      "port": 8080
+    },
+    {
+      "name": "lesson",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8081", "-d", "/Users/cratermacbookpro/Projects/claude/lesson"],
+      "port": 8081
+    }
+    ,{
+      "name": "komatsu-sake",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8082", "-d", "/Users/cratermacbookpro/Projects/claude/komatsu-sake"],
+      "port": 8082
+    }
+    ,{
+      "name": "design-reference-tool",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "cwd": "/Users/cratermacbookpro/Projects/claude/design-reference-tool",
+      "port": 3000
+    }
+    ,{
+      "name": "lp-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8083", "-d", "/Users/cratermacbookpro/Projects/claude/lp-sitemap-designer"],
+      "port": 8083
+    }
+    ,{
+      "name": "layout-instruction-tool",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8084", "-d", "/Users/cratermacbookpro/Projects/claude/layout-instruction-tool"],
+      "port": 8084
+    }
+  ]
+}
