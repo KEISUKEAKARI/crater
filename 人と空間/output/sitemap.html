@@ -213,7 +213,7 @@
       }
 
       .sitemap {
-        max-width: 240px;
+        max-width: 100%;
       }
 
       /* 横線を非表示 */
@@ -225,7 +225,8 @@
       .pages {
         flex-direction: column;
         align-items: center;
-        max-width: 240px;
+        max-width: 320px;
+        width: 100%;
         gap: 0;
       }
 
@@ -235,19 +236,34 @@
         align-items: center;
       }
 
-      /* 縦線の高さを少し増やして間隔を確保 */
+      /* 縦線の高さを確保 */
       .line-col {
         height: 24px;
       }
 
       .page-box {
-        width: 80%;
+        width: 70%;
         max-width: 200px;
       }
 
+      /* サブページは横並び */
+      .sub-pages {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 0 4px;
+      }
+
+      /* サブ間の縦線は非表示 */
+      .sub-line {
+        display: none;
+      }
+
       .sub-box {
-        width: 80%;
-        max-width: 180px;
+        width: auto;
+        max-width: none;
+        padding: 6px 10px;
       }
     }
   </style>
