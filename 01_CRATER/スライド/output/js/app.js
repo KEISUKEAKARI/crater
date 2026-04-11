@@ -5,7 +5,7 @@
 
 (function () {
 
-  var stage      = document.getElementById('slide-stage');
+  var stage      = document.getElementById('slide-wrapper');
   var counter    = document.getElementById('nav-counter');
   var btnPrev    = document.getElementById('btn-prev');
   var btnNext    = document.getElementById('btn-next');
@@ -38,6 +38,8 @@
     var slides = stage.querySelectorAll('.slide');
     slides.forEach(function (s) { s.classList.remove('active'); });
     if (slides[i]) slides[i].classList.add('active');
+    // スライドラッパーの位置を合わせてスクロール防止
+    window.scrollTo(0, 0);
 
     current = i;
 
