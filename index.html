@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRATER VIEW</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: #1e2d3d;
+      padding: 32px 48px;
+    }
+
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #fff;
+      opacity: 0.5;
+      margin-bottom: 6px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.1em;
+    }
+
+    /* コンテンツ */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    /* セクション */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #1e2d3d;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #888;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e2d3d;
+    }
+
+    /* カード一覧 */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 14px 18px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-width: 160px;
+    }
+
+    .card:hover {
+      border-color: #1e2d3d;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card-type {
+      font-size: 10px;
+      color: #888;
+      letter-spacing: 0.1em;
+    }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e2d3d;
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 600px) {
+      .header { padding: 24px 20px; }
+      .container { padding: 32px 20px; }
+      .cards { flex-direction: column; }
+      .card { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">CRATER INC.</div>
+    <h1>VIEW</h1>
+  </div>
+
+  <div class="container">
+
+    <!-- クライアント案件 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">CLIENT</span>
+        <span class="section-title">人と空間</span>
+      </div>
+      <div class="cards">
+        <a class="card" href="/CL/人と空間/output/sitemap.html">
+          <span class="card-type">SITEMAP</span>
+          <span class="card-name">サイトマップ</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 自社案件 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">CRATER</span>
+        <span class="section-title">社内デザイナー顧問 LP</span>
+      </div>
+      <div class="cards">
+        <a class="card" href="/01_CRATER/デザイン顧問/output/lp/wireframe-full.html">
+          <span class="card-type">WIREFRAME</span>
+          <span class="card-name">ワイヤーフレーム</span>
+        </a>
+        <a class="card" href="/01_CRATER/デザイン顧問/output/lp/layout-frame.html">
+          <span class="card-type">LAYOUT FRAME</span>
+          <span class="card-name">レイアウトフレーム</span>
+        </a>
+        <a class="card" href="/01_CRATER/デザイン顧問/output/lp/layout-frame-v2.html">
+          <span class="card-type">LAYOUT FRAME</span>
+          <span class="card-name">レイアウトフレーム v2</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">CRATER INC. — INTERNAL USE ONLY</div>
+
+</body>
+</html>
