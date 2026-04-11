@@ -9,19 +9,20 @@
 
     /* ===== 色変数 ===== */
     :root {
-      --黒: #1A1A1A;
-      --白: #ffffff;
-      --金: #F0C030;
-      --薄グレー: #EFEFED;
-      --線: #DDDDD8;
-      --文字薄: #AAAAAA;
+      --黒: #111111;
+      --グレー: #C8C8C8;
+      --濃グレー: #ADADAD;
+      --薄グレー: #D8D8D8;
+      --黄: #FFE500;
+      --線: rgba(0,0,0,0.18);
+      --文字薄: #555555;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: #D8D8D4;
+      background: var(--グレー);
       overflow: hidden;
       width: 100vw;
       height: 100vh;
@@ -33,7 +34,7 @@
     .スライド {
       position: absolute;
       inset: 0;
-      background: var(--白);
+      background: var(--グレー);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.35s ease;
@@ -64,7 +65,7 @@
     /* プログレスバー */
     .プログレス {
       position: fixed; bottom: 0; left: 0;
-      height: 3px; background: var(--金);
+      height: 3px; background: var(--黄);
       transition: width 0.35s ease; z-index: 100;
     }
 
@@ -75,23 +76,29 @@
     }
     .ナビボタン {
       width: 40px; height: 40px;
-      border: 1px solid var(--線);
-      background: var(--白);
+      border: 1px solid rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.12);
       border-radius: 50%;
       cursor: pointer;
-      font-size: 15px; color: #888;
+      font-size: 15px; color: #333;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
-    .ナビボタン:hover { background: var(--黒); border-color: var(--黒); color: var(--白); }
-    .ナビボタン:disabled { opacity: 0.2; pointer-events: none; }
+    .ナビボタン:hover { background: var(--黒); border-color: var(--黒); color: #fff; }
+    .ナビボタン:disabled { opacity: 0.25; pointer-events: none; }
+
+    /* 重要テキスト（黄色ハイライト帯） */
+    em {
+      font-style: normal;
+      background: var(--黄);
+      color: var(--黒);
+      padding: 1px 5px;
+    }
 
 
     /* ================================================
        スライド1: 表紙
     ================================================ */
-    #s1 { background: var(--薄グレー); }
-
     .表紙本文 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -117,11 +124,16 @@
       line-height: 0.9;
     }
 
-    .表紙ロゴ span { color: var(--金); }
+    /* "A" の一文字だけ黄色帯 */
+    .表紙ロゴ .アクセント {
+      background: var(--黄);
+      color: var(--黒);
+      padding: 0 2px;
+    }
 
     .表紙社名 {
       font-size: 13px; font-weight: 300;
-      color: #888; margin-top: 16px; letter-spacing: 0.1em;
+      color: var(--文字薄); margin-top: 16px; letter-spacing: 0.1em;
     }
 
     .表紙キャッチ {
@@ -136,13 +148,19 @@
       content: '';
       display: block;
       width: 32px; height: 3px;
-      background: var(--金);
+      background: var(--黄);
       margin-bottom: 20px;
     }
 
     .表紙年 {
-      font-size: 11px; color: #bbb;
-      margin-top: 20px; letter-spacing: 0.1em;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #fff;
+      background: var(--黒);
+      padding: 4px 12px;
+      margin-top: 24px;
     }
 
     /* ================================================
@@ -161,20 +179,16 @@
 
     .ミッション主張 {
       font-size: clamp(26px, 3.2vw, 40px);
-      font-weight: 900; line-height: 1.5;
+      font-weight: 900; line-height: 1.7;
       color: var(--黒); margin-bottom: 24px;
     }
 
-    .ミッション主張 em {
-      font-style: normal; color: var(--金);
-    }
-
     .ミッション本文テキスト {
-      font-size: 13px; color: #777; line-height: 2;
+      font-size: 13px; color: var(--文字薄); line-height: 2;
     }
 
     .ミッション右 {
-      background: var(--薄グレー);
+      background: var(--濃グレー);
       display: flex; flex-direction: column;
       justify-content: center;
       padding: 40px 36px; gap: 0;
@@ -190,11 +204,17 @@
       font-size: 40px; font-weight: 900;
       color: var(--黒); line-height: 1;
     }
-    .数字大 span { color: var(--金); font-size: 24px; }
+    .数字大 span { font-size: 24px; }
+
+    .数字大.ハイライト {
+      background: var(--黄);
+      display: inline-block;
+      padding: 0 8px;
+    }
 
     .数字ラベル {
       font-size: 11px; color: var(--文字薄);
-      letter-spacing: 0.1em; margin-top: 4px;
+      letter-spacing: 0.1em; margin-top: 6px;
     }
 
     /* ================================================
@@ -206,9 +226,13 @@
     }
 
     .概要見出し {
+      display: inline-block;
       font-size: 11px; font-weight: 700;
-      color: var(--金); letter-spacing: 0.18em;
-      text-transform: uppercase; margin-bottom: 24px;
+      color: var(--黒); letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: var(--黄);
+      padding: 4px 12px;
+      margin-bottom: 24px;
     }
 
     .概要テーブル { width: 100%; border-collapse: collapse; }
@@ -239,7 +263,7 @@
     }
 
     .事業左 {
-      background: var(--薄グレー);
+      background: var(--濃グレー);
       display: flex; flex-direction: column; justify-content: center;
       padding: 40px 48px;
       border-right: 1px solid var(--線);
@@ -248,14 +272,10 @@
     .事業キャッチ {
       font-size: clamp(28px, 3.5vw, 44px);
       font-weight: 900; color: var(--黒);
-      line-height: 1.3; margin-bottom: 20px;
+      line-height: 1.5; margin-bottom: 20px;
     }
 
-    .事業キャッチ em {
-      font-style: normal; color: var(--金);
-    }
-
-    .事業説明 { font-size: 12px; color: #888; line-height: 2; }
+    .事業説明 { font-size: 12px; color: var(--文字薄); line-height: 2; }
 
     .事業右 {
       display: flex; align-items: center; justify-content: center;
@@ -273,8 +293,8 @@
     .受賞主張 {
       font-size: clamp(22px, 2.8vw, 34px);
       font-weight: 900; color: var(--黒);
+      line-height: 1.6;
     }
-    .受賞主張 em { font-style: normal; color: var(--金); }
 
     .タイムライン {
       display: grid;
@@ -284,29 +304,24 @@
     }
 
     .タイムラインアイテム {
-      background: var(--白);
+      background: var(--グレー);
       padding: 24px 20px;
       display: flex; flex-direction: column;
       justify-content: space-between;
     }
 
-    .タイムラインアイテム:nth-child(2n) { background: var(--薄グレー); }
+    .タイムラインアイテム:nth-child(2n) { background: var(--濃グレー); }
 
+    /* バッジ：黒ベタ＋白文字 */
     .受賞年バッジ {
       display: inline-block;
-      background: var(--金);
-      color: var(--黒);
+      background: var(--黒);
+      color: #fff;
       font-size: 10px; font-weight: 700;
       padding: 3px 10px;
       letter-spacing: 0.1em;
       align-self: flex-start;
       margin-bottom: 12px;
-    }
-
-    .受賞年バッジ暗 {
-      background: var(--薄グレー);
-      color: var(--黒);
-      border: 1px solid var(--線);
     }
 
     .受賞賞名 {
@@ -321,7 +336,7 @@
     }
 
     .受賞補足 {
-      font-size: 12px; color: #888;
+      font-size: 12px; color: var(--文字薄);
       display: flex; gap: 24px; align-items: center;
     }
     .受賞補足 strong { color: var(--黒); font-weight: 700; }
@@ -337,8 +352,8 @@
     .クライアント主張 {
       font-size: clamp(22px, 2.8vw, 36px);
       font-weight: 900; color: var(--黒);
+      line-height: 1.6;
     }
-    .クライアント主張 em { font-style: normal; color: var(--金); }
 
     .クライアントグリッド {
       display: grid;
@@ -348,10 +363,10 @@
     }
 
     .クライアントセル {
-      background: var(--白);
+      background: var(--グレー);
       padding: 20px 20px 18px;
     }
-    .クライアントセル:nth-child(odd) { background: var(--薄グレー); }
+    .クライアントセル:nth-child(odd) { background: var(--濃グレー); }
 
     .クライアント社名 {
       font-size: 14px; font-weight: 900;
@@ -366,7 +381,7 @@
     /* ================================================
        スライド7: 連絡先
     ================================================ */
-    #s7 { background: var(--薄グレー); }
+    #s7 { background: var(--グレー); }
 
     .連絡先本文 {
       display: grid;
@@ -374,6 +389,7 @@
     }
 
     .連絡先左 {
+      background: var(--黒);
       padding: 40px 48px;
       border-right: 1px solid var(--線);
       display: flex; flex-direction: column; justify-content: center;
@@ -381,19 +397,19 @@
 
     .連絡先ロゴ {
       font-size: clamp(48px, 6.5vw, 80px);
-      font-weight: 900; color: var(--黒);
+      font-weight: 900; color: #fff;
       line-height: 0.9; letter-spacing: -0.02em;
     }
 
-    .連絡先ロゴ span { color: var(--金); }
+    .連絡先ロゴ .アクセント { color: var(--黄); }
 
     .連絡先社名 {
-      font-size: 13px; color: #888;
+      font-size: 13px; color: rgba(255,255,255,0.5);
       margin-top: 12px; letter-spacing: 0.1em;
     }
 
     .連絡先URL {
-      font-size: 13px; color: #bbb;
+      font-size: 13px; color: rgba(255,255,255,0.3);
       margin-top: 28px; letter-spacing: 0.05em;
     }
 
@@ -412,12 +428,15 @@
 
     .連絡先ラベル {
       font-size: 10px; font-weight: 700;
-      color: var(--金); letter-spacing: 0.15em;
+      color: var(--黒); letter-spacing: 0.15em;
       text-transform: uppercase;
+      display: inline-block;
+      background: var(--黄);
+      padding: 2px 8px;
     }
 
     .連絡先値 {
-      font-size: 14px; color: #666; line-height: 1.7;
+      font-size: 14px; color: #444; line-height: 1.7;
     }
 
   </style>
@@ -434,12 +453,12 @@
     </div>
     <div class="表紙本文">
       <div class="表紙左">
-        <div class="表紙ロゴ">CR<span>A</span>TER</div>
+        <div class="表紙ロゴ">CR<span class="アクセント">A</span>TER</div>
         <p class="表紙社名">株式会社クレーター</p>
       </div>
       <div class="表紙右">
         <p class="表紙キャッチ">この星に、<br>つめあとを残せ。</p>
-        <p class="表紙年">Est. 2013 — Tokyo, Japan</p>
+        <span class="表紙年">Est. 2013 — Tokyo, Japan</span>
       </div>
     </div>
     <div class="フッター">
@@ -469,7 +488,7 @@
           <div class="数字ラベル">創業からの実績</div>
         </div>
         <div class="数字ブロック">
-          <div class="数字大" style="color:var(--金)">4</div>
+          <div class="数字大 ハイライト">4</div>
           <div class="数字ラベル">国際デザイン賞受賞</div>
         </div>
         <div class="数字ブロック">
@@ -546,35 +565,35 @@
       </div>
       <div class="事業右">
         <svg viewBox="0 0 280 280" width="280" height="280" style="overflow:visible;">
-          <line x1="140" y1="140" x2="140" y2="24"  stroke="#DDDDD8" stroke-width="1"/>
-          <line x1="140" y1="140" x2="244" y2="80"  stroke="#DDDDD8" stroke-width="1"/>
-          <line x1="140" y1="140" x2="224" y2="216" stroke="#DDDDD8" stroke-width="1"/>
-          <line x1="140" y1="140" x2="56"  y2="216" stroke="#DDDDD8" stroke-width="1"/>
-          <line x1="140" y1="140" x2="36"  y2="80"  stroke="#DDDDD8" stroke-width="1"/>
-          <!-- 中心円（ゴールド） -->
-          <circle cx="140" cy="140" r="38" fill="#F0C030"/>
-          <text x="140" y="136" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="11" font-weight="900" fill="#1A1A1A" letter-spacing="1">CRATER</text>
-          <text x="140" y="152" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#555">デザイン事務所</text>
+          <line x1="140" y1="140" x2="140" y2="24"  stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <line x1="140" y1="140" x2="244" y2="80"  stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <line x1="140" y1="140" x2="224" y2="216" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <line x1="140" y1="140" x2="56"  y2="216" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <line x1="140" y1="140" x2="36"  y2="80"  stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <!-- 中心円（ビビッド黄） -->
+          <circle cx="140" cy="140" r="38" fill="#FFE500"/>
+          <text x="140" y="136" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="11" font-weight="900" fill="#111111" letter-spacing="1">CRATER</text>
+          <text x="140" y="152" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#333">デザイン事務所</text>
           <!-- ブランディング（上） -->
-          <circle cx="140" cy="24" r="28" fill="white" stroke="#DDDDD8" stroke-width="1.5"/>
-          <text x="140" y="20" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">ブランド</text>
-          <text x="140" y="32" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">ディング</text>
+          <circle cx="140" cy="24" r="28" fill="#D8D8D8" stroke="rgba(0,0,0,0.18)" stroke-width="1.5"/>
+          <text x="140" y="20" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">ブランド</text>
+          <text x="140" y="32" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">ディング</text>
           <!-- ロゴデザイン（右上） -->
-          <circle cx="244" cy="80" r="28" fill="#EFEFED" stroke="#DDDDD8" stroke-width="1.5"/>
-          <text x="244" y="76" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">ロゴ</text>
-          <text x="244" y="88" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">デザイン</text>
+          <circle cx="244" cy="80" r="28" fill="#ADADAD" stroke="rgba(0,0,0,0.18)" stroke-width="1.5"/>
+          <text x="244" y="76" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">ロゴ</text>
+          <text x="244" y="88" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">デザイン</text>
           <!-- パッケージ（右下） -->
-          <circle cx="224" cy="216" r="28" fill="white" stroke="#DDDDD8" stroke-width="1.5"/>
-          <text x="224" y="212" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">パッケージ</text>
-          <text x="224" y="224" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">デザイン</text>
+          <circle cx="224" cy="216" r="28" fill="#D8D8D8" stroke="rgba(0,0,0,0.18)" stroke-width="1.5"/>
+          <text x="224" y="212" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">パッケージ</text>
+          <text x="224" y="224" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">デザイン</text>
           <!-- Webデザイン（左下） -->
-          <circle cx="56" cy="216" r="28" fill="white" stroke="#DDDDD8" stroke-width="1.5"/>
-          <text x="56" y="212" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">Web</text>
-          <text x="56" y="224" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">デザイン</text>
+          <circle cx="56" cy="216" r="28" fill="#D8D8D8" stroke="rgba(0,0,0,0.18)" stroke-width="1.5"/>
+          <text x="56" y="212" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">Web</text>
+          <text x="56" y="224" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">デザイン</text>
           <!-- グラフィック（左上） -->
-          <circle cx="36" cy="80" r="28" fill="#EFEFED" stroke="#DDDDD8" stroke-width="1.5"/>
-          <text x="36" y="76" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">グラフィック</text>
-          <text x="36" y="88" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#1A1A1A">デザイン</text>
+          <circle cx="36" cy="80" r="28" fill="#ADADAD" stroke="rgba(0,0,0,0.18)" stroke-width="1.5"/>
+          <text x="36" y="76" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">グラフィック</text>
+          <text x="36" y="88" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="8.5" font-weight="700" fill="#111111">デザイン</text>
         </svg>
       </div>
     </div>
@@ -599,7 +618,7 @@
           <div class="受賞結果">Silver Award</div>
         </div>
         <div class="タイムラインアイテム">
-          <span class="受賞年バッジ 受賞年バッジ暗">2023</span>
+          <span class="受賞年バッジ">2023</span>
           <div class="受賞賞名">German<br>Design Award</div>
           <div class="受賞結果">受賞</div>
         </div>
@@ -609,7 +628,7 @@
           <div class="受賞結果">Gold Award</div>
         </div>
         <div class="タイムラインアイテム">
-          <span class="受賞年バッジ 受賞年バッジ暗">複数年</span>
+          <span class="受賞年バッジ">複数年</span>
           <div class="受賞賞名">K-Design<br>Award</div>
           <div class="受賞結果">Gold / Silver 複数受賞</div>
         </div>
@@ -666,7 +685,7 @@
     </div>
     <div class="連絡先本文">
       <div class="連絡先左">
-        <div class="連絡先ロゴ">CR<span>A</span>TER</div>
+        <div class="連絡先ロゴ">CR<span class="アクセント">A</span>TER</div>
         <p class="連絡先社名">株式会社クレーター</p>
         <p class="連絡先URL">crater.co.jp</p>
       </div>
