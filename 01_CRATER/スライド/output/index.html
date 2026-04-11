@@ -4,47 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>会社概要 — 株式会社クレーター</title>
-  <!-- Adobe Fonts（urw-din） -->
   <link rel="stylesheet" href="https://use.typekit.net/fwj5xdw.css">
-  <!-- Noto Sans JP -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
-<!-- サイドバー（デフォルト非表示） -->
-<div class="backdrop" id="backdrop"></div>
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-logo">CRATER</div>
-  <div id="sidebar-agenda"></div>
-</nav>
-
-<!-- スライドステージ（16:9固定） -->
+<!-- スライドステージ（フルビューポート） -->
 <div class="slide-stage" id="slide-stage"></div>
+
+<!-- 左右クリックナビ -->
+<div class="nav-prev" id="nav-prev" aria-label="前のスライド"></div>
+<div class="nav-next" id="nav-next" aria-label="次のスライド"></div>
+
+<!-- 右上UI -->
+<div class="status-bar" id="status-bar"></div>
+<button class="menu-btn" id="menu-btn" aria-label="メニュー">
+  <span></span><span></span><span></span>
+</button>
 
 <!-- プログレスバー -->
 <div class="progress-bar" id="progress-bar"></div>
 
-<!-- ナビゲーションバー -->
-<nav class="nav-bar">
-  <div class="nav-left">
-    <button class="hamburger-btn" id="hamburger-btn" aria-label="メニューを開く">
-      <span></span><span></span><span></span>
-    </button>
-    <span class="nav-logo">CRATER</span>
-  </div>
-  <div class="nav-center">
-    <button class="nav-btn" id="btn-prev" disabled aria-label="前のスライド">←</button>
-    <span class="nav-counter" id="nav-counter">1 / 4</span>
-    <button class="nav-btn" id="btn-next" aria-label="次のスライド">→</button>
-  </div>
-  <div class="nav-right">
-    <span class="nav-counter">Company Profile</span>
-  </div>
-</nav>
+<!-- サイドバー（右からスライドイン） -->
+<div class="sidebar-overlay" id="sidebar-overlay">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">CRATER</span>
+      <button class="sidebar-close" id="sidebar-close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="sidebar-list" id="sidebar-list"></div>
+  </nav>
+</div>
 
-<script src="js/slides.js?v=4"></script>
-<script src="js/app.js?v=4"></script>
+<!-- トークスクリプト（下ホバーで表示） -->
+<div class="script-trigger" id="script-trigger"></div>
+<div class="script-panel" id="script-panel"></div>
+
+<script src="js/slides.js?v=5"></script>
+<script src="js/app.js?v=5"></script>
 
 <!-- パスワード保護 -->
 <div id="pw-lock" style="position:fixed;inset:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;">

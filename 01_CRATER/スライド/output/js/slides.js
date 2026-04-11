@@ -1,9 +1,9 @@
 // ============================================
-// CRATER 会社概要 — slides.js v4
-// 最初の4枚
+// CRATER 会社概要 — slides.js v5
+// 1スライド = 1関数
 // ============================================
 
-// SLIDE 01 | 表紙 | F5 cover
+// SLIDE 01 | 表紙 | 黒左パネル / グレー右
 function slide01Cover() {
   return `<section class="slide" data-section="cover" data-notes="本日はお時間をいただきありがとうございます。株式会社クレーターの会社概要をご覧ください。クレーターは「この星に、つめあとを残せ」をブランドコンセプトに、デザインの力でブランドの価値を伝えることを使命としています。">
   <div class="s01">
@@ -20,7 +20,7 @@ function slide01Cover() {
 </section>`;
 }
 
-// SLIDE 02 | ミッション | F1 statement
+// SLIDE 02 | ミッション | 中央ステートメント
 function slide02Mission() {
   return `<section class="slide" data-section="mission" data-notes="クレーターのミッションはシンプルです。価値あるブランドを、必要な人に届ける。メッセージとストーリーを視覚化し、ブランドの価値を正確に伝えることが私たちの仕事です。">
   <div class="s02">
@@ -31,7 +31,7 @@ function slide02Mission() {
 </section>`;
 }
 
-// SLIDE 03 | 実績数字 | F4 big-number
+// SLIDE 03 | 実績数字 | 3カラム big-number
 function slide03Numbers() {
   return `<section class="slide" data-section="numbers" data-notes="私たちの実績を3つの数字でご覧ください。創業12年、国際デザイン賞4冠、5つの事業領域。この数字が私たちの実力を語っています。">
   <div class="s03">
@@ -60,7 +60,7 @@ function slide03Numbers() {
 </section>`;
 }
 
-// SLIDE 04 | 会社概要 | F2 left-right
+// SLIDE 04 | 会社概要 | 左細ラベル + 右テーブル
 function slide04Overview() {
   return `<section class="slide" data-section="overview" data-notes="会社概要をご説明します。株式会社クレーターは2013年創業、2019年法人設立の東京・下北沢のデザイン事務所です。代表の明里圭修がアートディレクターとして、ブランディングからWebまで幅広いデザインを一貫して担当しています。">
   <div class="s04">

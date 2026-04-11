@@ -1,19 +1,21 @@
 // ============================================
-// CRATER 会社概要スライド — app.js v4
-// slides.js が先に読み込まれている前提（window.slideFactories / agendaItems）
+// CRATER 会社概要スライド — app.js v5
+// slide-builder スキル準拠
 // ============================================
 
 (function () {
 
-  var stage      = document.getElementById('slide-stage');
-  var counter    = document.getElementById('nav-counter');
-  var btnPrev    = document.getElementById('btn-prev');
-  var btnNext    = document.getElementById('btn-next');
-  var progress   = document.getElementById('progress-bar');
-  var sidebar    = document.getElementById('sidebar');
-  var backdrop   = document.getElementById('backdrop');
-  var hamburger  = document.getElementById('hamburger-btn');
-  var agendaCont = document.getElementById('sidebar-agenda');
+  var stage     = document.getElementById('slide-stage');
+  var statusBar = document.getElementById('status-bar');
+  var menuBtn   = document.getElementById('menu-btn');
+  var overlay   = document.getElementById('sidebar-overlay');
+  var sideClose = document.getElementById('sidebar-close');
+  var sideList  = document.getElementById('sidebar-list');
+  var progress  = document.getElementById('progress-bar');
+  var navPrev   = document.getElementById('nav-prev');
+  var navNext   = document.getElementById('nav-next');
+  var scriptTrig = document.getElementById('script-trigger');
+  var scriptPanel = document.getElementById('script-panel');
 
   var current  = 0;
   var total    = slideFactories.length;
@@ -28,65 +30,80 @@
   }
 
   // ===== スライド移動 =====
-  function goTo(i) {
+  function goTo(i, skipHash) {
     if (i < 0 || i >= total) return;
-
-    // 当該スライドと前後1枚を先読み
     [i - 1, i, i + 1].forEach(function (j) { ensureRendered(j); });
 
-    // active 切替
     var slides = stage.querySelectorAll('.slide');
     slides.forEach(function (s) { s.classList.remove('active'); });
     if (slides[i]) slides[i].classList.add('active');
 
-    window.scrollTo(0, 0);
     current = i;
 
-    // ナビ更新
-    counter.textContent  = (i + 1) + ' / ' + total;
-    btnPrev.disabled     = i === 0;
-    btnNext.disabled     = i === total - 1;
+    // URLハッシュ同期
+    if (!skipHash) {
+      history.replaceState(null, '', '#' + (i + 1));
+    }
+
+    // ステータスバー更新
+    statusBar.textContent = agendaItems[i].label + '  ' + (i + 1) + ' / ' + total;
+
+    // プログレスバー
     progress.style.width = ((i + 1) / total * 100) + '%';
 
-    // サイドバーのアクティブ状態
+    // サイドバーのハイライト
     document.querySelectorAll('.sidebar-item').forEach(function (el, idx) {
       el.classList.toggle('active', idx === i);
     });
+
+    // トークスクリプト更新
+    var slide = slides[i];
+    var notes = slide ? slide.getAttribute('data-notes') : '';
+    scriptPanel.textContent = notes || '';
+
+    // スライド切替でスクリプトを隠す
+    scriptPanel.classList.remove('visible');
   }
 
   // ===== 初期化 =====
-  [0, 1, 2].forEach(function (i) { ensureRendered(i); });
-  goTo(0);
+  // URLハッシュからページ番号を復元
+  var initPage = 0;
+  var hash = window.location.hash.replace('#', '');
+  if (hash && !isNaN(hash)) {
+    var p = parseInt(hash, 10) - 1;
+    if (p >= 0 && p < total) initPage = p;
+  }
 
-  // ===== ボタン =====
-  btnPrev.addEventListener('click', function () { goTo(current - 1); });
-  btnNext.addEventListener('click', function () { goTo(current + 1); });
+  [0, 1, 2].forEach(function (i) { ensureRendered(i); });
+  goTo(initPage, true);
 
   // ===== キーボード =====
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
-    if (e.key === 'ArrowLeft')                   { e.preventDefault(); goTo(current - 1); }
-    if (e.key === 'Escape')                       { closeSidebar(); }
+    if (e.key === 'ArrowRight' || e.key === ' ')   { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'Backspace') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'Home')  { e.preventDefault(); goTo(0); }
+    if (e.key === 'End')   { e.preventDefault(); goTo(total - 1); }
+    if (e.key === 'Escape') { closeSidebar(); }
   });
+
+  // ===== 左右クリック =====
+  navPrev.addEventListener('click', function () { goTo(current - 1); });
+  navNext.addEventListener('click', function () { goTo(current + 1); });
 
   // ===== サイドバー =====
-  function openSidebar() {
-    sidebar.classList.add('open');
-    backdrop.classList.add('open');
-  }
+  function openSidebar() { overlay.classList.add('open'); }
+  function closeSidebar() { overlay.classList.remove('open'); }
 
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    backdrop.classList.remove('open');
-  }
+  menuBtn.addEventListener('click', function () {
+    overlay.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  sideClose.addEventListener('click', closeSidebar);
 
-  hamburger.addEventListener('click', function () {
-    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  overlay.addEventListener('click', function (e) {
+    if (!e.target.closest('.sidebar')) closeSidebar();
   });
 
-  backdrop.addEventListener('click', closeSidebar);
-
-  // ===== サイドバーのアジェンダ項目を動的生成 =====
+  // サイドバーのアジェンダ項目を生成
   agendaItems.forEach(function (item, i) {
     var btn = document.createElement('button');
     btn.className = 'sidebar-item';
@@ -98,7 +115,33 @@
       goTo(i);
       closeSidebar();
     });
-    agendaCont.appendChild(btn);
+    sideList.appendChild(btn);
+  });
+
+  // ===== トークスクリプト（下ホバー） =====
+  var scriptTimeout = null;
+
+  scriptTrig.addEventListener('mouseenter', function () {
+    if (scriptPanel.textContent.trim()) {
+      clearTimeout(scriptTimeout);
+      scriptPanel.classList.add('visible');
+    }
+  });
+
+  scriptTrig.addEventListener('mouseleave', function () {
+    scriptTimeout = setTimeout(function () {
+      scriptPanel.classList.remove('visible');
+    }, 300);
+  });
+
+  scriptPanel.addEventListener('mouseenter', function () {
+    clearTimeout(scriptTimeout);
+  });
+
+  scriptPanel.addEventListener('mouseleave', function () {
+    scriptTimeout = setTimeout(function () {
+      scriptPanel.classList.remove('visible');
+    }, 300);
   });
 
 })();
