@@ -125,16 +125,48 @@ git push
 - **HTMLファイルのみ指定する**（`git add フォルダ/` と書かない）
 - node_modules・.env・画像など不要なファイルが上がるのを防ぐため
 - 初回のみ必要（2回目以降は同じコマンドでpushするだけ）
+- **pushする前に必ずパスワード保護を追加すること**（下記参照）
+
+## パスワード保護ルール
+
+GitHubにpushするHTMLファイルには必ず以下のコードを `</body>` 直前に追加する。
+
+```html
+  <!-- パスワード保護 -->
+  <div id="pw-lock" style="position:fixed;inset:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;">
+    <div style="font-size:11px;letter-spacing:0.3em;color:#fff;opacity:0.4;">CRATER INC.</div>
+    <input id="pw-input" type="password" placeholder="PASSWORD" autofocus
+      style="background:#222;border:1px solid #444;border-radius:4px;padding:12px 16px;font-size:14px;color:#fff;width:240px;text-align:center;letter-spacing:0.1em;outline:none;"
+      onkeydown="if(event.key==='Enter')pwCheck()">
+    <div id="pw-error" style="font-size:12px;color:#e05555;display:none;">パスワードが違います</div>
+  </div>
+  <script>
+    (function(){ if(sessionStorage.getItem('cv_auth')==='1'){document.getElementById('pw-lock').style.display='none';} })();
+    function pwCheck(){
+      if(document.getElementById('pw-input').value==='view'){
+        document.getElementById('pw-lock').style.display='none';
+        sessionStorage.setItem('cv_auth','1');
+      } else {
+        document.getElementById('pw-error').style.display='block';
+        document.getElementById('pw-input').value='';
+      }
+    }
+  </script>
+```
+
+- パスワード：`view`（クライアント共有用）
+- index.htmlのパスワードは別：`allpage123`
+- 一度入力すれば同セッション中は再入力不要（sessionStorage管理）
 
 push完了後、以下をユーザーに伝える：
 ```
 GitHubに登録しました。
 公開URLはこのルールで作れます：
 
-https://crater-to.netlify.app/[フォルダ名]/output/[ファイル名]
+https://view.crater.co.jp/[フォルダ名]/output/[ファイル名]
 
 例：output/sitemap.html を作ったら
-→ https://crater-to.netlify.app/[フォルダ名]/output/sitemap.html
+→ https://view.crater.co.jp/[フォルダ名]/output/sitemap.html
 ```
 
 ---
