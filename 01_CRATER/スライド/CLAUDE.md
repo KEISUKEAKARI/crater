@@ -9,17 +9,16 @@
 ミニマル・モノクロ + レッドアクセント。「この星に、つめあとを残せ」のブランドイメージ。
 
 ## カラーイメージ
-- ベース：ブラック #111111 / ホワイト #ffffff
-- アクセント：レッド #D4001A
+- ベース：ダークグレー #222222 / ホワイト #ffffff
+- アクセント：ゴールド #F0C030
 
 ## 参考資料
 - brief/ フォルダを参照
-- references/anti-ai-design.md — 脱AIデザイン原則
 
 ## 禁止事項・注意事項
-- 脱AIデザイン原則に従う（references/anti-ai-design.md）
+- 脱AIデザイン原則に従う（.claude/skills/スライド/references/anti-ai-design.md）
 - 英語ラベルのみの見出し禁止
 - 均一配置禁止
 
 ## 進行メモ
-- 会社概要スライド：output/会社概要.html 作成済み
+- 会社概要スライド：output/company-profile.html 作成済み
