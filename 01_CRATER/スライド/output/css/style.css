@@ -279,60 +279,50 @@ body {
 
 
 /* ============================================================
-   S02: ミッション — 黒左パネル(28%) × グレー右(72%)
+   S02: ミッション — フルグレー × 左寄せ大ステートメント
    ============================================================ */
 .s02 {
-  display: grid;
-  grid-template-columns: 28% 72%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-/* 黒左パネル */
-.s02-left {
-  background: var(--c-black);
+/* 背景に薄く大きく "MISSION" */
+.s02-bg-word {
+  position: absolute;
+  right: -2cqw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-en);
+  font-size: 20cqw;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(0,0,0,0.045);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* コンテンツエリア */
+.s02-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 10cqw 0 7cqw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 4.5cqw 2.5cqw 4.5cqw 4cqw;
-  position: relative;
+  gap: 2.5cqw;
 }
-.s02-label-en {
+
+.s02-label {
   font-family: var(--font-en);
   font-size: 1.0cqw;
   font-weight: 400;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-}
-.s02-label-ja {
-  font-family: var(--font-ja);
-  font-size: 5.5cqw;
-  font-weight: 900;
-  color: rgba(255,255,255,0.08);
-  line-height: 1;
-  writing-mode: vertical-rl;
-  letter-spacing: 0.08em;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.s02-yellow-bar {
-  width: 2.5cqw;
-  height: 0.22cqw;
-  background: var(--c-accent);
-  align-self: flex-start;
-}
-
-/* グレー右エリア */
-.s02-right {
-  background: var(--c-base);
-  display: flex;
-  align-items: center;
-}
-.s02-inner {
-  padding: 0 7cqw 0 6cqw;
-  display: flex;
-  flex-direction: column;
-  gap: 3cqw;
+  color: var(--c-text-sub);
 }
 .s02-accent-line {
   width: 3cqw;
@@ -341,7 +331,7 @@ body {
 }
 .s02-statement {
   font-family: var(--font-ja);
-  font-size: 3.6cqw;
+  font-size: 3.8cqw;
   font-weight: 900;
   line-height: 1.55;
   color: var(--c-text);
@@ -359,11 +349,8 @@ body {
 
 
 /* ============================================================
-   S03: 実績数字 — 全黒背景 × 白数字 × 黄色バー
+   S03: 実績数字 — グレー3カラム × 黒大数字 × 黄色バー
    ============================================================ */
-.s03-dark {
-  background: var(--c-black) !important;
-}
 .s03 {
   display: flex;
   align-items: stretch;
@@ -375,20 +362,15 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 0 6.5cqw;
-  gap: 0;
+  border-right: 0.1cqw solid var(--c-border);
 }
-.s03-sep {
-  width: 0.1cqw;
-  background: rgba(255,255,255,0.1);
-  margin: 5cqw 0;
-  flex-shrink: 0;
-}
+.s03-col:last-child { border-right: none; }
 
 /* 上部インジケーターバー */
 .s03-bar-wrap {
   width: 100%;
-  height: 0.2cqw;
-  background: rgba(255,255,255,0.12);
+  height: 0.22cqw;
+  background: rgba(0,0,0,0.1);
   margin-bottom: 3.5cqw;
 }
 .s03-bar {
@@ -408,21 +390,21 @@ body {
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: var(--c-white);
+  color: var(--c-text);
 }
 .s03-unit {
   font-family: var(--font-ja);
   font-size: 3cqw;
   font-weight: 900;
-  color: var(--c-white);
-  opacity: 0.7;
+  color: var(--c-text);
+  opacity: 0.55;
 }
 
 /* 区切り線 */
 .s03-divider {
   width: 100%;
   height: 0.1cqw;
-  background: rgba(255,255,255,0.15);
+  background: var(--c-border);
   margin: 2.5cqw 0 1.8cqw;
 }
 
@@ -430,7 +412,7 @@ body {
   font-family: var(--font-ja);
   font-size: 1.45cqw;
   font-weight: 400;
-  color: rgba(255,255,255,0.45);
+  color: var(--c-text-sub);
   letter-spacing: 0.05em;
 }
 

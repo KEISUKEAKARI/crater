@@ -31,46 +31,36 @@ function slide01Cover() {
 </section>`;
 }
 
-// SLIDE 02 | ミッション | 黒左パネル × グレー右ステートメント
+// SLIDE 02 | ミッション | フルグレー × 左寄せ大ステートメント
 function slide02Mission() {
   return `<section class="slide" data-section="mission" data-notes="クレーターのミッションはシンプルです。価値あるブランドを、必要な人に届ける。メッセージとストーリーを視覚化し、ブランドの価値を正確に伝えることが私たちの仕事です。">
   <div class="s02">
-
-    <div class="s02-left">
-      <span class="s02-label-en">Mission</span>
-      <span class="s02-label-ja">使命</span>
-      <div class="s02-yellow-bar"></div>
+    <div class="s02-bg-word">MISSION</div>
+    <div class="s02-content">
+      <span class="s02-label">Mission</span>
+      <div class="s02-accent-line"></div>
+      <h2 class="s02-statement">
+        価値あるブランドを、<br>
+        必要な人に届ける。<br>
+        それがデザインの本質。
+      </h2>
+      <p class="s02-body">
+        メッセージとストーリーを視覚化し、<br>
+        ブランドの価値を正確に伝えることが、<br>
+        クレーターの仕事です。
+      </p>
     </div>
-
-    <div class="s02-right">
-      <div class="s02-inner">
-        <div class="s02-accent-line"></div>
-        <h2 class="s02-statement">
-          価値あるブランドを、<br>
-          必要な人に届ける。<br>
-          それがデザインの本質。
-        </h2>
-        <p class="s02-body">
-          メッセージとストーリーを視覚化し、<br>
-          ブランドの価値を正確に伝えることが、<br>
-          クレーターの仕事です。
-        </p>
-      </div>
-    </div>
-
   </div>
 </section>`;
 }
 
-// SLIDE 03 | 実績数字 | 全黒背景 × 白数字 × 黄色アクセント
+// SLIDE 03 | 実績数字 | グレー3カラム × 黒大数字 × 黄色バー
 function slide03Numbers() {
-  return `<section class="slide s03-dark" data-section="numbers" data-notes="私たちの実績を3つの数字でご覧ください。創業12年、国際デザイン賞4冠、5つの事業領域。この数字が私たちの実力を語っています。">
+  return `<section class="slide" data-section="numbers" data-notes="私たちの実績を3つの数字でご覧ください。創業12年、国際デザイン賞4冠、5つの事業領域。この数字が私たちの実力を語っています。">
   <div class="s03">
 
-    <div class="s03-col">
-      <div class="s03-bar-wrap">
-        <div class="s03-bar" style="width:80%;"></div>
-      </div>
+    <div class="s03-col" style="background:var(--c-surface);">
+      <div class="s03-bar-wrap"><div class="s03-bar" style="width:80%;"></div></div>
       <div class="s03-num-row">
         <span class="s03-number">12</span>
         <span class="s03-unit">年</span>
@@ -79,12 +69,8 @@ function slide03Numbers() {
       <p class="s03-label">創業からの実績</p>
     </div>
 
-    <div class="s03-sep"></div>
-
-    <div class="s03-col">
-      <div class="s03-bar-wrap">
-        <div class="s03-bar" style="width:45%;"></div>
-      </div>
+    <div class="s03-col" style="background:var(--c-base);">
+      <div class="s03-bar-wrap"><div class="s03-bar" style="width:45%;"></div></div>
       <div class="s03-num-row">
         <span class="s03-number">4</span>
         <span class="s03-unit">冠</span>
@@ -93,12 +79,8 @@ function slide03Numbers() {
       <p class="s03-label">国際デザイン賞受賞</p>
     </div>
 
-    <div class="s03-sep"></div>
-
-    <div class="s03-col">
-      <div class="s03-bar-wrap">
-        <div class="s03-bar" style="width:55%;"></div>
-      </div>
+    <div class="s03-col" style="background:var(--c-surface-lt);">
+      <div class="s03-bar-wrap"><div class="s03-bar" style="width:55%;"></div></div>
       <div class="s03-num-row">
         <span class="s03-number">5</span>
         <span class="s03-unit">領域</span>
