@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人と空間 ワイヤーフレーム</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+      background: #E0E0E0;
+      color: #1A1A1A;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== スライドナビ ===== */
+    .top-nav {
+      background: #1A2E42;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      height: 52px;
+      flex-shrink: 0;
+      gap: 4px;
+    }
+    .nav-logo { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-right: 20px; white-space: nowrap; }
+    .nav-tab { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); padding: 6px 14px; border-radius: 5px; cursor: pointer; white-space: nowrap; transition: all 0.2s; border: none; background: transparent; }
+    .nav-tab:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+    .nav-tab.active { color: #fff; background: rgba(255,255,255,0.15); }
+    .nav-spacer { flex: 1; }
+    .nav-counter { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+
+    /* ===== スライドエリア ===== */
+    .slide-wrapper { flex: 1; position: relative; overflow: hidden; }
+    .slides { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { min-width: 100%; height: 100%; overflow-y: auto; background: #E0E0E0; padding: 24px 80px 60px; }
+
+    /* ===== 左右ナビ ===== */
+    .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: #fff; border: none; border-radius: 50%; font-size: 20px; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px rgba(0,0,0,0.15); transition: all 0.2s; z-index: 100; }
+    .nav-btn:hover { background: #1A2E42; color: #fff; }
+    .nav-btn.prev { left: 16px; }
+    .nav-btn.next { right: 16px; }
+    .nav-btn:disabled { opacity: 0.2; pointer-events: none; }
+
+    /* ===== ドット ===== */
+    .dots { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #BBB; cursor: pointer; transition: all 0.2s; }
+    .dot.active { background: #1A2E42; width: 20px; border-radius: 3px; }
+
+    /* ===== ワイヤーフレーム ページ枠 ===== */
+    .wf-page {
+      max-width: 960px;
+      margin: 0 auto;
+      background: white;
+      min-height: 100%;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    }
+    .wf-page-label {
+      background: #1A2E42;
+      color: rgba(255,255,255,0.45);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      padding: 7px 24px;
+      text-align: center;
+    }
+
+    /* ===== ヘッダー ===== */
+    .wf-header {
+      background: #fff;
+      border-bottom: 2px solid #1A2E42;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .wf-logo { font-size: 15px; font-weight: 800; letter-spacing: 0.04em; color: #1A2E42; white-space: nowrap; line-height: 1.3; }
+    .wf-logo-en { font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: #AAA; display: block; }
+    .wf-nav-links { display: flex; gap: 28px; flex: 1; justify-content: center; }
+    .wf-nav-link { font-size: 12px; color: #555; text-decoration: none; letter-spacing: 0.04em; }
+    .wf-nav-link.active { color: #1A2E42; font-weight: 700; border-bottom: 2px solid #1A2E42; padding-bottom: 2px; }
+    .wf-header-cta { background: #1A2E42; color: white; font-size: 12px; font-weight: 600; padding: 9px 20px; border-radius: 4px; white-space: nowrap; }
+
+    /* ===== セクション ===== */
+    .wf-section { padding: 60px 40px; border-bottom: 1px solid #EBEBEB; position: relative; }
+    .wf-section:last-child { border-bottom: none; }
+    .wf-section.wf-gray { background: #F7F7F7; }
+    .wf-section.wf-dark { background: #1A2E42; }
+
+    /* セクション番号 */
+    .wf-sec-no {
+      position: absolute;
+      left: 10px;
+      top: 60px;
+      width: 28px;
+      height: 28px;
+      background: #E0E0E0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+    }
+    .wf-section.wf-dark .wf-sec-no { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); }
+    .wf-sec-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: #BBB; text-transform: uppercase; margin-bottom: 10px; }
+    .wf-section.wf-dark .wf-sec-label { color: rgba(255,255,255,0.3); }
+
+    /* ===== タイポ ===== */
+    .wf-h1 { font-size: 36px; font-weight: 800; line-height: 1.25; margin-bottom: 16px; color: #111; }
+    .wf-h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; color: #111; }
+    .wf-h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: #111; }
+    .wf-h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #111; }
+    .wf-lead { font-size: 14px; color: #555; line-height: 1.75; margin-bottom: 24px; }
+    .wf-body { font-size: 13px; color: #555; line-height: 1.7; }
+    .wf-section.wf-dark .wf-h1,
+    .wf-section.wf-dark .wf-h2 { color: #fff; }
+    .wf-section.wf-dark .wf-lead { color: rgba(255,255,255,0.65); }
+
+    /* ===== 画像プレースホルダー ===== */
+    .wf-img {
+      background: #F0F0F0;
+      border: 1px dashed #CCC;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #BBB;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== グリッド ===== */
+    .wf-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .wf-6040 { display: grid; grid-template-columns: 6fr 4fr; gap: 40px; align-items: start; }
+    .wf-4060 { display: grid; grid-template-columns: 4fr 6fr; gap: 40px; align-items: start; }
+    .wf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .wf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    /* ===== カード ===== */
+    .wf-card { border: 1px solid #E0E0E0; border-radius: 6px; padding: 20px; background: white; }
+    .wf-card-icon { width: 40px; height: 40px; background: #EEE; border-radius: 4px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
+
+    /* ===== ボタン ===== */
+    .wf-btn-primary { display: inline-block; background: #1A2E42; color: white; padding: 14px 32px; border-radius: 4px; font-size: 14px; font-weight: 600; margin-right: 12px; margin-bottom: 8px; }
+    .wf-btn-secondary { display: inline-block; border: 1.5px solid #1A2E42; color: #1A2E42; padding: 13px 32px; border-radius: 4px; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .wf-btn-text { display: inline-block; color: #1A2E42; font-size: 13px; font-weight: 600; text-decoration: underline; margin-top: 10px; }
+
+    /* ===== KPI ===== */
+    .wf-kpi-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .wf-kpi { text-align: center; padding: 20px 16px; background: #F7F7F7; border-radius: 6px; flex: 1; min-width: 100px; }
+    .wf-kpi-num { font-size: 34px; font-weight: 800; color: #1A2E42; margin-bottom: 6px; line-height: 1; }
+    .wf-kpi-label { font-size: 11px; color: #888; line-height: 1.5; }
+    .wf-section.wf-dark .wf-kpi { background: rgba(255,255,255,0.08); }
+    .wf-section.wf-dark .wf-kpi-num { color: #fff; }
+    .wf-section.wf-dark .wf-kpi-label { color: rgba(255,255,255,0.55); }
+
+    /* ===== リスト ===== */
+    .wf-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .wf-list li { font-size: 13px; color: #333; padding: 9px 14px 9px 34px; background: #F7F7F7; border-radius: 4px; position: relative; }
+    .wf-list li::before { content: ''; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border: 2px solid #CCC; border-radius: 50%; }
+
+    /* ===== フロー ===== */
+    .wf-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin-bottom: 20px; }
+    .wf-flow-step { background: #F0F0F0; border: 1px solid #DDD; border-radius: 4px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #333; white-space: nowrap; }
+    .wf-flow-arrow { font-size: 14px; color: #CCC; padding: 0 6px; }
+
+    /* ===== テーブル ===== */
+    .wf-table { width: 100%; border-collapse: collapse; }
+    .wf-table th { background: #F0F0F0; font-size: 12px; font-weight: 700; color: #555; padding: 11px 16px; text-align: left; border: 1px solid #E0E0E0; white-space: nowrap; }
+    .wf-table td { font-size: 13px; color: #333; padding: 11px 16px; border: 1px solid #E0E0E0; }
+    .wf-table tr:nth-child(even) td { background: #FAFAFA; }
+
+    /* ===== フォーム ===== */
+    .wf-form-row { display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
+    .wf-form-label { font-size: 12px; font-weight: 700; color: #333; }
+    .wf-required { color: #BF4C3A; font-size: 10px; margin-left: 5px; }
+    .wf-optional { color: #999; font-size: 10px; margin-left: 5px; }
+    .wf-form-input { background: #F5F5F5; border: 1px solid #DDD; border-radius: 4px; padding: 11px 14px; font-size: 13px; color: #999; }
+    .wf-form-textarea { background: #F5F5F5; border: 1px solid #DDD; border-radius: 4px; padding: 11px 14px; font-size: 13px; color: #999; height: 100px; }
+
+    /* ===== ステップ ===== */
+    .wf-step-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .wf-step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #1A2E42; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .wf-step-title { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 2px; }
+    .wf-step-desc { font-size: 12px; color: #666; line-height: 1.55; }
+
+    /* ===== タグ ===== */
+    .wf-tag { display: inline-block; background: #EBEBEB; color: #555; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px; }
+
+    /* ===== 引用 ===== */
+    .wf-quote { border-left: 3px solid #DDD; padding: 14px 18px; background: #FAFAFA; border-radius: 0 4px 4px 0; margin-top: 16px; }
+    .wf-quote p { font-size: 13px; color: #555; line-height: 1.75; font-style: italic; }
+    .wf-quote .source { font-size: 11px; color: #AAA; margin-top: 8px; }
+
+    /* ===== ノート ===== */
+    .wf-note { background: #FFFBE6; border-left: 3px solid #F5C842; padding: 10px 14px; border-radius: 0 4px 4px 0; font-size: 11px; color: #666; margin-top: 14px; line-height: 1.65; }
+
+    /* ===== 仕切り ===== */
+    .wf-divider { border: none; border-top: 1px solid #EBEBEB; margin: 16px 0; }
+
+    /* ===== CTA セクション ===== */
+    .wf-cta-section { text-align: center; padding: 80px 40px; position: relative; }
+
+    /* ===== フッター ===== */
+    .wf-footer { background: #1A2E42; padding: 48px 40px 24px; }
+    .wf-footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .wf-footer-logo { font-size: 15px; font-weight: 800; color: white; margin-bottom: 10px; }
+    .wf-footer-catch { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+    .wf-footer-col h4 { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; margin-bottom: 14px; }
+    .wf-footer-link { display: block; font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+    .wf-footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; }
+
+    /* ===== ページヘッダー（各ページ冒頭） ===== */
+    .wf-page-hero { padding: 72px 40px; text-align: center; position: relative; }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="nav-logo">HUMAN AND SPACE</div>
+    <button class="nav-tab active" onclick="goTo(0)">TOP</button>
+    <button class="nav-tab" onclick="goTo(1)">ABOUT</button>
+    <button class="nav-tab" onclick="goTo(2)">SERVICES</button>
+    <button class="nav-tab" onclick="goTo(3)">CASES</button>
+    <button class="nav-tab" onclick="goTo(4)">CONTACT</button>
+    <button class="nav-tab" onclick="goTo(5)">PRIVACY</button>
+    <div class="nav-spacer"></div>
+    <div class="nav-counter" id="counter">1 / 6</div>
+  </nav>
+
+  <div class="slide-wrapper">
+    <div class="slides" id="slides">
+
+      <!-- ===== PAGE 1: TOP ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 01 / TOP（ホーム）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo">
+              <span class="wf-logo-en">HUMAN AND SPACE</span>
+              人と空間
+            </div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link">私たちについて</a>
+              <a class="wf-nav-link">サービス</a>
+              <a class="wf-nav-link">事例</a>
+              <a class="wf-nav-link">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <!-- S01: ヒーロー -->
+          <section class="wf-section">
+            <div class="wf-sec-no">01</div>
+            <div class="wf-sec-label">ファーストビュー</div>
+            <div class="wf-6040">
+              <div>
+                <div class="wf-h1">「人」と「空間」から、<br>お客様の体験を変える。</div>
+                <div class="wf-lead">AI時代の店舗CX・UX改善のパイオニア。商空間運営における顧客体験価値（CX）と空間品質の改善を、調査・分析・伴走支援で実現します。</div>
+                <div>
+                  <div class="wf-btn-primary">まずは相談する（無料）</div>
+                  <div class="wf-btn-secondary">サービス資料を見る</div>
+                </div>
+              </div>
+              <div class="wf-img" style="height:300px">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="40" height="32" rx="2" stroke="#CCCCCC" stroke-width="2"/><path d="M4 36l12-10 8 6 8-12 12 16" stroke="#CCCCCC" stroke-width="2" stroke-linejoin="round"/><circle cx="16" cy="20" r="4" stroke="#CCCCCC" stroke-width="2"/></svg>
+                <span>店舗・空間イメージ写真</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- S02: 課題共感 -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">02</div>
+            <div class="wf-sec-label">課題共感</div>
+            <div style="text-align:center;margin-bottom:32px">
+              <div class="wf-h2">こんな課題はありませんか？</div>
+              <div class="wf-lead" style="max-width:560px;margin:8px auto 0">店舗運営は外部・内部環境の変化により、より多くの悩みを抱えるようになりました。その一方で、改善に向けた打ち手の進化が追い付いていないという状況を多く目にします。</div>
+            </div>
+            <div class="wf-2col">
+              <div>
+                <div class="wf-h4" style="margin-bottom:12px">CX（接客）の課題</div>
+                <ul class="wf-list">
+                  <li>スタッフレベルの低下が気になる</li>
+                  <li>店舗によって接客品質にばらつきがある</li>
+                  <li>顧客満足度が思うように向上しない</li>
+                  <li>スタッフのモチベーションが上がらない</li>
+                  <li>競合との差別化が難しい</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-h4" style="margin-bottom:12px">空間（VMD）の課題</div>
+                <ul class="wf-list">
+                  <li>商空間運営の正解が分からない</li>
+                  <li>施設の魅力・ブランディングを見直したい</li>
+                  <li>ステークホルダーとの合意形成が難しい</li>
+                  <li>自分たちの空間の良し悪しを把握したい</li>
+                  <li>気づくと運営のルールが乱れている</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- S03: サービス概要 -->
+          <section class="wf-section">
+            <div class="wf-sec-no">03</div>
+            <div class="wf-sec-label">サービス概観</div>
+            <div style="text-align:center;margin-bottom:32px">
+              <div class="wf-h2">4つのサービス</div>
+              <div class="wf-lead" style="max-width:520px;margin:8px auto 0">調査・分析からコンサルティング・DXまで、店舗CX・UX改善をワンストップで支援します。</div>
+            </div>
+            <div class="wf-grid-2">
+              <div class="wf-card">
+                <div class="wf-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#AAAAAA" stroke-width="1.5"/><path d="M20 20l-3-3" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">CX調査</div>
+                <div class="wf-body">生活者目線×プロの洞察のハイブリッド調査で、接客品質を可視化・スコア化します。</div>
+                <div class="wf-btn-text">詳しくはこちら →</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#AAAAAA" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#AAAAAA" stroke-width="1.5"/></svg>
+                </div>
+                <div class="wf-h4">空間品質調査</div>
+                <div class="wf-body">独自開発のスキームで空間の価値を9つの視点からスコア化。改善への第一歩を踏み出せます。</div>
+                <div class="wf-btn-text">詳しくはこちら →</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#AAAAAA" stroke-width="1.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">AIカメラと店舗運営DX</div>
+                <div class="wf-body">人流データとCXナレッジを掛け合わせ、売上改善を戦略的に設計できるKPI可視化を実現。</div>
+                <div class="wf-btn-text">詳しくはこちら →</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#AAAAAA" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">コンサルティング支援</div>
+                <div class="wf-body">調査で終わらず、あるべき姿からロードマップを引き、改善まで伴走する支援体制。</div>
+                <div class="wf-btn-text">詳しくはこちら →</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S04: 実績 -->
+          <section class="wf-section wf-dark">
+            <div class="wf-sec-no">04</div>
+            <div class="wf-sec-label">実績ハイライト</div>
+            <div class="wf-h2" style="text-align:center;margin-bottom:8px">導入企業の成果</div>
+            <div class="wf-lead" style="text-align:center;margin-bottom:32px">百貨店・アパレル・ライフスタイルショップなど、多様な業種での実績</div>
+            <div class="wf-kpi-row" style="margin-bottom:28px">
+              <div class="wf-kpi"><div class="wf-kpi-num">+26%</div><div class="wf-kpi-label">売上前年比<br>（ライフスタイルショップ）</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">117%</div><div class="wf-kpi-label">重点店舗売上<br>前年比（アパレル）</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">+7%</div><div class="wf-kpi-label">コンバージョン<br>（買上率）改善</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">5年+</div><div class="wf-kpi-label">大手百貨店<br>継続支援年数</div></div>
+            </div>
+            <div style="text-align:center">
+              <div class="wf-btn-secondary" style="border-color:rgba(255,255,255,0.35);color:rgba(255,255,255,0.85)">詳しい事例はこちら →</div>
+            </div>
+          </section>
+
+          <!-- S05: CTA -->
+          <section class="wf-cta-section">
+            <div class="wf-sec-no">05</div>
+            <div class="wf-h2">どのサービスが自社に合うか<br>分からなくても、まずはご相談ください。</div>
+            <div class="wf-lead" style="margin:16px 0 32px">課題の整理から一緒に考えます。強引な営業は一切行いません。</div>
+            <div>
+              <div class="wf-btn-primary" style="font-size:15px;padding:16px 40px">まずは相談してみる（無料）</div>
+              <div class="wf-btn-secondary" style="font-size:15px;padding:15px 40px">サービス資料をダウンロードする</div>
+            </div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div>
+                <div class="wf-footer-logo">人と空間</div>
+                <div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。<br>商空間運営におけるCXとUXのエキスパート。</div>
+              </div>
+              <div class="wf-footer-col">
+                <h4>SERVICES</h4>
+                <a class="wf-footer-link">CX調査</a>
+                <a class="wf-footer-link">空間品質調査</a>
+                <a class="wf-footer-link">AIカメラ・DX</a>
+                <a class="wf-footer-link">コンサルティング</a>
+              </div>
+              <div class="wf-footer-col">
+                <h4>COMPANY</h4>
+                <a class="wf-footer-link">私たちについて</a>
+                <a class="wf-footer-link">事例</a>
+                <a class="wf-footer-link">お問い合わせ</a>
+                <a class="wf-footer-link">プライバシーポリシー</a>
+              </div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ===== PAGE 2: ABOUT ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 02 / ABOUT（私たちについて）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo"><span class="wf-logo-en">HUMAN AND SPACE</span>人と空間</div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link active">私たちについて</a>
+              <a class="wf-nav-link">サービス</a>
+              <a class="wf-nav-link">事例</a>
+              <a class="wf-nav-link">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <!-- ページヘッダー -->
+          <section class="wf-section wf-dark wf-page-hero">
+            <div class="wf-sec-label">ABOUT</div>
+            <div class="wf-h1" style="font-size:32px">私たちについて</div>
+          </section>
+
+          <!-- S01: ミッション -->
+          <section class="wf-section" style="text-align:center">
+            <div class="wf-sec-no">01</div>
+            <div class="wf-sec-label">ミッション</div>
+            <div class="wf-h2" style="font-size:22px;line-height:1.7;max-width:600px;margin:0 auto 16px">AIを活用した店舗CXとUXの改善で<br>スピード感と高い精度を両立し、<br>お客様に高い価値を届ける</div>
+            <div class="wf-lead" style="max-width:540px;margin:0 auto">私たちはAI時代の店舗CXとUX改善のパイオニアを目指します。「人と空間」は商空間運営におけるCXとUXのエキスパートです。</div>
+          </section>
+
+          <!-- S02: AI時代のCX -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">02</div>
+            <div class="wf-sec-label">背景・文脈</div>
+            <div class="wf-h2" style="margin-bottom:24px">AI時代だからこそ、CXが問われる</div>
+            <div class="wf-2col">
+              <div>
+                <div class="wf-h4" style="margin-bottom:12px">リアル店舗が持つ価値</div>
+                <ul class="wf-list">
+                  <li>顧客との関係構築の重要な接点</li>
+                  <li>ブランド体験の最前線</li>
+                  <li>AIでは代替できない「人間らしい接客」の価値</li>
+                  <li>競合差別化の決定要因</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-h4" style="margin-bottom:12px">CX向上がもたらす効果</div>
+                <ul class="wf-list">
+                  <li>リピート率・客単価・売上の向上</li>
+                  <li>ブランドへの理解の深化</li>
+                  <li>ブランドの価値向上</li>
+                  <li>業務実行のスピードアップと効率化</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- S03: 5つの特徴 -->
+          <section class="wf-section">
+            <div class="wf-sec-no">03</div>
+            <div class="wf-sec-label">選ばれる理由</div>
+            <div class="wf-h2" style="margin-bottom:8px">人と空間が選ばれる5つの理由</div>
+            <div class="wf-lead" style="margin-bottom:28px">商空間CXのエキスパートとして蓄積してきたノウハウと独自の支援体制</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="wf-step-row">
+                <div class="wf-step-num">1</div>
+                <div><div class="wf-step-title">商空間運営・接客に特化したCX・UX改善ノウハウ</div><div class="wf-step-desc">百貨店・アパレル・ライフスタイルショップなど多様な業種での実践知を蓄積</div></div>
+              </div>
+              <div class="wf-step-row">
+                <div class="wf-step-num">2</div>
+                <div><div class="wf-step-title">独自のハイブリッドCX調査・空間品質調査</div><div class="wf-step-desc">生活者感覚×専門分析を融合した独自スキームで、リアルな現場データを取得</div></div>
+              </div>
+              <div class="wf-step-row">
+                <div class="wf-step-num">3</div>
+                <div><div class="wf-step-title">豊富なCX・UXデータとナレッジの蓄積</div><div class="wf-step-desc">全国比較・ベンチマーク分析で「自社の立ち位置」を客観的に把握できる</div></div>
+              </div>
+              <div class="wf-step-row">
+                <div class="wf-step-num">4</div>
+                <div><div class="wf-step-title">継続的な伴走支援体制</div><div class="wf-step-desc">調査して終わりではなく、改善まで一緒に走るPDCA型の支援</div></div>
+              </div>
+              <div class="wf-step-row">
+                <div class="wf-step-num">5</div>
+                <div><div class="wf-step-title">店舗運営DXとCX・UXを橋渡しする専門性</div><div class="wf-step-desc">AIカメラによる人流データとCXナレッジを掛け合わせ、売上改善を戦略的に設計</div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S04: 会社概要 -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">04</div>
+            <div class="wf-sec-label">会社情報</div>
+            <div class="wf-h2" style="margin-bottom:24px">会社概要</div>
+            <table class="wf-table">
+              <tr><th style="width:160px">社名</th><td>株式会社人と空間（HUMAN AND SPACE）</td></tr>
+              <tr><th>代表者</th><td>（要確認）</td></tr>
+              <tr><th>設立</th><td>（要確認）</td></tr>
+              <tr><th>所在地</th><td>（要確認）</td></tr>
+              <tr><th>TEL / FAX</th><td>（要確認）</td></tr>
+              <tr><th>URL</th><td>（要確認）</td></tr>
+              <tr><th>事業内容</th><td>店舗CX（顧客体験価値）・空間品質の調査・分析・コンサルティング支援 / 店舗運営DX（AIカメラ・人流計測）</td></tr>
+            </table>
+          </section>
+
+          <!-- S05: メンバー -->
+          <section class="wf-section">
+            <div class="wf-sec-no">05</div>
+            <div class="wf-sec-label">チーム</div>
+            <div class="wf-h2" style="margin-bottom:8px">メンバー</div>
+            <div class="wf-lead" style="margin-bottom:28px">人と空間を支えるチームをご紹介します。</div>
+            <div class="wf-grid-3">
+              <div class="wf-card" style="text-align:center">
+                <div class="wf-img" style="height:100px;width:100px;border-radius:50%;margin:0 auto 16px">
+                  <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="8" stroke="#CCCCCC" stroke-width="2"/><path d="M4 36c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">氏名（要確認）</div>
+                <div class="wf-body" style="font-size:11px;color:#AAA;margin-top:4px">役職・肩書き</div>
+                <div class="wf-body" style="margin-top:8px;font-size:12px">専門領域・一言メッセージ</div>
+              </div>
+              <div class="wf-card" style="text-align:center">
+                <div class="wf-img" style="height:100px;width:100px;border-radius:50%;margin:0 auto 16px">
+                  <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="8" stroke="#CCCCCC" stroke-width="2"/><path d="M4 36c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">氏名（要確認）</div>
+                <div class="wf-body" style="font-size:11px;color:#AAA;margin-top:4px">役職・肩書き</div>
+                <div class="wf-body" style="margin-top:8px;font-size:12px">専門領域・一言メッセージ</div>
+              </div>
+              <div class="wf-card" style="text-align:center">
+                <div class="wf-img" style="height:100px;width:100px;border-radius:50%;margin:0 auto 16px">
+                  <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="8" stroke="#CCCCCC" stroke-width="2"/><path d="M4 36c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="wf-h4">氏名（要確認）</div>
+                <div class="wf-body" style="font-size:11px;color:#AAA;margin-top:4px">役職・肩書き</div>
+                <div class="wf-body" style="margin-top:8px;font-size:12px">専門領域・一言メッセージ</div>
+              </div>
+            </div>
+            <div class="wf-note">メンバーの人数・掲載範囲・写真スタイルはクライアントに確認が必要です。</div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div><div class="wf-footer-logo">人と空間</div><div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。<br>商空間運営におけるCXとUXのエキスパート。</div></div>
+              <div class="wf-footer-col"><h4>SERVICES</h4><a class="wf-footer-link">CX調査</a><a class="wf-footer-link">空間品質調査</a><a class="wf-footer-link">AIカメラ・DX</a><a class="wf-footer-link">コンサルティング</a></div>
+              <div class="wf-footer-col"><h4>COMPANY</h4><a class="wf-footer-link">私たちについて</a><a class="wf-footer-link">事例</a><a class="wf-footer-link">お問い合わせ</a><a class="wf-footer-link">プライバシーポリシー</a></div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ===== PAGE 3: SERVICES ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 03 / SERVICES（サービス）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo"><span class="wf-logo-en">HUMAN AND SPACE</span>人と空間</div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link">私たちについて</a>
+              <a class="wf-nav-link active">サービス</a>
+              <a class="wf-nav-link">事例</a>
+              <a class="wf-nav-link">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <section class="wf-section wf-dark wf-page-hero">
+            <div class="wf-sec-label">SERVICES</div>
+            <div class="wf-h1" style="font-size:32px">サービス</div>
+            <div class="wf-lead" style="margin-top:12px;max-width:480px;margin-left:auto;margin-right:auto">調査・分析から伴走型コンサル・店舗DXまで、店舗CX・UX改善をワンストップで支援します。</div>
+          </section>
+
+          <!-- S01: 全体像 -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">01</div>
+            <div class="wf-sec-label">サービス全体像</div>
+            <div class="wf-h2" style="margin-bottom:24px">「人（CX）」と「空間」の2軸で支援</div>
+            <div class="wf-2col">
+              <div>
+                <div class="wf-h4" style="margin-bottom:10px">人（CX）領域</div>
+                <div class="wf-card"><div style="display:flex;flex-wrap:wrap;gap:6px"><span class="wf-tag">CX調査</span><span class="wf-tag">コンサルティング</span><span class="wf-tag">セミナー・研修</span><span class="wf-tag">ワークショップ</span></div></div>
+              </div>
+              <div>
+                <div class="wf-h4" style="margin-bottom:10px">空間 ／ 人×空間融合領域</div>
+                <div class="wf-card"><div style="display:flex;flex-wrap:wrap;gap:6px"><span class="wf-tag">空間品質調査</span><span class="wf-tag">空間品質コンサル</span><span class="wf-tag" style="background:#E5EAF0;color:#1A2E42">AIカメラ・店舗DX</span></div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S02: CX調査 -->
+          <section class="wf-section">
+            <div class="wf-sec-no">02</div>
+            <div class="wf-sec-label">サービス詳細</div>
+            <div class="wf-4060">
+              <div>
+                <div class="wf-h2">CX調査</div>
+                <div class="wf-lead">現在の店舗運営は「改善に向けた打ち手の進化が追い付いていない」状況。店舗での顧客体験価値（CX）の改善が鍵となります。</div>
+                <div class="wf-h4" style="margin-bottom:8px">独自性3つのポイント</div>
+                <ul class="wf-list" style="margin-bottom:20px">
+                  <li>生活者目線×プロの洞察の「良いトコどり」</li>
+                  <li>全国＆ベンチマーク比較による立ち位置の見える化</li>
+                  <li>調査後の伴走支援まで一貫したケーパビリティ</li>
+                </ul>
+                <div class="wf-flow">
+                  <div class="wf-flow-step">CX戦略策定</div><div class="wf-flow-arrow">→</div>
+                  <div class="wf-flow-step">CX調査</div><div class="wf-flow-arrow">→</div>
+                  <div class="wf-flow-step">分析・レポート</div><div class="wf-flow-arrow">→</div>
+                  <div class="wf-flow-step">継続的改善</div>
+                </div>
+              </div>
+              <div>
+                <div class="wf-card" style="margin-bottom:16px">
+                  <div class="wf-h4" style="margin-bottom:12px">ハイブリッド調査の構造</div>
+                  <div class="wf-step-row">
+                    <div class="wf-step-num" style="background:#4A7DB5;font-size:10px">生活</div>
+                    <div><div class="wf-step-title">モニター型調査員</div><div class="wf-step-desc">店舗商圏にお住まいの生活者。普通のお客様として来店し自然な状態を観察。</div></div>
+                  </div>
+                  <div class="wf-step-row">
+                    <div class="wf-step-num" style="background:#3A8A5C;font-size:10px">専門</div>
+                    <div><div class="wf-step-title">専門調査員</div><div class="wf-step-desc">ファッション・コスメ・ライフスタイル業界経験者。1店舗につき原則3名が訪問。</div></div>
+                  </div>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-h4" style="margin-bottom:10px">レポート構成</div>
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <div class="wf-body">① 自ブランドの調査結果</div>
+                    <div class="wf-body">② 全国・ベンチマーク比較</div>
+                    <div class="wf-body">③ 上下GAP分析</div>
+                    <div class="wf-body">④ トピックス分析</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S03: 空間品質調査 -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">03</div>
+            <div class="wf-sec-label">サービス詳細</div>
+            <div class="wf-4060">
+              <div>
+                <div class="wf-h2">空間品質調査</div>
+                <div class="wf-lead">人と空間が独自開発した「空間の価値をスコア化」するスキーム。空間品質をまず可視化することが改善の第一歩です。</div>
+                <div class="wf-h4" style="margin-bottom:8px">独自性3つのポイント</div>
+                <ul class="wf-list">
+                  <li>空間の価値を9つの視点でスコア化</li>
+                  <li>再来店意向を軸とした配点設計</li>
+                  <li>プロの知識×お客様目線の専門調査員</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-card">
+                  <div class="wf-h4" style="margin-bottom:14px">調査対象エリア（9エリア）</div>
+                  <div class="wf-grid-3" style="gap:8px">
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">外観・ファサード</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">エントランス</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">共用部通路</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">共用部施設</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">インフォ</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">トイレ</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">各エリア</div>
+                    <div style="background:#F5F5F5;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:#555">その他</div>
+                    <div style="background:#1A2E42;border-radius:4px;padding:8px 6px;font-size:11px;text-align:center;color:white">総合的な印象</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S04: AIカメラ -->
+          <section class="wf-section">
+            <div class="wf-sec-no">04</div>
+            <div class="wf-sec-label">サービス詳細</div>
+            <div class="wf-4060">
+              <div>
+                <div class="wf-h2">AIカメラと店舗運営DX</div>
+                <div class="wf-lead">人流データとCXナレッジを掛け合わせることで、KPIと行動の因果関係が明確になり、売上改善を戦略的に設計できます。</div>
+                <div class="wf-h4" style="margin-bottom:8px">可視化されるKPI</div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <span class="wf-tag">入店率</span><span class="wf-tag">入店客数</span><span class="wf-tag">コンバージョン</span>
+                  <span class="wf-tag">滞留時間</span><span class="wf-tag">接客頻度</span><span class="wf-tag">ディスプレイ視認率</span>
+                </div>
+              </div>
+              <div>
+                <div class="wf-card">
+                  <div class="wf-h4" style="margin-bottom:12px">オンボーディング支援フロー</div>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0">1</div><div class="wf-step-desc">課題抽出（現状の悩みの整理）</div></div>
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0">2</div><div class="wf-step-desc">成功シナリオの策定</div></div>
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0">3</div><div class="wf-step-desc">計測開始（AIカメラ設置）</div></div>
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0">4</div><div class="wf-step-desc">KPI目標設定</div></div>
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0">5</div><div class="wf-step-desc">実行支援（ダッシュボード共有・改善施策）</div></div>
+                    <div class="wf-step-row" style="gap:8px"><div class="wf-step-num" style="width:24px;height:24px;font-size:11px;flex-shrink:0;background:#3A8A5C">6</div><div class="wf-step-desc" style="font-weight:700;color:#111">自律自走フェーズへ</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S05: コンサルティング -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">05</div>
+            <div class="wf-sec-label">サービス詳細</div>
+            <div class="wf-h2" style="margin-bottom:8px">コンサルティング支援</div>
+            <div class="wf-lead" style="margin-bottom:24px">人と空間のコンサルティング支援は原則として伴走型です。あるべき姿を理解したうえで、ロードマップを引き、支援内容をご提案します。</div>
+            <div class="wf-grid-2">
+              <div class="wf-card">
+                <div class="wf-h4" style="margin-bottom:10px">CX領域 / 店舗向け</div>
+                <ul class="wf-list"><li>課題抽出・優先順位付け</li><li>具体的な改善施策の提示</li><li>KPI改善のためのワークショップ</li><li>接客改善セミナー</li></ul>
+              </div>
+              <div class="wf-card">
+                <div class="wf-h4" style="margin-bottom:10px">CX領域 / 本社・施設向け</div>
+                <ul class="wf-list"><li>CX改善伴走の仕方</li><li>店舗運営KPIの理解と活用</li><li>支援視点と存在価値の発揮</li><li>年間CX計画の策定</li></ul>
+              </div>
+              <div class="wf-card">
+                <div class="wf-h4" style="margin-bottom:10px">空間品質領域</div>
+                <ul class="wf-list"><li>空間品質ワークショップ</li><li>VMDの概念と使い方</li><li>実践型VMDワークショップ</li><li>空間品質視点での視察手法</li></ul>
+              </div>
+              <div class="wf-card">
+                <div class="wf-h4" style="margin-bottom:10px">セミナー・研修メニュー</div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+                  <span class="wf-tag">CXセミナー</span><span class="wf-tag">CX×AI活用</span><span class="wf-tag">空間品質改善</span><span class="wf-tag">VMDワークショップ</span><span class="wf-tag">接客改善</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wf-cta-section">
+            <div class="wf-h2">まずはご相談ください</div>
+            <div class="wf-lead" style="margin:12px 0 24px">どのサービスが合うか分からなくても、課題の整理から一緒に考えます。</div>
+            <div class="wf-btn-primary">お問い合わせはこちら</div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div><div class="wf-footer-logo">人と空間</div><div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。</div></div>
+              <div class="wf-footer-col"><h4>SERVICES</h4><a class="wf-footer-link">CX調査</a><a class="wf-footer-link">空間品質調査</a><a class="wf-footer-link">AIカメラ・DX</a><a class="wf-footer-link">コンサルティング</a></div>
+              <div class="wf-footer-col"><h4>COMPANY</h4><a class="wf-footer-link">私たちについて</a><a class="wf-footer-link">事例</a><a class="wf-footer-link">お問い合わせ</a><a class="wf-footer-link">プライバシーポリシー</a></div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ===== PAGE 4: CASES ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 04 / CASES（事例）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo"><span class="wf-logo-en">HUMAN AND SPACE</span>人と空間</div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link">私たちについて</a>
+              <a class="wf-nav-link">サービス</a>
+              <a class="wf-nav-link active">事例</a>
+              <a class="wf-nav-link">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <!-- ページヘッダー + KPI -->
+          <section class="wf-section wf-dark" style="padding:72px 40px">
+            <div class="wf-sec-label" style="text-align:center;margin-bottom:12px">CASES</div>
+            <div class="wf-h1" style="font-size:32px;text-align:center;margin-bottom:32px">事例</div>
+            <div class="wf-kpi-row">
+              <div class="wf-kpi"><div class="wf-kpi-num">117%</div><div class="wf-kpi-label">重点店舗 売上前年比</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">+26%</div><div class="wf-kpi-label">売上前年比</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">+9%</div><div class="wf-kpi-label">客単価改善</div></div>
+              <div class="wf-kpi"><div class="wf-kpi-num">3年</div><div class="wf-kpi-label">連続最高売上更新</div></div>
+            </div>
+          </section>
+
+          <!-- S01: 事例① 百貨店 -->
+          <section class="wf-section">
+            <div class="wf-sec-no">01</div>
+            <div class="wf-sec-label">ケーススタディ</div>
+            <div class="wf-6040">
+              <div>
+                <div class="wf-tag" style="margin-bottom:12px">百貨店</div>
+                <div class="wf-h2">大手百貨店 — CX・空間品質改善の伴走支援</div>
+                <div class="wf-lead">大手百貨店全店に向けたCX・空間品質改善プロジェクトへの伴走を5年以上にわたって支援。施設が自走して改善を進め、CX・空間品質を高めることに繋がっています。</div>
+                <div class="wf-h4" style="margin-bottom:8px">実施内容</div>
+                <ul class="wf-list">
+                  <li>全施設へのCX調査</li>
+                  <li>施設・ブランド・人と空間の三者MTG</li>
+                  <li>全施設への空間品質調査</li>
+                  <li>空間品質ワークショップ</li>
+                  <li>施設向け店舗運営支援セミナー</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-kpi" style="margin-bottom:16px">
+                  <div class="wf-kpi-num" style="font-size:28px">5年+</div>
+                  <div class="wf-kpi-label">継続支援 → 施設自律自走化を実現</div>
+                </div>
+                <div class="wf-quote">
+                  <p>「サービス力を高め、リアル店舗の価値を高めるためにご一緒頂いています。店舗への寄り添い方、改善の仕方を、前向きな取り組みを通じて理解を深めることができました。」</p>
+                  <div class="source">— 大手百貨店 担当者</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S02: 事例② ライフスタイルショップ -->
+          <section class="wf-section wf-gray">
+            <div class="wf-sec-no">02</div>
+            <div class="wf-sec-label">ケーススタディ</div>
+            <div class="wf-6040">
+              <div>
+                <div class="wf-tag" style="margin-bottom:12px">ライフスタイルショップ</div>
+                <div class="wf-h2">旗艦店KPI改善 — 売上+26% / CV+7% / 客単価+9%</div>
+                <div class="wf-lead">旗艦店でのCX調査・セッションと人流データを含めたKPI分析を導入。店舗が自ら考え行動したことが、前年を大きく上回る成果となりました。</div>
+                <div class="wf-h4" style="margin-bottom:8px">実施内容</div>
+                <ul class="wf-list">
+                  <li>旗艦店での人流（入店者）計測</li>
+                  <li>半年間のCX改善セッション</li>
+                  <li>プロジェクト期間中2回のCX調査</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-grid-2" style="margin-bottom:16px">
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">+26%</div><div class="wf-kpi-label">売上前年比</div></div>
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">+7%</div><div class="wf-kpi-label">CV率改善</div></div>
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">+9%</div><div class="wf-kpi-label">客単価前年比</div></div>
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">+8%</div><div class="wf-kpi-label">セット率前年比</div></div>
+                </div>
+                <div class="wf-quote">
+                  <p>「新人店長が着任したタイミングでCXセッションをお願いしましたが、結果的に、前年よりも高い売上を達成することができました。」</p>
+                  <div class="source">— ライフスタイルショップ 店長</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- S03: 事例③ アパレル -->
+          <section class="wf-section">
+            <div class="wf-sec-no">03</div>
+            <div class="wf-sec-label">ケーススタディ</div>
+            <div class="wf-6040">
+              <div>
+                <div class="wf-tag" style="margin-bottom:12px">アパレルブランド</div>
+                <div class="wf-h2">CX調査・伴走コンサル — 3年連続最高売上 / 最大117%</div>
+                <div class="wf-lead">立地のポテンシャルを活かしきれていない、期待していた店長が伸び悩んでいるなどの悩みからスタート。セッション受講メンバーの成長と売上改善が着実に進んでいます。</div>
+                <div class="wf-h4" style="margin-bottom:8px">実施内容</div>
+                <ul class="wf-list">
+                  <li>全国店舗へのCX調査</li>
+                  <li>重点店舗における人流計測</li>
+                  <li>重点店舗への伴走型コンサル</li>
+                  <li>エリアマネージャー向けKPI活用セッション</li>
+                </ul>
+              </div>
+              <div>
+                <div class="wf-grid-2" style="margin-bottom:16px">
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">117%</div><div class="wf-kpi-label">重点店舗 売上前年比</div></div>
+                  <div class="wf-kpi"><div class="wf-kpi-num" style="font-size:22px">3年</div><div class="wf-kpi-label">連続最高売上更新</div></div>
+                </div>
+                <div class="wf-quote">
+                  <p>「導入後、店舗スタッフが大きく成長してくれた。特に、KPI活用とCX視点での支援プログラムを受けたマネージャーのレベルアップが目覚ましい。」</p>
+                  <div class="source">— アパレルブランド 経営幹部</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wf-cta-section">
+            <div class="wf-h2">貴社でも成果を出しませんか</div>
+            <div class="wf-lead" style="margin:12px 0 24px">どのサービスが合うか分からなくても、まずはご相談ください。</div>
+            <div class="wf-btn-primary">お問い合わせはこちら</div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div><div class="wf-footer-logo">人と空間</div><div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。</div></div>
+              <div class="wf-footer-col"><h4>SERVICES</h4><a class="wf-footer-link">CX調査</a><a class="wf-footer-link">空間品質調査</a><a class="wf-footer-link">AIカメラ・DX</a><a class="wf-footer-link">コンサルティング</a></div>
+              <div class="wf-footer-col"><h4>COMPANY</h4><a class="wf-footer-link">私たちについて</a><a class="wf-footer-link">事例</a><a class="wf-footer-link">お問い合わせ</a><a class="wf-footer-link">プライバシーポリシー</a></div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ===== PAGE 5: CONTACT ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 05 / CONTACT（お問い合わせ）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo"><span class="wf-logo-en">HUMAN AND SPACE</span>人と空間</div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link">私たちについて</a>
+              <a class="wf-nav-link">サービス</a>
+              <a class="wf-nav-link">事例</a>
+              <a class="wf-nav-link active">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <section class="wf-section wf-dark wf-page-hero">
+            <div class="wf-sec-label">CONTACT</div>
+            <div class="wf-h1" style="font-size:32px">お問い合わせ</div>
+            <div class="wf-lead" style="margin-top:12px;max-width:480px;margin-left:auto;margin-right:auto">どのサービスが自社に合うか分からなくても、まずはご相談ください。課題の整理から一緒に考えます。</div>
+          </section>
+
+          <!-- S01: フォーム -->
+          <section class="wf-section">
+            <div class="wf-sec-no">01</div>
+            <div style="max-width:600px;margin:0 auto">
+              <div class="wf-lead" style="text-align:center;margin-bottom:32px">強引な営業は一切行いません。お気軽にご連絡ください。</div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">会社名<span class="wf-required">必須</span></div>
+                <div class="wf-form-input">株式会社〇〇</div>
+              </div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">お名前<span class="wf-required">必須</span></div>
+                <div class="wf-form-input">山田 太郎</div>
+              </div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">メールアドレス<span class="wf-required">必須</span></div>
+                <div class="wf-form-input">example@company.com</div>
+              </div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">電話番号<span class="wf-optional">任意</span></div>
+                <div class="wf-form-input">03-0000-0000</div>
+              </div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">興味のあるサービス<span class="wf-optional">任意・複数可</span></div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#333"><input type="checkbox" disabled> CX調査</label>
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#333"><input type="checkbox" disabled> 空間品質調査</label>
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#333"><input type="checkbox" disabled> AIカメラ・DX</label>
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#333"><input type="checkbox" disabled> コンサルティング</label>
+                  <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#333"><input type="checkbox" disabled> その他</label>
+                </div>
+              </div>
+              <div class="wf-form-row">
+                <div class="wf-form-label">お問い合わせ内容<span class="wf-required">必須</span></div>
+                <div class="wf-form-textarea">ご相談内容をご記入ください...</div>
+              </div>
+              <div style="margin-bottom:24px;font-size:12px;color:#555">
+                <label style="display:flex;align-items:flex-start;gap:8px"><input type="checkbox" disabled style="margin-top:2px"><span><a style="color:#1A2E42;text-decoration:underline">プライバシーポリシー</a>に同意する</span></label>
+              </div>
+              <div class="wf-btn-primary" style="width:100%;text-align:center;padding:16px;display:block;margin-right:0">送信する</div>
+            </div>
+          </section>
+
+          <!-- S02: 送信完了 -->
+          <section class="wf-section wf-gray" style="text-align:center">
+            <div class="wf-sec-no">02</div>
+            <div class="wf-sec-label">送信完了ページ（/contact/complete）</div>
+            <div style="max-width:480px;margin:0 auto">
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:16px"><circle cx="28" cy="28" r="27" stroke="#3A8A5C" stroke-width="2"/><path d="M16 28l9 9 16-16" stroke="#3A8A5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="wf-h2">お問い合わせありがとうございます</div>
+              <div class="wf-lead" style="margin:12px 0 24px">内容を確認のうえ、3営業日以内にご連絡いたします。しばらくお待ちください。</div>
+              <div class="wf-btn-secondary">TOPページへ戻る</div>
+            </div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div><div class="wf-footer-logo">人と空間</div><div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。</div></div>
+              <div class="wf-footer-col"><h4>SERVICES</h4><a class="wf-footer-link">CX調査</a><a class="wf-footer-link">空間品質調査</a><a class="wf-footer-link">AIカメラ・DX</a><a class="wf-footer-link">コンサルティング</a></div>
+              <div class="wf-footer-col"><h4>COMPANY</h4><a class="wf-footer-link">私たちについて</a><a class="wf-footer-link">事例</a><a class="wf-footer-link">お問い合わせ</a><a class="wf-footer-link">プライバシーポリシー</a></div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ===== PAGE 6: PRIVACY ===== -->
+      <div class="slide">
+        <div class="wf-page">
+          <div class="wf-page-label">WIREFRAME — PAGE 06 / PRIVACY（プライバシーポリシー）</div>
+
+          <header class="wf-header">
+            <div class="wf-logo"><span class="wf-logo-en">HUMAN AND SPACE</span>人と空間</div>
+            <nav class="wf-nav-links">
+              <a class="wf-nav-link">私たちについて</a>
+              <a class="wf-nav-link">サービス</a>
+              <a class="wf-nav-link">事例</a>
+              <a class="wf-nav-link">お問い合わせ</a>
+            </nav>
+            <div class="wf-header-cta">まずは相談する</div>
+          </header>
+
+          <section class="wf-section wf-dark wf-page-hero">
+            <div class="wf-sec-label">PRIVACY POLICY</div>
+            <div class="wf-h1" style="font-size:32px">プライバシーポリシー</div>
+          </section>
+
+          <!-- PP本文 -->
+          <section class="wf-section">
+            <div style="max-width:720px;margin:0 auto">
+              <div class="wf-lead" style="margin-bottom:36px">株式会社人と空間（以下「当社」）は、お客様の個人情報の適切な保護と管理が重要であることを認識し、以下の方針に基づき個人情報を取り扱います。</div>
+
+              <div style="display:flex;flex-direction:column;gap:28px">
+                <div>
+                  <div class="wf-h3">1. 個人情報の収集</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">サービスのご提供・お問い合わせへの対応・資料の送付等を目的として、お名前・会社名・メールアドレス・電話番号等の個人情報を収集することがあります。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">2. 個人情報の利用目的</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body" style="margin-bottom:10px">収集した個人情報は、以下の目的のために利用します。</div>
+                  <ul style="list-style:disc;padding-left:24px;display:flex;flex-direction:column;gap:6px">
+                    <li class="wf-body">サービスに関するご案内・お問い合わせへの対応</li>
+                    <li class="wf-body">資料・レポートの送付</li>
+                    <li class="wf-body">セミナー・ワークショップのご案内</li>
+                    <li class="wf-body">その他、業務遂行に必要な連絡</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="wf-h3">3. 個人情報の第三者提供</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">法令に定める場合を除き、お客様の個人情報を事前の同意なく第三者に提供することはありません。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">4. 個人情報の取り扱いの委託</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">利用目的の達成に必要な範囲で、個人情報の取り扱いを外部に委託する場合があります。その際は、委託先に対して適切な監督を行います。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">5. 個人情報の安全管理</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">個人情報への不正アクセス・紛失・破損・改ざん・漏洩等を防止するため、適切なセキュリティ対策を講じます。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">6. Cookieについて</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">当社ウェブサイトでは、サービス向上を目的としてGoogle Analytics等のアクセス解析ツールを使用しています。Cookieによりアクセス情報（IPアドレス、ブラウザ情報等）を収集・分析しますが、個人を特定する情報は含みません。ブラウザの設定によりCookieを無効にすることができます。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">7. 個人情報の開示・訂正・削除</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">お客様は、当社が保有するご自身の個人情報について開示・訂正・削除等を請求する権利を有します。ご請求の際は下記お問い合わせ先までご連絡ください。</div>
+                </div>
+                <div>
+                  <div class="wf-h3">8. お問い合わせ先</div>
+                  <div class="wf-divider"></div>
+                  <div class="wf-body">株式会社人と空間　個人情報取扱担当<br>E-mail：（要確認）</div>
+                </div>
+                <div style="padding:14px 18px;background:#F7F7F7;border-radius:4px">
+                  <div class="wf-body" style="color:#999">制定日：20XX年XX月XX日（クライアント確認後に記載）</div>
+                </div>
+              </div>
+              <div class="wf-note">このテキストは草案です。弁護士チェック・クライアント確認のうえ最終化してください。</div>
+            </div>
+          </section>
+
+          <footer class="wf-footer">
+            <div class="wf-footer-main">
+              <div><div class="wf-footer-logo">人と空間</div><div class="wf-footer-catch">AI時代の店舗CX・UX改善のパイオニア。</div></div>
+              <div class="wf-footer-col"><h4>SERVICES</h4><a class="wf-footer-link">CX調査</a><a class="wf-footer-link">空間品質調査</a><a class="wf-footer-link">AIカメラ・DX</a><a class="wf-footer-link">コンサルティング</a></div>
+              <div class="wf-footer-col"><h4>COMPANY</h4><a class="wf-footer-link">私たちについて</a><a class="wf-footer-link">事例</a><a class="wf-footer-link">お問い合わせ</a><a class="wf-footer-link">プライバシーポリシー</a></div>
+            </div>
+            <div class="wf-footer-bottom">© 株式会社人と空間 All Rights Reserved.</div>
+          </footer>
+        </div>
+      </div>
+
+    </div><!-- /.slides -->
+  </div>
+
+  <button class="nav-btn prev" id="prevBtn" onclick="move(-1)" disabled>‹</button>
+  <button class="nav-btn next" id="nextBtn" onclick="move(1)">›</button>
+  <div class="dots" id="dots"></div>
+
+  <!-- パスワード保護 -->
+  <div id="pw-lock" style="position:fixed;inset:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;">
+    <div style="font-size:11px;letter-spacing:0.3em;color:#fff;opacity:0.4;">CRATER INC.</div>
+    <input id="pw-input" type="password" placeholder="PASSWORD" autofocus
+      style="background:#222;border:1px solid #444;border-radius:4px;padding:12px 16px;font-size:14px;color:#fff;width:240px;text-align:center;letter-spacing:0.1em;outline:none;"
+      onkeydown="if(event.key==='Enter')pwCheck()">
+    <div id="pw-error" style="font-size:12px;color:#e05555;display:none;">パスワードが違います</div>
+    <div style="font-size:10px;letter-spacing:0.1em;color:#fff;opacity:0.25;margin-top:4px;">人と空間 / ワイヤーフレーム</div>
+  </div>
+
+  <script>
+    (function(){ if(sessionStorage.getItem('cv_auth')==='1'){document.getElementById('pw-lock').style.display='none';} })();
+    function pwCheck(){
+      if(document.getElementById('pw-input').value==='view'){
+        document.getElementById('pw-lock').style.display='none';
+        sessionStorage.setItem('cv_auth','1');
+      } else {
+        document.getElementById('pw-error').style.display='block';
+        document.getElementById('pw-input').value='';
+      }
+    }
+
+    const TOTAL = 6;
+    let current = 0;
+    const slidesEl = document.getElementById('slides');
+    const tabs = document.querySelectorAll('.nav-tab');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsEl = document.getElementById('dots');
+
+    for(let i = 0; i < TOTAL; i++){
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(n){
+      current = Math.max(0, Math.min(TOTAL - 1, n));
+      slidesEl.style.transform = `translateX(-${current * 100}%)`;
+      tabs.forEach((t, i) => t.classList.toggle('active', i === current));
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${TOTAL}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === TOTAL - 1;
+      document.querySelectorAll('.slide')[current].scrollTop = 0;
+    }
+
+    function move(dir){ goTo(current + dir); }
+
+    document.addEventListener('keydown', e => {
+      if(e.key === 'ArrowRight') move(1);
+      if(e.key === 'ArrowLeft') move(-1);
+    });
+  </script>
+
+</body>
+</html>

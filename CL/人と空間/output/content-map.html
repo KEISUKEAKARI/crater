@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人と空間 コンテンツマップ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background: #EBEBEB;
+      color: #1A1A1A;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== 上部タブナビ ===== */
+    .top-nav {
+      background: #1A2E42;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      height: 52px;
+      flex-shrink: 0;
+      gap: 4px;
+    }
+
+    .nav-logo {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.4);
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+
+    .nav-tab {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      padding: 6px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+    }
+
+    .nav-tab:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+    .nav-tab.active { color: #fff; background: rgba(255,255,255,0.15); }
+
+    .nav-spacer { flex: 1; }
+
+    .nav-counter {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== スライドエリア ===== */
+    .slide-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 32px 80px 80px;
+    }
+
+    /* ===== 左右ナビボタン ===== */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      color: #555;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      transition: all 0.2s;
+      z-index: 100;
+    }
+
+    .nav-btn:hover { background: #1A2E42; color: #fff; }
+    .nav-btn.prev { left: 16px; }
+    .nav-btn.next { right: 16px; }
+    .nav-btn:disabled { opacity: 0.2; pointer-events: none; }
+
+    /* ===== ドット ===== */
+    .dots {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #CCC;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dot.active { background: #1A2E42; width: 20px; border-radius: 3px; }
+
+    /* ===== スライド内 共通 ===== */
+    .slide-header {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #E0E0E0;
+    }
+
+    .slide-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #AAA;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .slide-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .slide-purpose {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    /* ジャーニー */
+    .journey {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .j-step {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      background: #1A2E42;
+      padding: 4px 11px;
+      border-radius: 4px;
+    }
+
+    .j-arrow { color: #CCC; font-size: 13px; }
+
+    /* セクション */
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sec {
+      background: #fff;
+      border-radius: 8px;
+      border-left: 4px solid #CCC;
+      overflow: hidden;
+    }
+
+    .sec.hero     { border-left-color: #1A2E42; }
+    .sec.problem  { border-left-color: #BF4C3A; }
+    .sec.intro    { border-left-color: #4A7DB5; }
+    .sec.service  { border-left-color: #4A7DB5; }
+    .sec.trust    { border-left-color: #3A8A5C; }
+    .sec.cta      { border-left-color: #C8881A; }
+    .sec.common   { border-left-color: #999; }
+
+    .sec-head {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 18px;
+    }
+
+    .sec-no {
+      font-size: 22px;
+      font-weight: 800;
+      color: #E4E4E4;
+      line-height: 1;
+    }
+
+    .sec-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .sec-sub { font-size: 11px; color: #AAA; }
+
+    .sec-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .tag-hero    { background: #E5EAF0; color: #1A2E42; }
+    .tag-problem { background: #F9E9E7; color: #BF4C3A; }
+    .tag-intro   { background: #E7EFF7; color: #4A7DB5; }
+    .tag-service { background: #E7EFF7; color: #4A7DB5; }
+    .tag-trust   { background: #E7F3EC; color: #3A8A5C; }
+    .tag-cta     { background: #F9F0E3; color: #C8881A; }
+    .tag-common  { background: #EFEFEF; color: #888; }
+
+    .sec-body {
+      border-top: 1px solid #F2F2F2;
+      padding: 14px 18px 18px;
+    }
+
+    /* コピー案ブロック */
+    .copy-block {
+      background: #F0F4F8;
+      border-left: 3px solid #4A7DB5;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+
+    .copy-block .copy-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4A7DB5;
+      margin-bottom: 5px;
+    }
+
+    .copy-block .copy-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1A1A1A;
+      line-height: 1.6;
+    }
+
+    .copy-block .copy-sub {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+      line-height: 1.55;
+    }
+
+    /* 引用 */
+    .quote-block {
+      background: #F7F9F7;
+      border-left: 3px solid #3A8A5C;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+
+    .quote-block .q-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #3A8A5C;
+      margin-bottom: 4px;
+    }
+
+    .quote-block .q-text {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* カラム */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .col-block h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #BBBBBB;
+      margin-bottom: 7px;
+    }
+
+    .col-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .col-block ul li {
+      font-size: 12px;
+      line-height: 1.55;
+      color: #333;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .col-block ul li::before { content: '–'; position: absolute; left: 0; color: #CCC; }
+    .col-block ul li strong { font-weight: 700; color: #111; }
+    .col-block ul li em { font-style: normal; color: #4A7DB5; font-weight: 600; }
+
+    /* 数字ハイライト */
+    .kpi-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .kpi-card {
+      background: #F4F8F4;
+      border: 1px solid #D0E8D8;
+      border-radius: 6px;
+      padding: 10px 16px;
+      text-align: center;
+    }
+
+    .kpi-card .kpi-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: #3A8A5C;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .kpi-card .kpi-label {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* フロー */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .flow-step {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1A2E42;
+      background: #E5EAF0;
+      padding: 5px 11px;
+      border-radius: 4px;
+    }
+
+    .flow-arrow { color: #CCC; font-size: 12px; }
+
+    /* ノート */
+    .note {
+      margin-top: 12px;
+      background: #F7F7F7;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #999;
+      line-height: 1.65;
+    }
+
+    .note strong { font-weight: 700; color: #777; }
+
+    /* ステップ表 */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .step-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #1A2E42;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.5;
+      padding-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="nav-logo">HUMAN AND SPACE</div>
+    <button class="nav-tab active" onclick="goTo(0)">TOP</button>
+    <button class="nav-tab" onclick="goTo(1)">ABOUT</button>
+    <button class="nav-tab" onclick="goTo(2)">SERVICES</button>
+    <button class="nav-tab" onclick="goTo(3)">CASES</button>
+    <button class="nav-tab" onclick="goTo(4)">CONTACT</button>
+    <button class="nav-tab" onclick="goTo(5)">PRIVACY</button>
+    <div class="nav-spacer"></div>
+    <div class="nav-counter" id="counter">1 / 6</div>
+  </nav>
+
+  <div class="slide-wrapper">
+    <div class="slides" id="slides">
+
+      <!-- ===== PAGE 1: TOP ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 01 — TOP / HOME</div>
+          <div class="slide-title">ホーム（トップページ）</div>
+          <div class="slide-purpose">「何の会社か」を瞬時に伝え、課題感に共感させ、各詳細ページへ誘導する起点。ブランディング＋問い合わせ獲得の両立が目的。</div>
+        </div>
+
+        <div class="journey">
+          <div class="j-step">訪問・認知</div><div class="j-arrow">›</div>
+          <div class="j-step">課題の共感</div><div class="j-arrow">›</div>
+          <div class="j-step">サービス概要の把握</div><div class="j-arrow">›</div>
+          <div class="j-step">信頼確認（実績）</div><div class="j-arrow">›</div>
+          <div class="j-step">詳細ページ or 問い合わせへ</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec hero">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">ヒーロー（ファーストビュー）</div>
+                <div class="sec-sub">3秒で「自分ごとだ」と感じさせる</div>
+              </div>
+              <div class="sec-tag tag-hero">ファーストビュー</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">コピー案（メインキャッチ）</div>
+                <div class="copy-text">「人」と「空間」から、お客様の体験を変える。</div>
+                <div class="copy-sub">サブ案：AI時代の店舗CX・UX改善のパイオニア／商空間運営におけるCXとUXのエキスパート</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>コンテンツ要素</h4>
+                  <ul>
+                    <li><strong>グローバルナビ：</strong>TOP / ABOUT / SERVICES / CASES / CONTACT</li>
+                    <li><strong>ロゴ：</strong>人と空間（HUMAN AND SPACE）幾何学マーク付き</li>
+                    <li><strong>一次CTA：</strong>「まずは相談する（無料）」ボタン</li>
+                    <li><strong>二次CTA：</strong>「サービス資料をダウンロード」テキストリンク</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>ビジュアル</h4>
+                  <ul>
+                    <li>店舗空間・接客シーンの写真（高品質・明るいトーン）</li>
+                    <li>または抽象的な空間グラフィック</li>
+                    <li>背景はブランドカラー（ダークネイビー系）も検討</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec problem">
+            <div class="sec-head">
+              <div class="sec-no">02</div>
+              <div>
+                <div class="sec-name">こんな課題はありませんか？</div>
+                <div class="sec-sub">CX・空間の悩みをチェックリスト形式で提示</div>
+              </div>
+              <div class="sec-tag tag-problem">課題共感</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">リード文（案）</div>
+                <div class="copy-text">店舗運営は、外部環境・内部環境の変化により、より多くの悩みを抱えるようになりました。その一方で、改善に向けた打ち手の進化が追い付いていないという状況を多く目にします。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>CX（接客）の課題リスト</h4>
+                  <ul>
+                    <li>スタッフレベルの低下が気になる</li>
+                    <li>店舗によって接客品質にばらつきがある</li>
+                    <li><em>顧客満足度が思うように向上しない</em></li>
+                    <li>接客改善の効果が見えにくい</li>
+                    <li><em>スタッフのモチベーションが上がらない</em></li>
+                    <li>競合との差別化が難しい</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>空間（VMD）の課題リスト</h4>
+                  <ul>
+                    <li>商空間運営の正解が分からない</li>
+                    <li>気づくと運営のルールが乱れている</li>
+                    <li>ステークホルダーとの合意形成が難しい</li>
+                    <li>施設の魅力・ブランディングを見直したい</li>
+                    <li><em>自分たちの空間の良し悪しを把握したい</em></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">
+                <strong>締めの一文：</strong>「→ 店舗での顧客体験価値（CX）の改善が鍵となります」／「→ 空間品質をまずは可視化することが改善の第一歩です」
+              </div>
+            </div>
+          </div>
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">03</div>
+              <div>
+                <div class="sec-name">サービス概要（4本柱の紹介）</div>
+                <div class="sec-sub">SERVICESページへの入口。アイコン＋タイトル＋一言説明</div>
+              </div>
+              <div class="sec-tag tag-service">サービス概観</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>カード①②</h4>
+                  <ul>
+                    <li><strong>CX調査：</strong>生活者目線×プロの洞察で現場の接客品質を可視化。ハイブリッド型の独自調査手法。</li>
+                    <li><strong>空間品質調査：</strong>独自開発のフレームワークで空間の価値を9つの視点からスコア化。</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>カード③④</h4>
+                  <ul>
+                    <li><strong>AIカメラと店舗運営DX：</strong>人流データとCXナレッジを掛け合わせ、KPIを可視化して売上改善を実現。</li>
+                    <li><strong>コンサルティング支援：</strong>調査で終わらず、改善まで伴走。あるべき姿から逆算したロードマップで支援。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">
+                <strong>各カードに：</strong>「詳しくはこちら →」リンク（SERVICESページ各セクションへアンカーリンク）
+              </div>
+            </div>
+          </div>
+
+          <div class="sec trust">
+            <div class="sec-head">
+              <div class="sec-no">04</div>
+              <div>
+                <div class="sec-name">実績ハイライト</div>
+                <div class="sec-sub">数字で一瞬で信頼を示す</div>
+              </div>
+              <div class="sec-tag tag-trust">信頼構築</div>
+            </div>
+            <div class="sec-body">
+              <div class="kpi-row">
+                <div class="kpi-card">
+                  <div class="kpi-num">+26%</div>
+                  <div class="kpi-label">売上前年比<br>（ライフスタイルショップ）</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">117%</div>
+                  <div class="kpi-label">重点店舗売上<br>前年比（アパレル）</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">+7%</div>
+                  <div class="kpi-label">コンバージョン<br>（買上率）改善</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">5年+</div>
+                  <div class="kpi-label">大手百貨店<br>継続支援年数</div>
+                </div>
+              </div>
+              <div class="note">
+                <strong>補足リンク：</strong>「詳しい導入事例はこちら →」CASESページへ
+              </div>
+            </div>
+          </div>
+
+          <div class="sec cta">
+            <div class="sec-head">
+              <div class="sec-no">05</div>
+              <div>
+                <div class="sec-name">CTA（フッター手前）</div>
+                <div class="sec-sub">TOPページ内の最終アクション誘導</div>
+              </div>
+              <div class="sec-tag tag-cta">CTA</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">コピー案</div>
+                <div class="copy-text">どのサービスが自社に合うか分からなくても、まずはご相談ください。</div>
+                <div class="copy-sub">課題の整理から一緒に考えます。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>CTA要素</h4>
+                  <ul>
+                    <li><strong>一次ボタン：</strong>「まずは相談してみる（無料）」</li>
+                    <li><strong>二次ボタン：</strong>「サービス資料をダウンロードする」</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>安心感を添える要素</h4>
+                  <ul>
+                    <li>「返答まで〇営業日以内」などの目安</li>
+                    <li>「強引な営業は一切行いません」一言</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== PAGE 2: ABOUT ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 02 — ABOUT</div>
+          <div class="slide-title">私たちについて</div>
+          <div class="slide-purpose">ミッション・特徴・背景・会社情報を通じて「人と空間に頼む理由」を納得感をもって伝えるページ。</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec hero">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">ミッション</div>
+                <div class="sec-sub">存在意義を正面から伝えるファーストセクション</div>
+              </div>
+              <div class="sec-tag tag-hero">ファーストビュー</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">ミッション文（原文）</div>
+                <div class="copy-text">AIを活用した店舗CXとUXの改善で<br>スピード感と高い精度を両立し<br>お客様に高い価値を届ける</div>
+              </div>
+              <div class="copy-block">
+                <div class="copy-label">ポジショニング文（原文）</div>
+                <div class="copy-text">私たちはAI時代の店舗CXとUX改善のパイオニアを目指します。「人と空間」は商空間運営におけるCXとUXのエキスパートです。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec intro">
+            <div class="sec-head">
+              <div class="sec-no">02</div>
+              <div>
+                <div class="sec-name">AI時代のCX重要性</div>
+                <div class="sec-sub">「なぜ今CXなのか」の文脈を作る</div>
+              </div>
+              <div class="sec-tag tag-intro">背景・文脈</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>AI時代だからこそCXが重要（左カラム）</h4>
+                  <ul>
+                    <li>顧客との関係構築の重要な接点</li>
+                    <li>ブランド体験の最前線</li>
+                    <li><em>AIでは代替できない「人間らしい接客」の価値</em></li>
+                    <li>競合差別化の決定要因</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>店舗におけるCX向上の効果（右カラム）</h4>
+                  <ul>
+                    <li><em>リピート率・客単価・売上の向上</em></li>
+                    <li>ブランドへの理解の深化</li>
+                    <li>ブランドの価値向上</li>
+                    <li>業務実行のスピードUPと効率化</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">
+                <strong>今求められているのは：</strong>「店頭でお客様と商品の間に立ち、プロダクトやサービス、そしてブランドとお客様の架け橋になること」
+              </div>
+            </div>
+          </div>
+
+          <div class="sec intro">
+            <div class="sec-head">
+              <div class="sec-no">03</div>
+              <div>
+                <div class="sec-name">人と空間の5つの特徴</div>
+                <div class="sec-sub">選ばれる理由・差別化ポイント</div>
+              </div>
+              <div class="sec-tag tag-intro">ブランド紹介</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>特徴（原文）</h4>
+                  <ul>
+                    <li><strong>①</strong> 商空間運営・接客に圧倒的に強いCX・UX改善ノウハウ</li>
+                    <li><strong>②</strong> 独自のCX調査、空間品質調査によるリアルなデータ</li>
+                    <li><strong>③</strong> 豊富なCX・UXデータとナレッジの蓄積</li>
+                    <li><strong>④</strong> 継続的な支援体制</li>
+                    <li><strong>⑤</strong> 店舗運営DXとCX・UXを橋渡しする専門性</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>選ばれる4つの理由（CX調査の文脈）</h4>
+                  <ul>
+                    <li>1. 商空間CX特化の専門性（現場目線の実践的ソリューション）</li>
+                    <li>2. 独自のハイブリッドCX調査（生活者感覚×専門分析の融合）</li>
+                    <li>3. 相対評価による本質的理解（全国比較・ベンチマーク分析）</li>
+                    <li>4. 現場モチベーションを高めるフォローアップ</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec common">
+            <div class="sec-head">
+              <div class="sec-no">04</div>
+              <div>
+                <div class="sec-name">会社概要</div>
+                <div class="sec-sub">基本情報の掲載</div>
+              </div>
+              <div class="sec-tag tag-common">会社情報</div>
+            </div>
+            <div class="sec-body">
+              <div class="steps">
+                <div class="step-row">
+                  <div class="step-label">社名</div>
+                  <div class="step-text">株式会社人と空間（HUMAN AND SPACE）</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">代表者</div>
+                  <div class="step-text">要確認</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">設立</div>
+                  <div class="step-text">要確認</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">所在地</div>
+                  <div class="step-text">要確認</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">TEL / FAX</div>
+                  <div class="step-text">要確認</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">URL</div>
+                  <div class="step-text">要確認</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">事業内容</div>
+                  <div class="step-text">店舗CX（顧客体験価値）・空間品質の調査・分析・コンサルティング支援 / 店舗運営DX（AIカメラ・人流計測）</div>
+                </div>
+              </div>
+              <div class="note" style="margin-top:12px">
+                <strong>ビジュアル：</strong>会社・オフィスの雰囲気写真（あれば）。なければブランドイメージビジュアルで代替。
+              </div>
+            </div>
+          </div>
+
+          <div class="sec common">
+            <div class="sec-head">
+              <div class="sec-no">05</div>
+              <div>
+                <div class="sec-name">メンバー紹介</div>
+                <div class="sec-sub">顔が見えることで親近感・信頼感を高める</div>
+              </div>
+              <div class="sec-tag tag-common">チーム</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>各メンバーカードの構成</h4>
+                  <ul>
+                    <li>顔写真（正方形またはラウンド）</li>
+                    <li>名前・肩書き</li>
+                    <li>専門領域・経歴の一言</li>
+                    <li>一言メッセージ（任意）</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>確認事項</h4>
+                  <ul>
+                    <li>掲載メンバーの範囲はクライアントに確認</li>
+                    <li>写真の有無・スタイル（スタジオ / カジュアル）を確認</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== PAGE 3: SERVICES ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 03 — SERVICES</div>
+          <div class="slide-title">サービス</div>
+          <div class="slide-purpose">4つのサービスを詳細に説明し「自社の課題にどれが合うか」を理解させるページ。PDCA型の支援フローも伝える。</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">サービス全体像</div>
+                <div class="sec-sub">「人（CX）」と「空間」の2軸を俯瞰する図解</div>
+              </div>
+              <div class="sec-tag tag-service">概観</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>人（CX）領域</h4>
+                  <ul>
+                    <li>CX調査（調査・分析）</li>
+                    <li>コンサルティング（伴走支援）</li>
+                    <li>セミナー・ワークショップ・研修・教育</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>空間領域 ／ 人×空間融合領域</h4>
+                  <ul>
+                    <li>空間品質調査（調査・分析）</li>
+                    <li>コンサルティング（伴走支援）</li>
+                    <li><em>店舗運営DX（人流計測・KPI改善）← 融合領域</em></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">
+                <strong>図解：</strong>「人と空間」を頂点にしたツリー構造図。人（CX）領域＝濃いネイビー、空間領域＝ブルーグレー、人×空間融合領域＝パープル系で色分け
+              </div>
+            </div>
+          </div>
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">02</div>
+              <div>
+                <div class="sec-name">CX調査</div>
+                <div class="sec-sub">包括的な店舗CX改善ソリューション</div>
+              </div>
+              <div class="sec-tag tag-service">サービス詳細</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">サービスリード文（原文）</div>
+                <div class="copy-text">現在の店舗運営は「改善に向けた打ち手の進化が追い付いていない」状況。店舗での顧客体験価値（CX）の改善が鍵となります。</div>
+              </div>
+
+              <div class="flow">
+                <div class="flow-step">CX戦略策定</div><div class="flow-arrow">→</div>
+                <div class="flow-step">ハイブリッドCX調査</div><div class="flow-arrow">→</div>
+                <div class="flow-step">分析・レポート</div><div class="flow-arrow">→</div>
+                <div class="flow-step">結果報告</div><div class="flow-arrow">→</div>
+                <div class="flow-step">継続的改善支援</div>
+              </div>
+
+              <div class="cols">
+                <div class="col-block">
+                  <h4>独自性3点（原文）</h4>
+                  <ul>
+                    <li><em>① 生活者目線×プロの洞察の「良いトコどり」</em></li>
+                    <li><em>② 全国＆ベンチマーク比較による立ち位置の「見える化」</em></li>
+                    <li><em>③ 調査後の研修・セッションを含めた伴走支援のケーパビリティ</em></li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>調査手法の詳細</h4>
+                  <ul>
+                    <li><strong>モニター型調査員：</strong>店舗商圏にお住まいの生活者 / 独自スクリーニング通過者</li>
+                    <li><strong>専門調査員：</strong>ファッション・コスメ・ライフスタイル業界経験者</li>
+                    <li>1店舗につき原則3名の異なる調査員が訪問</li>
+                    <li>調査員は普通のお客様として来店（自然な状態を観察）</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cols" style="margin-top:12px">
+                <div class="col-block">
+                  <h4>レポート構成</h4>
+                  <ul>
+                    <li>① 自ブランドの調査結果</li>
+                    <li>② 全国・ベンチマークとの比較</li>
+                    <li>③ 上下GAP分析</li>
+                    <li>④ トピックス分析</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>報告体制</h4>
+                  <ul>
+                    <li><strong>本社・事務局向け：</strong>今後の全体戦略に活かすための報告</li>
+                    <li><strong>店長向け：</strong>モチベーションと行動変革を後押しする報告研修</li>
+                    <li>→「やるべきことの明確化」と「納得して改善に取り組めるスタートライン」を実現</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="note">
+                <strong>CX戦略策定STEPの詳細：</strong>組織方針の理解 → 顧客体験ゴール設定 → カスタマージャーニーマップ作成 → タッチポイント分析 → CXビジョンとKPI目標設定（内容に応じて1〜3か月）
+              </div>
+            </div>
+          </div>
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">03</div>
+              <div>
+                <div class="sec-name">空間品質調査</div>
+                <div class="sec-sub">空間の価値を9つの視点でスコア化する独自スキーム</div>
+              </div>
+              <div class="sec-tag tag-service">サービス詳細</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">サービスリード文（原文）</div>
+                <div class="copy-text">空間品質調査は、人と空間が開発したオリジナルの「空間の価値をスコア化」するスキームです。空間品質をまずは可視化することが改善の第一歩です。</div>
+              </div>
+
+              <div class="flow">
+                <div class="flow-step">空間品質の要件定義</div><div class="flow-arrow">→</div>
+                <div class="flow-step">空間品質調査</div><div class="flow-arrow">→</div>
+                <div class="flow-step">分析・レポート</div><div class="flow-arrow">→</div>
+                <div class="flow-step">結果報告</div><div class="flow-arrow">→</div>
+                <div class="flow-step">継続的改善支援</div>
+              </div>
+
+              <div class="cols">
+                <div class="col-block">
+                  <h4>独自性3点（原文）</h4>
+                  <ul>
+                    <li><em>① 空間の価値を9つの視点でスコア化</em></li>
+                    <li><em>② 再来店意向を軸とした配点性向</em></li>
+                    <li><em>③ プロの知識×お客様目線をもった専門調査員</em></li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>調査対象エリア（9エリア）</h4>
+                  <ul>
+                    <li>【1】外観・ファサード　【2】エントランス</li>
+                    <li>【3】共用部通路　【4】共用部施設</li>
+                    <li>【5】インフォメーション　【6】トイレ</li>
+                    <li>【7】各エリア（***エリア）　【8】その他</li>
+                    <li>【9】総合的な印象</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cols" style="margin-top:12px">
+                <div class="col-block">
+                  <h4>設問の評価軸（エントランス例）</h4>
+                  <ul>
+                    <li>高揚感 / 居心地の良さ / アイデンティティ</li>
+                    <li>拡散力（人に伝えたくなるか）/ クリンリネス</li>
+                    <li>再来店意向 / ホスピタリティ / 照度・明度</li>
+                    <li>全体評価（スコア＋コメント）</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>成果物・オプション</h4>
+                  <ul>
+                    <li>スコア付き分析レポート（実際の写真つき）</li>
+                    <li>競合・ベンチマーク比較（オプション追加調査）</li>
+                    <li>改善施策への活用 + ナレッジ蓄積</li>
+                    <li>対象：ブランド空間 / 商業施設空間</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">04</div>
+              <div>
+                <div class="sec-name">AIカメラと店舗運営DX</div>
+                <div class="sec-sub">人流データ×CXナレッジで売上を戦略的に改善</div>
+              </div>
+              <div class="sec-tag tag-service">サービス詳細</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>3段階の比較（図解で見せる）</h4>
+                  <ul>
+                    <li><strong>人流データのない店舗：</strong>KGI（売上）が結果のすべてになりやすい。感覚頼み。</li>
+                    <li><strong>人流データのある店舗：</strong>入店客数・コンバージョン等のKPIが可視化される。</li>
+                    <li><em>人流データ×CXナレッジを掛け合わせる店舗：KPIと行動の因果関係が分かり、売上改善を戦略的に描ける。</em></li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>可視化されるKPI</h4>
+                  <ul>
+                    <li>入店率 / 入店客数</li>
+                    <li>コンバージョン（買上率）</li>
+                    <li>滞留時間</li>
+                    <li>接客頻度</li>
+                    <li>ディスプレイ視認率</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cols" style="margin-top:12px">
+                <div class="col-block">
+                  <h4>AIカメラ選定支援（3種類）</h4>
+                  <ul>
+                    <li><strong>天井付カメラA：</strong>LUXブランドでも採用の世界的モデル。滞留・接客頻度計測可。初期費用★★★★☆</li>
+                    <li><strong>天井付カメラB：</strong>空港向けに開発。高天井に強く安定性高い。初期費用★★★☆☆</li>
+                    <li><strong>汎用型カメラC：</strong>天井付け+置き型も可能なエントリーモデル。初期費用★★★★★</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>オンボーディング支援フロー</h4>
+                  <ul>
+                    <li>① 課題抽出（現状の悩みの整理）</li>
+                    <li>② 成功シナリオ策定</li>
+                    <li>③ 計測開始（AIカメラ設置）</li>
+                    <li>④ KPI目標設定</li>
+                    <li>⑤ 実行支援（ダッシュボード共有・改善施策）</li>
+                    <li><em>⑥ 自律自走フェーズへ</em></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec service">
+            <div class="sec-head">
+              <div class="sec-no">05</div>
+              <div>
+                <div class="sec-name">コンサルティング支援</div>
+                <div class="sec-sub">原則として伴走型。あるべき姿からロードマップを引く</div>
+              </div>
+              <div class="sec-tag tag-service">サービス詳細</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">リード文（原文）</div>
+                <div class="copy-text">人と空間のコンサルティング支援は原則として伴走型です。あるべき姿を理解したうえで、ロードマップを引き、支援内容をご提案させていただきます。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>CX領域 / 店舗向け</h4>
+                  <ul>
+                    <li>CXについての課題・調査結果からの課題抽出</li>
+                    <li>状況を踏まえた優先順位づけ</li>
+                    <li>具体的な改善施策の選択肢の提示</li>
+                    <li>KPI・KGIを改善するためのCXワークショップ</li>
+                    <li>接客における悩みの改善セミナー</li>
+                    <li><em>→ 成果物：CX改善計画 / 商品提案スクリプト / ナレッジ化 / 各種KPI改善</em></li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>CX領域 / 本社・施設向け</h4>
+                  <ul>
+                    <li>CX改善に向けた伴走の仕方</li>
+                    <li>店舗運営におけるKPI理解と使い方</li>
+                    <li>店舗を支援する上で見るべき視点と存在価値の発揮の仕方</li>
+                    <li><em>→ 成果物：年間CX計画 / KPIの意味と活用方法の理解 / 存在価値を発揮するための選択肢の質と量の改善</em></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cols" style="margin-top:12px">
+                <div class="col-block">
+                  <h4>空間品質領域 / プロジェクト毎</h4>
+                  <ul>
+                    <li>空間品質ワークショップ</li>
+                    <li>VMDの概念と使い方の理解</li>
+                    <li>実践型VMDワークショップ</li>
+                    <li>空間品質視点での店舗視察の手法セミナー</li>
+                    <li><em>→ 成果物：VMD基本理論の理解 / 実践知 / 日々の運営における型化</em></li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>セミナー・ワークショップメニュー</h4>
+                  <ul>
+                    <li>CXセミナー</li>
+                    <li>CX×AI活用セミナー</li>
+                    <li>空間品質改善セミナー</li>
+                    <li>空間品質ワークショップ（セッション）</li>
+                    <li>実践型VMDワークショップ</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== PAGE 4: CASES ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 04 — CASES</div>
+          <div class="slide-title">事例</div>
+          <div class="slide-purpose">具体的な数字・実施内容・お客様の声の3点セットで「本当に効果がある」という信頼を獲得するページ。</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec trust">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">事例一覧（導入部）</div>
+                <div class="sec-sub">業種の多様性と実績数字を俯瞰する</div>
+              </div>
+              <div class="sec-tag tag-trust">概観</div>
+            </div>
+            <div class="sec-body">
+              <div class="kpi-row">
+                <div class="kpi-card">
+                  <div class="kpi-num">117%</div>
+                  <div class="kpi-label">重点店舗<br>売上前年比</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">+26%</div>
+                  <div class="kpi-label">売上<br>前年比</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">+9%</div>
+                  <div class="kpi-label">客単価<br>改善</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-num">3年</div>
+                  <div class="kpi-label">連続最高売上<br>更新</div>
+                </div>
+              </div>
+              <div class="note">
+                <strong>対応業種：</strong>百貨店 / ライフスタイルショップ / アパレルブランド（他、ファッション・コスメ業界多数）
+              </div>
+            </div>
+          </div>
+
+          <div class="sec trust">
+            <div class="sec-head">
+              <div class="sec-no">02</div>
+              <div>
+                <div class="sec-name">事例① 大手百貨店 — CX・空間品質改善支援</div>
+                <div class="sec-sub">5年以上の継続支援 → 施設自律自走化を実現</div>
+              </div>
+              <div class="sec-tag tag-trust">ケーススタディ</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">案件概要</div>
+                <div class="copy-text">大手百貨店全店に向けたCX・空間品質改善プロジェクトへの伴走を過去5年以上にわたってご支援。結果として、施設が自走して改善を進め、CX・空間品質を高めることに繋がっています。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>実施内容</h4>
+                  <ul>
+                    <li>全施設へのCX調査</li>
+                    <li>CX調査後に伴走型コンサルとして施設・ブランド・人と空間での三者MTG</li>
+                    <li>全施設への空間品質調査</li>
+                    <li>空間品質ワークショップ</li>
+                    <li>施設向け店舗運営支援セミナー</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>結果</h4>
+                  <ul>
+                    <li>施設運営者としての役割の理解</li>
+                    <li>CX調査の活用方法とブランドとのコミュニケーションノウハウ習得</li>
+                    <li>年間でのCX改善への取組計画</li>
+                    <li>CX改善に向けた取組の活性化</li>
+                    <li><em>空間品質向上に向けた新たなプロジェクトの発足</em></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="quote-block">
+                <div class="q-label">お客様の声</div>
+                <div class="q-text">「サービス力を高め、リアル店舗の価値を高めるためにご一緒頂いています。店舗への寄り添い方、改善の仕方を、前向きな取り組みを通じて理解を深めることができました。これからより自律自走して施設らしさを実現していきたいと思います。」</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec trust">
+            <div class="sec-head">
+              <div class="sec-no">03</div>
+              <div>
+                <div class="sec-name">事例② ライフスタイルショップ — KPI改善</div>
+                <div class="sec-sub">売上+26% / コンバージョン+7% / 客単価+9%</div>
+              </div>
+              <div class="sec-tag tag-trust">ケーススタディ</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">案件概要</div>
+                <div class="copy-text">ライフスタイルショップの旗艦店でのCX調査とセッションとあわせて人流データを含めたKPI分析を導入。店舗が自ら考え、行動したことが、前年を大きく上回る成果となりました。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>実施内容</h4>
+                  <ul>
+                    <li>旗艦店舗での人流（入店者）計測</li>
+                    <li>半年間のCX改善セッション</li>
+                    <li>プロジェクト期間中2回のCX調査</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>結果（数値）</h4>
+                  <ul>
+                    <li><em>売上前年比 +26%</em></li>
+                    <li><em>セット率前年比 +8%</em></li>
+                    <li><em>コンバージョン（買上率）プロジェクト開始時から +7%</em></li>
+                    <li><em>客単価前年比 +9%</em></li>
+                    <li>高単価商材の紹介スクリプトの完成とヒーロー商材化の実現</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="quote-block">
+                <div class="q-label">お客様の声</div>
+                <div class="q-text">「新人店長が着任したタイミングでCXセッションをお願いしましたが、結果的に、前年よりも高い売上を達成することができました。CX視点での具体的な改善の仕方を教えて頂いたことと、数値を通して店舗を理解できたことがとても良かったです。」</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec trust">
+            <div class="sec-head">
+              <div class="sec-no">04</div>
+              <div>
+                <div class="sec-name">事例③ アパレルブランド — CX調査とセッション</div>
+                <div class="sec-sub">3年連続最高売上 / 重点店舗 最大117%</div>
+              </div>
+              <div class="sec-tag tag-trust">ケーススタディ</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">案件概要（課題から）</div>
+                <div class="copy-text">立地のポテンシャルを活かしきれていない、期待していた店長が伸び悩んでいる、店舗運営のDX化が進まないなどの悩みからスタート。セッション受講メンバーの成長と売上改善が進んでいます。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>実施内容</h4>
+                  <ul>
+                    <li>全国店舗へのCX調査</li>
+                    <li>重点店舗における人流計測実施</li>
+                    <li>重点店舗支援への伴走型コンサル</li>
+                    <li>エリアマネージャーに向けたKPI活用とCX視点での支援セッション</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>結果（数値）</h4>
+                  <ul>
+                    <li><em>ブランド全体で導入以降3年連続で最高売上を達成</em></li>
+                    <li><em>重点店舗での売上前年比最大117%達成</em></li>
+                    <li>入店率・コンバージョン（買上率）などの各種KPIについても大幅改善</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="quote-block">
+                <div class="q-label">お客様の声</div>
+                <div class="q-text">「導入後、店舗スタッフが大きく成長してくれた。特に、KPI活用とCX視点での支援プログラムを受けたマネージャーのレベルUPが目覚ましく、幹部メンバーに昇格してくれているのが嬉しい驚きです。これからも定期的な調査とセッションをお願いします。」</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== PAGE 5: CONTACT ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 05 — CONTACT</div>
+          <div class="slide-title">お問い合わせ</div>
+          <div class="slide-purpose">心理的ハードルを下げた複数の入口を用意し、「まず相談してみよう」というアクションを促すページ。</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec cta">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">CTAリード</div>
+                <div class="sec-sub">相談ハードルを下げるメッセージ</div>
+              </div>
+              <div class="sec-tag tag-cta">導入</div>
+            </div>
+            <div class="sec-body">
+              <div class="copy-block">
+                <div class="copy-label">キャッチコピー（案）</div>
+                <div class="copy-text">どのサービスが自社に合うか分からなくても、まずはご相談ください。</div>
+                <div class="copy-sub">課題の整理から一緒に考えます。強引な営業は一切行いません。</div>
+              </div>
+              <div class="cols">
+                <div class="col-block">
+                  <h4>CTAボタン</h4>
+                  <ul>
+                    <li><strong>一次CTA：</strong>「まずは相談してみる（無料）」</li>
+                    <li><strong>二次CTA：</strong>「サービス資料をダウンロードする」</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>安心感を添える情報</h4>
+                  <ul>
+                    <li>返答目安：〇営業日以内</li>
+                    <li>電話でのご相談：TEL 〇〇〇-〇〇〇〇-〇〇〇〇</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec cta">
+            <div class="sec-head">
+              <div class="sec-no">02</div>
+              <div>
+                <div class="sec-name">お問い合わせフォーム</div>
+                <div class="sec-sub">入力項目は最小限に絞る</div>
+              </div>
+              <div class="sec-tag tag-cta">フォーム</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>必須項目</h4>
+                  <ul>
+                    <li>会社名</li>
+                    <li>お名前</li>
+                    <li>メールアドレス</li>
+                    <li>お問い合わせ内容（テキストエリア）</li>
+                    <li>プライバシーポリシー同意チェック</li>
+                  </ul>
+                </div>
+                <div class="col-block">
+                  <h4>任意項目</h4>
+                  <ul>
+                    <li>電話番号</li>
+                    <li>興味のあるサービス（チェックボックス）</li>
+                    <li>→ CX調査 / 空間品質調査 / AIカメラ・DX / コンサルティング / その他</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec common">
+            <div class="sec-head">
+              <div class="sec-no">03</div>
+              <div>
+                <div class="sec-name">送信完了ページ</div>
+                <div class="sec-sub">次のステップと安心感を伝える</div>
+              </div>
+              <div class="sec-tag tag-common">完了</div>
+            </div>
+            <div class="sec-body">
+              <div class="cols">
+                <div class="col-block">
+                  <h4>コンテンツ</h4>
+                  <ul>
+                    <li>「お問い合わせありがとうございます」完了メッセージ</li>
+                    <li>返答までの目安（例：3営業日以内にご連絡します）</li>
+                    <li>TOPへ戻るボタン</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== PAGE 6: PRIVACY ===== -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-label">Page 06 — PRIVACY</div>
+          <div class="slide-title">プライバシーポリシー</div>
+          <div class="slide-purpose">法的要件を満たすための必須ページ。テキスト中心のシンプル構成。クライアントから原稿を受領して掲載。</div>
+        </div>
+
+        <div class="sections">
+
+          <div class="sec common">
+            <div class="sec-head">
+              <div class="sec-no">01</div>
+              <div>
+                <div class="sec-name">プライバシーポリシー本文</div>
+                <div class="sec-sub">草案テキスト（クライアント確認・弁護士チェック推奨）</div>
+              </div>
+              <div class="sec-tag tag-common">テキスト</div>
+            </div>
+            <div class="sec-body">
+
+              <div class="copy-block">
+                <div class="copy-label">冒頭文（草案）</div>
+                <div class="copy-text">株式会社人と空間（以下「当社」）は、お客様の個人情報の適切な保護と管理が重要であることを認識し、以下の方針に基づき個人情報を取り扱います。</div>
+              </div>
+
+              <div class="steps" style="margin-top:14px">
+                <div class="step-row">
+                  <div class="step-label">1. 収集</div>
+                  <div class="step-text">サービスのご提供・お問い合わせへの対応・資料の送付等を目的として、お名前・会社名・メールアドレス・電話番号等の個人情報を収集することがあります。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">2. 利用目的</div>
+                  <div class="step-text">① サービスに関するご案内・お問い合わせへの対応　② 資料・レポートの送付　③ セミナー・ワークショップのご案内　④ その他業務遂行に必要な連絡</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">3. 第三者提供</div>
+                  <div class="step-text">法令に定める場合を除き、お客様の個人情報を事前の同意なく第三者に提供することはありません。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">4. 委託</div>
+                  <div class="step-text">利用目的の達成に必要な範囲で、個人情報の取り扱いを外部に委託する場合があります。その際は委託先に対して適切な監督を行います。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">5. 安全管理</div>
+                  <div class="step-text">個人情報への不正アクセス・紛失・破損・改ざん・漏洩等を防止するため、適切なセキュリティ対策を講じます。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">6. Cookie</div>
+                  <div class="step-text">当社ウェブサイトではGoogle Analytics等のアクセス解析ツールを使用しています。Cookieによりアクセス情報を収集しますが、個人を特定する情報は含みません。ブラウザの設定によりCookieを無効にすることができます。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">7. 開示・訂正</div>
+                  <div class="step-text">お客様は、当社が保有するご自身の個人情報について開示・訂正・削除等を請求する権利を有します。ご請求の際は下記お問い合わせ先までご連絡ください。</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">8. お問合せ先</div>
+                  <div class="step-text">株式会社人と空間　個人情報取扱担当　E-mail：（要確認）</div>
+                </div>
+                <div class="step-row">
+                  <div class="step-label">制定日</div>
+                  <div class="step-text">20XX年XX月XX日（クライアントと要確認）</div>
+                </div>
+              </div>
+
+              <div class="note" style="margin-top:12px">
+                <strong>注意：</strong>この草案はテンプレートです。弁護士チェック・クライアント確認のうえ最終化してください。制定日・お問い合わせ先メールは受領後に差し替え。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /.slides -->
+  </div>
+
+  <button class="nav-btn prev" id="prevBtn" onclick="move(-1)" disabled>‹</button>
+  <button class="nav-btn next" id="nextBtn" onclick="move(1)">›</button>
+
+  <div class="dots" id="dots"></div>
+
+  <!-- パスワード保護 -->
+  <div id="pw-lock" style="position:fixed;inset:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;">
+    <div style="font-size:11px;letter-spacing:0.3em;color:#fff;opacity:0.4;">CRATER INC.</div>
+    <input id="pw-input" type="password" placeholder="PASSWORD" autofocus
+      style="background:#222;border:1px solid #444;border-radius:4px;padding:12px 16px;font-size:14px;color:#fff;width:240px;text-align:center;letter-spacing:0.1em;outline:none;"
+      onkeydown="if(event.key==='Enter')pwCheck()">
+    <div id="pw-error" style="font-size:12px;color:#e05555;display:none;">パスワードが違います</div>
+    <div style="font-size:10px;letter-spacing:0.1em;color:#fff;opacity:0.25;margin-top:4px;">人と空間 / コンテンツマップ</div>
+  </div>
+
+  <script>
+    (function(){ if(sessionStorage.getItem('cv_auth')==='1'){document.getElementById('pw-lock').style.display='none';} })();
+    function pwCheck(){
+      if(document.getElementById('pw-input').value==='view'){
+        document.getElementById('pw-lock').style.display='none';
+        sessionStorage.setItem('cv_auth','1');
+      } else {
+        document.getElementById('pw-error').style.display='block';
+        document.getElementById('pw-input').value='';
+      }
+    }
+
+    const TOTAL = 6;
+    let current = 0;
+    const slidesEl = document.getElementById('slides');
+    const tabs = document.querySelectorAll('.nav-tab');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsEl = document.getElementById('dots');
+
+    for(let i = 0; i < TOTAL; i++){
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(n){
+      current = Math.max(0, Math.min(TOTAL - 1, n));
+      slidesEl.style.transform = `translateX(-${current * 100}%)`;
+      tabs.forEach((t, i) => t.classList.toggle('active', i === current));
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${TOTAL}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === TOTAL - 1;
+      document.querySelectorAll('.slide')[current].scrollTop = 0;
+    }
+
+    function move(dir){ goTo(current + dir); }
+
+    document.addEventListener('keydown', e => {
+      if(e.key === 'ArrowRight') move(1);
+      if(e.key === 'ArrowLeft') move(-1);
+    });
+  </script>
+
+</body>
+</html>
