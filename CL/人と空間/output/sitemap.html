@@ -656,17 +656,18 @@
     // このページの識別子（ASCII必須）
     const PAGE_ID = "hito-sitemap-v1";
 
-    let commentMode = false;
-    let pendingX = 0, pendingY = 0;
-    let activeCommentId = null;
+    var commentMode = false;
+    var pendingX = 0, pendingY = 0, pendingAnchor = null;
+    var activeCommentId = null;
+    var lastSnapshot = null;
 
-    // ピン＆ポップアップ用コンテナ（body直下・絶対配置・オーバーレイより高いz-index）
-    const container = document.createElement('div');
+    // ピン＆ポップアップ用コンテナ
+    var container = document.createElement('div');
     container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:0;z-index:8000;';
     document.body.appendChild(container);
 
     // 入力ポップアップ
-    const inputPopup = document.createElement('div');
+    var inputPopup = document.createElement('div');
     inputPopup.className = 'c-popup';
     inputPopup.innerHTML =
       '<textarea id="c-text" placeholder="コメントを入力… (Enterで送信)" ' +
@@ -678,7 +679,7 @@
     container.appendChild(inputPopup);
 
     // 表示ポップアップ
-    const viewPopup = document.createElement('div');
+    var viewPopup = document.createElement('div');
     viewPopup.className = 'c-view-popup';
     viewPopup.innerHTML =
       '<div class="c-view-text" id="c-view-text"></div>' +
@@ -686,29 +687,87 @@
       '<button class="c-btn-delete" onclick="deleteComment()">削除</button>';
     container.appendChild(viewPopup);
 
-    // コメントモード切り替え
-    function cToggle() {
-      commentMode = !commentMode;
-      const btn = document.getElementById('c-toggle');
-      const overlay = document.getElementById('c-overlay');
-      btn.classList.toggle('active', commentMode);
-      overlay.classList.toggle('active', commentMode);
-      // アイコン切り替え（吹き出し ↔ ×）
-      document.getElementById('c-icon-comment').style.display = commentMode ? 'none' : 'block';
-      document.getElementById('c-icon-close').style.display = commentMode ? 'block' : 'none';
-      if (!commentMode) {
-        inputPopup.style.display = 'none';
+    // ===== DOMアンカー：ピンが指すHTML要素を記録 =====
+
+    // クリック位置の要素からCSSセレクターを生成
+    function buildSelector(el) {
+      if (!el || el === document.body) return 'body';
+      if (el.id) return '#' + el.id;
+      var parts = [];
+      var node = el;
+      while (node && node !== document.body && node.parentElement) {
+        var tag = node.tagName.toLowerCase();
+        var siblings = Array.from(node.parentElement.children).filter(function(c) {
+          return c.tagName === node.tagName;
+        });
+        if (siblings.length > 1) {
+          parts.unshift(tag + ':nth-of-type(' + (siblings.indexOf(node) + 1) + ')');
+        } else {
+          parts.unshift(tag);
+        }
+        if (node.id) { parts[0] = '#' + node.id; break; }
+        node = node.parentElement;
       }
+      return parts.join(' > ');
     }
 
-    // オーバーレイクリック → 入力ポップアップ表示
+    // ピンの表示座標を計算（アンカー要素が見つかれば追従・なければ絶対座標）
+    function getPinCoords(data) {
+      if (data.anchor && data.anchor.selector) {
+        try {
+          var el = document.querySelector(data.anchor.selector);
+          if (el) {
+            var rect = el.getBoundingClientRect();
+            return {
+              x: rect.left + window.scrollX + data.anchor.ox * rect.width,
+              y: rect.top  + window.scrollY + data.anchor.oy * rect.height
+            };
+          }
+        } catch(e) {}
+      }
+      return { x: data.x, y: data.y };
+    }
+
+    // ===== コメントモード切り替え =====
+    function cToggle() {
+      commentMode = !commentMode;
+      var btn = document.getElementById('c-toggle');
+      var overlay = document.getElementById('c-overlay');
+      btn.classList.toggle('active', commentMode);
+      overlay.classList.toggle('active', commentMode);
+      document.getElementById('c-icon-comment').style.display = commentMode ? 'none' : 'block';
+      document.getElementById('c-icon-close').style.display = commentMode ? 'block' : 'none';
+      if (!commentMode) inputPopup.style.display = 'none';
+    }
+
+    // オーバーレイクリック → アンカー取得 → 入力ポップアップ表示
     document.getElementById('c-overlay').addEventListener('click', function(e) {
-      pendingX = e.clientX + window.scrollX;
-      pendingY = e.clientY + window.scrollY;
-      const popupX = (window.innerWidth - e.clientX > 290) ? pendingX + 16 : pendingX - 276;
+      var cx = e.clientX, cy = e.clientY;
+
+      // オーバーレイを一瞬隠して真下の要素を取得
+      this.style.display = 'none';
+      var target = document.elementFromPoint(cx, cy);
+      this.style.display = 'block';
+
+      pendingX = cx + window.scrollX;
+      pendingY = cy + window.scrollY;
+
+      // アンカーデータ（要素セレクター＋要素内オフセット比率）
+      if (target && target !== document.body) {
+        var rect = target.getBoundingClientRect();
+        pendingAnchor = {
+          selector: buildSelector(target),
+          ox: (cx - rect.left) / Math.max(rect.width,  1),
+          oy: (cy - rect.top)  / Math.max(rect.height, 1)
+        };
+      } else {
+        pendingAnchor = null;
+      }
+
+      var popupX = (window.innerWidth - cx > 290) ? pendingX + 16 : pendingX - 276;
       inputPopup.style.display = 'block';
       inputPopup.style.left = popupX + 'px';
-      inputPopup.style.top = pendingY + 'px';
+      inputPopup.style.top  = pendingY + 'px';
       document.getElementById('c-text').value = '';
       document.getElementById('c-text').focus();
     });
@@ -721,16 +780,16 @@
 
     // コメント送信（送信後もコメントモード継続）
     function submitComment() {
-      const text = document.getElementById('c-text').value.trim();
+      var text = document.getElementById('c-text').value.trim();
       if (!text) return;
       db.collection('comments').doc(PAGE_ID).collection('items').add({
         x: pendingX,
         y: pendingY,
+        anchor: pendingAnchor || null,
         text: text,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function() {
         inputPopup.style.display = 'none';
-        // コメントモードは維持（続けてピンを立てられる）
       }).catch(function(err) {
         alert('保存に失敗しました: ' + err.message);
       });
@@ -755,38 +814,54 @@
       }
     });
 
-    // リアルタイムでコメント読み込み・表示
+    // ===== ピン描画（リサイズ時にも再計算） =====
+    function renderPins(snapshot) {
+      container.querySelectorAll('.c-pin').forEach(function(p) { p.remove(); });
+      var num = 0;
+      snapshot.forEach(function(docSnap) {
+        num++;
+        var data = docSnap.data();
+        var coords = getPinCoords(data);
+        var n = num;
+        var pin = document.createElement('div');
+        pin.className = 'c-pin';
+        pin.style.left = coords.x + 'px';
+        pin.style.top  = coords.y + 'px';
+        pin.textContent = n;
+        pin.addEventListener('click', function(e) {
+          e.stopPropagation();
+          activeCommentId = docSnap.id;
+          var relX = coords.x - window.scrollX;
+          var popupX = (window.innerWidth - relX > 290) ? coords.x + 16 : coords.x - 276;
+          viewPopup.style.display = 'block';
+          viewPopup.style.left = popupX + 'px';
+          viewPopup.style.top  = coords.y + 'px';
+          document.getElementById('c-view-text').textContent = data.text;
+          var ts = data.timestamp ? data.timestamp.toDate().toLocaleString('ja-JP') : '';
+          document.getElementById('c-view-meta').textContent = ts;
+        });
+        container.appendChild(pin);
+      });
+    }
+
+    // リアルタイム同期
     db.collection('comments').doc(PAGE_ID).collection('items')
       .orderBy('timestamp')
       .onSnapshot(function(snapshot) {
-        container.querySelectorAll('.c-pin').forEach(function(p) { p.remove(); });
-        var num = 0;
-        snapshot.forEach(function(docSnap) {
-          num++;
-          var data = docSnap.data();
-          var n = num;
-          var pin = document.createElement('div');
-          pin.className = 'c-pin';
-          pin.style.left = data.x + 'px';
-          pin.style.top = data.y + 'px';
-          pin.textContent = n;
-          pin.addEventListener('click', function(e) {
-            e.stopPropagation();
-            activeCommentId = docSnap.id;
-            var relX = data.x - window.scrollX;
-            var popupX = (window.innerWidth - relX > 290) ? data.x + 16 : data.x - 276;
-            viewPopup.style.display = 'block';
-            viewPopup.style.left = popupX + 'px';
-            viewPopup.style.top = data.y + 'px';
-            document.getElementById('c-view-text').textContent = data.text;
-            var ts = data.timestamp ? data.timestamp.toDate().toLocaleString('ja-JP') : '';
-            document.getElementById('c-view-meta').textContent = ts;
-          });
-          container.appendChild(pin);
-        });
+        lastSnapshot = snapshot;
+        renderPins(snapshot);
       }, function(err) {
         alert('読み込みエラー: ' + err.message);
       });
+
+    // ブラウザ幅変更時にピンを再計算
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (lastSnapshot) renderPins(lastSnapshot);
+      }, 100);
+    });
   </script>
 
 </body>
