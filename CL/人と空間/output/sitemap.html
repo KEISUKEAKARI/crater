@@ -642,8 +642,8 @@
       appId: "1:523845906687:web:b5b6612eabe1af9544dcca"
     };
 
-    // このページの識別子（案件_ページ名_バージョン）
-    const PAGE_ID = "人と空間_サイトマップ_v1";
+    // このページの識別子（ASCII必須）
+    const PAGE_ID = "hito-sitemap-v1";
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -689,7 +689,8 @@
     };
 
     // オーバーレイクリック → ピン設置
-    document.getElementById('c-overlay').addEventListener('click', function(e) {
+    const overlayEl = document.getElementById('c-overlay');
+    overlayEl.addEventListener('click', function(e) {
       pendingX = e.clientX + window.scrollX;
       pendingY = e.clientY + window.scrollY;
 
@@ -700,11 +701,16 @@
       inputPopup.style.top = pendingY + 'px';
       document.getElementById('c-text').value = '';
       document.getElementById('c-text').focus();
+
+      // ポップアップ表示中はオーバーレイのクリックを無効化
+      overlayEl.style.pointerEvents = 'none';
     });
 
     // キャンセル
     function cancelInput() {
       inputPopup.style.display = 'none';
+      // オーバーレイのクリックを再有効化
+      overlayEl.style.pointerEvents = 'auto';
     }
     document.getElementById('c-cancel').addEventListener('click', () => {
       cancelInput();
