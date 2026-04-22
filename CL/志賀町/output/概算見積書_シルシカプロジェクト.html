@@ -200,6 +200,53 @@
       body { font-size: 9.5pt; }
       .page { padding: 12mm 14mm 12mm 16mm; max-width: 100%; }
     }
+
+    /* スマホ対応 */
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 16px 48px 16px;
+        max-width: 100%;
+      }
+      body {
+        font-size: 10pt;
+      }
+      /* ヘッダー：横並び→縦積み */
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .header-left h1 {
+        font-size: 15pt;
+      }
+      .header-right {
+        text-align: left;
+        font-size: 9pt;
+      }
+      /* 宛先・発行元：横並び→縦積み */
+      .meta {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .meta-from {
+        text-align: left;
+      }
+      /* 合計金額 */
+      .summary .total-amount {
+        font-size: 14pt;
+      }
+      /* テーブルはスクロール */
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 8.5pt;
+      }
+      thead th, tbody td, tfoot td {
+        padding: 6px 8px;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>

@@ -191,6 +191,40 @@
         max-width: 100%;
       }
     }
+
+    /* スマホ対応 */
+    @media (max-width: 768px) {
+      .page {
+        padding: 24px 16px 48px 16px;
+        max-width: 100%;
+      }
+      body {
+        font-size: 10pt;
+        line-height: 1.8;
+      }
+      .doc-title h1 {
+        font-size: 14pt;
+      }
+      .section-title {
+        font-size: 11pt;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 9pt;
+      }
+      th, td {
+        padding: 7px 8px;
+        white-space: nowrap;
+      }
+      /* 評価基準テーブルは折り返し許可 */
+      .section table th,
+      .section table td {
+        white-space: normal;
+        min-width: 60px;
+      }
+    }
   </style>
 </head>
 <body>
