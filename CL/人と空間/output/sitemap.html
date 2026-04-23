@@ -639,6 +639,15 @@
       color: #bbb;
       margin-bottom: 10px;
     }
+    .c-btn-edit {
+      background: none;
+      color: #1e2d3d;
+      border: 1px solid #1e2d3d;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 11px;
+      cursor: pointer;
+    }
     .c-btn-delete {
       background: none;
       color: #e74c3c;
@@ -712,9 +721,21 @@
     var viewPopup = document.createElement('div');
     viewPopup.className = 'c-view-popup';
     viewPopup.innerHTML =
-      '<div class="c-view-text" id="c-view-text"></div>' +
-      '<div class="c-view-meta" id="c-view-meta"></div>' +
-      '<button class="c-btn-delete" onclick="deleteComment()">削除</button>';
+      '<div id="c-view-mode">' +
+        '<div class="c-view-text" id="c-view-text"></div>' +
+        '<div class="c-view-meta" id="c-view-meta"></div>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="c-btn-edit" onclick="editComment()">編集</button>' +
+          '<button class="c-btn-delete" onclick="deleteComment()">削除</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="c-edit-mode" style="display:none;">' +
+        '<textarea id="c-edit-text" style="width:100%;height:80px;border:1px solid #e0e0e0;border-radius:6px;padding:8px 10px;font-size:13px;resize:none;outline:none;box-sizing:border-box;font-family:inherit;line-height:1.6;"></textarea>' +
+        '<div class="c-popup-actions">' +
+          '<button class="c-btn-cancel" onclick="cancelEdit()">キャンセル</button>' +
+          '<button class="c-btn-submit" onclick="saveEdit()">保存</button>' +
+        '</div>' +
+      '</div>';
     container.appendChild(viewPopup);
 
     // ===== DOMアンカー：ピンが指すHTML要素を記録 =====
@@ -830,6 +851,29 @@
       }).catch(function(err) {
         alert('保存に失敗しました: ' + err.message);
       });
+    }
+
+    // コメント編集
+    function editComment() {
+      document.getElementById('c-edit-text').value = document.getElementById('c-view-text').textContent;
+      document.getElementById('c-view-mode').style.display = 'none';
+      document.getElementById('c-edit-mode').style.display = 'block';
+      document.getElementById('c-edit-text').focus();
+    }
+    function cancelEdit() {
+      document.getElementById('c-view-mode').style.display = 'block';
+      document.getElementById('c-edit-mode').style.display = 'none';
+    }
+    function saveEdit() {
+      var newText = document.getElementById('c-edit-text').value.trim();
+      if (!newText) return;
+      db.collection('comments').doc(PAGE_ID).collection('items').doc(activeCommentId).update({
+        text: newText
+      }).then(function() {
+        viewPopup.style.display = 'none';
+        cancelEdit();
+        activeCommentId = null;
+      }).catch(function(err) { alert('更新に失敗しました: ' + err.message); });
     }
 
     // コメント削除

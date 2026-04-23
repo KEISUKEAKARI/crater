@@ -1145,6 +1145,10 @@
     }
     .c-view-text { font-size: 13px; color: #222; line-height: 1.7; margin-bottom: 8px; white-space: pre-wrap; word-break: break-word; }
     .c-view-meta { font-size: 11px; color: #bbb; margin-bottom: 10px; }
+    .c-btn-edit {
+      background: none; color: #1A2E42; border: 1px solid #1A2E42;
+      border-radius: 6px; padding: 5px 12px; font-size: 11px; cursor: pointer;
+    }
     .c-btn-delete {
       background: none; color: #e74c3c; border: 1px solid #e74c3c;
       border-radius: 6px; padding: 5px 12px; font-size: 11px; cursor: pointer;
@@ -1261,9 +1265,21 @@
     var viewPopup = document.createElement('div');
     viewPopup.className = 'c-view-popup';
     viewPopup.innerHTML =
-      '<div class="c-view-text" id="c-view-text"></div>' +
-      '<div class="c-view-meta" id="c-view-meta"></div>' +
-      '<button class="c-btn-delete" onclick="wfDeleteComment()">削除</button>';
+      '<div id="c-view-mode">' +
+        '<div class="c-view-text" id="c-view-text"></div>' +
+        '<div class="c-view-meta" id="c-view-meta"></div>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="c-btn-edit" onclick="wfEditComment()">編集</button>' +
+          '<button class="c-btn-delete" onclick="wfDeleteComment()">削除</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="c-edit-mode" style="display:none;">' +
+        '<textarea id="c-edit-text" style="width:100%;height:80px;border:1px solid #e0e0e0;border-radius:6px;padding:8px 10px;font-size:13px;resize:none;outline:none;box-sizing:border-box;font-family:inherit;line-height:1.6;"></textarea>' +
+        '<div class="c-popup-actions">' +
+          '<button class="c-btn-cancel" onclick="wfCancelEdit()">キャンセル</button>' +
+          '<button class="c-btn-submit" onclick="wfSaveEdit()">保存</button>' +
+        '</div>' +
+      '</div>';
     popupLayer.appendChild(viewPopup);
 
     // セレクター生成（slide内の相対パス）
@@ -1376,6 +1392,28 @@
       }).then(function() {
         inputPopup.style.display = 'none';
       }).catch(function(err) { alert('保存に失敗しました: ' + err.message); });
+    }
+
+    function wfEditComment() {
+      document.getElementById('c-edit-text').value = document.getElementById('c-view-text').textContent;
+      document.getElementById('c-view-mode').style.display = 'none';
+      document.getElementById('c-edit-mode').style.display = 'block';
+      document.getElementById('c-edit-text').focus();
+    }
+    function wfCancelEdit() {
+      document.getElementById('c-view-mode').style.display = 'block';
+      document.getElementById('c-edit-mode').style.display = 'none';
+    }
+    function wfSaveEdit() {
+      var newText = document.getElementById('c-edit-text').value.trim();
+      if (!newText) return;
+      db.collection('comments').doc(WF_PAGE_ID).collection('items').doc(wfActiveCommentId).update({
+        text: newText
+      }).then(function() {
+        viewPopup.style.display = 'none';
+        wfCancelEdit();
+        wfActiveCommentId = null;
+      }).catch(function(err) { alert('更新に失敗しました: ' + err.message); });
     }
 
     function wfDeleteComment() {
