@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>009 INDUSTRIAL RAW — Style Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── トークン ── */
+:root {
+  --c-dark:     #1A1A1A;
+  --c-rust:     #B5451B;
+  --c-concrete: #8C8C8C;
+  --c-mid:      #2E2E2E;
+  --c-ash:      #C8C0B8;
+
+  --f-display: 'Barlow Condensed', 'Impact', sans-serif;
+  --f-body:    'Barlow', 'Helvetica Neue', sans-serif;
+
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  --max-w: 900px;
+  --col-pad: 64px;
+}
+
+body {
+  background: var(--c-dark);
+  color: var(--c-ash);
+  font-family: var(--f-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── ページナビ ── */
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #111;
+  border-bottom: 2px solid var(--c-rust);
+  padding: 0 var(--col-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.page-nav a {
+  font-family: var(--f-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-concrete);
+  text-decoration: none;
+  padding: 14px 16px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.page-nav a:hover { color: var(--c-ash); }
+
+.page-nav .nav-id {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-rust);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 24px 14px 0;
+  border-right: 1px solid #333;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* ── セクション共通 ── */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-rust);
+  margin-bottom: var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #333;
+}
+
+/* ── ヒーロー ── */
+.hero {
+  background: var(--c-mid);
+  /* 縦線テクスチャ */
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+  border-bottom: 3px solid var(--c-rust);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-8) var(--col-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-id {
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  color: var(--c-rust);
+  margin-bottom: var(--sp-4);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--c-ash);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.hero-concept {
+  font-family: var(--f-body);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--c-concrete);
+  max-width: 480px;
+  line-height: 1.75;
+}
+
+.hero-tags {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-ash);
+  border: 1px solid #444;
+  padding: 5px 12px;
+}
+
+
+/* ═══════════════════════════════════
+   A. VISUAL DIRECTION
+═══════════════════════════════════ */
+
+.world-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.world-card {
+  padding: var(--sp-6);
+  background: #222;
+  border-left: 2px solid var(--c-rust);
+}
+
+.world-card-label {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-rust);
+  margin-bottom: var(--sp-3);
+}
+
+.world-card-title {
+  font-family: var(--f-display);
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--c-ash);
+  margin-bottom: var(--sp-3);
+  line-height: 1.1;
+}
+
+.world-card-body {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--c-concrete);
+}
+
+/* 写真ディレクション */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-bottom: var(--sp-6);
+  background: #111;
+}
+
+.photo-card {
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-4);
+}
+
+.photo-placeholder { position: absolute; inset: 0; }
+
+/* アンダーエクスポーズ・金属的なムード */
+.photo-1 .photo-placeholder { background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%); }
+.photo-2 .photo-placeholder { background: linear-gradient(160deg, #111 0%, #1e1e1e 50%, #0d0d0d 100%); }
+.photo-3 .photo-placeholder { background: linear-gradient(200deg, #0d0d0d 0%, #1a1a1a 50%, #111 100%); }
+
+/* ラストのアクセントライン */
+.photo-1::before { content: ''; position: absolute; bottom: 0; left: 0; width: 3px; height: 100%; background: var(--c-rust); }
+.photo-2::before { content: ''; position: absolute; bottom: 0; left: 0; width: 1px; height: 100%; background: #333; }
+.photo-3::before { content: ''; position: absolute; bottom: 0; left: 0; width: 3px; height: 100%; background: var(--c-concrete); }
+
+.photo-desc {
+  position: relative;
+  z-index: 1;
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--c-ash);
+  text-transform: uppercase;
+}
+
+/* Do / Don't */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.do-card {
+  padding: var(--sp-5);
+  background: #222;
+  border-left: 3px solid var(--c-rust);
+}
+
+.dont-card {
+  padding: var(--sp-5);
+  background: #1e1e1e;
+  border-left: 3px solid #333;
+}
+
+.do-dont-label {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--sp-4);
+}
+
+.do-card .do-dont-label  { color: var(--c-rust); }
+.dont-card .do-dont-label { color: var(--c-concrete); }
+
+.do-dont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.do-dont li {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--c-ash);
+  opacity: 0.8;
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.do-card li::before   { content: '—'; position: absolute; left: 0; color: var(--c-rust); font-weight: 400; }
+.dont-card li::before { content: '×'; position: absolute; left: 0; color: var(--c-concrete); font-size: 11px; }
+
+
+/* ═══════════════════════════════════
+   B. DESIGN SYSTEM
+═══════════════════════════════════ */
+
+.color-tokens { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.color-row {
+  display: grid;
+  grid-template-columns: 80px 140px 1fr 80px 80px;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid #282828;
+}
+
+.color-row:last-child { border-bottom: none; }
+
+.color-chip      { width: 80px; height: 36px; }
+.color-token-name { font-family: monospace; font-size: 11px; color: var(--c-ash); }
+.color-desc      { font-size: 11px; font-weight: 300; color: var(--c-concrete); }
+.color-hex-val   { font-family: monospace; font-size: 11px; color: #555; }
+
+.contrast-badge  { font-size: 9px; font-weight: 600; padding: 3px 8px; text-align: center; }
+.contrast-aa     { background: rgba(40,160,80,0.12); color: #4CAF50; }
+.contrast-aaa    { background: rgba(20,120,60,0.12); color: #2E7D32; }
+.contrast-fail   { background: rgba(140,140,140,0.1); color: var(--c-concrete); }
+
+/* CSS変数ブロック */
+.code-block {
+  position: relative;
+  background: #111;
+  border-left: 3px solid var(--c-rust);
+  padding: var(--sp-5) var(--sp-6);
+  overflow-x: auto;
+  margin-top: var(--sp-4);
+}
+
+.code-block pre {
+  font-family: 'Menlo', 'Monaco', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--c-ash);
+  white-space: pre;
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
+}
+.copy-btn.copied {
+  color: #6ECFA0;
+  border-color: #6ECFA0;
+}
+
+.code-comment { color: #3a3a3a; }
+.code-prop    { color: var(--c-rust); }
+.code-val     { color: var(--c-ash); }
+
+/* 日本語サンプル（暗背景のためcolorで調整） */
+.t-ja {
+  display: block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.65em;
+  color: var(--c-rust);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* タイポグラフィスケール */
+.type-scale { display: flex; flex-direction: column; }
+
+.type-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 160px;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid #282828;
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-label      { font-family: monospace; font-size: 10px; color: #444; padding-top: 4px; }
+.type-spec-detail { font-size: 10px; font-weight: 300; color: #444; font-family: monospace; line-height: 1.6; }
+
+.t-display { font-family: var(--f-display); font-size: 80px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--c-ash); line-height: 0.9; }
+.t-h1      { font-family: var(--f-display); font-size: 52px; font-weight: 700; text-transform: uppercase; color: var(--c-ash); line-height: 1.0; }
+.t-h2      { font-family: var(--f-display); font-size: 36px; font-weight: 600; text-transform: uppercase; color: var(--c-ash); line-height: 1.0; }
+.t-h3      { font-family: var(--f-body); font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.2em; color: var(--c-rust); }
+.t-body-lg { font-family: var(--f-body); font-size: 16px; font-weight: 300; line-height: 1.75; color: var(--c-ash); }
+.t-body    { font-family: var(--f-body); font-size: 14px; font-weight: 300; line-height: 1.75; color: var(--c-ash); opacity: 0.7; }
+.t-caption { font-family: var(--f-body); font-size: 12px; font-weight: 300; color: var(--c-concrete); }
+.t-label   { font-family: var(--f-display); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.25em; color: var(--c-ash); opacity: 0.6; }
+
+/* スペーシングスケール */
+.spacing-scale { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.spacing-row {
+  display: grid;
+  grid-template-columns: 60px 80px 1fr;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.spacing-bar-wrap { height: 20px; display: flex; align-items: center; }
+.spacing-bar      { height: 6px; background: var(--c-rust); opacity: 0.6; }
+.spacing-token    { font-family: monospace; font-size: 10px; color: #444; }
+.spacing-px       { font-family: monospace; font-size: 11px; color: var(--c-ash); font-weight: 400; }
+
+/* コンポーネント */
+.component-section { margin-bottom: var(--sp-8); }
+
+.component-title {
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-concrete);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid #282828;
+}
+
+.btn-states {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-6);
+  background: #111;
+  border-top: 1px solid #333;
+  margin-bottom: var(--sp-4);
+}
+
+.btn-states-light {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--c-dark);
+  border: 1px solid #333;
+  margin-bottom: var(--sp-4);
+}
+
+.state-label {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.state-item { display: flex; flex-direction: column; align-items: center; }
+
+.btn {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  padding: 13px 28px;
+  transition: all 0.1s;
+}
+
+/* Primary: rust bg ash text uppercase */
+.btn-primary-default  { background: var(--c-rust); color: var(--c-ash); }
+.btn-primary-hover    { background: #9E3D17; color: var(--c-ash); }
+.btn-primary-active   { background: #883314; color: var(--c-ash); }
+.btn-primary-disabled { background: #3A1A0A; color: #5A3A2A; cursor: not-allowed; }
+
+/* Secondary: ash border transparent */
+.btn-secondary-default  { background: transparent; color: var(--c-ash); border: 1px solid var(--c-ash); padding: 12px 28px; opacity: 0.8; }
+.btn-secondary-hover    { background: rgba(200,192,184,0.1); color: var(--c-ash); border: 1px solid var(--c-ash); padding: 12px 28px; }
+.btn-secondary-active   { background: rgba(200,192,184,0.2); color: var(--c-ash); border: 1px solid var(--c-ash); padding: 12px 28px; }
+.btn-secondary-disabled { background: transparent; color: #3a3a3a; border: 1px solid #333; padding: 12px 28px; cursor: not-allowed; }
+
+/* Ghost: ash border on dark bg */
+.btn-ghost-default  { background: transparent; color: var(--c-ash); border: 1px solid #3a3a3a; padding: 12px 28px; }
+.btn-ghost-hover    { background: rgba(200,192,184,0.06); color: var(--c-ash); border: 1px solid var(--c-ash); padding: 12px 28px; }
+.btn-ghost-active   { background: rgba(200,192,184,0.12); color: var(--c-ash); border: 1px solid var(--c-ash); padding: 12px 28px; }
+.btn-ghost-disabled { background: transparent; color: #333; border: 1px solid #2a2a2a; padding: 12px 28px; cursor: not-allowed; }
+
+/* Input */
+.input-states {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  background: #111;
+  padding: var(--sp-5);
+}
+
+.input-state-item { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label { font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--c-rust); }
+
+.form-input          { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid #333; background: #1a1a1a; color: var(--c-ash); outline: none; width: 100%; }
+.form-input-focus    { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid var(--c-rust); background: #1a1a1a; color: var(--c-ash); outline: none; width: 100%; }
+.form-input-error    { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid #C04040; background: rgba(192,64,64,0.05); color: var(--c-ash); outline: none; width: 100%; }
+.form-input-disabled { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid #282828; background: #161616; color: #333; outline: none; width: 100%; cursor: not-allowed; }
+
+.form-hint       { font-size: 10px; font-weight: 300; color: var(--c-concrete); }
+.form-hint-error { font-size: 10px; font-weight: 400; color: #C04040; }
+
+/* カード */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #111;
+}
+
+/* Card A: dark bg border-left rust */
+.card-a { background: var(--c-dark); padding: var(--sp-6); border-left: 3px solid var(--c-rust); }
+/* Card B: mid bg */
+.card-b { background: var(--c-mid); padding: var(--sp-6); border-left: 1px solid #333; }
+/* Card C: ash bg dark text */
+.card-c { background: var(--c-ash); padding: var(--sp-6); }
+
+.card-eyebrow {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+
+.card-a .card-eyebrow, .card-b .card-eyebrow { color: var(--c-rust); }
+.card-c .card-eyebrow { color: var(--c-dark); opacity: 0.6; }
+
+.card-title-bold {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--sp-3);
+}
+
+.card-a .card-title-bold, .card-b .card-title-bold { color: var(--c-ash); }
+.card-c .card-title-bold { color: var(--c-dark); }
+
+.card-body-text { font-size: 12px; font-weight: 300; line-height: 1.75; }
+.card-a .card-body-text, .card-b .card-body-text { color: var(--c-concrete); }
+.card-c .card-body-text { color: rgba(26,26,26,0.7); }
+
+.card-link {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: var(--sp-4);
+  border-bottom: 1px solid;
+  padding-bottom: 2px;
+}
+
+.card-a .card-link, .card-b .card-link { color: var(--c-rust); border-color: rgba(181,69,27,0.4); }
+.card-c .card-link { color: var(--c-dark); border-color: rgba(26,26,26,0.3); }
+
+/* ナビゲーション */
+.nav-sample {
+  background: #111;
+  border-bottom: 2px solid var(--c-rust);
+  padding: var(--sp-3) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-4);
+}
+
+.nav-logo-sample   { font-family: var(--f-display); font-size: 22px; font-weight: 700; text-transform: uppercase; color: var(--c-ash); letter-spacing: 0.1em; }
+.nav-links-sample  { display: flex; gap: var(--sp-5); align-items: center; }
+.nav-link-sample   { font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-concrete); text-decoration: none; }
+.nav-link-active   { font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-ash); text-decoration: none; }
+.nav-cta           { font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; background: var(--c-rust); color: var(--c-ash); padding: 8px 18px; text-decoration: none; }
+
+/* レイアウトルール */
+.layout-rules { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+
+.layout-rule-card {
+  background: #222;
+  padding: var(--sp-5);
+  border-left: 3px solid #333;
+}
+
+.layout-rule-title { font-family: var(--f-display); font-size: 18px; font-weight: 700; text-transform: uppercase; color: var(--c-ash); margin-bottom: var(--sp-3); }
+.layout-rule-body  { font-size: 11px; font-weight: 300; line-height: 1.75; color: var(--c-concrete); }
+.layout-rule-value { font-family: monospace; font-size: 11px; color: var(--c-rust); background: rgba(181,69,27,0.08); padding: 2px 6px; }
+
+/* フッター */
+footer {
+  background: #111;
+  border-top: 2px solid var(--c-rust);
+  padding: var(--sp-6) var(--col-pad);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-id   { font-family: var(--f-display); font-size: 16px; font-weight: 700; color: var(--c-rust); text-transform: uppercase; }
+.footer-name { font-family: var(--f-display); font-size: 13px; font-weight: 600; color: var(--c-ash); text-transform: uppercase; letter-spacing: 0.1em; }
+.footer-note { font-size: 10px; font-weight: 300; color: #444; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  :root { --col-pad: 24px; }
+  .hero { min-height: 360px; }
+  .world-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-card:last-child { display: none; }
+  .do-dont { grid-template-columns: 1fr; }
+  .color-row { grid-template-columns: 48px 1fr 60px; }
+  .color-desc, .contrast-badge { display: none; }
+  .type-row { grid-template-columns: 80px 1fr; }
+  .type-spec-detail { display: none; }
+  .t-display { font-size: 52px; }
+  .input-states { grid-template-columns: 1fr 1fr; padding: var(--sp-4); }
+  .cards-grid { grid-template-columns: 1fr; }
+  .layout-rules { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-links-sample .nav-link-sample:not(:last-child) { display: none; }
+  .btn-states, .btn-states-light { flex-wrap: wrap; gap: var(--sp-3); }
+}
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">009 — Industrial Raw</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — 009</div>
+    <div class="hero-title">INDUSTRIAL<br>RAW</div>
+    <div class="hero-concept">削ぎ落とした先にだけ、本物がある。<br>飾らない。それが誇り。</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Industrial</span>
+      <span class="hero-tag">Raw</span>
+      <span class="hero-tag">Minimal</span>
+      <span class="hero-tag">Masculine</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- A. VISUAL DIRECTION -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+
+  <!-- 世界観 -->
+  <div class="world-grid" style="margin-bottom:48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">削ぎ落とした先に<br>だけ、本物がある</div>
+      <div class="world-card-body">装飾は不誠実だ。このスタイルは、あらゆる余計を捨てた先に辿り着く美を語る。コンクリートの質感、鉄の冷たさ、ラストのわずかな色だけが語りかける。</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">飾らない。<br>それが誇り</div>
+      <div class="world-card-body">言葉は短く、重く。Barlow Condensedの大文字が、コンクリートのような重さで紙面に刻まれる。柔らかさは一切排除。これが真実の形だ。</div>
+    </div>
+  </div>
+
+  <!-- 写真ディレクション -->
+  <div style="margin-bottom:48px;">
+    <div style="font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--c-concrete); margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      <div class="photo-card photo-1">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">アンダーエクスポーズ<br>シャドウ支配</div>
+      </div>
+      <div class="photo-card photo-2">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">金属質感<br>工場・素材</div>
+      </div>
+      <div class="photo-card photo-3">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">手仕事のクローズアップ<br>職人の痕跡</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:1px; background:#111;">
+      <div style="font-size:11px; font-weight:300; color:var(--c-concrete); line-height:1.75; padding:12px; background:var(--c-dark);">露出：暗く。シャドウを深く落とし、輪郭だけを残す。</div>
+      <div style="font-size:11px; font-weight:300; color:var(--c-concrete); line-height:1.75; padding:12px; background:var(--c-dark);">質感：金属・コンクリート・革。表面の傷や経年変化を見せる。</div>
+      <div style="font-size:11px; font-weight:300; color:var(--c-concrete); line-height:1.75; padding:12px; background:var(--c-dark);">構図：水平か垂直のラインで組む。対角線は使わない。</div>
+    </div>
+  </div>
+
+  <!-- Do / Don't -->
+  <div style="font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--c-concrete); margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>
+        <li>ALL CAPS テキストで硬質感を出す。小文字は原則禁止</li>
+        <li>border-radius: 0。エッジは直角に保つ</li>
+        <li>ラスト色をアクセントに少量使う。面積は最小限に</li>
+        <li>heavy weight（600〜700）の書体で力強さを表現</li>
+        <li>余白よりも密度。情報を詰める勇気を持つ</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>
+        <li>明るい色・パステルカラー・白が多すぎる背景</li>
+        <li>角丸（border-radius）。柔らかさは禁止</li>
+        <li>優雅な書体（serif / script系）</li>
+        <li>繊細・軽い印象。Thin / Light フォントは NG</li>
+        <li>グラデーションやきらびやかな装飾</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- B. DESIGN SYSTEM -->
+
+<!-- カラー -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+
+  <div class="color-tokens">
+    <div class="color-row" style="font-family:'Barlow Condensed',sans-serif; font-size:9px; color:#3a3a3a; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#1A1A1A;"></div>
+      <div class="color-token-name">--c-dark</div>
+      <div class="color-desc">ベース背景</div>
+      <div class="color-hex-val">#1A1A1A</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#B5451B;"></div>
+      <div class="color-token-name">--c-rust</div>
+      <div class="color-desc">アクセント・ボタン・ボーダー</div>
+      <div class="color-hex-val">#B5451B</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#8C8C8C;"></div>
+      <div class="color-token-name">--c-concrete</div>
+      <div class="color-desc">セカンダリテキスト</div>
+      <div class="color-hex-val">#8C8C8C</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#2E2E2E;"></div>
+      <div class="color-token-name">--c-mid</div>
+      <div class="color-desc">セカンダリ背景・カード</div>
+      <div class="color-hex-val">#2E2E2E</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#C8C0B8;"></div>
+      <div class="color-token-name">--c-ash</div>
+      <div class="color-desc">メインテキスト・ライトカード</div>
+      <div class="color-hex-val">#C8C0B8</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCSS(this)">COPY</button>
+    <pre><span class="code-comment">/* 009 Industrial Raw — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--c-dark</span>:     <span class="code-val">#1A1A1A</span>;
+  <span class="code-prop">--c-rust</span>:     <span class="code-val">#B5451B</span>;
+  <span class="code-prop">--c-concrete</span>: <span class="code-val">#8C8C8C</span>;
+  <span class="code-prop">--c-mid</span>:      <span class="code-val">#2E2E2E</span>;
+  <span class="code-prop">--c-ash</span>:      <span class="code-val">#C8C0B8</span>;
+
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-display</span>: <span class="code-val">'Barlow Condensed', 'Impact', sans-serif</span>;
+  <span class="code-prop">--f-body</span>:    <span class="code-val">'Barlow', 'Helvetica Neue', sans-serif</span>;
+
+  <span class="code-comment">/* Border Radius */</span>
+  <span class="code-prop">--radius</span>: <span class="code-val">0px</span>; <span class="code-comment">/* 直角が原則 */</span>
+}</pre>
+  </div>
+</div>
+
+<!-- タイポグラフィ -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">STEEL<span class="t-ja">粗削りの本質</span></div>
+      <div class="type-spec-detail">Barlow Condensed / 80px<br>weight 700 / uppercase</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">RAW MATERIAL<span class="t-ja">工業的な力強さ</span></div>
+      <div class="type-spec-detail">Barlow Condensed / 52px<br>weight 700</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">CRAFT OVER FORM<span class="t-ja">素材そのままに</span></div>
+      <div class="type-spec-detail">Barlow Condensed / 36px<br>weight 600</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">Section Marker Here<span class="t-ja">構造が語る</span></div>
+      <div class="type-spec-detail">Barlow / 14px / 400<br>uppercase / ls 0.2em / rust</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body LG</div>
+      <div class="t-body-lg">Only what remains after stripping excess is true. That is the craftsman's philosophy.<span class="t-ja">加工せず、飾らず、ありのまま。</span></div>
+      <div class="type-spec-detail">Barlow / 16px<br>weight 300 / lh 1.75</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body">Concrete speaks the weight of time. Steel carries an honest coldness. Unadorned materials are the most eloquent.<span class="t-ja">加工せず、飾らず、ありのまま。</span></div>
+      <div class="type-spec-detail">Barlow / 14px<br>weight 300 / ash</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="t-caption">Prototype 09 — Raw Material Series — 2024<span class="t-ja">原型09 — 素材シリーズ</span></div>
+      <div class="type-spec-detail">Barlow / 12px / weight 300</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">New Series<span class="t-ja" style="text-transform:none; letter-spacing:0;">新シリーズ</span></div>
+      <div class="type-spec-detail">Barlow Condensed / 10px<br>weight 600 / uppercase</div>
+    </div>
+  </div>
+</div>
+
+<!-- スペーシング -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+
+  <div class="spacing-scale">
+    <div class="spacing-row"><div class="spacing-token">--sp-1</div><div class="spacing-px">4px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-2</div><div class="spacing-px">8px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-3</div><div class="spacing-px">12px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-4</div><div class="spacing-px">16px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-5</div><div class="spacing-px">24px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-6</div><div class="spacing-px">32px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-7</div><div class="spacing-px">40px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-8</div><div class="spacing-px">64px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-9</div><div class="spacing-px">96px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-10</div><div class="spacing-px">128px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div></div>
+  </div>
+</div>
+
+<!-- コンポーネント -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+
+  <!-- Button Primary -->
+  <div class="component-section">
+    <div class="component-title">Button — Primary（Rust / All Caps）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-primary-default">Execute</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-hover">Execute</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-active">Execute</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-disabled" disabled>Execute</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Secondary -->
+  <div class="component-section">
+    <div class="component-title">Button — Secondary（Ash Border / Transparent）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-secondary-default">View</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-hover">View</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-active">View</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-disabled" disabled>View</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Ghost -->
+  <div class="component-section">
+    <div class="component-title">Button — Ghost（Ash Border / Dark bg）</div>
+    <div class="btn-states-light">
+      <div class="state-item">
+        <button class="btn btn-ghost-default">Contact</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-hover">Contact</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-active">Contact</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-disabled" disabled>Contact</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="component-section">
+    <div class="component-title">Form — Input States</div>
+    <div class="input-states">
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input" type="text" placeholder="山田 剛" readonly>
+        <div class="form-hint">Default</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input-focus" type="text" value="山田 剛" readonly>
+        <div class="form-hint">Focus</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Email</div>
+        <input class="form-input-error" type="text" value="yamada@" readonly>
+        <div class="form-hint-error">Error — 形式違反</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input-disabled" type="text" value="変更不可" disabled>
+        <div class="form-hint">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="component-section">
+    <div class="component-title">Cards — 3 Variants</div>
+    <div class="cards-grid">
+      <div class="card-a">
+        <div class="card-eyebrow">Raw Series</div>
+        <div class="card-title-bold">FORGED<br>IN FIRE</div>
+        <div class="card-body-text">熱と圧力が形を決める。それが素材の誠実さだ。</div>
+        <a href="#" class="card-link">Explore</a>
+      </div>
+      <div class="card-b">
+        <div class="card-eyebrow">Craft</div>
+        <div class="card-title-bold">MADE BY<br>HAND</div>
+        <div class="card-body-text">機械では出せない傷が、手仕事の証明になる。</div>
+        <a href="#" class="card-link">View More</a>
+      </div>
+      <div class="card-c">
+        <div class="card-eyebrow">Archive</div>
+        <div class="card-title-bold">THE PURE<br>FORM</div>
+        <div class="card-body-text">余計なものを全部取り去ったとき、何が残るのか。</div>
+        <a href="#" class="card-link">See Archive</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="component-section">
+    <div class="component-title">Navigation</div>
+    <div class="nav-sample">
+      <div class="nav-logo-sample">IRONWORKS</div>
+      <div class="nav-links-sample">
+        <a href="#" class="nav-link-active">Products</a>
+        <a href="#" class="nav-link-sample">Craft</a>
+        <a href="#" class="nav-link-sample">Archive</a>
+        <a href="#" class="nav-link-sample">Contact</a>
+        <a href="#" class="nav-cta">Inquire</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- レイアウト -->
+<div id="layout" class="section" style="border-bottom:none;">
+  <div class="section-label">Layout Rules</div>
+
+  <div class="layout-rules">
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Max Width</div>
+      <div class="layout-rule-body">コンテンツ幅は <span class="layout-rule-value">1080px</span>。ヒーローはフルブリード可。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Column Padding</div>
+      <div class="layout-rule-body">左右パディング <span class="layout-rule-value">64px</span>（モバイル <span class="layout-rule-value">24px</span>）。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Border Radius</div>
+      <div class="layout-rule-body">全要素 <span class="layout-rule-value">0px</span>。直角が原則。角丸は一切許可しない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Gap / Separator</div>
+      <div class="layout-rule-body">要素間のギャップは <span class="layout-rule-value">1px</span> で区切る。目地のある構造。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Section Spacing</div>
+      <div class="layout-rule-body">セクション間は <span class="layout-rule-value">64–96px</span>。詰めてリズムを出す。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Color Usage</div>
+      <div class="layout-rule-body">ラストは <span class="layout-rule-value">1〜2要素</span> のみ。コンクリートとアッシュが基調色。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-id">009</div>
+    <div class="footer-name">Industrial Raw</div>
+    <div class="footer-note">Visual Direction + Design System</div>
+  </div>
+</footer>
+
+<script>
+function copyCSS(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

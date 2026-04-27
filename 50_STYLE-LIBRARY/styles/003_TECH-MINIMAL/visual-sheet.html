@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>003 TECH MINIMAL — Style Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-dark:       #141414;
+  --c-blue:       #4F6EF7;
+  --c-light:      #F2F2F2;
+  --c-mid:        #1E1E2E;
+  --c-blue-light: #8899FF;
+  --c-muted:      #888888;
+
+  --f-sans: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  --f-mono: 'Space Mono', 'Menlo', monospace;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 40px; --sp-8: 64px;
+  --sp-9: 96px; --sp-10: 128px;
+
+  --radius-sm: 2px; --radius-md: 4px;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 40px rgba(79,110,247,0.15);
+  --max-w: 900px; --col-pad: 64px;
+}
+
+body {
+  background: var(--c-light);
+  color: var(--c-dark);
+  font-family: var(--f-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── ナビ ── */
+.page-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(20,20,20,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(79,110,247,0.25);
+  padding: 0 var(--col-pad);
+  display: flex; align-items: center; gap: 0; overflow-x: auto;
+}
+.page-nav a {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--c-muted); text-decoration: none;
+  padding: 14px 16px; border-bottom: 2px solid transparent;
+  white-space: nowrap; transition: color 0.15s;
+}
+.page-nav a:hover { color: var(--c-blue-light); }
+.page-nav .nav-id {
+  font-family: var(--f-mono); font-size: 10px; color: var(--c-blue);
+  letter-spacing: 0.1em; padding: 14px 24px 14px 0;
+  border-right: 1px solid rgba(79,110,247,0.25); margin-right: 8px; white-space: nowrap;
+}
+
+/* ── セクション ── */
+.section {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid rgba(79,110,247,0.12);
+}
+.section:last-child { border-bottom: none; }
+.section-label {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--c-blue); margin-bottom: var(--sp-6);
+  display: flex; align-items: center; gap: var(--sp-3);
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: rgba(79,110,247,0.2); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--c-dark); min-height: 480px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: var(--sp-8) var(--col-pad); position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(79,110,247,0.25) 0%, transparent 55%),
+              radial-gradient(ellipse at 15% 85%, rgba(136,153,255,0.08) 0%, transparent 40%);
+}
+.hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; position: relative; }
+.hero-id {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.3em;
+  color: var(--c-blue); margin-bottom: var(--sp-5); text-transform: uppercase;
+}
+.hero-title {
+  font-family: var(--f-sans); font-size: clamp(52px, 7vw, 96px); font-weight: 700;
+  color: var(--c-light); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: var(--sp-5);
+}
+.hero-concept {
+  font-family: var(--f-sans); font-size: 16px; font-weight: 300;
+  color: rgba(242,242,242,0.55); max-width: 480px; line-height: 1.7;
+}
+.hero-tags { display: flex; gap: var(--sp-3); margin-top: var(--sp-6); flex-wrap: wrap; }
+.hero-tag {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--c-blue);
+  border: 1px solid rgba(79,110,247,0.4); padding: 5px 12px; border-radius: var(--radius-sm);
+}
+
+/* ── 世界観 ── */
+.world-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); margin-bottom: var(--sp-6); }
+.world-card {
+  background: var(--c-mid); padding: var(--sp-6);
+  position: relative; overflow: hidden; border-top: 2px solid var(--c-blue);
+}
+.world-card-label {
+  font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--c-blue); margin-bottom: var(--sp-3);
+}
+.world-card-title {
+  font-family: var(--f-sans); font-size: 24px; font-weight: 600;
+  color: var(--c-light); margin-bottom: var(--sp-3); line-height: 1.25; letter-spacing: -0.01em;
+}
+.world-card-body { font-size: 12px; font-weight: 300; line-height: 1.8; color: rgba(242,242,242,0.5); }
+
+/* ── 写真ディレクション ── */
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin-bottom: var(--sp-6); }
+.photo-card {
+  background: var(--c-mid); aspect-ratio: 4/5; position: relative;
+  overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--sp-4);
+}
+.photo-placeholder { position: absolute; inset: 0; }
+.photo-1 .photo-placeholder { background: linear-gradient(160deg, #0a0a14 0%, #1a1a2e 40%, #141414 100%); }
+.photo-2 .photo-placeholder { background: linear-gradient(200deg, #141414 0%, #0f1020 50%, #1E1E2E 100%); }
+.photo-3 .photo-placeholder { background: linear-gradient(140deg, #0a0814 0%, #141414 60%, #1a1a2e 100%); }
+.photo-accent { position: absolute; border-radius: 50%; pointer-events: none; }
+.photo-1 .photo-accent { width: 100px; height: 100px; top: 25%; right: -10px; background: radial-gradient(circle, rgba(79,110,247,0.5) 0%, transparent 70%); }
+.photo-2 .photo-accent { width: 70px; height: 70px; bottom: 35%; left: 15px; background: radial-gradient(circle, rgba(136,153,255,0.4) 0%, transparent 70%); }
+.photo-3 .photo-accent { width: 130px; height: 130px; top: -20px; left: 40%; background: radial-gradient(circle, rgba(79,110,247,0.3) 0%, transparent 70%); }
+.photo-desc {
+  position: relative; z-index: 1;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em;
+  color: var(--c-blue-light); text-transform: uppercase;
+}
+
+/* ── Do/Don't ── */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+.do-card { background: rgba(79,110,247,0.06); border: 1px solid rgba(79,110,247,0.2); padding: var(--sp-5); }
+.dont-card { background: rgba(200,60,60,0.04); border: 1px solid rgba(200,60,60,0.15); padding: var(--sp-5); }
+.do-dont-label { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: var(--sp-4); }
+.do-card .do-dont-label { color: var(--c-blue); }
+.dont-card .do-dont-label { color: #C84040; }
+.do-dont ul { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); }
+.do-dont li { font-size: 12px; font-weight: 300; line-height: 1.6; color: var(--c-dark); padding-left: var(--sp-4); position: relative; }
+.do-card li::before { content: '✓'; position: absolute; left: 0; color: var(--c-blue); font-size: 11px; }
+.dont-card li::before { content: '✕'; position: absolute; left: 0; color: #C84040; font-size: 11px; }
+
+/* ── カラートークン ── */
+.color-tokens { display: flex; flex-direction: column; gap: var(--sp-3); }
+.color-row {
+  display: grid; grid-template-columns: 80px 140px 1fr 80px 80px;
+  align-items: center; gap: var(--sp-4); padding: var(--sp-3) 0;
+  border-bottom: 1px solid rgba(79,110,247,0.1);
+}
+.color-row:last-child { border-bottom: none; }
+.color-chip { width: 80px; height: 36px; border-radius: var(--radius-sm); }
+.color-token-name { font-family: var(--f-mono); font-size: 11px; color: var(--c-dark); }
+.color-desc { font-size: 11px; font-weight: 300; color: var(--c-muted); }
+.color-hex-val { font-family: var(--f-mono); font-size: 11px; color: var(--c-muted); }
+.contrast-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 2px; text-align: center; }
+.contrast-aa { background: rgba(40,160,80,0.12); color: #1A8040; }
+.contrast-aaa { background: rgba(20,120,60,0.15); color: #0F6030; }
+.contrast-fail { background: rgba(200,60,60,0.1); color: #C84040; }
+
+/* ── コードブロック ── */
+.code-block {
+  position: relative;
+  background: var(--c-dark); border-left: 3px solid var(--c-blue);
+  padding: var(--sp-5) var(--sp-6); overflow-x: auto; margin-top: var(--sp-4); border-radius: var(--radius-sm);
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
+}
+.copy-btn.copied {
+  color: #6ECFA0;
+  border-color: #6ECFA0;
+}
+.code-block pre { font-family: var(--f-mono); font-size: 11px; line-height: 1.9; color: var(--c-blue-light); white-space: pre; }
+.code-comment { color: #3a3a5a; }
+.code-prop { color: var(--c-blue-light); }
+.code-val { color: var(--c-light); }
+
+/* ── タイポ ── */
+.type-scale { display: flex; flex-direction: column; gap: 0; }
+.type-row {
+  display: grid; grid-template-columns: 100px 1fr 160px;
+  gap: var(--sp-4); align-items: baseline; padding: var(--sp-4) 0;
+  border-bottom: 1px solid rgba(79,110,247,0.1);
+}
+.type-row:last-child { border-bottom: none; }
+.type-label { font-family: var(--f-mono); font-size: 10px; color: var(--c-muted); padding-top: 4px; }
+.type-spec-detail { font-family: var(--f-mono); font-size: 10px; font-weight: 300; color: var(--c-muted); line-height: 1.6; }
+.t-display { font-family: var(--f-sans); font-size: 52px; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; color: var(--c-dark); }
+.t-h1 { font-family: var(--f-sans); font-size: 36px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
+.t-h2 { font-family: var(--f-sans); font-size: 26px; font-weight: 500; line-height: 1.25; }
+.t-h3 { font-family: var(--f-mono); font-size: 18px; font-weight: 400; color: var(--c-blue); }
+.t-body-lg { font-family: var(--f-sans); font-size: 16px; font-weight: 300; line-height: 1.75; }
+.t-body { font-family: var(--f-sans); font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--c-muted); }
+.t-caption { font-family: var(--f-sans); font-size: 12px; font-weight: 300; line-height: 1.6; color: var(--c-muted); }
+.t-label { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-blue); }
+
+/* 日本語サンプルテキスト */
+.t-ja { display: block; opacity: 0.7; margin-top: 4px; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; white-space: nowrap; overflow: hidden; font-size: 0.65em; }
+
+/* 英語サンプルテキスト（既存テキストが日本語の行に追加） */
+.t-en { display: block; opacity: 0.65; margin-bottom: 2px; white-space: nowrap; overflow: hidden; font-size: 0.65em; }
+
+/* ── スペーシング ── */
+.spacing-scale { display: flex; flex-direction: column; gap: var(--sp-3); }
+.spacing-row { display: grid; grid-template-columns: 60px 80px 1fr; align-items: center; gap: var(--sp-4); }
+.spacing-bar-wrap { height: 20px; display: flex; align-items: center; }
+.spacing-bar { height: 8px; background: var(--c-blue); border-radius: 1px; opacity: 0.5; }
+.spacing-token { font-family: var(--f-mono); font-size: 10px; color: var(--c-muted); }
+.spacing-px { font-family: var(--f-mono); font-size: 11px; color: var(--c-dark); font-weight: 500; }
+
+/* ── コンポーネント ── */
+.component-section { margin-bottom: var(--sp-8); }
+.component-title {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--c-muted); margin-bottom: var(--sp-5); padding-bottom: var(--sp-3);
+  border-bottom: 1px solid rgba(79,110,247,0.12);
+}
+.btn-states {
+  display: flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;
+  padding: var(--sp-6); background: var(--c-dark); margin-bottom: var(--sp-4);
+}
+.btn-states-light {
+  display: flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;
+  padding: var(--sp-5) var(--sp-6); background: var(--c-light);
+  border: 1px solid rgba(79,110,247,0.15); margin-bottom: var(--sp-4);
+}
+.state-label { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); text-align: center; margin-top: 6px; }
+.state-item { display: flex; flex-direction: column; align-items: center; }
+.btn { font-family: var(--f-sans); cursor: pointer; transition: all 0.15s; border: none; }
+.btn-primary-default { background: var(--c-blue); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 12px 24px; border-radius: var(--radius-sm); }
+.btn-primary-hover { background: #3a58e8; color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 12px 24px; border-radius: var(--radius-sm); }
+.btn-primary-active { background: #2a44d0; color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 12px 24px; border-radius: var(--radius-sm); }
+.btn-primary-disabled { background: #1e2850; color: #3a4a80; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 12px 24px; border-radius: var(--radius-sm); cursor: not-allowed; }
+.btn-secondary-default { background: transparent; color: var(--c-blue); border: 1px solid var(--c-blue); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 11px 24px; border-radius: var(--radius-sm); }
+.btn-secondary-hover { background: rgba(79,110,247,0.12); color: var(--c-blue-light); border: 1px solid var(--c-blue-light); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 11px 24px; border-radius: var(--radius-sm); }
+.btn-secondary-disabled { background: transparent; color: #333; border: 1px solid #333; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 11px 24px; border-radius: var(--radius-sm); cursor: not-allowed; }
+.btn-ghost-default { background: transparent; color: var(--c-dark); border: 1px solid rgba(79,110,247,0.3); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 11px 24px; border-radius: var(--radius-sm); }
+.btn-ghost-hover { background: rgba(79,110,247,0.07); color: var(--c-blue); border: 1px solid var(--c-blue); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 11px 24px; border-radius: var(--radius-sm); }
+
+/* ── Input ── */
+.input-states { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-bottom: var(--sp-4); }
+.input-state-item { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-blue); }
+.form-input { font-family: var(--f-sans); font-size: 13px; font-weight: 400; padding: 10px 12px; border: 1px solid rgba(79,110,247,0.2); background: white; color: var(--c-dark); outline: none; width: 100%; border-radius: var(--radius-sm); }
+.form-input-focus { font-family: var(--f-sans); font-size: 13px; font-weight: 400; padding: 10px 12px; border: 1px solid var(--c-blue); background: white; color: var(--c-dark); outline: none; box-shadow: 0 0 0 3px rgba(79,110,247,0.12); width: 100%; border-radius: var(--radius-sm); }
+.form-input-error { font-family: var(--f-sans); font-size: 13px; font-weight: 400; padding: 10px 12px; border: 1px solid #C84040; background: rgba(200,64,64,0.03); color: var(--c-dark); outline: none; width: 100%; border-radius: var(--radius-sm); }
+.form-input-disabled { font-family: var(--f-sans); font-size: 13px; font-weight: 400; padding: 10px 12px; border: 1px solid #2a2a2a; background: #1a1a1a; color: #444; outline: none; width: 100%; border-radius: var(--radius-sm); cursor: not-allowed; }
+.form-hint { font-family: var(--f-mono); font-size: 10px; color: var(--c-muted); }
+.form-hint-error { font-family: var(--f-mono); font-size: 10px; color: #C84040; }
+
+/* ── Cards ── */
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+.card-a { background: var(--c-dark); padding: var(--sp-6); border-top: 2px solid var(--c-blue); }
+.card-b { background: var(--c-mid); padding: var(--sp-6); }
+.card-c { background: white; padding: var(--sp-6); border: 1px solid rgba(79,110,247,0.2); }
+.card-eyebrow { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-blue); margin-bottom: var(--sp-3); }
+.card-title-sans { font-family: var(--f-sans); font-size: 18px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: var(--sp-3); }
+.card-dark .card-title-sans { color: var(--c-light); }
+.card-mid .card-title-sans { color: var(--c-light); }
+.card-light .card-title-sans { color: var(--c-dark); }
+.card-body-text { font-size: 12px; font-weight: 300; line-height: 1.7; }
+.card-dark .card-body-text { color: rgba(242,242,242,0.45); }
+.card-mid .card-body-text { color: rgba(242,242,242,0.45); }
+.card-light .card-body-text { color: var(--c-muted); }
+.card-link { display: inline-block; font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-blue); text-decoration: none; margin-top: var(--sp-4); border-bottom: 1px solid rgba(79,110,247,0.3); padding-bottom: 2px; }
+
+/* ── Nav ── */
+.nav-sample { background: var(--c-dark); padding: var(--sp-4) var(--sp-6); display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4); border-bottom: 1px solid rgba(79,110,247,0.2); }
+.nav-logo-sample { font-family: var(--f-sans); font-size: 18px; font-weight: 700; color: var(--c-light); letter-spacing: -0.01em; }
+.nav-links-sample { display: flex; gap: var(--sp-6); align-items: center; }
+.nav-link-sample { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-muted); text-decoration: none; }
+.nav-link-active { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-blue-light); text-decoration: none; }
+.nav-cta { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--c-blue); color: white; padding: 8px 18px; text-decoration: none; border-radius: var(--radius-sm); }
+
+/* ── Layout Rules ── */
+.layout-rules { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+.layout-rule-card { background: var(--c-mid); padding: var(--sp-5); border-left: 2px solid var(--c-blue); }
+.layout-rule-title { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--c-light); margin-bottom: var(--sp-3); }
+.layout-rule-body { font-size: 11px; font-weight: 300; line-height: 1.7; color: rgba(242,242,242,0.5); }
+.layout-rule-value { font-family: var(--f-mono); font-size: 11px; color: var(--c-blue); background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 2px; }
+
+/* フッター */
+footer { background: var(--c-dark); padding: var(--sp-6) var(--col-pad); border-top: 1px solid rgba(79,110,247,0.2); }
+.footer-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.footer-id { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--c-blue); }
+.footer-name { font-family: var(--f-sans); font-size: 14px; font-weight: 700; color: var(--c-light); }
+.footer-note { font-family: var(--f-mono); font-size: 10px; color: #333; }
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  :root { --col-pad: 24px; }
+  .hero { min-height: 360px; }
+  .world-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-3 { display: none; }
+  .do-dont { grid-template-columns: 1fr; }
+  .color-row { grid-template-columns: 48px 1fr 60px; }
+  .color-desc, .contrast-badge { display: none; }
+  .type-row { grid-template-columns: 80px 1fr; }
+  .type-spec-detail { display: none; }
+  .input-states { grid-template-columns: 1fr 1fr; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .layout-rules { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-links-sample .nav-link-sample:not(:last-child) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">003 — Tech Minimal</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — 003</div>
+    <div class="hero-title">Tech<br>Minimal</div>
+    <div class="hero-concept">精密なものだけが残る。<br>ノイズを排除した先に、本質がある。</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Digital</span>
+      <span class="hero-tag">Dark</span>
+      <span class="hero-tag">Precision</span>
+      <span class="hero-tag">Mono</span>
+    </div>
+  </div>
+</div>
+
+<!-- A. VISUAL DIRECTION -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+
+  <div class="world-grid" style="margin-bottom: 48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">精密なものだけが<br>残る。</div>
+      <div class="world-card-body">余計な一行も、余計な一色も許さない。デジタルの暗闇に浮かぶブルーの光は、意図だけで成立している。ノイズはすでに取り除かれた。</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">ノイズを排除した<br>先に、本質がある。</div>
+      <div class="world-card-body">短く、正確に、速く。言葉に装飾はいらない。データが語り、ロジックが証明する。感情より、事実で動かす。</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#888; margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      <div class="photo-card photo-1">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">暗室光<br>モニターの青い反射</div>
+      </div>
+      <div class="photo-card photo-2">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">接写回路基板<br>精密な構造美</div>
+      </div>
+      <div class="photo-card photo-3">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">黒背景に<br>光るインターフェース</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px;">
+      <div style="font-size:11px; font-weight:300; color:#888; line-height:1.6;">色調：コールドブルー寄り。ウォームカラーは排除。</div>
+      <div style="font-size:11px; font-weight:300; color:#888; line-height:1.6;">明暗：強いコントラスト。暗部に沈め、光点で誘導。</div>
+      <div style="font-size:11px; font-weight:300; color:#888; line-height:1.6;">構図：対称・グリッド。ランダムな配置は使わない。</div>
+    </div>
+  </div>
+
+  <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#888; margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>
+        <li>ダーク背景（#141414 / #1E1E2E）に統一する</li>
+        <li>Space MonoをラベルとコードUIに徹底使用</li>
+        <li>エレクトリックブルーは差し色のみ・面積を抑える</li>
+        <li>グリッドを守る。要素を揃える</li>
+        <li>余白は広く。情報密度は意図的にコントロール</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>
+        <li>ウォームカラー・アースカラーの使用</li>
+        <li>過剰な装飾・グラデーション・シャドウ多用</li>
+        <li>多色使い（アクセント色は1色に限定）</li>
+        <li>丸みが大きいボーダーラジウス（8px以上禁止）</li>
+        <li>手書き・スクリプト系フォント</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- B. DESIGN SYSTEM — カラー -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+
+  <div class="color-tokens">
+    <div class="color-row" style="font-family:'Space Mono',monospace; font-size:9px; color:#888; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#141414;"></div>
+      <div class="color-token-name">--c-dark</div>
+      <div class="color-desc">背景・ヘッダー・ダーク面</div>
+      <div class="color-hex-val">#141414</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#4F6EF7;"></div>
+      <div class="color-token-name">--c-blue</div>
+      <div class="color-desc">アクセント・ボタン・ライン</div>
+      <div class="color-hex-val">#4F6EF7</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#F2F2F2; border:1px solid #ddd;"></div>
+      <div class="color-token-name">--c-light</div>
+      <div class="color-desc">ページ背景（ライトモード）</div>
+      <div class="color-hex-val">#F2F2F2</div>
+      <div><span class="contrast-badge contrast-fail">—</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#1E1E2E;"></div>
+      <div class="color-token-name">--c-mid</div>
+      <div class="color-desc">カード背景・サーフェス</div>
+      <div class="color-hex-val">#1E1E2E</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#8899FF;"></div>
+      <div class="color-token-name">--c-blue-light</div>
+      <div class="color-desc">サブアクセント・ホバー</div>
+      <div class="color-hex-val">#8899FF</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#888888; border:1px solid #ccc;"></div>
+      <div class="color-token-name">--c-muted</div>
+      <div class="color-desc">サブテキスト・プレースホルダー</div>
+      <div class="color-hex-val">#888888</div>
+      <div><span class="contrast-badge contrast-fail">—</span></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCSS(this)">COPY</button>
+    <pre><span class="code-comment">/* 003 Tech Minimal — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--c-dark</span>:       <span class="code-val">#141414</span>;
+  <span class="code-prop">--c-blue</span>:       <span class="code-val">#4F6EF7</span>;
+  <span class="code-prop">--c-light</span>:      <span class="code-val">#F2F2F2</span>;
+  <span class="code-prop">--c-mid</span>:        <span class="code-val">#1E1E2E</span>;
+  <span class="code-prop">--c-blue-light</span>: <span class="code-val">#8899FF</span>;
+  <span class="code-prop">--c-muted</span>:      <span class="code-val">#888888</span>;
+
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-sans</span>: <span class="code-val">'Space Grotesk', sans-serif</span>;
+  <span class="code-prop">--f-mono</span>: <span class="code-val">'Space Mono', monospace</span>;
+
+  <span class="code-comment">/* Border Radius */</span>
+  <span class="code-prop">--radius-sm</span>: <span class="code-val">2px</span>;
+  <span class="code-prop">--radius-md</span>: <span class="code-val">4px</span>;
+}</pre>
+  </div>
+</div>
+
+<!-- タイポグラフィ -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">Build Faster<span class="t-ja">システムの哲学</span></div>
+      <div class="type-spec-detail">Space Grotesk / 52px<br>weight 700 / ls -0.02em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">Deploy with Confidence<span class="t-ja">精密な設計思想</span></div>
+      <div class="type-spec-detail">Space Grotesk / 36px<br>weight 600</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">Zero Config Setup<span class="t-ja">データが導く答え</span></div>
+      <div class="type-spec-detail">Space Grotesk / 26px<br>weight 500</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">const api = new Client()<span class="t-ja">コアアーキテクチャ</span></div>
+      <div class="type-spec-detail">Space Mono / 18px<br>weight 400 / blue</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body LG</div>
+      <div class="t-body-lg"><span class="t-en">Only typed systems have a future that scales.</span>型のあるシステムだけが、スケールする未来を持てる。</div>
+      <div class="type-spec-detail">Space Grotesk / 16px<br>weight 300 / lh 1.75</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body"><span class="t-en">Trust working code over specs. The code is the documentation.</span>仕様書より、動くコードを信じる。ドキュメントはコードが語る。</div>
+      <div class="type-spec-detail">Space Grotesk / 14px<br>weight 300 / muted</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="t-caption"><span class="t-en">v2.4.1 — Last updated 2026-04-25</span>v2.4.1 — 最終更新 2026-04-25</div>
+      <div class="type-spec-detail">Space Grotesk / 12px<br>weight 300</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">New Feature<span class="t-ja">新機能</span></div>
+      <div class="type-spec-detail">Space Mono / 9px<br>uppercase / ls +0.2em</div>
+    </div>
+  </div>
+</div>
+
+<!-- スペーシング -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+  <div class="spacing-scale">
+    <div class="spacing-row"><div class="spacing-token">--sp-1</div><div class="spacing-px">4px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-2</div><div class="spacing-px">8px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-3</div><div class="spacing-px">12px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-4</div><div class="spacing-px">16px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-5</div><div class="spacing-px">24px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-6</div><div class="spacing-px">32px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-7</div><div class="spacing-px">40px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-8</div><div class="spacing-px">64px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-9</div><div class="spacing-px">96px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-10</div><div class="spacing-px">128px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div></div>
+  </div>
+</div>
+
+<!-- コンポーネント -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+
+  <div class="component-section">
+    <div class="component-title">Button — Primary（dark bg用）</div>
+    <div class="btn-states">
+      <div class="state-item"><button class="btn btn-primary-default">Execute</button><div class="state-label" style="color:#444;">Default</div></div>
+      <div class="state-item"><button class="btn btn-primary-hover">Execute</button><div class="state-label" style="color:#444;">Hover</div></div>
+      <div class="state-item"><button class="btn btn-primary-active">Execute</button><div class="state-label" style="color:#444;">Active</div></div>
+      <div class="state-item"><button class="btn btn-primary-disabled" disabled>Execute</button><div class="state-label" style="color:#444;">Disabled</div></div>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <div class="component-title">Button — Secondary（dark bg用）</div>
+    <div class="btn-states">
+      <div class="state-item"><button class="btn btn-secondary-default">Learn More</button><div class="state-label" style="color:#444;">Default</div></div>
+      <div class="state-item"><button class="btn btn-secondary-hover">Learn More</button><div class="state-label" style="color:#444;">Hover</div></div>
+      <div class="state-item"><button class="btn btn-secondary-disabled" disabled>Learn More</button><div class="state-label" style="color:#444;">Disabled</div></div>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <div class="component-title">Button — Ghost（light bg用）</div>
+    <div class="btn-states-light">
+      <div class="state-item"><button class="btn btn-ghost-default">View Docs</button><div class="state-label">Default</div></div>
+      <div class="state-item"><button class="btn btn-ghost-hover">View Docs</button><div class="state-label">Hover</div></div>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <div class="component-title">Form — Input States</div>
+    <div class="input-states">
+      <div class="input-state-item">
+        <div class="form-label">API Key</div>
+        <input class="form-input" type="text" placeholder="sk-xxxxxxxx" readonly>
+        <div class="form-hint">Default</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">API Key</div>
+        <input class="form-input-focus" type="text" value="sk-abc12345" readonly>
+        <div class="form-hint">Focus</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">API Key</div>
+        <input class="form-input-error" type="text" value="invalid-key" readonly>
+        <div class="form-hint-error">無効なキーです</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">API Key</div>
+        <input class="form-input-disabled" type="text" value="変更不可" disabled>
+        <div class="form-hint">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <div class="component-title">Cards — 3 Variants</div>
+    <div class="cards-grid">
+      <div class="card-a card-dark">
+        <div class="card-eyebrow">New Release</div>
+        <div class="card-title-sans">Edge Runtime<br>v3.0</div>
+        <div class="card-body-text">コールドスタートを排除。レイテンシ0.3ms以下を保証する次世代実行環境。</div>
+        <a href="#" class="card-link">Changelog →</a>
+      </div>
+      <div class="card-b card-mid">
+        <div class="card-eyebrow">Docs</div>
+        <div class="card-title-sans">Quick Start<br>Guide</div>
+        <div class="card-body-text">5分で動く。設定ファイルは3行。あとは書くだけ。</div>
+        <a href="#" class="card-link">Read Guide →</a>
+      </div>
+      <div class="card-c card-light">
+        <div class="card-eyebrow">Case Study</div>
+        <div class="card-title-sans">Scale to 10M<br>Requests</div>
+        <div class="card-body-text">インフラ管理ゼロで、月間1,000万リクエストを捌いた実装例。</div>
+        <a href="#" class="card-link">View Case →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <div class="component-title">Navigation</div>
+    <div class="nav-sample">
+      <div class="nav-logo-sample">NEXUS</div>
+      <div class="nav-links-sample">
+        <a class="nav-link-active" href="#">Product</a>
+        <a class="nav-link-sample" href="#">Docs</a>
+        <a class="nav-link-sample" href="#">Pricing</a>
+        <a class="nav-cta" href="#">Start Free</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- レイアウト -->
+<div id="layout" class="section">
+  <div class="section-label">Layout Rules</div>
+  <div class="layout-rules">
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Max Width</div>
+      <div class="layout-rule-body">コンテンツ幅は <span class="layout-rule-value">900px</span> を上限とする。それ以上は左右に余白。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Column Padding</div>
+      <div class="layout-rule-body">左右余白は <span class="layout-rule-value">64px</span>。モバイルは <span class="layout-rule-value">24px</span>。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Grid System</div>
+      <div class="layout-rule-body">12カラムグリッド。ガターは <span class="layout-rule-value">24px</span>。要素は必ずグリッドに揃える。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Section Spacing</div>
+      <div class="layout-rule-body">セクション間は <span class="layout-rule-value">64px（--sp-8）</span>。コンテンツ密度を一定に保つ。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Border Radius</div>
+      <div class="layout-rule-body">最大 <span class="layout-rule-value">4px</span>。丸みは機能的にのみ使用。装飾目的では使わない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Line Height</div>
+      <div class="layout-rule-body">見出しは <span class="layout-rule-value">1.1〜1.25</span>。本文は <span class="layout-rule-value">1.7〜1.8</span>。密度設計を意識する。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-id">003 — Tech Minimal</div>
+    <div class="footer-name">NEXUS</div>
+    <div class="footer-note">Style Reference — CRATER Style Library</div>
+  </div>
+</footer>
+
+<script>
+function copyCSS(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

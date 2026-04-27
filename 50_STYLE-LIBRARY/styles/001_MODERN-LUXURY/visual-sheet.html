@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>001 MODERN LUXURY — Style Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── トークン ── */
+:root {
+  --c-black:      #0D0D0D;
+  --c-charcoal:   #2C2C2C;
+  --c-gold:       #C9A84C;
+  --c-gold-light: #E8DFC8;
+  --c-cream:      #FAF8F4;
+  --c-cream-mid:  #F0EBE0;
+
+  --f-serif: 'Cormorant Garamond', Georgia, serif;
+  --f-sans:  'Inter', 'Helvetica Neue', sans-serif;
+
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  --shadow-sm: 0 1px 4px rgba(13,13,13,0.08);
+  --shadow-md: 0 4px 16px rgba(13,13,13,0.12);
+  --shadow-lg: 0 12px 40px rgba(13,13,13,0.18);
+
+  --max-w: 900px;
+  --col-pad: 64px;
+}
+
+body {
+  background: var(--c-cream);
+  color: var(--c-black);
+  font-family: var(--f-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── ナビ（ページ内ジャンプ）── */
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,248,244,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-gold-light);
+  padding: 0 var(--col-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.page-nav a {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #AAA;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.page-nav a:hover { color: var(--c-black); }
+
+.copy-md-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--c-black);
+  color: var(--c-gold);
+  border: none;
+  font-family: var(--f-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.copy-md-btn:hover { background: var(--c-charcoal); }
+.copy-md-btn.copied { background: #2a4a36; color: #6ECFA0; }
+
+.page-nav .nav-id {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-gold);
+  letter-spacing: 0.15em;
+  padding: 14px 24px 14px 0;
+  border-right: 1px solid var(--c-gold-light);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* ── セクション共通 ── */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid var(--c-gold-light);
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--c-gold-light);
+}
+
+.section-title {
+  font-family: var(--f-serif);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: var(--sp-5);
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--c-black);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-8) var(--col-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 30%, rgba(201,168,76,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 40%);
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.hero-id {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--c-gold);
+  margin-bottom: var(--sp-5);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--f-serif);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  color: var(--c-cream);
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.hero-concept {
+  font-family: var(--f-serif);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232,223,200,0.75);
+  letter-spacing: 0.04em;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.hero-tags {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 5px 12px;
+}
+
+
+/* ═══════════════════════════════════
+   A. VISUAL DIRECTION
+═══════════════════════════════════ */
+
+/* 世界観 */
+.world-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-6);
+}
+
+.world-card {
+  background: var(--c-black);
+  padding: var(--sp-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.world-card-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: var(--sp-3);
+}
+
+.world-card-title {
+  font-family: var(--f-serif);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--c-cream);
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+}
+
+.world-card-body {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(232,223,200,0.6);
+}
+
+/* 写真ディレクション */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.photo-card {
+  background: var(--c-charcoal);
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-4);
+}
+
+.photo-placeholder {
+  position: absolute; inset: 0;
+}
+
+/* 写真ムードをCSSで表現 */
+.photo-1 .photo-placeholder { background: linear-gradient(160deg, #1a1410 0%, #2c2418 40%, #0d0d0d 100%); }
+.photo-2 .photo-placeholder { background: linear-gradient(200deg, #0d0d0d 0%, #1e1810 50%, #2c2418 100%); }
+.photo-3 .photo-placeholder { background: linear-gradient(140deg, #141008 0%, #0d0d0d 60%, #1a1410 100%); }
+
+.photo-accent {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.photo-1 .photo-accent { width: 120px; height: 120px; top: 20%; right: -20px; background: radial-gradient(circle, rgba(201,168,76,0.3) 0%, transparent 70%); }
+.photo-2 .photo-accent { width: 80px; height: 80px; bottom: 30%; left: 10px; background: radial-gradient(circle, rgba(201,168,76,0.2) 0%, transparent 70%); }
+.photo-3 .photo-accent { width: 150px; height: 150px; top: -30px; left: 50%; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); }
+
+.photo-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--c-gold);
+  text-transform: uppercase;
+}
+
+/* Do / Don't */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.do-card, .dont-card {
+  padding: var(--sp-5);
+}
+
+.do-card {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+.dont-card {
+  background: rgba(180,40,40,0.04);
+  border: 1px solid rgba(180,40,40,0.15);
+}
+
+.do-dont-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+}
+
+.do-card .do-dont-label { color: var(--c-gold); }
+.dont-card .do-dont-label { color: #C84040; }
+
+.do-dont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.do-dont li {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--c-charcoal);
+  padding-left: var(--sp-4);
+  position: relative;
+}
+
+.do-card li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: var(--c-gold);
+  font-size: 11px;
+}
+
+.dont-card li::before {
+  content: '✕';
+  position: absolute; left: 0;
+  color: #C84040;
+  font-size: 11px;
+}
+
+
+/* ═══════════════════════════════════
+   B. DESIGN SYSTEM
+═══════════════════════════════════ */
+
+/* カラートークン */
+.color-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.color-row {
+  display: grid;
+  grid-template-columns: 80px 140px 1fr 80px 80px;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-cream-mid);
+}
+
+.color-row:last-child { border-bottom: none; }
+
+.color-chip {
+  width: 80px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+}
+
+.color-token-name {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--c-charcoal);
+}
+
+.color-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: #888;
+}
+
+.color-hex-val {
+  font-family: monospace;
+  font-size: 11px;
+  color: #999;
+}
+
+.contrast-badge {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.contrast-aa { background: rgba(40,160,80,0.12); color: #1A8040; }
+.contrast-aaa { background: rgba(20,120,60,0.15); color: #0F6030; }
+.contrast-fail { background: rgba(200,60,60,0.1); color: #C84040; }
+
+/* CSS変数ブロック */
+.code-block {
+  position: relative;
+  background: var(--c-black);
+  border-left: 3px solid var(--c-gold);
+  padding: var(--sp-5) var(--sp-6);
+  overflow-x: auto;
+  margin-top: var(--sp-4);
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
+}
+.copy-btn.copied {
+  color: #6ECFA0;
+  border-color: #6ECFA0;
+}
+
+.code-block pre {
+  font-family: 'Menlo', 'Monaco', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--c-gold-light);
+  white-space: pre;
+}
+
+.code-comment { color: #555; }
+.code-prop { color: var(--c-gold); }
+.code-val { color: #E8DFC8; }
+
+/* タイポグラフィスケール */
+.type-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.type-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 160px;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--c-cream-mid);
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-label {
+  font-family: monospace;
+  font-size: 10px;
+  color: #AAA;
+  padding-top: 4px;
+}
+
+.type-spec-detail {
+  font-size: 10px;
+  font-weight: 300;
+  color: #AAA;
+  font-family: monospace;
+  line-height: 1.6;
+}
+
+.t-display {
+  font-family: var(--f-serif);
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  color: var(--c-black);
+}
+
+.t-h1 {
+  font-family: var(--f-serif);
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.t-h2 {
+  font-family: var(--f-serif);
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.t-h3 {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--c-gold);
+}
+
+.t-body-lg {
+  font-family: var(--f-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.t-body {
+  font-family: var(--f-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--c-charcoal);
+}
+
+.t-caption {
+  font-family: var(--f-sans);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #888;
+}
+
+.t-label {
+  font-family: var(--f-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+/* 日本語サンプルテキスト */
+.t-ja {
+  display: block;
+  opacity: 0.7;
+  margin-top: 4px;
+  font-family: 'Noto Serif JP', serif;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.65em;
+}
+
+/* 英語サンプルテキスト（既存テキストが日本語の行に追加） */
+.t-en {
+  display: block;
+  opacity: 0.65;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.65em;
+}
+
+/* スペーシングスケール */
+.spacing-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.spacing-row {
+  display: grid;
+  grid-template-columns: 60px 80px 1fr;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.spacing-bar-wrap {
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.spacing-bar {
+  height: 8px;
+  background: var(--c-gold);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.spacing-token {
+  font-family: monospace;
+  font-size: 10px;
+  color: #AAA;
+}
+
+.spacing-px {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--c-charcoal);
+  font-weight: 500;
+}
+
+/* コンポーネント */
+.component-section {
+  margin-bottom: var(--sp-8);
+}
+
+.component-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #AAA;
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--c-cream-mid);
+}
+
+/* ボタン全状態 */
+.btn-states {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-6);
+  background: var(--c-black);
+  margin-bottom: var(--sp-4);
+}
+
+.btn-states-light {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--c-cream-mid);
+  border: 1px solid var(--c-gold-light);
+  margin-bottom: var(--sp-4);
+}
+
+.state-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.state-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Primary Button */
+.btn { font-family: var(--f-sans); cursor: pointer; transition: all 0.15s; border: none; }
+
+.btn-primary-default {
+  background: var(--c-gold);
+  color: var(--c-black);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 14px 28px;
+}
+
+.btn-primary-hover {
+  background: #B8923D;
+  color: var(--c-black);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 14px 28px;
+}
+
+.btn-primary-active {
+  background: #A07830;
+  color: var(--c-black);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 14px 28px;
+}
+
+.btn-primary-disabled {
+  background: #3A3520;
+  color: #6A6040;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 14px 28px;
+  cursor: not-allowed;
+}
+
+/* Secondary Button */
+.btn-secondary-default {
+  background: transparent;
+  color: var(--c-cream);
+  border: 1px solid var(--c-gold);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 13px 28px;
+}
+
+.btn-secondary-hover {
+  background: rgba(201,168,76,0.1);
+  color: var(--c-cream);
+  border: 1px solid var(--c-gold);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 13px 28px;
+}
+
+.btn-secondary-disabled {
+  background: transparent;
+  color: #444;
+  border: 1px solid #333;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 13px 28px;
+  cursor: not-allowed;
+}
+
+/* Ghost Button (light bg) */
+.btn-ghost-default {
+  background: transparent;
+  color: var(--c-black);
+  border: 1px solid var(--c-charcoal);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 13px 28px;
+}
+
+.btn-ghost-hover {
+  background: var(--c-black);
+  color: var(--c-cream);
+  border: 1px solid var(--c-black);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 13px 28px;
+}
+
+/* Input */
+.input-states {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.input-state-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.form-input {
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 12px 14px;
+  border: 1px solid var(--c-gold-light);
+  background: white;
+  color: var(--c-black);
+  outline: none;
+  width: 100%;
+}
+
+.form-input-focus {
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 12px 14px;
+  border: 1px solid var(--c-gold);
+  background: white;
+  color: var(--c-black);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  width: 100%;
+}
+
+.form-input-error {
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 12px 14px;
+  border: 1px solid #C84040;
+  background: rgba(200,64,64,0.03);
+  color: var(--c-black);
+  outline: none;
+  width: 100%;
+}
+
+.form-input-disabled {
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 12px 14px;
+  border: 1px solid var(--c-cream-mid);
+  background: var(--c-cream-mid);
+  color: #BBB;
+  outline: none;
+  width: 100%;
+  cursor: not-allowed;
+}
+
+.form-hint {
+  font-size: 10px;
+  font-weight: 300;
+  color: #AAA;
+}
+
+.form-hint-error {
+  font-size: 10px;
+  font-weight: 300;
+  color: #C84040;
+}
+
+/* カード */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.card-a {
+  background: var(--c-black);
+  padding: var(--sp-6);
+}
+
+.card-b {
+  background: white;
+  padding: var(--sp-6);
+  border: 1px solid var(--c-gold-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-c {
+  background: var(--c-cream-mid);
+  padding: var(--sp-6);
+  border-top: 2px solid var(--c-gold);
+}
+
+.card-eyebrow {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: var(--sp-3);
+}
+
+.card-title-serif {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: var(--sp-3);
+}
+
+.card-dark .card-title-serif { color: var(--c-cream); }
+.card-light .card-title-serif { color: var(--c-black); }
+
+.card-body-text {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.card-dark .card-body-text { color: rgba(232,223,200,0.55); }
+.card-light .card-body-text { color: #777; }
+
+.card-link {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  text-decoration: none;
+  margin-top: var(--sp-4);
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 2px;
+}
+
+/* ナビゲーション */
+.nav-sample {
+  background: var(--c-black);
+  padding: var(--sp-4) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-4);
+}
+
+.nav-logo-sample {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--c-cream);
+  letter-spacing: 0.1em;
+}
+
+.nav-links-sample {
+  display: flex;
+  gap: var(--sp-6);
+  align-items: center;
+}
+
+.nav-link-sample {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232,223,200,0.5);
+  text-decoration: none;
+}
+
+.nav-link-active {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cream);
+  text-decoration: none;
+}
+
+.nav-cta {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--c-gold);
+  color: var(--c-black);
+  padding: 9px 20px;
+  text-decoration: none;
+}
+
+/* レイアウトルール */
+.layout-rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+}
+
+.layout-rule-card {
+  background: var(--c-cream-mid);
+  padding: var(--sp-5);
+  border-left: 2px solid var(--c-gold);
+}
+
+.layout-rule-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--c-black);
+  margin-bottom: var(--sp-3);
+}
+
+.layout-rule-body {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #666;
+}
+
+.layout-rule-value {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--c-gold);
+  background: rgba(201,168,76,0.08);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* フッター */
+footer {
+  background: var(--c-black);
+  padding: var(--sp-6) var(--col-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-id { font-size: 10px; letter-spacing: 0.2em; color: var(--c-gold); }
+.footer-name { font-family: var(--f-serif); font-size: 14px; color: var(--c-cream); letter-spacing: 0.1em; }
+.footer-note { font-size: 10px; color: #444; letter-spacing: 0.1em; }
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  :root { --col-pad: 24px; }
+  .hero { min-height: 360px; }
+  .world-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-3 { display: none; }
+  .do-dont { grid-template-columns: 1fr; }
+  .color-row { grid-template-columns: 48px 1fr 60px; }
+  .color-desc, .contrast-badge { display: none; }
+  .type-row { grid-template-columns: 80px 1fr; }
+  .type-spec-detail { display: none; }
+  .input-states { grid-template-columns: 1fr 1fr; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .layout-rules { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-links-sample .nav-link-sample:not(:last-child) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">001 — Modern Luxury</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+  <button class="copy-md-btn" onclick="copyDesignMd()">COPY design.md</button>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — 001</div>
+    <div class="hero-title">Modern<br>Luxury</div>
+    <div class="hero-concept">黒と金が宿す、静かな権威。<br>余白が語る上質感。</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Luxury</span>
+      <span class="hero-tag">Minimal</span>
+      <span class="hero-tag">Serif</span>
+      <span class="hero-tag">Dark</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     A. VISUAL DIRECTION
+═══════════════════════════════ -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+
+  <!-- 世界観 -->
+  <div class="world-grid" style="margin-bottom: 48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">静かな<br>存在感。</div>
+      <div class="world-card-body">主張しない。でも目を離せない。このブランドの空間には、声高に語る言葉はない。黒い余白と、金のディテールだけが、それ以上の何かを語る。</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">少ない言葉で、<br>深く届ける。</div>
+      <div class="world-card-body">キャッチコピーは短く。説明しすぎない。選び抜かれた一語が、長い文章より重い。沈黙もメッセージのうち。</div>
+    </div>
+  </div>
+
+  <!-- 写真ディレクション -->
+  <div style="margin-bottom: 48px;">
+    <div style="font-size:10px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#AAA; margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      <div class="photo-card photo-1">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">アンダーエクスポーズ<br>シャドウ重視</div>
+      </div>
+      <div class="photo-card photo-2">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">接写・テクスチャー<br>素材感を語る</div>
+      </div>
+      <div class="photo-card photo-3">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">余白90%<br>ひとつだけ置く</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px;">
+      <div style="font-size:11px; font-weight:300; color:#777; line-height:1.6;">色温度：3200K前後のウォームトーン。青みは排除する。</div>
+      <div style="font-size:11px; font-weight:300; color:#777; line-height:1.6;">コントラスト：高め。ハイライトを飛ばさず、シャドウに落とす。</div>
+      <div style="font-size:11px; font-weight:300; color:#777; line-height:1.6;">構図：センターかオフセンター。対角線は使わない。</div>
+    </div>
+  </div>
+
+  <!-- Do / Don't -->
+  <div style="font-size:10px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#AAA; margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>
+        <li>余白は惜しまない。コンテンツを詰め込まない</li>
+        <li>金は「差し色」として使う。面積を大きくしない</li>
+        <li>フォントはCormorantとInterの2種のみ</li>
+        <li>テキストは少なく、選び抜いた言葉だけ使う</li>
+        <li>グラデーションは黒〜透明のみ許容</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>
+        <li>派手なアニメーションやトランジション</li>
+        <li>ビビッドカラーとの組み合わせ</li>
+        <li>フォントを3種以上使う</li>
+        <li>影を多用する（flatかわずかなシャドウのみ）</li>
+        <li>丸みの大きいボーダーラジウス（2px以上は禁止）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     B. DESIGN SYSTEM
+═══════════════════════════════ -->
+
+<!-- カラー -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+
+  <div class="color-tokens">
+    <div class="color-row" style="font-size:9px; color:#AAA; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#0D0D0D;"></div>
+      <div class="color-token-name">--c-black</div>
+      <div class="color-desc">背景・テキスト・ヘッダー</div>
+      <div class="color-hex-val">#0D0D0D</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#2C2C2C;"></div>
+      <div class="color-token-name">--c-charcoal</div>
+      <div class="color-desc">セカンダリテキスト</div>
+      <div class="color-hex-val">#2C2C2C</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#C9A84C; border:1px solid #E8DFC8;"></div>
+      <div class="color-token-name">--c-gold</div>
+      <div class="color-desc">アクセント・ラベル・ボタン</div>
+      <div class="color-hex-val">#C9A84C</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#E8DFC8; border:1px solid #DDD;"></div>
+      <div class="color-token-name">--c-gold-light</div>
+      <div class="color-desc">ボーダー・サブカラー</div>
+      <div class="color-hex-val">#E8DFC8</div>
+      <div><span class="contrast-badge contrast-fail">—</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#FAF8F4; border:1px solid #DDD;"></div>
+      <div class="color-token-name">--c-cream</div>
+      <div class="color-desc">ページ背景・ライトモード</div>
+      <div class="color-hex-val">#FAF8F4</div>
+      <div><span class="contrast-badge contrast-fail">—</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#F0EBE0; border:1px solid #DDD;"></div>
+      <div class="color-token-name">--c-cream-mid</div>
+      <div class="color-desc">カード背景・セパレーター</div>
+      <div class="color-hex-val">#F0EBE0</div>
+      <div><span class="contrast-badge contrast-fail">—</span></div>
+    </div>
+  </div>
+
+  <!-- CSS変数コード -->
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCSS(this)">COPY</button>
+    <pre><span class="code-comment">/* 001 Modern Luxury — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--c-black</span>:      <span class="code-val">#0D0D0D</span>;
+  <span class="code-prop">--c-charcoal</span>:   <span class="code-val">#2C2C2C</span>;
+  <span class="code-prop">--c-gold</span>:       <span class="code-val">#C9A84C</span>;
+  <span class="code-prop">--c-gold-light</span>: <span class="code-val">#E8DFC8</span>;
+  <span class="code-prop">--c-cream</span>:      <span class="code-val">#FAF8F4</span>;
+  <span class="code-prop">--c-cream-mid</span>:  <span class="code-val">#F0EBE0</span>;
+
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-serif</span>: <span class="code-val">'Cormorant Garamond', Georgia, serif</span>;
+  <span class="code-prop">--f-sans</span>:  <span class="code-val">'Inter', 'Helvetica Neue', sans-serif</span>;
+
+  <span class="code-comment">/* Shadow */</span>
+  <span class="code-prop">--shadow-sm</span>: <span class="code-val">0 1px 4px rgba(13,13,13,0.08)</span>;
+  <span class="code-prop">--shadow-md</span>: <span class="code-val">0 4px 16px rgba(13,13,13,0.12)</span>;
+  <span class="code-prop">--shadow-lg</span>: <span class="code-val">0 12px 40px rgba(13,13,13,0.18)</span>;
+
+  <span class="code-comment">/* Border Radius */</span>
+  <span class="code-prop">--radius-sm</span>: <span class="code-val">2px</span>;
+  <span class="code-prop">--radius-md</span>: <span class="code-val">4px</span>;
+}</pre>
+  </div>
+</div>
+
+<!-- タイポグラフィ -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">The Gold Standard<span class="t-ja">上質な基準</span></div>
+      <div class="type-spec-detail">Cormorant / 52px<br>weight 300 / ls +0.02em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">Premium Collection<span class="t-ja">プレミアムコレクション</span></div>
+      <div class="type-spec-detail">Cormorant / 36px<br>weight 300 / ls +0.01em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">Crafted with Intent<span class="t-ja">意図を持って設計する</span></div>
+      <div class="type-spec-detail">Cormorant / 26px<br>weight 300</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">Details matter most<span class="t-ja">細部にこそ真価がある</span></div>
+      <div class="type-spec-detail">Cormorant Italic / 20px<br>weight 400 / gold</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body LG</div>
+      <div class="t-body-lg"><span class="t-en">Every material is chosen with care.</span>素材の選択から仕上げまで、すべての工程に意図がある。</div>
+      <div class="type-spec-detail">Inter / 16px<br>weight 300 / lh 1.8</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body"><span class="t-en">That is true quality. Value that speaks for itself.</span>それが本物の上質さ。手に取った瞬間に伝わる、説明のいらない価値。</div>
+      <div class="type-spec-detail">Inter / 14px<br>weight 300 / lh 1.75</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="t-caption"><span class="t-en">Autumn/Winter 2024 — Limited to 100</span>2024年秋冬コレクション — 限定100点</div>
+      <div class="type-spec-detail">Inter / 12px<br>weight 300 / lh 1.6</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">New Arrival<span class="t-ja">新着アイテム</span></div>
+      <div class="type-spec-detail">Inter / 9px<br>weight 500 / ls +0.25em / uppercase</div>
+    </div>
+  </div>
+</div>
+
+<!-- スペーシング -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+
+  <div class="spacing-scale">
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-1</div>
+      <div class="spacing-px">4px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-2</div>
+      <div class="spacing-px">8px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-3</div>
+      <div class="spacing-px">12px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-4</div>
+      <div class="spacing-px">16px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-5</div>
+      <div class="spacing-px">24px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-6</div>
+      <div class="spacing-px">32px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-7</div>
+      <div class="spacing-px">40px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-8</div>
+      <div class="spacing-px">64px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-9</div>
+      <div class="spacing-px">96px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-token">--sp-10</div>
+      <div class="spacing-px">128px</div>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- コンポーネント -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+
+  <!-- Button Primary -->
+  <div class="component-section">
+    <div class="component-title">Button — Primary（dark bg用）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-primary-default">Discover</button>
+        <div class="state-label" style="color:#555;">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-hover">Discover</button>
+        <div class="state-label" style="color:#555;">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-active">Discover</button>
+        <div class="state-label" style="color:#555;">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-disabled" disabled>Discover</button>
+        <div class="state-label" style="color:#555;">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Secondary -->
+  <div class="component-section">
+    <div class="component-title">Button — Secondary（dark bg用）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-secondary-default">Learn More</button>
+        <div class="state-label" style="color:#555;">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-hover">Learn More</button>
+        <div class="state-label" style="color:#555;">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-disabled" disabled>Learn More</button>
+        <div class="state-label" style="color:#555;">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Ghost -->
+  <div class="component-section">
+    <div class="component-title">Button — Ghost（light bg用）</div>
+    <div class="btn-states-light">
+      <div class="state-item">
+        <button class="btn btn-ghost-default">Contact</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-hover">Contact</button>
+        <div class="state-label">Hover</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Input -->
+  <div class="component-section">
+    <div class="component-title">Form — Input States</div>
+    <div class="input-states">
+      <div class="input-state-item">
+        <div class="form-label">お名前</div>
+        <input class="form-input" type="text" placeholder="山田 太郎" readonly>
+        <div class="form-hint">Default</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">お名前</div>
+        <input class="form-input-focus" type="text" value="山田 太郎" readonly>
+        <div class="form-hint">Focus</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">メールアドレス</div>
+        <input class="form-input-error" type="text" value="yamada@" readonly>
+        <div class="form-hint-error">形式が正しくありません</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">お名前</div>
+        <input class="form-input-disabled" type="text" value="変更不可" disabled>
+        <div class="form-hint">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="component-section">
+    <div class="component-title">Cards — 3 Variants</div>
+    <div class="cards-grid">
+      <div class="card-a card-dark">
+        <div class="card-eyebrow">New Arrival</div>
+        <div class="card-title-serif">The Obsidian<br>Collection</div>
+        <div class="card-body-text">黒曜石のような深みと、金の光沢。限定50点のみの製作。</div>
+        <a href="#" class="card-link">View Collection</a>
+      </div>
+      <div class="card-b card-light">
+        <div class="card-eyebrow">Featured</div>
+        <div class="card-title-serif">Atelier<br>Selection</div>
+        <div class="card-body-text">職人が一点一点手がける、妥協なきものづくり。</div>
+        <a href="#" class="card-link">Learn More</a>
+      </div>
+      <div class="card-c card-light">
+        <div class="card-eyebrow">Story</div>
+        <div class="card-title-serif">The Art of<br>Restraint</div>
+        <div class="card-body-text">引き算の美学。何を加えるかより、何を残すかを問い続ける。</div>
+        <a href="#" class="card-link">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="component-section">
+    <div class="component-title">Navigation</div>
+    <div class="nav-sample">
+      <div class="nav-logo-sample">Maison</div>
+      <div class="nav-links-sample">
+        <a href="#" class="nav-link-active">Collection</a>
+        <a href="#" class="nav-link-sample">About</a>
+        <a href="#" class="nav-link-sample">Atelier</a>
+        <a href="#" class="nav-link-sample">Contact</a>
+        <a href="#" class="nav-cta">Enquire</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- レイアウト -->
+<div id="layout" class="section" style="border-bottom:none;">
+  <div class="section-label">Layout Rules</div>
+
+  <div class="layout-rules">
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Max Width</div>
+      <div class="layout-rule-body">コンテンツ幅は <span class="layout-rule-value">1080px</span> を上限とする。ヒーローセクションはフルワイド可。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Column Padding</div>
+      <div class="layout-rule-body">左右パディングは <span class="layout-rule-value">64px</span>（モバイル <span class="layout-rule-value">24px</span>）。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Grid</div>
+      <div class="layout-rule-body">12カラムグリッド基準。gap <span class="layout-rule-value">24px</span>。コンテンツは4・6・8カラム単位で組む。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Section Spacing</div>
+      <div class="layout-rule-body">セクション間の余白は <span class="layout-rule-value">96–128px</span>。詰めすぎない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Border Radius</div>
+      <div class="layout-rule-body">最大 <span class="layout-rule-value">4px</span>。角丸は最小限。シャープなエッジがこのスタイルの原則。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Motion</div>
+      <div class="layout-rule-body">トランジションは <span class="layout-rule-value">0.15s ease</span> のみ使用。派手なアニメーション禁止。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-id">Style Library — 001</div>
+    <div class="footer-name">Modern Luxury</div>
+    <div class="footer-note">Visual Direction + Design System</div>
+  </div>
+</footer>
+
+<textarea id="design-md-text" style="display:none;">
+# 001 MODERN LUXURY
+Style Library — Visual Direction + Design System
+
+## コンセプト
+黒と金が宿す、静かな権威。余白が語る上質感。
+キーワード: Luxury / Minimal / Serif / Dark
+
+---
+
+## A. Visual Direction
+
+### Brand World
+「静かな存在感。」
+主張しない。でも目を離せない。このブランドの空間には、声高に語る言葉はない。黒い余白と、金のディテールだけが、それ以上の何かを語る。
+
+### Brand Voice
+「少ない言葉で、深く届ける。」
+キャッチコピーは短く。説明しすぎない。選び抜かれた一語が、長い文章より重い。沈黙もメッセージのうち。
+
+### Photography Direction
+- 色温度：3200K前後のウォームトーン。青みは排除する。
+- コントラスト：高め。ハイライトを飛ばさず、シャドウに落とす。
+- 構図：センターかオフセンター。対角線は使わない。
+- アンダーエクスポーズ・シャドウ重視
+- 接写・テクスチャー・素材感を語る
+- 余白90%・ひとつだけ置く
+
+### Do
+- 余白は惜しまない。コンテンツを詰め込まない
+- 金は「差し色」として使う。面積を大きくしない
+- フォントはCormorantとInterの2種のみ
+- テキストは少なく、選び抜いた言葉だけ使う
+- グラデーションは黒〜透明のみ許容
+
+### Don't
+- 派手なアニメーションやトランジション
+- ビビッドカラーとの組み合わせ
+- フォントを3種以上使う
+- 影を多用する（flatかわずかなシャドウのみ）
+- 丸みの大きいボーダーラジウス（4px以上は禁止）
+
+---
+
+## B. Design System
+
+### カラートークン
+--c-black:      #0D0D0D  （背景・テキスト・ヘッダー）
+--c-charcoal:   #2C2C2C  （セカンダリテキスト）
+--c-gold:       #C9A84C  （アクセント・ラベル・ボタン）
+--c-gold-light: #E8DFC8  （ボーダー・サブカラー）
+--c-cream:      #FAF8F4  （ページ背景・ライトモード）
+--c-cream-mid:  #F0EBE0  （カード背景・セパレーター）
+
+### フォント
+- Display / Heading: Cormorant Garamond（serif）/ weight 300–600
+- Body / UI: Inter / weight 300–600
+- 日本語: Noto Serif JP / weight 300–700
+- Google Fonts import: Cormorant+Garamond + Inter + Noto+Serif+JP
+
+### タイポグラフィスケール
+- Display:  Cormorant Garamond / 52px / weight 300 / letter-spacing +0.02em
+- H1:       Cormorant Garamond / 36px / weight 300 / letter-spacing +0.01em
+- H2:       Cormorant Garamond / 26px / weight 300
+- H3:       Cormorant Garamond italic / 20px / weight 400 / color: gold
+- Body LG:  Inter / 16px / weight 300 / line-height 1.8
+- Body:     Inter / 14px / weight 300 / line-height 1.75
+- Caption:  Inter / 12px / weight 300 / line-height 1.6
+- Label:    Inter / 9px / weight 500 / letter-spacing +0.25em / uppercase
+
+### スペーシングスケール
+--sp-1: 4px / --sp-2: 8px / --sp-3: 12px / --sp-4: 16px / --sp-5: 24px
+--sp-6: 32px / --sp-7: 40px / --sp-8: 64px / --sp-9: 96px / --sp-10: 128px
+
+### CSS Variables
+:root {
+  --c-black:      #0D0D0D;
+  --c-charcoal:   #2C2C2C;
+  --c-gold:       #C9A84C;
+  --c-gold-light: #E8DFC8;
+  --c-cream:      #FAF8F4;
+  --c-cream-mid:  #F0EBE0;
+  --f-serif: 'Cormorant Garamond', Georgia, serif;
+  --f-sans:  'Inter', 'Helvetica Neue', sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 40px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --shadow-sm: 0 1px 4px rgba(13,13,13,0.08);
+  --shadow-md: 0 4px 16px rgba(13,13,13,0.12);
+  --shadow-lg: 0 12px 40px rgba(13,13,13,0.18);
+}
+
+### コンポーネント仕様
+ボタン:
+- Primary: bg #0D0D0D / text #FAF8F4 / border-radius 2px / font 9px / ls +0.25em / uppercase
+- Outline: bg transparent / border 1px solid #C9A84C / text #C9A84C
+- Ghost: border none / text #2C2C2C / ホバーでアンダーライン
+- Disabled: opacity 0.35
+
+Input:
+- border: 1px solid #E8DFC8 / focus: border-color #C9A84C
+- border-radius 2px / padding 10px 16px / font-size 14px
+
+### レイアウトルール
+- Max Width: 1080px（ヒーローはフルワイド可）
+- Column Padding: 64px（モバイル 24px）
+- Grid: 12カラム / gap 24px / コンテンツは4・6・8カラム単位
+- Section Spacing: 96–128px
+- Border Radius: 最大 4px（シャープなエッジが原則）
+- Motion: transition 0.15s ease のみ。派手なアニメーション禁止
+</textarea>
+
+<script>
+function copyCSS(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function copyDesignMd() {
+  const btn = document.querySelector('.copy-md-btn');
+  const text = document.getElementById('design-md-text').value;
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY design.md';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

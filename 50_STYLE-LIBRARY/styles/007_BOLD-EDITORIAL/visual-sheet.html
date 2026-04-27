@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>007 BOLD EDITORIAL — Style Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── トークン ── */
+:root {
+  --c-black:  #000000;
+  --c-yellow: #F5D800;
+  --c-white:  #FFFFFF;
+  --c-red:    #FF2D2D;
+  --c-dark:   #222222;
+
+  --f-display: 'Bebas Neue', 'Impact', sans-serif;
+  --f-body:    'Inter', 'Helvetica Neue', sans-serif;
+
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  --max-w: 900px;
+  --col-pad: 64px;
+}
+
+body {
+  background: var(--c-dark);
+  color: var(--c-white);
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── ページナビ ── */
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--c-black);
+  border-bottom: 4px solid var(--c-yellow);
+  padding: 0 var(--col-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.page-nav a {
+  font-family: var(--f-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #555;
+  text-decoration: none;
+  padding: 14px 16px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.page-nav a:hover { color: var(--c-yellow); }
+
+.page-nav .nav-id {
+  font-family: var(--f-display);
+  font-size: 16px;
+  color: var(--c-yellow);
+  letter-spacing: 0.05em;
+  padding: 12px 24px 12px 0;
+  border-right: 2px solid #333;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* ── セクション共通 ── */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-yellow);
+  margin-bottom: var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #2a2a2a;
+}
+
+/* ── ヒーロー ── */
+.hero {
+  background: var(--c-black);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-8) var(--col-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 大きなBEBAS背景テキスト（opacity 0.03）*/
+.hero::before {
+  content: 'BOLD';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-family: var(--f-display);
+  font-size: clamp(200px, 35vw, 400px);
+  color: var(--c-white);
+  opacity: 0.03;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-id {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: var(--c-yellow);
+  margin-bottom: var(--sp-4);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(64px, 10vw, 120px);
+  color: var(--c-white);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--sp-5);
+}
+
+.hero-concept {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-black);
+  background: var(--c-yellow);
+  padding: 5px 12px;
+}
+
+
+/* ═══════════════════════════════════
+   A. VISUAL DIRECTION
+═══════════════════════════════════ */
+
+.world-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: var(--sp-6);
+}
+
+.world-card {
+  padding: var(--sp-6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* カード1：黒bg 黄テキスト */
+.world-card:nth-child(1) { background: var(--c-black); }
+/* カード2：黄bg 黒テキスト */
+.world-card:nth-child(2) { background: var(--c-yellow); }
+
+.world-card-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+
+.world-card:nth-child(1) .world-card-label { color: var(--c-yellow); }
+.world-card:nth-child(2) .world-card-label { color: rgba(0,0,0,0.45); }
+
+.world-card-title {
+  font-family: var(--f-display);
+  font-size: 40px;
+  line-height: 1.0;
+  margin-bottom: var(--sp-3);
+}
+
+.world-card:nth-child(1) .world-card-title { color: var(--c-yellow); }
+.world-card:nth-child(2) .world-card-title { color: var(--c-black); }
+
+.world-card-body {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.world-card:nth-child(1) .world-card-body { color: rgba(255,255,255,0.45); }
+.world-card:nth-child(2) .world-card-body { color: rgba(0,0,0,0.6); }
+
+/* 写真ディレクション */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.photo-card {
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-4);
+}
+
+.photo-placeholder { position: absolute; inset: 0; }
+
+.photo-1 .photo-placeholder { background: linear-gradient(180deg, #050505 0%, #0a0a0a 60%, #000 100%); }
+.photo-2 .photo-placeholder { background: linear-gradient(160deg, #0a0a0a 0%, #000 50%, #050505 100%); }
+.photo-3 .photo-placeholder { background: linear-gradient(200deg, #000 0%, #080808 60%, #0a0a0a 100%); }
+
+/* ハイコントラストのカラーライン */
+.photo-1::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--c-yellow); }
+.photo-2::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--c-red); }
+.photo-3::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--c-white); }
+
+.photo-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--c-yellow);
+  text-transform: uppercase;
+}
+
+/* Do / Don't */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.do-card {
+  padding: var(--sp-5);
+  background: rgba(245,216,0,0.05);
+  border: 2px solid var(--c-yellow);
+}
+
+.dont-card {
+  padding: var(--sp-5);
+  background: rgba(255,45,45,0.04);
+  border: 2px solid rgba(255,45,45,0.4);
+}
+
+.do-dont-label {
+  font-family: var(--f-display);
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp-4);
+}
+
+.do-card .do-dont-label  { color: var(--c-yellow); }
+.dont-card .do-dont-label { color: var(--c-red); }
+
+.do-dont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.do-dont li {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.65);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.do-card li::before   { content: '✓'; position: absolute; left: 0; color: var(--c-yellow); font-weight: 700; }
+.dont-card li::before { content: '✕'; position: absolute; left: 0; color: var(--c-red); font-weight: 700; }
+
+
+/* ═══════════════════════════════════
+   B. DESIGN SYSTEM
+═══════════════════════════════════ */
+
+.color-tokens { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.color-row {
+  display: grid;
+  grid-template-columns: 80px 140px 1fr 80px 80px;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.color-row:last-child { border-bottom: none; }
+
+.color-chip      { width: 80px; height: 36px; }
+.color-token-name { font-family: monospace; font-size: 11px; color: var(--c-yellow); }
+.color-desc      { font-size: 11px; color: #555; }
+.color-hex-val   { font-family: monospace; font-size: 11px; color: #444; }
+
+.contrast-badge  { font-size: 9px; font-weight: 700; padding: 3px 8px; text-align: center; }
+.contrast-aa     { background: rgba(40,160,80,0.15); color: #4CAF50; }
+.contrast-aaa    { background: rgba(20,120,60,0.15); color: #2E7D32; }
+.contrast-fail   { background: rgba(200,60,60,0.1);  color: #EF5350; }
+
+/* CSS変数ブロック */
+.code-block {
+  position: relative;
+  background: var(--c-black);
+  border-left: 4px solid var(--c-yellow);
+  padding: var(--sp-5) var(--sp-6);
+  overflow-x: auto;
+  margin-top: var(--sp-4);
+}
+
+.code-block pre {
+  font-family: 'Menlo', 'Monaco', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #aaa;
+  white-space: pre;
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
+}
+.copy-btn.copied {
+  color: #6ECFA0;
+  border-color: #6ECFA0;
+}
+
+.code-comment { color: #444; }
+.code-prop    { color: var(--c-yellow); }
+.code-val     { color: var(--c-white); }
+
+/* 日本語サンプル */
+.t-ja {
+  display: block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.65em;
+  opacity: 0.7;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* タイポグラフィスケール */
+.type-scale { display: flex; flex-direction: column; gap: 0; }
+
+.type-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 160px;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-label      { font-family: monospace; font-size: 10px; color: #555; padding-top: 4px; }
+.type-spec-detail { font-size: 10px; color: #444; font-family: monospace; line-height: 1.6; }
+
+.t-display { font-family: var(--f-display); font-size: 80px; line-height: 0.9; letter-spacing: 0.01em; color: var(--c-white); }
+.t-h1      { font-family: var(--f-display); font-size: 52px; line-height: 1.0; color: var(--c-white); }
+.t-h2      { font-family: var(--f-display); font-size: 36px; line-height: 1.0; color: var(--c-white); }
+.t-h3      { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: var(--c-yellow); }
+.t-body-lg { font-size: 16px; font-weight: 400; line-height: 1.7; color: var(--c-white); }
+.t-body    { font-size: 14px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,0.6); }
+.t-caption { font-size: 11px; font-weight: 400; color: #555; }
+.t-label   { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-yellow); }
+
+/* スペーシングスケール */
+.spacing-scale { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.spacing-row {
+  display: grid;
+  grid-template-columns: 60px 80px 1fr;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.spacing-bar-wrap { height: 20px; display: flex; align-items: center; }
+.spacing-bar      { height: 8px; background: var(--c-yellow); opacity: 0.7; }
+.spacing-token    { font-family: monospace; font-size: 10px; color: #555; }
+.spacing-px       { font-family: monospace; font-size: 11px; color: var(--c-white); font-weight: 700; }
+
+/* コンポーネント */
+.component-section { margin-bottom: var(--sp-8); }
+
+.component-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 2px solid #222;
+}
+
+.btn-states {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-6);
+  background: var(--c-black);
+  margin-bottom: var(--sp-4);
+}
+
+.btn-states-light {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--c-white);
+  border: 2px solid var(--c-black);
+  margin-bottom: var(--sp-4);
+}
+
+.state-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.state-item { display: flex; flex-direction: column; align-items: center; }
+
+.btn {
+  font-family: var(--f-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  padding: 14px 28px;
+  transition: all 0.1s;
+}
+
+/* Primary */
+.btn-primary-default  { background: var(--c-yellow); color: var(--c-black); }
+.btn-primary-hover    { background: #D4BB00; color: var(--c-black); }
+.btn-primary-active   { background: #B8A100; color: var(--c-black); }
+.btn-primary-disabled { background: #3A3800; color: #6A6200; cursor: not-allowed; }
+
+/* Secondary */
+.btn-secondary-default  { background: var(--c-black); color: var(--c-white); border: 2px solid var(--c-white); padding: 12px 28px; }
+.btn-secondary-hover    { background: var(--c-white); color: var(--c-black); border: 2px solid var(--c-white); padding: 12px 28px; }
+.btn-secondary-active   { background: #DDD; color: var(--c-black); border: 2px solid #DDD; padding: 12px 28px; }
+.btn-secondary-disabled { background: var(--c-black); color: #333; border: 2px solid #333; padding: 12px 28px; cursor: not-allowed; }
+
+/* Ghost */
+.btn-ghost-default  { background: transparent; color: var(--c-black); border: 2px solid var(--c-black); padding: 12px 28px; }
+.btn-ghost-hover    { background: var(--c-black); color: var(--c-white); border: 2px solid var(--c-black); padding: 12px 28px; }
+.btn-ghost-active   { background: #222; color: var(--c-white); border: 2px solid #222; padding: 12px 28px; }
+.btn-ghost-disabled { background: transparent; color: #999; border: 2px solid #999; padding: 12px 28px; cursor: not-allowed; }
+
+/* Input */
+.input-states {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  background: var(--c-black);
+  padding: var(--sp-5);
+}
+
+.input-state-item { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-yellow); }
+
+.form-input          { font-family: var(--f-body); font-size: 16px; padding: 12px 14px; border: 2px solid #333; background: #111; color: var(--c-white); outline: none; width: 100%; }
+.form-input-focus    { font-family: var(--f-body); font-size: 16px; padding: 12px 14px; border: 2px solid var(--c-yellow); background: #111; color: var(--c-white); outline: none; width: 100%; }
+.form-input-error    { font-family: var(--f-body); font-size: 16px; padding: 12px 14px; border: 2px solid var(--c-red); background: rgba(255,45,45,0.05); color: var(--c-white); outline: none; width: 100%; }
+.form-input-disabled { font-family: var(--f-body); font-size: 16px; padding: 12px 14px; border: 2px solid #222; background: #111; color: #333; outline: none; width: 100%; cursor: not-allowed; }
+
+.form-hint       { font-size: 10px; color: #555; }
+.form-hint-error { font-size: 10px; font-weight: 700; color: var(--c-red); }
+
+/* カード */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.card-a { background: var(--c-black); padding: var(--sp-6); border-top: 4px solid var(--c-yellow); }
+.card-b { background: var(--c-yellow); padding: var(--sp-6); }
+.card-c { background: var(--c-white); padding: var(--sp-6); border: 2px solid var(--c-black); }
+
+.card-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+
+.card-a .card-eyebrow { color: var(--c-yellow); }
+.card-b .card-eyebrow { color: rgba(0,0,0,0.45); }
+.card-c .card-eyebrow { color: var(--c-black); }
+
+.card-title-bold {
+  font-family: var(--f-display);
+  font-size: 32px;
+  line-height: 1.0;
+  margin-bottom: var(--sp-3);
+}
+
+.card-a .card-title-bold { color: var(--c-white); }
+.card-b .card-title-bold { color: var(--c-black); }
+.card-c .card-title-bold { color: var(--c-black); }
+
+.card-body-text { font-size: 12px; font-weight: 400; line-height: 1.7; }
+.card-a .card-body-text { color: rgba(255,255,255,0.45); }
+.card-b .card-body-text { color: rgba(0,0,0,0.6); }
+.card-c .card-body-text { color: #555; }
+
+.card-link {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: var(--sp-4);
+  border-bottom: 2px solid;
+  padding-bottom: 2px;
+}
+
+.card-a .card-link { color: var(--c-yellow); border-color: var(--c-yellow); }
+.card-b .card-link { color: var(--c-black); border-color: var(--c-black); }
+.card-c .card-link { color: var(--c-black); border-color: var(--c-black); }
+
+/* ナビゲーション */
+.nav-sample {
+  background: var(--c-black);
+  border-bottom: 4px solid var(--c-yellow);
+  padding: var(--sp-3) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-4);
+}
+
+.nav-logo-sample   { font-family: var(--f-display); font-size: 28px; color: var(--c-white); letter-spacing: 0.05em; }
+.nav-links-sample  { display: flex; gap: var(--sp-5); align-items: center; }
+.nav-link-sample   { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #555; text-decoration: none; }
+.nav-link-active   { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--c-yellow); text-decoration: none; }
+.nav-cta           { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; background: var(--c-yellow); color: var(--c-black); padding: 9px 20px; text-decoration: none; }
+
+/* レイアウトルール */
+.layout-rules { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+
+.layout-rule-card {
+  background: var(--c-black);
+  padding: var(--sp-5);
+  border-left: 4px solid var(--c-yellow);
+}
+
+.layout-rule-title { font-family: var(--f-display); font-size: 20px; color: var(--c-white); margin-bottom: var(--sp-3); }
+.layout-rule-body  { font-size: 11px; line-height: 1.7; color: #555; }
+.layout-rule-value { font-family: monospace; font-size: 11px; color: var(--c-yellow); background: rgba(245,216,0,0.1); padding: 2px 6px; }
+
+/* フッター */
+footer {
+  background: var(--c-black);
+  border-top: 4px solid var(--c-yellow);
+  padding: var(--sp-6) var(--col-pad);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-id   { font-family: var(--f-display); font-size: 18px; color: var(--c-yellow); }
+.footer-name { font-family: var(--f-display); font-size: 14px; color: var(--c-white); letter-spacing: 0.1em; }
+.footer-note { font-size: 10px; color: #444; letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; }
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  :root { --col-pad: 24px; }
+  .hero { min-height: 360px; }
+  .world-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-card:last-child { display: none; }
+  .do-dont { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .color-row { grid-template-columns: 48px 1fr 60px; }
+  .color-desc, .contrast-badge { display: none; }
+  .type-row { grid-template-columns: 80px 1fr; }
+  .type-spec-detail { display: none; }
+  .t-display { font-size: 52px; }
+  .input-states { grid-template-columns: 1fr 1fr; padding: var(--sp-4); }
+  .cards-grid { grid-template-columns: 1fr; }
+  .layout-rules { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-links-sample .nav-link-sample:not(:last-child) { display: none; }
+  .btn-states, .btn-states-light { flex-wrap: wrap; gap: var(--sp-3); }
+}
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">007 — Bold Editorial</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — 007</div>
+    <div class="hero-title">BOLD<br>EDITORIAL</div>
+    <div class="hero-concept">声を上げなければ存在しない。<br>デザインは武器だ。</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Editorial</span>
+      <span class="hero-tag">Bold</span>
+      <span class="hero-tag">Contrast</span>
+      <span class="hero-tag">Impactful</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- A. VISUAL DIRECTION -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+
+  <!-- 世界観 -->
+  <div class="world-grid" style="margin-bottom:48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">声を上げなければ<br>存在しない</div>
+      <div class="world-card-body">見えなければ負け。このスタイルは存在を主張する。黒とイエローの対比が、語りかけるのではなく叩きつける。余白はリズムであり、沈黙ではない。</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">デザインは<br>武器だ</div>
+      <div class="world-card-body">タイポグラフィが刃になる。Bebas Neueの大文字が紙面を支配し、イエローが目を刺す。これは優しさではなく、確信だ。コンプロマイズしない。</div>
+    </div>
+  </div>
+
+  <!-- 写真ディレクション -->
+  <div style="margin-bottom:48px;">
+    <div style="font-size:9px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#555; margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      <div class="photo-card photo-1">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">ハイコントラスト<br>暗部を押し込む</div>
+      </div>
+      <div class="photo-card photo-2">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">ドラマチック<br>ライティング</div>
+      </div>
+      <div class="photo-card photo-3">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">アンダーエクスポーズ<br>シャドウ重視</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px;">
+      <div style="font-size:11px; color:#555; line-height:1.6; padding:12px; background:#111;">露出：暗め。ハイライトを飛ばさず、シャドウを深く落とす。</div>
+      <div style="font-size:11px; color:#555; line-height:1.6; padding:12px; background:#111;">光源：強いスポット光。ドラマチックで演劇的な照明設計。</div>
+      <div style="font-size:11px; color:#555; line-height:1.6; padding:12px; background:#111;">構図：大胆なクロップ。顔の半分・体の断片も許容する。</div>
+    </div>
+  </div>
+
+  <!-- Do / Don't -->
+  <div style="font-size:9px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#555; margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>
+        <li>Bebas Neue ALL CAPS で強打する。中途半端な大きさは禁止</li>
+        <li>余白をリズムとして意図的に使う。詰めても抜いても計算する</li>
+        <li>イエローは面積で使える。背景ごと染めてよい</li>
+        <li>2色のコントラストを最大化。黒+黄の組み合わせを核に</li>
+        <li>レッドはアクセント用。1ページに1〜2箇所まで</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>
+        <li>グラデーション（単色の強さを希薄にする）</li>
+        <li>角丸（border-radius）。エッジはシャープに保つ</li>
+        <li>細いフォント・軽い書体（Thin / Light 系）</li>
+        <li>パステルカラーや中間色。存在感が消える</li>
+        <li>センタリングの多用。左揃えを基本に組む</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- B. DESIGN SYSTEM -->
+
+<!-- カラー -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+
+  <div class="color-tokens">
+    <div class="color-row" style="font-size:9px; color:#444; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#000000;"></div>
+      <div class="color-token-name">--c-black</div>
+      <div class="color-desc">ベース背景・テキスト</div>
+      <div class="color-hex-val">#000000</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#F5D800;"></div>
+      <div class="color-token-name">--c-yellow</div>
+      <div class="color-desc">メインアクセント・ボタン・背景</div>
+      <div class="color-hex-val">#F5D800</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#FFFFFF; outline:1px solid #333;"></div>
+      <div class="color-token-name">--c-white</div>
+      <div class="color-desc">テキスト・ライト面</div>
+      <div class="color-hex-val">#FFFFFF</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#FF2D2D;"></div>
+      <div class="color-token-name">--c-red</div>
+      <div class="color-desc">ポイントアクセント（少量）</div>
+      <div class="color-hex-val">#FF2D2D</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#222222;"></div>
+      <div class="color-token-name">--c-dark</div>
+      <div class="color-desc">セカンダリ背景・カード</div>
+      <div class="color-hex-val">#222222</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCSS(this)">COPY</button>
+    <pre><span class="code-comment">/* 007 Bold Editorial — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--c-black</span>:  <span class="code-val">#000000</span>;
+  <span class="code-prop">--c-yellow</span>: <span class="code-val">#F5D800</span>;
+  <span class="code-prop">--c-white</span>:  <span class="code-val">#FFFFFF</span>;
+  <span class="code-prop">--c-red</span>:    <span class="code-val">#FF2D2D</span>;
+  <span class="code-prop">--c-dark</span>:   <span class="code-val">#222222</span>;
+
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-display</span>: <span class="code-val">'Bebas Neue', 'Impact', sans-serif</span>;
+  <span class="code-prop">--f-body</span>:    <span class="code-val">'Inter', 'Helvetica Neue', sans-serif</span>;
+
+  <span class="code-comment">/* Border Radius */</span>
+  <span class="code-prop">--radius</span>: <span class="code-val">0px</span>; <span class="code-comment">/* シャープエッジが原則 */</span>
+}</pre>
+  </div>
+</div>
+
+<!-- タイポグラフィ -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">IMPACT<span class="t-ja">衝撃の一言</span></div>
+      <div class="type-spec-detail">Bebas Neue / 80px<br>ls +0.01em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">FRONT PAGE<span class="t-ja">大胆な宣言</span></div>
+      <div class="type-spec-detail">Bebas Neue / 52px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">COVER STORY<span class="t-ja">主張するデザイン</span></div>
+      <div class="type-spec-detail">Bebas Neue / 36px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">Section Label Here<span class="t-ja">コントラストの力</span></div>
+      <div class="type-spec-detail">Inter / 14px / 700<br>uppercase / ls 0.3em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body LG</div>
+      <div class="t-body-lg">Design speaks before words do. Bold, clear, fearless.<span class="t-ja">強く、明確に、迷いなく。</span></div>
+      <div class="type-spec-detail">Inter / 16px<br>weight 400 / lh 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body">When typography becomes a weapon, it's no longer just letters. It claims space, demands attention.<span class="t-ja">強く、明確に、迷いなく。</span></div>
+      <div class="type-spec-detail">Inter / 14px<br>weight 400 / lh 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="t-caption">Vol.07 — 2024 Spring Issue — Limited Edition<span class="t-ja">2024年春号 — 限定版</span></div>
+      <div class="type-spec-detail">Inter / 11px / weight 400</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">New Release<span class="t-ja" style="text-transform:none; letter-spacing:0;">新着情報</span></div>
+      <div class="type-spec-detail">Inter / 9px / 700<br>ls 0.3em / uppercase</div>
+    </div>
+  </div>
+</div>
+
+<!-- スペーシング -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+
+  <div class="spacing-scale">
+    <div class="spacing-row"><div class="spacing-token">--sp-1</div><div class="spacing-px">4px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-2</div><div class="spacing-px">8px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-3</div><div class="spacing-px">12px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-4</div><div class="spacing-px">16px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-5</div><div class="spacing-px">24px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-6</div><div class="spacing-px">32px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-7</div><div class="spacing-px">40px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-8</div><div class="spacing-px">64px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-9</div><div class="spacing-px">96px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-10</div><div class="spacing-px">128px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div></div>
+  </div>
+</div>
+
+<!-- コンポーネント -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+
+  <!-- Button Primary -->
+  <div class="component-section">
+    <div class="component-title">Button — Primary（黒bg用 / Yellow）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-primary-default">Discover</button>
+        <div class="state-label" style="color:#444;">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-hover">Discover</button>
+        <div class="state-label" style="color:#444;">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-active">Discover</button>
+        <div class="state-label" style="color:#444;">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-disabled" disabled>Discover</button>
+        <div class="state-label" style="color:#444;">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Secondary -->
+  <div class="component-section">
+    <div class="component-title">Button — Secondary（黒bg用 / White Border）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-secondary-default">Read More</button>
+        <div class="state-label" style="color:#444;">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-hover">Read More</button>
+        <div class="state-label" style="color:#444;">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-active">Read More</button>
+        <div class="state-label" style="color:#444;">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-disabled" disabled>Read More</button>
+        <div class="state-label" style="color:#444;">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Ghost -->
+  <div class="component-section">
+    <div class="component-title">Button — Ghost（白bg用 / Black Border）</div>
+    <div class="btn-states-light">
+      <div class="state-item">
+        <button class="btn btn-ghost-default">Contact</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-hover">Contact</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-active">Contact</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-disabled" disabled>Contact</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="component-section">
+    <div class="component-title">Form — Input States</div>
+    <div class="input-states">
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input" type="text" placeholder="山田 太郎" readonly>
+        <div class="form-hint">Default</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input-focus" type="text" value="山田 太郎" readonly>
+        <div class="form-hint">Focus</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Email</div>
+        <input class="form-input-error" type="text" value="yamada@" readonly>
+        <div class="form-hint-error">形式が違います</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Name</div>
+        <input class="form-input-disabled" type="text" value="変更不可" disabled>
+        <div class="form-hint">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="component-section">
+    <div class="component-title">Cards — 3 Variants</div>
+    <div class="cards-grid">
+      <div class="card-a">
+        <div class="card-eyebrow">Cover Story</div>
+        <div class="card-title-bold">THE LOUD<br>SILENCE</div>
+        <div class="card-body-text">コントラストが最大に達するとき、デザインは沈黙を超える。</div>
+        <a href="#" class="card-link">Read Issue</a>
+      </div>
+      <div class="card-b">
+        <div class="card-eyebrow">Feature</div>
+        <div class="card-title-bold">MAKE IT<br>LOUD</div>
+        <div class="card-body-text">主張しない選択肢はない。見えなければ存在しないのと同じだ。</div>
+        <a href="#" class="card-link">View More</a>
+      </div>
+      <div class="card-c">
+        <div class="card-eyebrow">Editorial</div>
+        <div class="card-title-bold">DESIGN<br>AS WEAPON</div>
+        <div class="card-body-text">タイポグラフィはメッセージの外形だ。選ぶフォントが思想を決める。</div>
+        <a href="#" class="card-link">Explore</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="component-section">
+    <div class="component-title">Navigation</div>
+    <div class="nav-sample">
+      <div class="nav-logo-sample">EDITORIAL</div>
+      <div class="nav-links-sample">
+        <a href="#" class="nav-link-active">Issues</a>
+        <a href="#" class="nav-link-sample">Archive</a>
+        <a href="#" class="nav-link-sample">Studio</a>
+        <a href="#" class="nav-link-sample">Contact</a>
+        <a href="#" class="nav-cta">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- レイアウト -->
+<div id="layout" class="section" style="border-bottom:none;">
+  <div class="section-label">Layout Rules</div>
+
+  <div class="layout-rules">
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Max Width</div>
+      <div class="layout-rule-body">コンテンツ幅は <span class="layout-rule-value">1080px</span> を上限。ヒーローはフルブリード可。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Column Padding</div>
+      <div class="layout-rule-body">左右パディング <span class="layout-rule-value">64px</span>（モバイル <span class="layout-rule-value">24px</span>）。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Border Radius</div>
+      <div class="layout-rule-body">全要素 <span class="layout-rule-value">0px</span>。角丸は一切使わない。シャープエッジが原則。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Typography Grid</div>
+      <div class="layout-rule-body">テキストは左揃え基本。Bebas Neueは字間 <span class="layout-rule-value">0.01em</span> で組む。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Section Spacing</div>
+      <div class="layout-rule-body">セクション間は <span class="layout-rule-value">64–96px</span>。詰めてもリズムを崩さない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Color Usage</div>
+      <div class="layout-rule-body">イエローは面積で使える。レッドは <span class="layout-rule-value">1–2箇所</span> まで。グラデーション禁止。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-id">007</div>
+    <div class="footer-name">BOLD EDITORIAL</div>
+    <div class="footer-note">Visual Direction + Design System</div>
+  </div>
+</footer>
+
+<script>
+function copyCSS(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>010 VIVID DIGITAL — Style Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── トークン ── */
+:root {
+  --c-void:        #050505;
+  --c-purple:      #7B2FFF;
+  --c-cyan:        #00F5FF;
+  --c-pink:        #FF2D78;
+  --c-dark-purple: #1A0033;
+
+  --f-display: 'Syne', 'Helvetica Neue', sans-serif;
+  --f-body:    'Inter', 'Helvetica Neue', sans-serif;
+
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  --max-w: 900px;
+  --col-pad: 64px;
+
+  --glow-purple: 0 0 24px rgba(123,47,255,0.4);
+  --glow-cyan:   0 0 20px rgba(0,245,255,0.35);
+  --glow-pink:   0 0 20px rgba(255,45,120,0.35);
+}
+
+body {
+  background: var(--c-void);
+  color: rgba(255,255,255,0.85);
+  font-family: var(--f-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── ページナビ ── */
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(123,47,255,0.3);
+  padding: 0 var(--col-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.page-nav a {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  padding: 14px 16px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.page-nav a:hover { color: var(--c-cyan); }
+
+.page-nav .nav-id {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 800;
+  /* グラデーションテキスト purple→cyan */
+  background: linear-gradient(90deg, var(--c-purple), var(--c-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 12px 24px 12px 0;
+  border-right: 1px solid rgba(123,47,255,0.3);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* ── セクション共通 ── */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid rgba(123,47,255,0.12);
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  opacity: 0.7;
+  margin-bottom: var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(123,47,255,0.4), transparent);
+}
+
+/* ── ヒーロー ── */
+.hero {
+  background: var(--c-dark-purple);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-8) var(--col-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+/* radial-gradient glowオーバーレイ */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,47,255,0.35) 0%, transparent 70%);
+  top: -150px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,245,255,0.2) 0%, transparent 70%);
+  bottom: 40px;
+  left: 80px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-id {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  color: var(--c-cyan);
+  opacity: 0.7;
+  margin-bottom: var(--sp-4);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(52px, 9vw, 100px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.hero-concept {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  border: 1px solid rgba(0,245,255,0.3);
+  padding: 5px 12px;
+}
+
+
+/* ═══════════════════════════════════
+   A. VISUAL DIRECTION
+═══════════════════════════════════ */
+
+.world-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.world-card {
+  padding: var(--sp-6);
+  background: rgba(123,47,255,0.08);
+  border: 1px solid rgba(123,47,255,0.25);
+}
+
+.world-card-label {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  opacity: 0.7;
+  margin-bottom: var(--sp-3);
+}
+
+.world-card-title {
+  font-family: var(--f-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.world-card-body {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.45);
+}
+
+/* 写真ディレクション */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+
+.photo-card {
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-4);
+  border: 1px solid rgba(123,47,255,0.2);
+}
+
+.photo-placeholder { position: absolute; inset: 0; }
+
+/* ネオン・電気的なムード */
+.photo-1 .photo-placeholder { background: linear-gradient(180deg, var(--c-dark-purple) 0%, #0D0020 60%, #050005 100%); }
+.photo-2 .photo-placeholder { background: linear-gradient(160deg, #000010 0%, #050520 50%, var(--c-dark-purple) 100%); }
+.photo-3 .photo-placeholder { background: linear-gradient(200deg, #000020 0%, var(--c-dark-purple) 50%, #000015 100%); }
+
+/* グローアクセント */
+.photo-1::after { content: ''; position: absolute; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(123,47,255,0.5) 0%, transparent 70%); top: 20%; right: 10%; pointer-events: none; }
+.photo-2::after { content: ''; position: absolute; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(0,245,255,0.4) 0%, transparent 70%); bottom: 30%; left: 15%; pointer-events: none; }
+.photo-3::after { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,45,120,0.35) 0%, transparent 70%); top: 25%; left: 30%; pointer-events: none; }
+
+.photo-desc {
+  position: relative;
+  z-index: 1;
+  font-family: var(--f-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--c-cyan);
+}
+
+/* Do / Don't */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.do-card {
+  padding: var(--sp-5);
+  background: rgba(123,47,255,0.07);
+  border: 1px solid rgba(123,47,255,0.3);
+}
+
+.dont-card {
+  padding: var(--sp-5);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.do-dont-label {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: var(--sp-4);
+}
+
+.do-card .do-dont-label  { color: var(--c-cyan); }
+.dont-card .do-dont-label { color: rgba(255,255,255,0.3); }
+
+.do-dont ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.do-dont li {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.do-card li::before   { content: '✓'; position: absolute; left: 0; color: var(--c-cyan); font-weight: 400; }
+.dont-card li::before { content: '✕'; position: absolute; left: 0; color: rgba(255,255,255,0.3); }
+
+
+/* ═══════════════════════════════════
+   B. DESIGN SYSTEM
+═══════════════════════════════════ */
+
+.color-tokens { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.color-row {
+  display: grid;
+  grid-template-columns: 80px 140px 1fr 80px 80px;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid rgba(123,47,255,0.1);
+}
+
+.color-row:last-child { border-bottom: none; }
+
+.color-chip      { width: 80px; height: 36px; }
+.color-token-name { font-family: monospace; font-size: 11px; color: var(--c-cyan); }
+.color-desc      { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); }
+.color-hex-val   { font-family: monospace; font-size: 11px; color: rgba(255,255,255,0.25); }
+
+.contrast-badge  { font-size: 9px; font-weight: 600; padding: 3px 8px; text-align: center; }
+.contrast-aa     { background: rgba(40,160,80,0.15); color: #4CAF50; }
+.contrast-aaa    { background: rgba(20,120,60,0.15); color: #2E7D32; }
+.contrast-fail   { background: rgba(123,47,255,0.12); color: rgba(0,245,255,0.6); }
+
+/* CSS変数ブロック */
+.code-block {
+  position: relative;
+  background: #0a0012;
+  border-left: 3px solid var(--c-purple);
+  padding: var(--sp-5) var(--sp-6);
+  overflow-x: auto;
+  margin-top: var(--sp-4);
+}
+
+.code-block pre {
+  font-family: 'Menlo', 'Monaco', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+  white-space: pre;
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
+}
+.copy-btn.copied {
+  color: #6ECFA0;
+  border-color: #6ECFA0;
+}
+
+.code-comment { color: rgba(123,47,255,0.4); }
+.code-prop    { color: var(--c-purple); }
+.code-val     { color: var(--c-cyan); }
+
+/* 日本語サンプル（暗背景のためcyanカラーで調整） */
+.t-ja {
+  display: block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.65em;
+  color: var(--c-cyan);
+  opacity: 0.6;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* タイポグラフィスケール */
+.type-scale { display: flex; flex-direction: column; }
+
+.type-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 160px;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid rgba(123,47,255,0.1);
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-label      { font-family: monospace; font-size: 10px; color: rgba(255,255,255,0.25); padding-top: 4px; }
+.type-spec-detail { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.25); font-family: monospace; line-height: 1.6; }
+
+.t-display { font-family: var(--f-display); font-size: 80px; font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 0.9; }
+.t-h1      { font-family: var(--f-display); font-size: 52px; font-weight: 800; letter-spacing: -0.01em; color: #fff; line-height: 1.0; }
+.t-h2      { font-family: var(--f-display); font-size: 36px; font-weight: 700; color: #fff; line-height: 1.1; }
+.t-h3      { font-family: var(--f-display); font-size: 20px; font-weight: 600; color: var(--c-cyan); }
+.t-body-lg { font-size: 16px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.7); }
+.t-body    { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.5); }
+.t-caption { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); }
+.t-label   { font-family: var(--f-display); font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--c-cyan); opacity: 0.7; }
+
+/* スペーシングスケール */
+.spacing-scale { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.spacing-row {
+  display: grid;
+  grid-template-columns: 60px 80px 1fr;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.spacing-bar-wrap { height: 20px; display: flex; align-items: center; }
+.spacing-bar      { height: 6px; background: linear-gradient(90deg, var(--c-purple), var(--c-cyan)); opacity: 0.7; }
+.spacing-token    { font-family: monospace; font-size: 10px; color: rgba(255,255,255,0.25); }
+.spacing-px       { font-family: monospace; font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 400; }
+
+/* コンポーネント */
+.component-section { margin-bottom: var(--sp-8); }
+
+.component-title {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid rgba(123,47,255,0.15);
+}
+
+.btn-states {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-6);
+  background: #0a0012;
+  border: 1px solid rgba(123,47,255,0.15);
+  margin-bottom: var(--sp-4);
+}
+
+.btn-states-light {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--sp-5) var(--sp-6);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: var(--sp-4);
+}
+
+.state-label {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  margin-top: 6px;
+}
+
+.state-item { display: flex; flex-direction: column; align-items: center; }
+
+.btn {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  padding: 13px 28px;
+  transition: all 0.15s;
+}
+
+/* Primary: gradient purple→pink */
+.btn-primary-default  { background: linear-gradient(135deg, var(--c-purple), var(--c-pink)); color: #fff; box-shadow: var(--glow-purple); }
+.btn-primary-hover    { background: linear-gradient(135deg, #6A1FEF, #EF2060); color: #fff; box-shadow: 0 0 32px rgba(123,47,255,0.6); }
+.btn-primary-active   { background: linear-gradient(135deg, #5A10DF, #DF1050); color: #fff; }
+.btn-primary-disabled { background: rgba(123,47,255,0.15); color: rgba(255,255,255,0.2); cursor: not-allowed; }
+
+/* Secondary: cyan border transparent */
+.btn-secondary-default  { background: transparent; color: var(--c-cyan); border: 1px solid var(--c-cyan); padding: 12px 28px; }
+.btn-secondary-hover    { background: rgba(0,245,255,0.1); color: var(--c-cyan); border: 1px solid var(--c-cyan); padding: 12px 28px; box-shadow: var(--glow-cyan); }
+.btn-secondary-active   { background: rgba(0,245,255,0.18); color: var(--c-cyan); border: 1px solid var(--c-cyan); padding: 12px 28px; }
+.btn-secondary-disabled { background: transparent; color: rgba(0,245,255,0.2); border: 1px solid rgba(0,245,255,0.15); padding: 12px 28px; cursor: not-allowed; }
+
+/* Ghost: rgba white border on void */
+.btn-ghost-default  { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); padding: 12px 28px; }
+.btn-ghost-hover    { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 12px 28px; }
+.btn-ghost-active   { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 28px; }
+.btn-ghost-disabled { background: transparent; color: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.06); padding: 12px 28px; cursor: not-allowed; }
+
+/* Input */
+.input-states {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  background: #0a0012;
+  padding: var(--sp-5);
+  border: 1px solid rgba(123,47,255,0.15);
+}
+
+.input-state-item { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label { font-family: var(--f-display); font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--c-cyan); opacity: 0.7; }
+
+.form-input          { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid rgba(123,47,255,0.3); background: rgba(123,47,255,0.05); color: rgba(255,255,255,0.7); outline: none; width: 100%; }
+.form-input-focus    { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid var(--c-cyan); background: rgba(0,245,255,0.04); color: rgba(255,255,255,0.9); outline: none; width: 100%; box-shadow: 0 0 0 3px rgba(0,245,255,0.08); }
+.form-input-error    { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid var(--c-pink); background: rgba(255,45,120,0.05); color: rgba(255,255,255,0.7); outline: none; width: 100%; }
+.form-input-disabled { font-family: var(--f-body); font-size: 16px; font-weight: 300; padding: 12px 14px; border: 1px solid rgba(123,47,255,0.1); background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.15); outline: none; width: 100%; cursor: not-allowed; }
+
+.form-hint       { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.25); }
+.form-hint-error { font-size: 10px; font-weight: 400; color: var(--c-pink); }
+
+/* カード */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+
+/* Card A: purple tint bg border purple glow */
+.card-a {
+  background: rgba(123,47,255,0.08);
+  border: 1px solid rgba(123,47,255,0.3);
+  padding: var(--sp-6);
+  box-shadow: var(--glow-purple);
+}
+
+/* Card B: dark bg border-top gradient */
+.card-b {
+  background: #0D0010;
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, var(--c-purple), var(--c-cyan)) 1;
+  padding: var(--sp-6);
+}
+
+/* Card C: void bg border cyan */
+.card-c {
+  background: var(--c-void);
+  border: 1px solid rgba(0,245,255,0.25);
+  padding: var(--sp-6);
+}
+
+.card-eyebrow {
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  opacity: 0.6;
+  margin-bottom: var(--sp-3);
+}
+
+.card-title-digital {
+  font-family: var(--f-display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: var(--sp-3);
+}
+
+.card-body-text { font-size: 12px; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.45); }
+
+.card-link {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: var(--sp-4);
+  padding-bottom: 2px;
+}
+
+.card-a .card-link { color: var(--c-purple); border-bottom: 1px solid rgba(123,47,255,0.4); }
+.card-b .card-link { color: var(--c-cyan); border-bottom: 1px solid rgba(0,245,255,0.3); }
+.card-c .card-link { color: var(--c-cyan); border-bottom: 1px solid rgba(0,245,255,0.3); }
+
+/* ナビゲーション */
+.nav-sample {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(123,47,255,0.25);
+  padding: var(--sp-4) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-4);
+}
+
+/* ロゴ：グラデーションテキスト purple→cyan */
+.nav-logo-sample {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--c-purple), var(--c-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+}
+
+.nav-links-sample  { display: flex; gap: var(--sp-5); align-items: center; }
+.nav-link-sample   { font-family: var(--f-display); font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; }
+.nav-link-active   { font-family: var(--f-display); font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-cyan); text-decoration: none; }
+.nav-cta           { font-family: var(--f-display); font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; background: linear-gradient(135deg, var(--c-purple), var(--c-pink)); color: #fff; padding: 9px 20px; text-decoration: none; }
+
+/* レイアウトルール */
+.layout-rules { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+
+.layout-rule-card {
+  background: rgba(123,47,255,0.05);
+  border: 1px solid rgba(123,47,255,0.15);
+  padding: var(--sp-5);
+}
+
+.layout-rule-title { font-family: var(--f-display); font-size: 16px; font-weight: 800; color: #fff; margin-bottom: var(--sp-3); letter-spacing: -0.01em; }
+.layout-rule-body  { font-size: 11px; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.4); }
+.layout-rule-value { font-family: monospace; font-size: 11px; color: var(--c-cyan); background: rgba(0,245,255,0.08); padding: 2px 6px; }
+
+/* フッター */
+footer {
+  background: #0a0012;
+  border-top: 1px solid rgba(123,47,255,0.25);
+  padding: var(--sp-6) var(--col-pad);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-id {
+  font-family: var(--f-display);
+  font-size: 16px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--c-purple), var(--c-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-name { font-family: var(--f-display); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; }
+.footer-note { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  :root { --col-pad: 24px; }
+  .hero { min-height: 360px; }
+  .world-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr 1fr; }
+  .photo-card:last-child { display: none; }
+  .do-dont { grid-template-columns: 1fr; }
+  .color-row { grid-template-columns: 48px 1fr 60px; }
+  .color-desc, .contrast-badge { display: none; }
+  .type-row { grid-template-columns: 80px 1fr; }
+  .type-spec-detail { display: none; }
+  .t-display { font-size: 52px; }
+  .input-states { grid-template-columns: 1fr 1fr; padding: var(--sp-4); }
+  .cards-grid { grid-template-columns: 1fr; }
+  .layout-rules { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-links-sample .nav-link-sample:not(:last-child) { display: none; }
+  .btn-states, .btn-states-light { flex-wrap: wrap; gap: var(--sp-3); }
+}
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">010 — Vivid Digital</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — 010</div>
+    <div class="hero-title">VIVID<br>DIGITAL</div>
+    <div class="hero-concept">ピクセルの向こう側に、新しい現実がある。<br>デジタルこそが表現の最前線だ。</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Neon</span>
+      <span class="hero-tag">Cyber</span>
+      <span class="hero-tag">Digital</span>
+      <span class="hero-tag">Glow</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- A. VISUAL DIRECTION -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+
+  <!-- 世界観 -->
+  <div class="world-grid" style="margin-bottom:48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">ピクセルの向こう側に、<br>新しい現実がある</div>
+      <div class="world-card-body">物理と電子の境界が溶けていく時代。このスタイルはその最前線に立つ。パープルとシアンのネオンが、暗闇の中で新しいリアルを描き出す。</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">デジタルこそが<br>表現の最前線</div>
+      <div class="world-card-body">スクリーンが新しいキャンバスだ。Syneの太字がグローに包まれ、グラデーションが空間を貫く。アナログへの郷愁はいらない。前に進め。</div>
+    </div>
+  </div>
+
+  <!-- 写真ディレクション -->
+  <div style="margin-bottom:48px;">
+    <div style="font-family:'Syne',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:rgba(0,245,255,0.5); margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      <div class="photo-card photo-1">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">ネオンライト<br>電気的な発光</div>
+      </div>
+      <div class="photo-card photo-2">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">長時間露光<br>都市夜景</div>
+      </div>
+      <div class="photo-card photo-3">
+        <div class="photo-placeholder"></div>
+        <div class="photo-desc">スクリーン光<br>デジタルUI</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-4); margin-top:12px;">
+      <div style="font-size:11px; font-weight:300; color:rgba(255,255,255,0.35); line-height:1.7;">露出：暗い背景に光を際立たせる。アンダーエクスポーズ基本。</div>
+      <div style="font-size:11px; font-weight:300; color:rgba(255,255,255,0.35); line-height:1.7;">色調：寒色系。パープル・シアンの光が支配する画面。</div>
+      <div style="font-size:11px; font-weight:300; color:rgba(255,255,255,0.35); line-height:1.7;">構図：縦位置。光の軌跡・デジタルノイズを積極的に見せる。</div>
+    </div>
+  </div>
+
+  <!-- Do / Don't -->
+  <div style="font-family:'Syne',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:rgba(0,245,255,0.5); margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>
+        <li>グラデーション（purple→pink）をボタン・装飾に積極的に使う</li>
+        <li>glow効果（box-shadow でのネオン表現）を要所で使う</li>
+        <li>Syne の太字（weight 800）でタイトルを打ち抜く</li>
+        <li>背景は暗く保つ。void・dark-purple が基調</li>
+        <li>シアンをテキストアクセントとして点在させる</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>
+        <li>ウォームカラー（オレンジ・ベージュ・ブラウン系）</li>
+        <li>プリント的な質感・紙の風合いの表現</li>
+        <li>serif書体（アナログ感が出る）</li>
+        <li>明るい背景・白ベースのレイアウト</li>
+        <li>グロー効果なしの素朴なカラー使用</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- B. DESIGN SYSTEM -->
+
+<!-- カラー -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+
+  <div class="color-tokens">
+    <div class="color-row" style="font-family:'Syne',sans-serif; font-size:9px; color:rgba(255,255,255,0.2); font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#050505; border:1px solid #1a0033;"></div>
+      <div class="color-token-name">--c-void</div>
+      <div class="color-desc">ベース背景</div>
+      <div class="color-hex-val">#050505</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#7B2FFF;"></div>
+      <div class="color-token-name">--c-purple</div>
+      <div class="color-desc">メインアクセント・グラデーション起点</div>
+      <div class="color-hex-val">#7B2FFF</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#00F5FF;"></div>
+      <div class="color-token-name">--c-cyan</div>
+      <div class="color-desc">テキストアクセント・ボーダー・ネオン</div>
+      <div class="color-hex-val">#00F5FF</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#FF2D78;"></div>
+      <div class="color-token-name">--c-pink</div>
+      <div class="color-desc">グラデーション終点・ポイントアクセント</div>
+      <div class="color-hex-val">#FF2D78</div>
+      <div><span class="contrast-badge contrast-aa">AA</span></div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip" style="background:#1A0033;"></div>
+      <div class="color-token-name">--c-dark-purple</div>
+      <div class="color-desc">ヒーロー背景・セカンダリ面</div>
+      <div class="color-hex-val">#1A0033</div>
+      <div><span class="contrast-badge contrast-aaa">AAA</span></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCSS(this)">COPY</button>
+    <pre><span class="code-comment">/* 010 Vivid Digital — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--c-void</span>:        <span class="code-val">#050505</span>;
+  <span class="code-prop">--c-purple</span>:      <span class="code-val">#7B2FFF</span>;
+  <span class="code-prop">--c-cyan</span>:        <span class="code-val">#00F5FF</span>;
+  <span class="code-prop">--c-pink</span>:        <span class="code-val">#FF2D78</span>;
+  <span class="code-prop">--c-dark-purple</span>: <span class="code-val">#1A0033</span>;
+
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-display</span>: <span class="code-val">'Syne', 'Helvetica Neue', sans-serif</span>;
+  <span class="code-prop">--f-body</span>:    <span class="code-val">'Inter', 'Helvetica Neue', sans-serif</span>;
+
+  <span class="code-comment">/* Glow Effects */</span>
+  <span class="code-prop">--glow-purple</span>: <span class="code-val">0 0 24px rgba(123,47,255,0.4)</span>;
+  <span class="code-prop">--glow-cyan</span>:   <span class="code-val">0 0 20px rgba(0,245,255,0.35)</span>;
+  <span class="code-prop">--glow-pink</span>:   <span class="code-val">0 0 20px rgba(255,45,120,0.35)</span>;
+}</pre>
+  </div>
+</div>
+
+<!-- タイポグラフィ -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">PIXEL<span class="t-ja">デジタルの衝動</span></div>
+      <div class="type-spec-detail">Syne / 80px<br>weight 800 / ls -0.02em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">New Reality<span class="t-ja">ネオンの世界観</span></div>
+      <div class="type-spec-detail">Syne / 52px<br>weight 800</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">Digital Native<span class="t-ja">未来のビジョン</span></div>
+      <div class="type-spec-detail">Syne / 36px<br>weight 700</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">System Signal<span class="t-ja">データが躍動する</span></div>
+      <div class="type-spec-detail">Syne / 20px / 600<br>color cyan</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body LG</div>
+      <div class="t-body-lg">When pixels accumulate meaning, that is when expression begins.<span class="t-ja">光の先に広がるデジタルフロンティア。</span></div>
+      <div class="type-spec-detail">Inter / 16px<br>weight 300 / lh 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body">The boundary between digital and reality no longer exists. Emotion on screen becomes the language of the next era.<span class="t-ja">光の先に広がるデジタルフロンティア。</span></div>
+      <div class="type-spec-detail">Inter / 14px<br>weight 300 / lh 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Caption</div>
+      <div class="t-caption">System v010 — Digital Edition — 2024<span class="t-ja">システム v010 — デジタル版</span></div>
+      <div class="type-spec-detail">Inter / 12px / weight 300</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">New Signal<span class="t-ja" style="text-transform:none; letter-spacing:0;">新シグナル</span></div>
+      <div class="type-spec-detail">Syne / 9px / 600<br>ls 0.25em / cyan 70%</div>
+    </div>
+  </div>
+</div>
+
+<!-- スペーシング -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+
+  <div class="spacing-scale">
+    <div class="spacing-row"><div class="spacing-token">--sp-1</div><div class="spacing-px">4px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-2</div><div class="spacing-px">8px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-3</div><div class="spacing-px">12px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-4</div><div class="spacing-px">16px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-5</div><div class="spacing-px">24px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-6</div><div class="spacing-px">32px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-7</div><div class="spacing-px">40px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-8</div><div class="spacing-px">64px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-9</div><div class="spacing-px">96px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div></div>
+    <div class="spacing-row"><div class="spacing-token">--sp-10</div><div class="spacing-px">128px</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div></div>
+  </div>
+</div>
+
+<!-- コンポーネント -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+
+  <!-- Button Primary -->
+  <div class="component-section">
+    <div class="component-title">Button — Primary（Gradient purple→pink / Glow）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-primary-default">Launch</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-hover">Launch</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-active">Launch</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-primary-disabled" disabled>Launch</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Secondary -->
+  <div class="component-section">
+    <div class="component-title">Button — Secondary（Cyan Border / Transparent）</div>
+    <div class="btn-states">
+      <div class="state-item">
+        <button class="btn btn-secondary-default">Connect</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-hover">Connect</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-active">Connect</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-secondary-disabled" disabled>Connect</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Ghost -->
+  <div class="component-section">
+    <div class="component-title">Button — Ghost（White rgba border / Void bg）</div>
+    <div class="btn-states-light">
+      <div class="state-item">
+        <button class="btn btn-ghost-default">Signal</button>
+        <div class="state-label">Default</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-hover">Signal</button>
+        <div class="state-label">Hover</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-active">Signal</button>
+        <div class="state-label">Active</div>
+      </div>
+      <div class="state-item">
+        <button class="btn btn-ghost-disabled" disabled>Signal</button>
+        <div class="state-label">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="component-section">
+    <div class="component-title">Form — Input States</div>
+    <div class="input-states">
+      <div class="input-state-item">
+        <div class="form-label">Username</div>
+        <input class="form-input" type="text" placeholder="user_001" readonly>
+        <div class="form-hint">Default</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Username</div>
+        <input class="form-input-focus" type="text" value="user_001" readonly>
+        <div class="form-hint">Focus</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Email</div>
+        <input class="form-input-error" type="text" value="user@" readonly>
+        <div class="form-hint-error">Error — Invalid</div>
+      </div>
+      <div class="input-state-item">
+        <div class="form-label">Username</div>
+        <input class="form-input-disabled" type="text" value="locked" disabled>
+        <div class="form-hint">Disabled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="component-section">
+    <div class="component-title">Cards — 3 Variants</div>
+    <div class="cards-grid">
+      <div class="card-a">
+        <div class="card-eyebrow">New Signal</div>
+        <div class="card-title-digital">Beyond The<br>Pixel</div>
+        <div class="card-body-text">ピクセルを超えた先にある、まだ見ぬ表現空間へ。</div>
+        <a href="#" class="card-link">Explore</a>
+      </div>
+      <div class="card-b">
+        <div class="card-eyebrow">Feature</div>
+        <div class="card-title-digital">Neon<br>Reality</div>
+        <div class="card-body-text">ネオンが現実を塗り替える。電気の光が新しい世界を作る。</div>
+        <a href="#" class="card-link">View More</a>
+      </div>
+      <div class="card-c">
+        <div class="card-eyebrow">System</div>
+        <div class="card-title-digital">Digital<br>Native</div>
+        <div class="card-body-text">生まれたときからデジタル。この世代が次の文化をつくる。</div>
+        <a href="#" class="card-link">Connect</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="component-section">
+    <div class="component-title">Navigation</div>
+    <div class="nav-sample">
+      <div class="nav-logo-sample">VIVID SYS</div>
+      <div class="nav-links-sample">
+        <a href="#" class="nav-link-active">Works</a>
+        <a href="#" class="nav-link-sample">Lab</a>
+        <a href="#" class="nav-link-sample">About</a>
+        <a href="#" class="nav-link-sample">Contact</a>
+        <a href="#" class="nav-cta">Launch</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- レイアウト -->
+<div id="layout" class="section" style="border-bottom:none;">
+  <div class="section-label">Layout Rules</div>
+
+  <div class="layout-rules">
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Max Width</div>
+      <div class="layout-rule-body">コンテンツ幅 <span class="layout-rule-value">1080px</span>。ヒーローはフルブリード。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Column Padding</div>
+      <div class="layout-rule-body">左右パディング <span class="layout-rule-value">64px</span>（モバイル <span class="layout-rule-value">24px</span>）。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Background</div>
+      <div class="layout-rule-body">ベースは <span class="layout-rule-value">void (#050505)</span>。白や明るい背景は使わない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Glow Usage</div>
+      <div class="layout-rule-body">box-shadow のグローは <span class="layout-rule-value">主要CTAと見出し</span> のみ。多用しない。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Section Spacing</div>
+      <div class="layout-rule-body">セクション間は <span class="layout-rule-value">96–128px</span>。暗い背景に余白が映える。</div>
+    </div>
+    <div class="layout-rule-card">
+      <div class="layout-rule-title">Gradient Rule</div>
+      <div class="layout-rule-body">グラデーションは <span class="layout-rule-value">purple → pink</span> が基本軸。ランダムな配色禁止。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-id">010</div>
+    <div class="footer-name">Vivid Digital</div>
+    <div class="footer-note">Visual Direction + Design System</div>
+  </div>
+</footer>
+
+<script>
+function copyCSS(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

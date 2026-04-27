@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Library</title>
+<style>
+/* 全スタイルのディスプレイフォントをまとめて読み込む */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Lora:wght@400;700&family=EB+Garamond:wght@400;500;600&family=DM+Serif+Display&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;700;900&family=Bebas+Neue&family=Barlow+Condensed:wght@400;700&family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F0EFEC;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ── ヘッダー ── */
+header {
+  background: #fff;
+  border-bottom: 1px solid #E0E0DC;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.header-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.header-count {
+  font-size: 11px;
+  color: #BBB;
+}
+
+/* ── ビュータブ ── */
+.view-tabs {
+  display: flex;
+  gap: 0;
+  margin-left: 24px;
+}
+.view-tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #BBB;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0 14px;
+  height: 52px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.view-tab:hover { color: #555; }
+.view-tab.active { color: #111; border-bottom-color: #111; }
+
+/* ── フィルター ── */
+.filter-bar {
+  background: #fff;
+  border-bottom: 1px solid #E0E0DC;
+  padding: 0 40px;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+
+.filter-bar + .filter-bar {
+  border-top: 1px solid #F0F0EC;
+}
+
+.filter-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #BBB;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.12s, border-color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-btn:hover { color: #555; }
+.filter-btn.active { color: #111; border-bottom-color: #111; }
+
+/* カラートーンフィルター */
+.tone-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── グリッド ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  padding: 20px;
+}
+
+/* ── カード ── */
+.card {
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.16);
+}
+
+.card.hidden { display: none; }
+
+/* カード内：番号 */
+.card-num {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+}
+
+/* カード内：スタイル名（ディスプレイフォント） */
+.card-name {
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+}
+
+/* カード内：コンセプト */
+.card-concept {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  opacity: 0.65;
+  margin-bottom: 14px;
+}
+
+/* カード内：カラードット */
+.card-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+/* ── スタイルツールバー ── */
+.styles-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #F0EFEC;
+}
+.btn-add-style {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-add-style:hover { background: #333; }
+
+/* スタイルフォームモーダル */
+.sf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.sf-overlay.open { display: flex; }
+.sf-modal {
+  background: #fff;
+  border-radius: 8px;
+  width: 600px;
+  max-width: 95vw;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+.sf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  border-bottom: 1px solid #E8E8E4;
+  flex-shrink: 0;
+}
+.sf-title { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #111; }
+.sf-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #F0EFEC; border: none; cursor: pointer;
+  font-size: 14px; color: #555;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.12s;
+}
+.sf-close:hover { background: #E4E4E0; }
+.sf-body { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.sf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sf-field { display: flex; flex-direction: column; gap: 5px; }
+.sf-label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+.sf-input, .sf-select {
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: #111; background: #FAFAF8;
+  border: 1px solid #E0E0DC; border-radius: 4px;
+  padding: 9px 12px; outline: none;
+  transition: border-color 0.12s; width: 100%;
+}
+.sf-input:focus, .sf-select:focus { border-color: #111; }
+.sf-textarea {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #111;
+  background: #FAFAF8;
+  border: 1px solid #E0E0DC;
+  border-radius: 4px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.12s;
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.sf-textarea:focus { border-color: #111; }
+.sf-color-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sf-color-picker {
+  width: 40px; height: 36px;
+  border: 1px solid #E0E0DC; border-radius: 4px;
+  padding: 2px; cursor: pointer; background: none;
+  flex-shrink: 0;
+}
+.sf-color-text {
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: #111; background: #FAFAF8;
+  border: 1px solid #E0E0DC; border-radius: 4px;
+  padding: 9px 12px; outline: none;
+  transition: border-color 0.12s; flex: 1;
+}
+.sf-color-text:focus { border-color: #111; }
+/* カラーパレット入力（5色） */
+.sf-palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+.sf-palette-item {
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+}
+.sf-palette-picker {
+  width: 100%; height: 32px;
+  border: 1px solid #E0E0DC; border-radius: 4px;
+  padding: 2px; cursor: pointer; background: none;
+}
+.sf-palette-hex {
+  font-family: 'Inter', sans-serif; font-size: 9px;
+  color: #888; text-align: center;
+  border: none; background: none; width: 100%;
+  padding: 0; outline: none;
+}
+/* タグチェックボックス */
+.sf-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.sf-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  padding: 4px 10px; border-radius: 3px; cursor: pointer;
+  border: 1px solid #E0E0DC; background: #FAFAF8; color: #888;
+  transition: all 0.12s;
+  user-select: none;
+}
+.sf-tag.selected { background: #111; color: #fff; border-color: #111; }
+/* トーン */
+.sf-tones { display: flex; gap: 8px; }
+.sf-tone {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  padding: 4px 12px; border-radius: 3px; cursor: pointer;
+  border: 1px solid #E0E0DC; background: #FAFAF8; color: #888;
+  transition: all 0.12s; user-select: none;
+}
+.sf-tone.selected { background: #111; color: #fff; border-color: #111; }
+.sf-footer {
+  padding: 16px 24px; border-top: 1px solid #E8E8E4;
+  display: flex; justify-content: flex-end; gap: 8px;
+}
+.sf-btn-cancel {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: #F0EFEC; color: #555; border: none;
+  padding: 9px 18px; border-radius: 4px; cursor: pointer;
+}
+.sf-btn-save {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: #111; color: #fff; border: none;
+  padding: 9px 18px; border-radius: 4px; cursor: pointer;
+}
+.sf-btn-save:hover { background: #333; }
+/* カスタムスタイルカードの削除ボタン */
+.card-delete-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  border: none; cursor: pointer;
+  font-size: 10px; color: rgba(255,255,255,0.7);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+  z-index: 10;
+}
+.card-delete-btn:hover { background: rgba(200,50,50,0.7); color: #fff; }
+
+/* ── クライアントボタン（カード上） ── */
+.client-tag-btn {
+  position: absolute;
+  top: 12px;
+  right: 44px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  z-index: 10;
+}
+.client-tag-btn:hover {
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  transform: scale(1.15);
+}
+.client-tag-btn.has-client { color: #7EB8FF; }
+
+/* ── CLIENTSビュー ── */
+#clients-view { display: none; }
+#clients-view.active { display: block; }
+#styles-view { display: block; }
+#styles-view.hidden { display: none; }
+
+.clients-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.clients-toolbar-left {
+  font-size: 11px;
+  color: #BBB;
+  letter-spacing: 0.1em;
+}
+.btn-add-client {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-add-client:hover { background: #333; }
+
+/* クライアントカードグリッド */
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+.client-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: box-shadow 0.18s;
+}
+.client-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
+.client-card-base {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #BBB;
+  background: #F0EFEC;
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  align-self: flex-start;
+}
+.client-card-name {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #111;
+  line-height: 1.2;
+}
+.client-card-dots {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.client-card-note {
+  font-size: 11px;
+  color: #AAA;
+  line-height: 1.6;
+}
+.client-card-date {
+  font-size: 9px;
+  color: #CCC;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+}
+.client-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.cc-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.cc-btn-copy { background: #111; color: #fff; }
+.cc-btn-copy:hover { background: #333; }
+.cc-btn-edit { background: #F0EFEC; color: #555; }
+.cc-btn-edit:hover { background: #E4E4E0; }
+.cc-btn-delete { background: #FEF0EF; color: #C0392B; margin-left: auto; }
+.cc-btn-delete:hover { background: #FDDCDA; }
+
+/* ── クライアントフォームモーダル ── */
+.cf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.cf-overlay.open { display: flex; }
+.cf-modal {
+  background: #fff;
+  border-radius: 8px;
+  width: 560px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+.cf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  border-bottom: 1px solid #E8E8E4;
+  flex-shrink: 0;
+}
+.cf-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+}
+.cf-close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #F0EFEC;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.12s;
+}
+.cf-close:hover { background: #E4E4E0; }
+.cf-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.cf-field { display: flex; flex-direction: column; gap: 6px; }
+.cf-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #888;
+}
+.cf-input, .cf-select, .cf-textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #111;
+  background: #FAFAF8;
+  border: 1px solid #E0E0DC;
+  border-radius: 4px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.12s;
+  width: 100%;
+}
+.cf-input:focus, .cf-select:focus, .cf-textarea:focus {
+  border-color: #111;
+}
+.cf-textarea {
+  min-height: 180px;
+  resize: vertical;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.cf-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #E8E8E4;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.cf-btn-cancel {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #F0EFEC;
+  color: #555;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cf-btn-save {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cf-btn-save:hover { background: #333; }
+
+/* ── お気に入りボタン ── */
+.star-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  z-index: 10;
+}
+.star-btn:hover {
+  background: rgba(0,0,0,0.45);
+  color: #FFD700;
+  transform: scale(1.15);
+}
+.star-btn.active {
+  color: #FFD700;
+  background: rgba(0,0,0,0.35);
+}
+.star-btn.active:hover {
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── スタイルエディター ── */
+.ed-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.72);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.ed-overlay.open { display: flex; }
+.ed-modal {
+  background: #F2F1EE;
+  border-radius: 10px;
+  width: 96vw; height: 92vh;
+  max-width: 1360px;
+  box-shadow: 0 48px 120px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ed-header {
+  background: #fff;
+  border-bottom: 1px solid #E0E0DC;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.ed-title {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: #111;
+}
+.ed-header-actions { display: flex; gap: 8px; }
+.ed-btn-cancel {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: #F0EFEC; color: #555; border: none;
+  padding: 8px 16px; border-radius: 4px; cursor: pointer;
+}
+.ed-btn-save {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: #111; color: #fff; border: none;
+  padding: 8px 16px; border-radius: 4px; cursor: pointer;
+}
+.ed-btn-save:hover { background: #333; }
+.ed-btn-fullsheet {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: #1A4A8C; color: #fff; border: none;
+  padding: 8px 16px; border-radius: 4px; cursor: pointer;
+}
+.ed-btn-fullsheet:hover { background: #2560B0; }
+.ed-body { display: flex; flex: 1; overflow: hidden; }
+.ed-panel-left {
+  width: 288px; flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #E0E0DC;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.ed-panel-left::-webkit-scrollbar { width: 4px; }
+.ed-panel-left::-webkit-scrollbar-thumb { background: #DDD; border-radius: 2px; }
+.ed-panel-right { flex: 1; background: #E0DFDc; overflow: hidden; }
+.ed-frame { width: 100%; height: 100%; border: none; display: block; }
+.ed-section-title {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase; color: #BBB;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 1px solid #F0EFEC;
+}
+.ed-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+.ed-label { font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #999; }
+.ed-input, .ed-select {
+  font-family: 'Inter', sans-serif; font-size: 12px;
+  color: #111; background: #FAFAF8;
+  border: 1px solid #E4E4E0; border-radius: 4px;
+  padding: 7px 10px; outline: none; width: 100%;
+  transition: border-color 0.12s;
+}
+.ed-input:focus, .ed-select:focus { border-color: #111; }
+.ed-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.ed-color-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.ed-color-label { font-size: 10px; color: #888; width: 78px; flex-shrink: 0; }
+.ed-color-picker {
+  width: 34px; height: 28px;
+  border: 1px solid #E4E4E0; border-radius: 4px;
+  padding: 2px; cursor: pointer; background: none; flex-shrink: 0;
+}
+.ed-color-text {
+  font-family: 'Courier New', monospace; font-size: 11px;
+  color: #555; background: #FAFAF8;
+  border: 1px solid #E4E4E0; border-radius: 4px;
+  padding: 5px 8px; outline: none; flex: 1; min-width: 0;
+  transition: border-color 0.12s;
+}
+.ed-color-text:focus { border-color: #111; }
+
+/* ── モーダル ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-inner {
+  position: relative;
+  width: 92vw;
+  height: 90vh;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 48px;
+  background: #fff;
+  border-bottom: 1px solid #E8E8E4;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.modal-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F0EFEC;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s;
+  font-size: 16px;
+  color: #555;
+  line-height: 1;
+}
+
+.modal-close:hover { background: #E4E4E0; color: #111; }
+
+.modal-copy-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: #F0EFEC;
+  color: #555;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+.modal-copy-btn:hover { background: #111; color: #fff; }
+.modal-copy-btn.copied { background: #2A6A40; color: #fff; }
+
+.modal-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  display: block;
+}
+
+/* レスポンシブ */
+@media (max-width: 1400px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 700px) {
+  header, .filter-bar { padding: 0 16px; }
+  .grid { grid-template-columns: repeat(2, 1fr); padding: 12px; gap: 8px; }
+  .modal-inner { width: 100vw; height: 100dvh; border-radius: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">Style Library</div>
+  <div class="view-tabs">
+    <button class="view-tab active" data-view="styles">Styles</button>
+    <button class="view-tab" data-view="clients">Clients</button>
+  </div>
+  <div class="header-count" id="header-count"></div>
+</header>
+
+<div class="filter-bar" id="cat-bar">
+  <button class="filter-btn active" data-cat="all">All</button>
+  <button class="filter-btn" data-cat="fav">⭐ Favorites</button>
+  <button class="filter-btn" data-cat="luxury">Luxury</button>
+  <button class="filter-btn" data-cat="natural">Natural</button>
+  <button class="filter-btn" data-cat="tech">Tech</button>
+  <button class="filter-btn" data-cat="pop">Pop</button>
+  <button class="filter-btn" data-cat="japanese">Japanese</button>
+  <button class="filter-btn" data-cat="minimal">Minimal</button>
+  <button class="filter-btn" data-cat="editorial">Editorial</button>
+  <button class="filter-btn" data-cat="feminine">Feminine</button>
+  <button class="filter-btn" data-cat="raw">Raw</button>
+  <button class="filter-btn" data-cat="digital">Digital</button>
+</div>
+<div class="filter-bar" id="tone-bar">
+  <button class="filter-btn active" data-tone="all">All Colors</button>
+  <button class="filter-btn" data-tone="dark"><span class="tone-dot" style="background:#1A1A1A;"></span>Dark</button>
+  <button class="filter-btn" data-tone="light"><span class="tone-dot" style="background:#F5F5F0; border:1px solid #DDD;"></span>Light</button>
+  <button class="filter-btn" data-tone="warm"><span class="tone-dot" style="background:linear-gradient(135deg,#C87941,#E8C97A);"></span>Warm</button>
+  <button class="filter-btn" data-tone="cool"><span class="tone-dot" style="background:linear-gradient(135deg,#1E3A5F,#4F6EF7);"></span>Cool</button>
+  <button class="filter-btn" data-tone="vivid"><span class="tone-dot" style="background:linear-gradient(135deg,#FF2D78,#7B2FFF);"></span>Vivid</button>
+</div>
+
+<!-- STYLESビュー -->
+<div id="styles-view">
+  <div class="styles-toolbar">
+    <div style="font-size:11px;color:#BBB;" id="count"></div>
+    <button class="btn-add-style" onclick="openEditor()">＋ New Style</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- CLIENTSビュー -->
+<div id="clients-view">
+  <div class="clients-toolbar">
+    <div class="clients-toolbar-left" id="client-count">0 presets</div>
+    <button class="btn-add-client" onclick="openClientForm()">＋ New Client</button>
+  </div>
+  <div class="client-grid" id="client-grid"></div>
+</div>
+
+<!-- スタイル登録フォームモーダル（シンプル版） -->
+<div class="sf-overlay" id="sf-modal">
+  <div class="sf-modal">
+    <div class="sf-header">
+      <div class="sf-title" id="sf-modal-title">New Style</div>
+      <button class="sf-close" onclick="closeStyleForm()">✕</button>
+    </div>
+    <div class="sf-body">
+      <div class="sf-row">
+        <div class="sf-field">
+          <label class="sf-label">Style Name *</label>
+          <input class="sf-input" id="sf-name" placeholder="例：MODERN LUXURY" />
+        </div>
+        <div class="sf-field">
+          <label class="sf-label">Style ID（空欄で自動採番）</label>
+          <input class="sf-input" id="sf-id" placeholder="例：012" />
+        </div>
+      </div>
+      <div class="sf-field">
+        <label class="sf-label">Base Style（バリエーション元・任意）</label>
+        <select class="sf-select" id="sf-base-style">
+          <option value="">— なし（新規スタイル）—</option>
+        </select>
+      </div>
+      <div class="sf-field">
+        <label class="sf-label">HTML / CSS コード（visual-sheet.html の中身、または :root {...} を貼り付け）</label>
+        <textarea class="sf-textarea" id="sf-code" placeholder="<!DOCTYPE html>
+<html>...
+または
+:root {
+  --c-primary: #1A2E4A;
+  ...
+}"></textarea>
+      </div>
+    </div>
+    <div class="sf-footer">
+      <button class="sf-btn-cancel" onclick="closeStyleForm()">Cancel</button>
+      <button class="sf-btn-save" onclick="saveStyleForm()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- クライアントフォームモーダル -->
+<div class="cf-overlay" id="cf-modal">
+  <div class="cf-modal">
+    <div class="cf-header">
+      <div class="cf-title" id="cf-modal-title">New Client</div>
+      <button class="cf-close" onclick="closeClientForm()">✕</button>
+    </div>
+    <div class="cf-body">
+      <div class="cf-field">
+        <label class="cf-label">Client / Project Name *</label>
+        <input class="cf-input" id="cf-name" placeholder="例：CRATER、APOLLOS LP…" />
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Base Style（任意）</label>
+        <select class="cf-select" id="cf-base">
+          <option value="">— ベーススタイルなし —</option>
+        </select>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">CSS Variables（貼り付け）</label>
+        <textarea class="cf-textarea" id="cf-css" placeholder=":root {
+  --c-primary: #1A2E4A;
+  --c-accent: #C9A84C;
+  …
+}"></textarea>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Memo（任意）</label>
+        <input class="cf-input" id="cf-note" placeholder="納品日・備考など" />
+      </div>
+    </div>
+    <div class="cf-footer">
+      <button class="cf-btn-cancel" onclick="closeClientForm()">Cancel</button>
+      <button class="cf-btn-save" onclick="saveClientForm()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- スタイルエディターモーダル -->
+<div class="ed-overlay" id="ed-modal">
+  <div class="ed-modal">
+    <div class="ed-header">
+      <div class="ed-title" id="ed-modal-title">Style Editor</div>
+      <div class="ed-header-actions">
+        <button class="ed-btn-cancel" onclick="closeEditor()">Cancel</button>
+        <button class="ed-btn-save" onclick="saveFromEditor()">Save as New Style</button>
+        <button class="ed-btn-fullsheet" onclick="generateFullSheet()">Full Sheet生成 ↓</button>
+      </div>
+    </div>
+    <div class="ed-body">
+      <!-- 左パネル：コントロール -->
+      <div class="ed-panel-left">
+        <div>
+          <div class="ed-section-title">Basic Info</div>
+          <div class="ed-field">
+            <label class="ed-label">Style Name *</label>
+            <input class="ed-input" id="ed-name" placeholder="STYLE NAME" oninput="updateEditorPreview()">
+          </div>
+          <div class="ed-field">
+            <label class="ed-label">Concept</label>
+            <input class="ed-input" id="ed-concept" placeholder="スタイルのコンセプト" oninput="updateEditorPreview()">
+          </div>
+          <div class="ed-field">
+            <label class="ed-label">Style ID（空欄で自動）</label>
+            <input class="ed-input" id="ed-id" placeholder="例: 012">
+          </div>
+          <div class="ed-field">
+            <label class="ed-label">業種・ターゲット（任意）</label>
+            <input class="ed-input" id="ed-industry" placeholder="例: IT・テクノロジー、飲食・カフェ、医療">
+          </div>
+          <div class="ed-field">
+            <label class="ed-label">キーワード（任意・カンマ区切り）</label>
+            <input class="ed-input" id="ed-keywords" placeholder="例: スピード, 精密, 未来感">
+          </div>
+        </div>
+        <div>
+          <div class="ed-section-title">Typography</div>
+          <div class="ed-field">
+            <label class="ed-label">Display Font</label>
+            <select class="ed-select" id="ed-font" onchange="updateWeightOptions(this.value); updateEditorPreview()"></select>
+          </div>
+          <div class="ed-two-col">
+            <div class="ed-field">
+              <label class="ed-label">Weight</label>
+              <select class="ed-select" id="ed-weight" onchange="updateEditorPreview()"></select>
+            </div>
+            <div class="ed-field">
+              <label class="ed-label">Style</label>
+              <select class="ed-select" id="ed-font-style" onchange="updateEditorPreview()">
+                <option value="normal">Normal</option>
+                <option value="italic">Italic</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ed-section-title">Colors</div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Background</span>
+            <input type="color" class="ed-color-picker" id="ed-bg-picker" oninput="syncColorText('ed-bg',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-bg-text" oninput="syncColorPicker('ed-bg',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Title</span>
+            <input type="color" class="ed-color-picker" id="ed-namecolor-picker" oninput="syncColorText('ed-namecolor',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-namecolor-text" oninput="syncColorPicker('ed-namecolor',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Sub Text</span>
+            <input type="color" class="ed-color-picker" id="ed-conceptcolor-picker" oninput="syncColorText('ed-conceptcolor',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-conceptcolor-text" oninput="syncColorPicker('ed-conceptcolor',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Accent</span>
+            <input type="color" class="ed-color-picker" id="ed-numcolor-picker" oninput="syncColorText('ed-numcolor',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-numcolor-text" oninput="syncColorPicker('ed-numcolor',this.value);updateEditorPreview()">
+          </div>
+        </div>
+        <div>
+          <div class="ed-section-title">Color Palette</div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Color 1</span>
+            <input type="color" class="ed-color-picker" id="ed-pal-0-picker" oninput="syncColorText('ed-pal-0',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-pal-0-text" oninput="syncColorPicker('ed-pal-0',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Color 2</span>
+            <input type="color" class="ed-color-picker" id="ed-pal-1-picker" oninput="syncColorText('ed-pal-1',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-pal-1-text" oninput="syncColorPicker('ed-pal-1',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Color 3</span>
+            <input type="color" class="ed-color-picker" id="ed-pal-2-picker" oninput="syncColorText('ed-pal-2',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-pal-2-text" oninput="syncColorPicker('ed-pal-2',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Color 4</span>
+            <input type="color" class="ed-color-picker" id="ed-pal-3-picker" oninput="syncColorText('ed-pal-3',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-pal-3-text" oninput="syncColorPicker('ed-pal-3',this.value);updateEditorPreview()">
+          </div>
+          <div class="ed-color-row">
+            <span class="ed-color-label">Color 5</span>
+            <input type="color" class="ed-color-picker" id="ed-pal-4-picker" oninput="syncColorText('ed-pal-4',this.value);updateEditorPreview()">
+            <input type="text" class="ed-color-text" id="ed-pal-4-text" oninput="syncColorPicker('ed-pal-4',this.value);updateEditorPreview()">
+          </div>
+        </div>
+      </div>
+      <!-- 右パネル：ライブプレビュー -->
+      <div class="ed-panel-right">
+        <iframe class="ed-frame" id="ed-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- モーダル -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-inner">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-copy-btn" id="modal-copy-btn">Copy CSS</button>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <iframe class="modal-frame" id="modal-frame" src=""></iframe>
+  </div>
+</div>
+
+<script>
+const styles = [
+  {
+    id: "001", name: "Modern\nLuxury",
+    concept: "黒と金が宿す、静かな権威",
+    tags: ["luxury","minimal"],
+    tones: ["dark","warm"],
+    bg: "#0D0D0D",
+    nameColor: "#FAF8F4",
+    conceptColor: "rgba(232,223,200,0.7)",
+    numColor: "rgba(201,168,76,0.8)",
+    font: "'Cormorant Garamond', serif",
+    fontWeight: 300,
+    fontStyle: "italic",
+    colors: ["#0D0D0D","#C9A84C","#FAF8F4","#2C2C2C","#E8DFC8"],
+    path: "styles/001_MODERN-LUXURY/visual-sheet.html"
+  },
+  {
+    id: "002", name: "Natural\nOrganic",
+    concept: "土と緑と光。素材の温度",
+    tags: ["natural","minimal"],
+    tones: ["dark","warm"],
+    bg: "#4A5C3E",
+    nameColor: "#F5EFE0",
+    conceptColor: "rgba(212,196,168,0.75)",
+    numColor: "rgba(212,196,168,0.6)",
+    font: "'Lora', serif",
+    fontWeight: 400,
+    colors: ["#7A8C6E","#A67B5B","#F5EFE0","#4A5C3E","#D4C4A8"],
+    path: "styles/002_NATURAL-ORGANIC/visual-sheet.html"
+  },
+  {
+    id: "003", name: "Tech\nMinimal",
+    concept: "精密さと速度。暗闇を走る青",
+    tags: ["tech","minimal","digital"],
+    tones: ["dark","cool"],
+    bg: "#141414",
+    nameColor: "#F2F2F2",
+    conceptColor: "rgba(136,153,255,0.65)",
+    numColor: "rgba(79,110,247,0.9)",
+    font: "'Space Grotesk', sans-serif",
+    fontWeight: 700,
+    colors: ["#141414","#4F6EF7","#F2F2F2","#1E1E2E","#8899FF"],
+    path: "styles/003_TECH-MINIMAL/visual-sheet.html"
+  },
+  {
+    id: "004", name: "Pop\nCasual!",
+    concept: "エネルギーと遊び心",
+    tags: ["pop"],
+    tones: ["light","warm","vivid"],
+    bg: "#FFE66D",
+    nameColor: "#2D2D2D",
+    conceptColor: "rgba(45,45,45,0.6)",
+    numColor: "#FF6B6B",
+    font: "'Nunito', sans-serif",
+    fontWeight: 900,
+    colors: ["#FF6B6B","#FFE66D","#4ECDC4","#FFFFFF","#2D2D2D"],
+    path: "styles/004_POP-CASUAL/visual-sheet.html"
+  },
+  {
+    id: "005", name: "和\nModern",
+    concept: "静寂と現代の緊張が共存",
+    tags: ["japanese","minimal"],
+    tones: ["dark","cool"],
+    bg: "#1E3A5F",
+    nameColor: "#F8F4EE",
+    conceptColor: "rgba(248,244,238,0.5)",
+    numColor: "rgba(139,115,85,0.9)",
+    font: "'Noto Serif JP', serif",
+    fontWeight: 300,
+    colors: ["#1E3A5F","#C0392B","#F8F4EE","#8B7355","#2C2C2C"],
+    path: "styles/005_WA-MODERN/visual-sheet.html"
+  },
+  {
+    id: "006", name: "Nordic\nMinimal",
+    concept: "機能と美が溶け合うシンプルさ",
+    tags: ["minimal","natural"],
+    tones: ["light"],
+    bg: "#FAFAF8",
+    nameColor: "#333333",
+    conceptColor: "rgba(51,51,51,0.5)",
+    numColor: "#C8C8C0",
+    font: "'DM Serif Display', serif",
+    fontWeight: 400,
+    colors: ["#FAFAF8","#333333","#8FA68E","#C8C8C0","#F0EDE8"],
+    path: "styles/006_NORDIC-MINIMAL/visual-sheet.html"
+  },
+  {
+    id: "007", name: "BOLD\nEDITORIAL",
+    concept: "主張する文字。雑誌的な強さ",
+    tags: ["editorial"],
+    tones: ["dark","vivid"],
+    bg: "#000000",
+    nameColor: "#F5D800",
+    conceptColor: "rgba(255,255,255,0.45)",
+    numColor: "rgba(245,216,0,0.7)",
+    font: "'Bebas Neue', sans-serif",
+    fontWeight: 400,
+    colors: ["#000000","#F5D800","#FFFFFF","#FF2D2D","#222222"],
+    path: "styles/007_BOLD-EDITORIAL/visual-sheet.html"
+  },
+  {
+    id: "008", name: "Soft\nFeminine",
+    concept: "やわらかさの中にある強さ",
+    tags: ["feminine","luxury"],
+    tones: ["light","warm"],
+    bg: "linear-gradient(135deg, #F9EEF2, #EDE8F5)",
+    nameColor: "#3D3040",
+    conceptColor: "rgba(155,140,170,0.9)",
+    numColor: "rgba(155,140,170,0.6)",
+    font: "'Playfair Display', serif",
+    fontWeight: 400,
+    fontStyle: "italic",
+    colors: ["#F2C4CE","#C4B5D9","#FBF7F4","#E8A0B0","#9B8CAA"],
+    path: "styles/008_SOFT-FEMININE/visual-sheet.html"
+  },
+  {
+    id: "009", name: "INDUSTRIAL\nRAW",
+    concept: "削ぎ落とされた無骨な美学",
+    tags: ["raw","editorial"],
+    tones: ["dark","warm"],
+    bg: "#1A1A1A",
+    nameColor: "#C8C0B8",
+    conceptColor: "rgba(140,140,140,0.75)",
+    numColor: "rgba(181,69,27,0.9)",
+    font: "'Barlow Condensed', sans-serif",
+    fontWeight: 700,
+    colors: ["#1A1A1A","#B5451B","#8C8C8C","#2E2E2E","#C8C0B8"],
+    path: "styles/009_INDUSTRIAL-RAW/visual-sheet.html"
+  },
+  {
+    id: "011", name: "DOJO\nSPIRIT",
+    concept: "白×黒×金。道場と起業家精神のエディトリアル",
+    tags: ["japanese","editorial","bold"],
+    tones: ["light"],
+    bg: "#FFFFFF",
+    nameColor: "#0D0D0D",
+    conceptColor: "rgba(13,13,13,0.5)",
+    numColor: "#A28D0B",
+    font: "'Noto Serif JP', serif",
+    fontWeight: 600,
+    colors: ["#000000","#3A3A3A","#A28D0B","#C4AB2A","#F0F0EE"],
+    path: "styles/011_DOJO-SPIRIT/visual-sheet.html"
+  },
+  {
+    id: "010", name: "VIVID\nDIGITAL",
+    concept: "ネオンが灯る夜の美意識",
+    tags: ["digital","pop","tech"],
+    tones: ["dark","cool","vivid"],
+    bg: "#1A0033",
+    nameColor: "#FFFFFF",
+    conceptColor: "rgba(0,245,255,0.6)",
+    numColor: "rgba(123,47,255,0.9)",
+    font: "'Syne', sans-serif",
+    fontWeight: 800,
+    colors: ["#050505","#7B2FFF","#00F5FF","#FF2D78","#1A0033"],
+    path: "styles/010_VIVID-DIGITAL/visual-sheet.html"
+  },
+];
+
+// ── カスタムスタイル（LocalStorage） ──
+let customStyles = JSON.parse(localStorage.getItem('style-custom') || '[]');
+
+function saveCustomStyles() {
+  localStorage.setItem('style-custom', JSON.stringify(customStyles));
+}
+
+function getAllStyles() {
+  return [...styles, ...customStyles];
+}
+
+// ── スタイルフォーム（シンプル版） ──
+function populateStyleBaseSelect() {
+  const sel = document.getElementById('sf-base-style');
+  sel.innerHTML = '<option value="">— なし（新規スタイル）—</option>';
+  getAllStyles().forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    opt.textContent = `${s.id} — ${s.name.replace('\n',' ')}`;
+    sel.appendChild(opt);
+  });
+}
+
+function openStyleForm(prefillBaseId) {
+  populateStyleBaseSelect();
+  document.getElementById('sf-modal-title').textContent = 'New Style';
+  document.getElementById('sf-name').value = '';
+  document.getElementById('sf-id').value = '';
+  document.getElementById('sf-base-style').value = prefillBaseId || '';
+  document.getElementById('sf-code').value = '';
+  document.getElementById('sf-modal').classList.add('open');
+}
+
+function closeStyleForm() {
+  document.getElementById('sf-modal').classList.remove('open');
+}
+
+function saveStyleForm() {
+  const name = document.getElementById('sf-name').value.trim();
+  if (!name) { alert('スタイル名を入力してください'); return; }
+
+  const code = document.getElementById('sf-code').value.trim();
+  const baseId = document.getElementById('sf-base-style').value;
+  const baseStyle = getAllStyles().find(s => s.id === baseId);
+
+  // IDを自動採番
+  const manualId = document.getElementById('sf-id').value.trim();
+  const autoId = manualId || (() => {
+    const allIds = getAllStyles().map(s => parseInt(s.id)).filter(n => !isNaN(n));
+    return String(Math.max(...allIds, 0) + 1).padStart(3, '0');
+  })();
+
+  // コードからカラーを抽出してカード表示に使う
+  const colorMatches = code.match(/#[0-9A-Fa-f]{6}/g) || [];
+  const colors = [...new Set(colorMatches)].slice(0, 5);
+
+  // 背景色：コードの最初のカラーを推定、またはベーススタイルから引き継ぎ
+  const bg = baseStyle?.bg || (colors[0] || '#1A1A1A');
+  const nameColor = baseStyle?.nameColor || '#FFFFFF';
+
+  const entry = {
+    id: autoId,
+    name,
+    concept: baseStyle ? `Base: ${baseStyle.name.replace('\n',' ')}` : '—',
+    tags: baseStyle?.tags || ['minimal'],
+    tones: baseStyle?.tones || ['light'],
+    bg,
+    nameColor,
+    conceptColor: `rgba(255,255,255,0.55)`,
+    numColor: `rgba(255,255,255,0.4)`,
+    font: baseStyle?.font || "'Inter', sans-serif",
+    fontWeight: baseStyle?.fontWeight || 400,
+    colors: colors.length ? colors : (baseStyle?.colors || []),
+    _code: code,       // 貼り付けたコードをそのまま保存
+    _baseId: baseId || null,
+    _custom: true
+  };
+
+  customStyles.push(entry);
+  saveCustomStyles();
+  closeStyleForm();
+  render();
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function deleteCustomStyle(id, e) {
+  e.stopPropagation();
+  if (!confirm('このスタイルを削除しますか？')) return;
+  customStyles = customStyles.filter(s => s.id !== id);
+  saveCustomStyles();
+  render();
+}
+
+// ── ビュー切り替え ──
+let currentView = 'styles';
+
+document.querySelectorAll('.view-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentView = tab.dataset.view;
+
+    if (currentView === 'styles') {
+      document.getElementById('styles-view').classList.remove('hidden');
+      document.getElementById('clients-view').classList.remove('active');
+      document.querySelectorAll('.filter-bar').forEach(b => b.style.display = '');
+    } else {
+      document.getElementById('styles-view').classList.add('hidden');
+      document.getElementById('clients-view').classList.add('active');
+      document.querySelectorAll('.filter-bar').forEach(b => b.style.display = 'none');
+      renderClients();
+    }
+  });
+});
+
+// ── フィルター状態 ──
+let activeCat = 'all';
+let activeTone = 'all';
+
+// ── お気に入り ──
+let favorites = new Set(JSON.parse(localStorage.getItem('style-favorites') || '[]'));
+
+function saveFavorites() {
+  localStorage.setItem('style-favorites', JSON.stringify([...favorites]));
+}
+
+function toggleFavorite(id, e) {
+  e.stopPropagation();
+  favorites.has(id) ? favorites.delete(id) : favorites.add(id);
+  saveFavorites();
+  render();
+}
+
+// ── クライアントデータ ──
+let clients = JSON.parse(localStorage.getItem('style-clients') || '[]');
+let editingClientId = null;
+
+function saveClientsToStorage() {
+  localStorage.setItem('style-clients', JSON.stringify(clients));
+}
+
+// ベーススタイル選択肢を生成
+function populateBaseSelect() {
+  const sel = document.getElementById('cf-base');
+  sel.innerHTML = '<option value="">— ベーススタイルなし —</option>';
+  styles.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    opt.textContent = `${s.id} — ${s.name.replace('\n', ' ')}`;
+    sel.appendChild(opt);
+  });
+}
+
+function openClientForm(clientId, prefillBaseId) {
+  editingClientId = clientId || null;
+  populateBaseSelect();
+  const isEdit = !!clientId;
+  document.getElementById('cf-modal-title').textContent = isEdit ? 'Edit Preset' : 'New Preset';
+
+  if (isEdit) {
+    const c = clients.find(c => c.id === clientId);
+    document.getElementById('cf-name').value = c.clientName;
+    document.getElementById('cf-base').value = c.baseStyleId || '';
+    document.getElementById('cf-css').value = c.css || '';
+    document.getElementById('cf-note').value = c.note || '';
+  } else {
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-base').value = prefillBaseId || '';
+    document.getElementById('cf-css').value = '';
+    document.getElementById('cf-note').value = '';
+  }
+
+  document.getElementById('cf-modal').classList.add('open');
+}
+
+function closeClientForm() {
+  document.getElementById('cf-modal').classList.remove('open');
+  editingClientId = null;
+}
+
+function saveClientForm() {
+  const name = document.getElementById('cf-name').value.trim();
+  if (!name) { alert('クライアント名を入力してください'); return; }
+
+  const css = document.getElementById('cf-css').value.trim();
+
+  // CSSからカラーを簡易抽出
+  const colorMatches = css.match(/#[0-9A-Fa-f]{6}/g) || [];
+  const colors = [...new Set(colorMatches)].slice(0, 6);
+
+  if (editingClientId) {
+    const idx = clients.findIndex(c => c.id === editingClientId);
+    clients[idx] = {
+      ...clients[idx],
+      clientName: name,
+      baseStyleId: document.getElementById('cf-base').value || null,
+      css,
+      note: document.getElementById('cf-note').value.trim(),
+      colors,
+      updatedAt: new Date().toISOString().slice(0, 10)
+    };
+  } else {
+    clients.push({
+      id: Date.now().toString(),
+      clientName: name,
+      baseStyleId: document.getElementById('cf-base').value || null,
+      css,
+      note: document.getElementById('cf-note').value.trim(),
+      colors,
+      createdAt: new Date().toISOString().slice(0, 10),
+      updatedAt: new Date().toISOString().slice(0, 10)
+    });
+  }
+
+  saveClientsToStorage();
+  closeClientForm();
+  renderClients();
+}
+
+function deleteClient(id, e) {
+  e.stopPropagation();
+  if (!confirm('このプリセットを削除しますか？')) return;
+  clients = clients.filter(c => c.id !== id);
+  saveClientsToStorage();
+  renderClients();
+}
+
+function copyClientCSS(css, btn) {
+  navigator.clipboard.writeText(css).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'COPIED!';
+    btn.style.background = '#4A4A4A';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
+  });
+}
+
+// クライアントグリッド描画
+function renderClients() {
+  const grid = document.getElementById('client-grid');
+  grid.innerHTML = '';
+
+  if (clients.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1; padding:80px 0; text-align:center; color:#BBB; font-size:13px; letter-spacing:0.1em;">プリセットがまだありません — ＋ New Preset から登録</div>`;
+    document.getElementById('client-count').textContent = '0 presets';
+    return;
+  }
+
+  clients.forEach(c => {
+    const baseStyle = styles.find(s => s.id === c.baseStyleId);
+    const dots = (c.colors || []).map(col =>
+      `<div class="dot" style="background:${col}; box-shadow:0 0 0 1px rgba(0,0,0,0.1);"></div>`
+    ).join('');
+
+    const baseLabel = baseStyle
+      ? `<div class="client-card-base">${baseStyle.id} ${baseStyle.name.replace('\n',' ')}</div>`
+      : `<div class="client-card-base" style="background:#F8F0FF;color:#9B59B6;">No Base</div>`;
+
+    const card = document.createElement('div');
+    card.className = 'client-card';
+    card.innerHTML = `
+      ${baseLabel}
+      <div class="client-card-name">${c.clientName}</div>
+      ${c.colors?.length ? `<div class="client-card-dots">${dots}</div>` : ''}
+      ${c.note ? `<div class="client-card-note">${c.note}</div>` : ''}
+      <div class="client-card-date">Updated: ${c.updatedAt}</div>
+      <div class="client-card-actions">
+        <button class="cc-btn cc-btn-copy" onclick="copyClientCSS(${JSON.stringify(c.css || '')}, this)">Copy CSS</button>
+        <button class="cc-btn cc-btn-edit" onclick="openClientForm('${c.id}')">Edit</button>
+        <button class="cc-btn cc-btn-delete" onclick="deleteClient('${c.id}', event)">Delete</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('client-count').textContent = `${clients.length} preset${clients.length !== 1 ? 's' : ''}`;
+}
+
+// ESCでフォームを閉じる
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeEditor();
+    closeStyleForm();
+    closeClientForm();
+    closeModal();
+  }
+});
+
+// ── スタイルグリッド描画 ──
+function render() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  let count = 0;
+
+  getAllStyles().forEach(s => {
+    if (activeCat === 'fav' && !favorites.has(s.id)) return;
+    if (activeCat !== 'all' && activeCat !== 'fav' && !s.tags.includes(activeCat)) return;
+    if (activeTone !== 'all' && !s.tones.includes(activeTone)) return;
+    count++;
+
+    const isFav = favorites.has(s.id);
+    const clientCount = clients.filter(c => c.baseStyleId === s.id).length;
+    const isCustom = !!s._custom;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.background = s.bg;
+
+    const dots = (s.colors || []).map(c =>
+      `<div class="dot" style="background:${c};"></div>`
+    ).join('');
+
+    card.innerHTML = `
+      <button class="client-tag-btn ${clientCount > 0 ? 'has-client' : ''}" title="このスタイルをベースに新規スタイルを追加">
+        ${clientCount > 0 ? `＋${clientCount}` : '＋'}
+      </button>
+      <button class="star-btn ${isFav ? 'active' : ''}" title="${isFav ? 'お気に入り解除' : 'お気に入りに追加'}">${isFav ? '⭐' : '☆'}</button>
+      ${isCustom ? `<button class="card-delete-btn" title="削除">✕</button>` : ''}
+      <div class="card-num" style="color:${s.numColor}">${s.id}</div>
+      <div class="card-name" style="color:${s.nameColor}; font-family:${s.font}; font-weight:${s.fontWeight || 400}; font-style:${s.fontStyle || 'normal'};">${s.name.replace('\n','<br>')}</div>
+      <div class="card-concept" style="color:${s.conceptColor}">${s.concept}</div>
+      <div class="card-dots">${dots}</div>
+    `;
+
+    card.querySelector('.star-btn').addEventListener('click', e => toggleFavorite(s.id, e));
+    card.querySelector('.client-tag-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      openEditor(s);  // このスタイルをベースにビジュアルエディターで編集
+    });
+    if (isCustom) {
+      card.querySelector('.card-delete-btn').addEventListener('click', e => deleteCustomStyle(s.id, e));
+    }
+    if (s.path || s._code) {
+      card.addEventListener('click', () => openModal(s));
+    }
+    grid.appendChild(card);
+  });
+
+  if (activeCat === 'fav' && count === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1; padding:80px 0; text-align:center; color:#BBB; font-size:13px; letter-spacing:0.1em;">⭐ お気に入りはまだありません</div>`;
+  }
+
+  document.getElementById('count').textContent = `${count} styles`;
+  document.getElementById('header-count').textContent = `${count} styles`;
+}
+
+// モーダル
+let currentModalStyle = null;
+
+function openModal(s) {
+  const overlay = document.getElementById('modal');
+  const frame = document.getElementById('modal-frame');
+  const title = document.getElementById('modal-title');
+  currentModalStyle = s;
+
+  title.textContent = `${s.id} — ${s.name.replace('\n',' ')}`;
+
+  // コピーボタンのラベルをスタイルに合わせて切り替え
+  const copyBtn = document.getElementById('modal-copy-btn');
+  copyBtn.textContent = (s._fullSheet || s.path) ? 'Copy design.md' : 'Copy CSS';
+
+  // カスタムスタイルで_codeがある場合はBlob URLで表示
+  if (s._code) {
+    const blob = new Blob([s._code], { type: 'text/html' });
+    frame.src = URL.createObjectURL(blob);
+  } else {
+    frame.src = s.path;
+  }
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildCSSFromStyle(s) {
+  const lines = [
+    `/* ${s.id} — ${s.name.replace('\n', ' ')} */`,
+    `/* ${s.concept} */`,
+    ``,
+    `:root {`,
+    `  --bg:            ${s.bg};`,
+    `  --c-text:        ${s.nameColor};`,
+    `  --c-subtext:     ${s.conceptColor};`,
+    `  --c-accent:      ${s.numColor};`,
+  ];
+  (s.colors || []).forEach((c, i) => {
+    lines.push(`  --c-palette-${i + 1}: ${c};`);
+  });
+  lines.push(`  --f-display:     ${s.font};`);
+  lines.push(`  --f-weight:      ${s.fontWeight || 400};`);
+  if (s.fontStyle === 'italic') lines.push(`  --f-style:       italic;`);
+  lines.push(`}`);
+  return lines.join('\n');
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modal');
+  const frame = document.getElementById('modal-frame');
+  overlay.classList.remove('open');
+  frame.src = '';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+
+document.getElementById('modal-copy-btn').addEventListener('click', () => {
+  const btn = document.getElementById('modal-copy-btn');
+  if (!currentModalStyle) return;
+
+  // まずiframe内のdesign-md-textを試みる（同一オリジンで動く場合）
+  let text = null;
+  try {
+    const frame = document.getElementById('modal-frame');
+    const textarea = frame.contentDocument?.getElementById('design-md-text');
+    if (textarea?.value?.trim()) {
+      text = textarea.value.trim();
+    }
+  } catch(e) { /* セキュリティ制限 → フォールバックへ */ }
+
+  // フォールバック：スタイルデータからCSS変数ブロックを生成
+  if (!text) {
+    text = buildCSSFromStyle(currentModalStyle);
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    const resetLabel = (currentModalStyle?._fullSheet || currentModalStyle?.path) ? 'Copy design.md' : 'Copy CSS';
+    setTimeout(() => { btn.textContent = resetLabel; btn.classList.remove('copied'); }, 2500);
+  });
+});
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── ビジュアルエディター ──
+const EDITOR_FONTS = [
+  { label: 'Cormorant Garamond', value: "'Cormorant Garamond', serif", weights: [300, 400, 700] },
+  { label: 'Lora', value: "'Lora', serif", weights: [400, 700] },
+  { label: 'EB Garamond', value: "'EB Garamond', serif", weights: [400, 500, 600] },
+  { label: 'DM Serif Display', value: "'DM Serif Display', serif", weights: [400] },
+  { label: 'Playfair Display', value: "'Playfair Display', serif", weights: [400, 700] },
+  { label: 'Noto Serif JP（明朝）', value: "'Noto Serif JP', serif", weights: [300, 400, 600, 700] },
+  { label: 'Inter', value: "'Inter', sans-serif", weights: [300, 400, 500, 600, 700] },
+  { label: 'Space Grotesk', value: "'Space Grotesk', sans-serif", weights: [400, 500, 600, 700] },
+  { label: 'Nunito', value: "'Nunito', sans-serif", weights: [400, 700, 900] },
+  { label: 'Bebas Neue', value: "'Bebas Neue', sans-serif", weights: [400] },
+  { label: 'Barlow Condensed', value: "'Barlow Condensed', sans-serif", weights: [400, 700] },
+  { label: 'Syne', value: "'Syne', sans-serif", weights: [400, 700, 800] },
+  { label: 'Noto Sans JP（ゴシック）', value: "'Noto Sans JP', sans-serif", weights: [300, 400, 500, 700] },
+];
+
+let editorBase = null;
+let editorData = {};
+
+function rgbaToHex(color) {
+  if (!color) return '#888888';
+  if (typeof color === 'string' && color.startsWith('#')) return color.slice(0, 7);
+  const m = String(color).match(/rgba?\((\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+  if (!m) return '#888888';
+  return '#' + [m[1], m[2], m[3]].map(n => parseInt(n).toString(16).padStart(2, '0')).join('');
+}
+
+function setEditorColor(id, hex) {
+  const picker = document.getElementById(id + '-picker');
+  const text = document.getElementById(id + '-text');
+  if (picker) picker.value = hex;
+  if (text) text.value = hex;
+}
+
+function syncColorText(id, hex) {
+  document.getElementById(id + '-text').value = hex;
+}
+
+function syncColorPicker(id, val) {
+  if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+    document.getElementById(id + '-picker').value = val;
+  }
+}
+
+function updateWeightOptions(fontValue) {
+  const font = EDITOR_FONTS.find(f => f.value === fontValue);
+  const weights = font?.weights || [300, 400, 600, 700];
+  const sel = document.getElementById('ed-weight');
+  const current = parseInt(sel.value) || 400;
+  sel.innerHTML = weights.map(w => `<option value="${w}">${w}</option>`).join('');
+  const closest = weights.reduce((a, b) => Math.abs(b - current) < Math.abs(a - current) ? b : a);
+  sel.value = closest;
+}
+
+function openEditor(s) {
+  editorBase = s || null;
+
+  editorData = {
+    name: s ? s.name : '',
+    concept: s ? (s.concept.startsWith('Base:') ? '' : s.concept) : '',
+    bg: rgbaToHex(s?.bg || '#F5F5F0'),
+    nameColor: rgbaToHex(s?.nameColor || '#111111'),
+    conceptColor: rgbaToHex(s?.conceptColor || '#888888'),
+    numColor: rgbaToHex(s?.numColor || '#AAAAAA'),
+    colors: (s?.colors || ['#111111', '#555555', '#999999', '#CCCCCC', '#F5F5F0']).map(c => rgbaToHex(c)),
+    font: s?.font || "'Inter', sans-serif",
+    fontWeight: s?.fontWeight || 400,
+    fontStyle: s?.fontStyle || 'normal',
+  };
+
+  // フォントセレクターを生成
+  const fontSel = document.getElementById('ed-font');
+  fontSel.innerHTML = EDITOR_FONTS.map(f => `<option value="${f.value}">${f.label}</option>`).join('');
+  fontSel.value = editorData.font;
+  updateWeightOptions(editorData.font);
+  document.getElementById('ed-weight').value = editorData.fontWeight;
+  document.getElementById('ed-font-style').value = editorData.fontStyle;
+
+  // フォームに値セット
+  document.getElementById('ed-name').value = editorData.name;
+  document.getElementById('ed-concept').value = editorData.concept;
+  document.getElementById('ed-id').value = '';
+
+  // カラーピッカーをセット
+  setEditorColor('ed-bg', editorData.bg);
+  setEditorColor('ed-namecolor', editorData.nameColor);
+  setEditorColor('ed-conceptcolor', editorData.conceptColor);
+  setEditorColor('ed-numcolor', editorData.numColor);
+  for (let i = 0; i < 5; i++) {
+    setEditorColor(`ed-pal-${i}`, editorData.colors[i] || '#888888');
+  }
+
+  document.getElementById('ed-modal-title').textContent =
+    s ? `Variant — ${s.id} ${s.name.replace('\n', ' ')}` : 'New Style';
+
+  document.getElementById('ed-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(updateEditorPreview, 80);
+}
+
+function closeEditor() {
+  document.getElementById('ed-modal').classList.remove('open');
+  document.getElementById('ed-frame').srcdoc = '';
+  document.body.style.overflow = '';
+  editorBase = null;
+}
+
+function readEditorValues() {
+  editorData.name = document.getElementById('ed-name').value.trim() || 'NEW STYLE';
+  editorData.concept = document.getElementById('ed-concept').value.trim() || '—';
+  editorData.font = document.getElementById('ed-font').value;
+  editorData.fontWeight = parseInt(document.getElementById('ed-weight').value) || 400;
+  editorData.fontStyle = document.getElementById('ed-font-style').value;
+  editorData.bg = document.getElementById('ed-bg-text').value;
+  editorData.nameColor = document.getElementById('ed-namecolor-text').value;
+  editorData.conceptColor = document.getElementById('ed-conceptcolor-text').value;
+  editorData.numColor = document.getElementById('ed-numcolor-text').value;
+  editorData.colors = [0, 1, 2, 3, 4].map(i => document.getElementById(`ed-pal-${i}-text`).value || '#888888');
+}
+
+function updateEditorPreview() {
+  readEditorValues();
+  document.getElementById('ed-frame').srcdoc = buildEditorHTML(editorData);
+}
+
+function buildEditorHTML(d) {
+  const name = (d.name || '').replace(/\n/g, '<br>');
+  const swatches = (d.colors || []).map(c =>
+    `<div style="width:44px;height:44px;border-radius:50%;background:${c};flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,0.08);"></div>`
+  ).join('');
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Lora:wght@400;700&family=EB+Garamond:wght@400;500;600&family=DM+Serif+Display&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;700;900&family=Bebas+Neue&family=Barlow+Condensed:wght@400;700&family=Syne:wght@400;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:${d.bg};color:${d.nameColor};font-family:'Inter',sans-serif;min-height:100vh;padding:64px 72px;}
+.lbl{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:${d.numColor};margin-bottom:36px;opacity:.75;}
+.nm{font-family:${d.font};font-size:clamp(52px,8vw,100px);font-weight:${d.fontWeight};font-style:${d.fontStyle};line-height:1.0;color:${d.nameColor};margin-bottom:24px;letter-spacing:-0.01em;}
+.cpt{font-size:14px;font-weight:300;letter-spacing:.06em;color:${d.conceptColor};margin-bottom:60px;max-width:480px;line-height:2.0;}
+.pal{display:flex;gap:12px;margin-bottom:60px;flex-wrap:wrap;}
+.rule{height:1px;background:${d.nameColor};opacity:.1;margin-bottom:48px;}
+.ttag{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:${d.numColor};opacity:.6;margin-bottom:22px;}
+.tdsp{font-family:${d.font};font-size:clamp(38px,5.5vw,68px);font-weight:${d.fontWeight};font-style:${d.fontStyle};color:${d.nameColor};margin-bottom:18px;line-height:1.1;}
+.th1{font-family:${d.font};font-size:clamp(20px,2.5vw,32px);font-weight:${d.fontWeight};font-style:${d.fontStyle};color:${d.nameColor};opacity:.65;margin-bottom:18px;line-height:1.3;}
+.tbody{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:${d.conceptColor};line-height:1.95;max-width:540px;}
+</style></head>
+<body>
+<div class="lbl">Visual Sheet</div>
+<div class="nm">${name}</div>
+<div class="cpt">${d.concept}</div>
+<div class="pal">${swatches}</div>
+<div class="rule"></div>
+<div class="ttag">Typography</div>
+<div class="tdsp">Aa / あア漢</div>
+<div class="th1">見出しサンプル — Heading Sample</div>
+<div class="tbody">本文テキストのサンプルです。フォントの読みやすさと雰囲気を確認するためのダミーテキストです。Body text sample for checking readability and visual atmosphere.</div>
+</body></html>`;
+}
+
+function saveFromEditor() {
+  readEditorValues();
+  const name = editorData.name;
+  if (!name || name === 'NEW STYLE') {
+    const inp = document.getElementById('ed-name');
+    inp.focus();
+    inp.style.borderColor = '#FF3B30';
+    setTimeout(() => inp.style.borderColor = '', 2000);
+    return;
+  }
+
+  const manualId = document.getElementById('ed-id').value.trim();
+  const autoId = manualId || (() => {
+    const allIds = getAllStyles().map(s => parseInt(s.id)).filter(n => !isNaN(n));
+    return String(Math.max(...allIds, 0) + 1).padStart(3, '0');
+  })();
+
+  const finalHTML = buildEditorHTML({ ...editorData, id: autoId });
+
+  const entry = {
+    id: autoId,
+    name: editorData.name,
+    concept: editorData.concept,
+    tags: editorBase?.tags || ['minimal'],
+    tones: editorBase?.tones || ['light'],
+    bg: editorData.bg,
+    nameColor: editorData.nameColor,
+    conceptColor: editorData.conceptColor,
+    numColor: editorData.numColor,
+    font: editorData.font,
+    fontWeight: editorData.fontWeight,
+    fontStyle: editorData.fontStyle,
+    colors: editorData.colors,
+    _code: finalHTML,
+    _baseId: editorBase?.id || null,
+    _custom: true
+  };
+
+  customStyles.push(entry);
+  saveCustomStyles();
+  closeEditor();
+  render();
+}
+
+// ── Full Sheet生成 ──────────────────────────────────────────
+function generateFullSheet() {
+  readEditorValues();
+  const name = editorData.name;
+  if (!name || name === 'NEW STYLE') {
+    alert('Style Nameを入力してください');
+    return;
+  }
+  const manualId = document.getElementById('ed-id').value.trim();
+  const autoId = manualId || (() => {
+    const allIds = getAllStyles().map(s => parseInt(s.id)).filter(n => !isNaN(n));
+    return String(Math.max(...allIds, 0) + 1).padStart(3, '0');
+  })();
+  const industry  = document.getElementById('ed-industry').value.trim();
+  const keywords  = document.getElementById('ed-keywords').value.trim();
+  const fullHTML  = buildFullVisualSheet({ ...editorData, id: autoId, industry, keywords });
+
+  // フルシートHTMLでライブラリに保存
+  const entry = {
+    id: autoId,
+    name: editorData.name,
+    concept: editorData.concept,
+    tags: keywords ? keywords.split(/[,、，]/).map(k => k.trim()).filter(Boolean) : (editorBase?.tags || ['minimal']),
+    tones: editorBase?.tones || ['light'],
+    bg: editorData.bg,
+    nameColor: editorData.nameColor,
+    conceptColor: editorData.conceptColor,
+    numColor: editorData.numColor,
+    font: editorData.font,
+    fontWeight: editorData.fontWeight,
+    fontStyle: editorData.fontStyle,
+    colors: editorData.colors,
+    _code: fullHTML,
+    _baseId: editorBase?.id || null,
+    _custom: true,
+    _fullSheet: true,
+  };
+  customStyles.push(entry);
+  saveCustomStyles();
+  closeEditor();
+  render();
+}
+
+function buildFullVisualSheet(d) {
+  // 色エイリアス
+  const bg       = d.bg       || '#F8F8F6';
+  const txtMain  = d.nameColor || '#111111';
+  const txtSub   = d.conceptColor || 'rgba(80,80,80,0.7)';
+  const accent   = d.numColor || '#888888';
+  const pal      = d.colors   || ['#888','#AAA','#CCC','#DDD','#EEE'];
+  const pal1     = pal[0] || accent;
+  const pal2     = pal[1] || '#ffffff';
+  const pal3     = pal[2] || '#cccccc';
+  const pal4     = pal[3] || '#999999';
+  const pal5     = pal[4] || '#555555';
+
+  // 暗背景かどうか判定
+  const isDark = (() => {
+    const hex = bg.replace('#','');
+    if (hex.length < 6) return false;
+    const r = parseInt(hex.slice(0,2),16);
+    const g = parseInt(hex.slice(2,4),16);
+    const b = parseInt(hex.slice(4,6),16);
+    return (r*0.299 + g*0.587 + b*0.114) < 128;
+  })();
+
+  const sectionBorder = isDark
+    ? `rgba(255,255,255,0.1)`
+    : `rgba(0,0,0,0.08)`;
+  const navBg = isDark
+    ? `rgba(${parseInt(bg.replace('#','').slice(0,2),16)},${parseInt(bg.replace('#','').slice(2,4),16)},${parseInt(bg.replace('#','').slice(4,6),16)},0.92)`
+    : `rgba(248,248,246,0.95)`;
+
+  // フォント名整形
+  const fontFamily = d.font || "'Inter', sans-serif";
+  const fontName   = fontFamily.replace(/'/g,'').split(',')[0].trim();
+  const fontGoogleParam = fontName.replace(/ /g,'+');
+  const fontWeight = d.fontWeight || 400;
+
+  // スタイル名整形
+  const styleName = d.name.replace('\n',' ');
+  const styleNameHtml = d.name.replace('\n','<br>');
+  const concept   = d.concept || '';
+  const industry  = d.industry || '';
+  const keywords  = d.keywords || '';
+  const id        = d.id || '000';
+
+  // キーワード配列
+  const kwArr = keywords
+    ? keywords.split(/[,、，]/).map(k => k.trim()).filter(Boolean)
+    : [];
+
+  // ── コンテキスト判断ロジック ──
+  // 業種に基づいた写真方向
+  const photoDirections = (() => {
+    const ind = industry.toLowerCase();
+    if (ind.includes('飲食') || ind.includes('カフェ') || ind.includes('food')) {
+      return [
+        ['テーブルウェア接写', '素材のテクスチャーを主役に'],
+        ['料理の俯瞰', '構図は引き算。余白を必ず残す'],
+        ['環境写真', '店内・光の空気感を切り取る']
+      ];
+    } else if (ind.includes('医療') || ind.includes('クリニック') || ind.includes('health')) {
+      return [
+        ['白背景・シンプル', '清潔感と信頼を最優先'],
+        ['自然光ポートレート', '医師・スタッフの表情を柔らかく'],
+        ['施術・設備', '高解像度・ノイズなし']
+      ];
+    } else if (ind.includes('it') || ind.includes('テック') || ind.includes('tech') || ind.includes('saas')) {
+      return [
+        ['ダーク＋UI画面', 'スクリーン上で映えるコンポジション'],
+        ['抽象的なデータ', 'ライン・グリッド・パーティクル'],
+        ['人物は小さく', 'スケール感と環境を主役に']
+      ];
+    } else if (ind.includes('ブライダル') || ind.includes('wedding') || ind.includes('結婚')) {
+      return [
+        ['柔らかいボケ', 'f1.4〜2.0の浅い被写界深度'],
+        ['逆光・フレア', '感情的な光の演出'],
+        ['ディテール接写', '花・指輪・レース']
+      ];
+    } else if (ind.includes('建築') || ind.includes('interior') || ind.includes('インテリア')) {
+      return [
+        ['広角・正面構図', '空間のスケール感を最大化'],
+        ['光と影のグラデーション', '時刻：ゴールデンアワー'],
+        ['素材・質感', 'コンクリート・木・ガラスの接写']
+      ];
+    } else {
+      // デフォルト：トーンで判断
+      if (isDark) {
+        return [
+          ['コントラスト高め', 'シャドウを落として立体感'],
+          ['人工光', 'スタジオ or 夜景'],
+          ['ローアングル', '被写体に力強さを与える']
+        ];
+      } else {
+        return [
+          ['自然光・フラット', '白・ベージュ背景推奨'],
+          ['余白70%以上', '被写体をひとつに絞る'],
+          ['色温度4000〜5500K', 'ニュートラルな色再現']
+        ];
+      }
+    }
+  })();
+
+  // 写真補足テキスト
+  const photoNotes = isDark
+    ? ['色温度：3200K以下のクール〜ニュートラル。', 'コントラスト：高め。ハイライトを守り、シャドウを落とす。', '構図：センター or 非対称。ダイナミズムを入れる。']
+    : ['色温度：4500〜5500Kのニュートラル。', 'コントラスト：ナチュラル。飛ばし・潰しは避ける。', '構図：余白を優先。被写体はひとつ。'];
+
+  // Brand World
+  const brandWorldTitle = kwArr.length > 0
+    ? kwArr.slice(0,2).join('と') + '。'
+    : (isDark ? '静かな力。' : '清澄な空間。');
+  const brandWorldBody = concept
+    ? `${concept}。このブランドが放つトーンは、言葉よりも先に雰囲気で伝わる。色・タイポグラフィ・余白のすべてが、ひとつの世界観を語るために設計されている。`
+    : (isDark
+        ? '主張しない。でも目を離せない。このブランドの空間には、声高に語る言葉はない。余白とディテールだけが、それ以上の何かを語る。'
+        : '余白が語る。このブランドの強さは引き算にある。ノイズを徹底的に排除し、本質だけを残した視覚言語。');
+
+  // Brand Voice
+  const brandVoiceTitle = isDark
+    ? '少ない言葉で、<br>深く届ける。'
+    : '明快に、<br>誠実に届ける。';
+  const brandVoiceBody = isDark
+    ? 'キャッチコピーは短く。説明しすぎない。選び抜かれた一語が、長い文章より重い。沈黙もメッセージのうち。'
+    : '飾らない言葉で、確かな価値を伝える。読みやすさを最優先に。一文を短く、段落を少なく。';
+
+  // Do / Don't
+  const doItems = isDark ? [
+    '余白は惜しまない。コンテンツを詰め込まない',
+    `アクセントカラー（${pal1}）は差し色として使う`,
+    `フォントは${fontName}と補助フォントの2種のみ`,
+    'テキストは少なく、選び抜いた言葉だけ使う',
+    'グラデーションは背景色〜透明のみ許容',
+  ] : [
+    '余白を積極的に使う。情報は整理してから置く',
+    `アクセント（${pal1}）は全体の10〜15%に収める`,
+    `フォントは${fontName}と補助フォントの2種のみ`,
+    'ラインや仕切りは細く・薄く（1px / opacity 0.15程度）',
+    '写真は必ず余白を残してトリミングする',
+  ];
+  const dontItems = isDark ? [
+    '派手なアニメーションやトランジション',
+    'ビビッドカラーとの安易な組み合わせ',
+    'フォントを3種以上使う',
+    '影を多用する（flatかわずかなシャドウのみ）',
+    '画像に直接テキストを重ねる（可読性が失われる場合）',
+  ] : [
+    '情報の詰め込み。スクロールを恐れない',
+    'コントラストの低いテキスト（アクセシビリティ重視）',
+    'フォントを3種以上使う',
+    '枠線の多用。囲わなくても伝わる',
+    '派手なホバーエフェクト（微細なものに留める）',
+  ];
+
+  // タグ
+  const tags = kwArr.length > 0 ? kwArr : (isDark ? ['dark','bold','precision'] : ['clean','minimal','light']);
+
+  // タイポスケール
+  const fontLink = `https://fonts.googleapis.com/css2?family=${fontGoogleParam}:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap`;
+
+  // アクセント色のrgb
+  const hexToRgb = hex => {
+    const h = hex.replace('#','');
+    return `${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)}`;
+  };
+  const accentRgb = (() => { try { return hexToRgb(accent); } catch(e){ return '136,136,136'; } })();
+
+  // design.md
+  const designMd = `# ${id} ${styleName} — Design System
+
+## CSS Variables
+\`\`\`css
+:root {
+  --bg:           ${bg};
+  --c-text:       ${txtMain};
+  --c-subtext:    ${txtSub};
+  --c-accent:     ${accent};
+  --c-pal-1:      ${pal1};
+  --c-pal-2:      ${pal2};
+  --c-pal-3:      ${pal3};
+  --c-pal-4:      ${pal4};
+  --c-pal-5:      ${pal5};
+  --f-display:    ${fontFamily};
+  --f-weight:     ${fontWeight};
+  --f-body:       'Inter', sans-serif;
+  --f-ja:         'Noto Sans JP', sans-serif;
+  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 8px;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+}
+\`\`\`
+
+## コンセプト
+${concept}
+業種：${industry || '—'}
+キーワード：${keywords || '—'}
+
+### Brand World
+${brandWorldBody}
+
+### Photography Direction
+- ${photoDirections[0][0]}：${photoDirections[0][1]}
+- ${photoDirections[1][0]}：${photoDirections[1][1]}
+- ${photoDirections[2][0]}：${photoDirections[2][1]}
+
+### Do
+${doItems.map(i => `- ${i}`).join('\n')}
+
+### Don't
+${dontItems.map(i => `- ${i}`).join('\n')}
+
+## Typography Scale
+| Role    | Font              | Size   | Weight |
+|---------|-------------------|--------|--------|
+| Display | ${fontName}       | clamp(52px,7vw,96px) | ${fontWeight} |
+| H1      | ${fontName}       | 36px   | ${fontWeight} |
+| H2      | ${fontName}       | 24px   | ${fontWeight} |
+| H3      | Inter             | 18px   | 600    |
+| Body    | Inter / Noto Sans | 15px   | 400    |
+| Label   | Inter             | 10px   | 500    |
+
+## Spacing
+4 / 8 / 12 / 16 / 24 / 32 / 40 / 64 / 96 / 128px
+
+## Border Radius
+sm: 2px / md: 4px / lg: 8px
+`;
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${id} ${styleName} — Style Reference</title>
+<style>
+@import url('${fontLink}');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        ${bg};
+  --c-text:    ${txtMain};
+  --c-sub:     ${txtSub};
+  --c-accent:  ${accent};
+  --c-pal-1:   ${pal1};
+  --c-pal-2:   ${pal2};
+  --c-pal-3:   ${pal3};
+  --c-pal-4:   ${pal4};
+  --c-pal-5:   ${pal5};
+  --f-display: ${fontFamily};
+  --f-weight:  ${fontWeight};
+  --f-body:    'Inter', sans-serif;
+  --max-w:     900px;
+  --col-pad:   64px;
+  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 40px; --sp-8: 64px; --sp-9: 96px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── ナビ ── */
+.page-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: ${navBg};
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid ${sectionBorder};
+  padding: 0 var(--col-pad);
+  display: flex; align-items: center; gap: 0; overflow-x: auto;
+}
+.nav-id {
+  font-size: 10px; font-weight: 600; color: var(--c-accent);
+  letter-spacing: 0.15em; padding: 14px 24px 14px 0;
+  border-right: 1px solid ${sectionBorder}; margin-right: 8px; white-space: nowrap;
+}
+.page-nav a {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--c-sub); text-decoration: none;
+  padding: 14px 16px; border-bottom: 2px solid transparent; white-space: nowrap;
+  transition: color 0.15s;
+}
+.page-nav a:hover { color: var(--c-text); }
+.copy-md-btn {
+  margin-left: auto; flex-shrink: 0;
+  background: var(--c-text); color: var(--bg); border: none;
+  font-family: var(--f-body); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 7px 16px; cursor: pointer; border-radius: 2px;
+  transition: all 0.2s; white-space: nowrap;
+}
+.copy-md-btn.copied { background: #2a4a36; color: #6ECFA0; }
+
+/* ── セクション共通 ── */
+.section {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: var(--sp-8) var(--col-pad);
+  border-bottom: 1px solid ${sectionBorder};
+}
+.section:last-child { border-bottom: none; }
+.section-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--c-accent); margin-bottom: var(--sp-6);
+  display: flex; align-items: center; gap: var(--sp-3);
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: ${sectionBorder}; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--c-text);
+  min-height: 480px; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: var(--sp-8) var(--col-pad);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(${accentRgb},0.18) 0%, transparent 55%);
+}
+.hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; position: relative; }
+.hero-id { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; color: var(--c-accent); margin-bottom: var(--sp-5); text-transform: uppercase; }
+.hero-title { font-family: var(--f-display); font-size: clamp(52px,7vw,96px); font-weight: var(--f-weight); color: var(--bg); line-height: 1.0; letter-spacing: 0.02em; margin-bottom: var(--sp-5); }
+.hero-concept { font-size: 17px; font-weight: 300; color: rgba(${isDark ? '240,240,240' : '200,200,200'},0.75); letter-spacing: 0.03em; max-width: 500px; line-height: 1.6; }
+.hero-tags { display: flex; gap: 8px; margin-top: var(--sp-6); flex-wrap: wrap; }
+.hero-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-accent); border: 1px solid rgba(${accentRgb},0.35); padding: 5px 12px; }
+
+/* ── VISUAL DIRECTION ── */
+.world-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); margin-bottom: var(--sp-6); }
+.world-card { background: var(--c-text); padding: var(--sp-6); }
+.world-card-label { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 12px; }
+.world-card-title { font-family: var(--f-display); font-size: 28px; font-weight: var(--f-weight); color: var(--bg); line-height: 1.2; margin-bottom: 16px; }
+.world-card-body { font-size: 13px; color: rgba(${isDark ? '200,200,200' : '180,180,180'},0.85); line-height: 1.7; }
+.photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 12px; }
+.photo-card { }
+.photo-placeholder { height: 120px; background: var(--c-text); position: relative; overflow: hidden; }
+.photo-accent { position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: var(--c-accent); opacity: 0.25; }
+.photo-desc { font-size: 11px; color: var(--c-sub); margin-top: 8px; line-height: 1.5; }
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+.do-card { background: rgba(${accentRgb},0.08); border-left: 3px solid var(--c-accent); padding: var(--sp-5); }
+.dont-card { background: rgba(180,60,60,0.06); border-left: 3px solid rgba(180,60,60,0.6); padding: var(--sp-5); }
+.do-dont-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; color: var(--c-accent); }
+.dont-card .do-dont-label { color: rgba(200,80,80,0.9); }
+.do-card ul, .dont-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.do-card li, .dont-card li { font-size: 13px; line-height: 1.5; padding-left: 16px; position: relative; color: var(--c-text); }
+.do-card li::before { content: '✓'; position: absolute; left: 0; color: var(--c-accent); font-weight: 700; }
+.dont-card li::before { content: '✕'; position: absolute; left: 0; color: rgba(200,80,80,0.9); font-weight: 700; }
+
+/* ── COLOR TOKENS ── */
+.color-tokens { display: flex; flex-direction: column; gap: 0; margin-bottom: var(--sp-6); }
+.color-row { display: grid; grid-template-columns: 36px 180px 1fr 100px 80px; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid ${sectionBorder}; }
+.color-chip { width: 28px; height: 28px; border-radius: 3px; }
+.color-token-name { font-family: monospace; font-size: 12px; color: var(--c-text); font-weight: 500; }
+.color-desc { font-size: 12px; color: var(--c-sub); }
+.color-hex-val { font-family: monospace; font-size: 12px; color: var(--c-text); }
+.contrast-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 2px; letter-spacing: 0.1em; }
+.contrast-aaa { background: #1a4a2a; color: #6ecfa0; }
+.contrast-aa  { background: #2a3a1a; color: #a0cf60; }
+.contrast-fail { background: rgba(0,0,0,0.1); color: var(--c-sub); }
+
+/* コードブロック */
+.code-block { background: ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)'}; border-radius: 4px; padding: 24px; position: relative; margin-top: 24px; overflow-x: auto; }
+.code-block pre { font-family: monospace; font-size: 12px; line-height: 1.8; color: var(--c-text); }
+.copy-btn { position: absolute; top: 12px; right: 12px; background: var(--c-text); color: var(--bg); border: none; font-size: 9px; font-weight: 600; letter-spacing: 0.15em; padding: 5px 12px; cursor: pointer; border-radius: 2px; }
+.code-comment { color: var(--c-accent); opacity: 0.6; }
+.code-prop { color: var(--c-text); }
+.code-val { color: var(--c-accent); }
+
+/* ── TYPOGRAPHY ── */
+.type-scale { display: flex; flex-direction: column; gap: 0; }
+.type-row { display: grid; grid-template-columns: 80px 1fr 200px; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid ${sectionBorder}; }
+.type-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-accent); }
+.type-spec-detail { font-size: 11px; color: var(--c-sub); line-height: 1.6; text-align: right; }
+.t-display { font-family: var(--f-display); font-size: clamp(36px,5vw,64px); font-weight: var(--f-weight); color: var(--c-text); line-height: 1.1; }
+.t-h1 { font-family: var(--f-display); font-size: 36px; font-weight: var(--f-weight); color: var(--c-text); line-height: 1.2; }
+.t-h2 { font-family: var(--f-display); font-size: 24px; font-weight: var(--f-weight); color: var(--c-text); line-height: 1.3; }
+.t-h3 { font-size: 18px; font-weight: 600; color: var(--c-text); }
+.t-body { font-size: 15px; font-weight: 400; color: var(--c-text); line-height: 1.7; }
+.t-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-accent); }
+.t-ja { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 0.55em; color: var(--c-sub); margin-top: 4px; }
+
+/* ── SPACING ── */
+.spacing-scale { display: flex; flex-direction: column; gap: 8px; }
+.spacing-row { display: grid; grid-template-columns: 60px 80px 1fr; align-items: center; gap: 16px; }
+.spacing-bar-wrap { height: 20px; display: flex; align-items: center; }
+.spacing-bar { height: 8px; background: var(--c-accent); border-radius: 1px; opacity: 0.5; }
+.spacing-token { font-family: monospace; font-size: 10px; color: var(--c-sub); }
+.spacing-px { font-family: monospace; font-size: 11px; color: var(--c-text); font-weight: 500; }
+
+/* ── COMPONENTS ── */
+.component-title { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-sub); margin-bottom: var(--sp-5); padding-bottom: 12px; border-bottom: 1px solid ${sectionBorder}; }
+.btn-states { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding: var(--sp-6); background: var(--c-text); margin-bottom: 8px; }
+.btn-states-light { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding: var(--sp-5) var(--sp-6); background: ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)'}; margin-bottom: 8px; }
+.state-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(128,128,128,0.8); text-align: center; margin-top: 6px; }
+.state-item { display: flex; flex-direction: column; align-items: center; }
+.btn { font-family: var(--f-body); cursor: pointer; transition: all 0.15s; border: none; }
+.btn-primary { background: var(--c-accent); color: var(--bg); font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; padding: 14px 28px; }
+.btn-secondary { background: transparent; color: var(--bg); border: 1px solid rgba(${accentRgb},0.6); font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; padding: 13px 28px; }
+.btn-ghost { background: transparent; color: var(--c-accent); border: none; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; padding: 13px 0; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── LAYOUT ── */
+.layout-grid-demo { display: grid; grid-template-columns: repeat(12,1fr); gap: 8px; margin-bottom: 24px; }
+.grid-col { height: 40px; background: rgba(${accentRgb},0.15); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--c-accent); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ページナビ -->
+<nav class="page-nav">
+  <span class="nav-id">${id} — ${styleName}</span>
+  <a href="#visual">Visual</a>
+  <a href="#color">Color</a>
+  <a href="#type">Type</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+  <button class="copy-md-btn" onclick="copyDesignMd(this)">COPY design.md</button>
+</nav>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-id">Style Library — ${id}</div>
+    <div class="hero-title">${styleNameHtml}</div>
+    <div class="hero-concept">${concept}</div>
+    <div class="hero-tags">
+      ${tags.map(t => `<span class="hero-tag">${t}</span>`).join('\n      ')}
+    </div>
+  </div>
+</div>
+
+<!-- A. VISUAL DIRECTION -->
+<div id="visual" class="section">
+  <div class="section-label">A — Visual Direction</div>
+  <div class="world-grid" style="margin-bottom:48px;">
+    <div class="world-card">
+      <div class="world-card-label">Brand World</div>
+      <div class="world-card-title">${brandWorldTitle}</div>
+      <div class="world-card-body">${brandWorldBody}</div>
+    </div>
+    <div class="world-card">
+      <div class="world-card-label">Brand Voice</div>
+      <div class="world-card-title">${brandVoiceTitle}</div>
+      <div class="world-card-body">${brandVoiceBody}</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:48px;">
+    <div style="font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-sub);margin-bottom:16px;">Photography Direction</div>
+    <div class="photo-grid">
+      ${photoDirections.map(([title, desc]) => `<div class="photo-card">
+        <div class="photo-placeholder"><div class="photo-accent"></div></div>
+        <div class="photo-desc">${title}<br>${desc}</div>
+      </div>`).join('\n      ')}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px;">
+      ${photoNotes.map(n => `<div style="font-size:11px;font-weight:300;color:var(--c-sub);line-height:1.6;">${n}</div>`).join('\n      ')}
+    </div>
+  </div>
+
+  <div style="font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-sub);margin-bottom:16px;">Do / Don't</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-dont-label">Do</div>
+      <ul>${doItems.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+    <div class="dont-card">
+      <div class="do-dont-label">Don't</div>
+      <ul>${dontItems.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+  </div>
+</div>
+
+<!-- B. COLOR TOKENS -->
+<div id="color" class="section">
+  <div class="section-label">B — Color Tokens</div>
+  <div class="color-tokens">
+    <div class="color-row" style="font-size:9px;color:var(--c-sub);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding-bottom:8px;">
+      <span></span><span>Token</span><span>Usage</span><span>Hex</span><span>Contrast</span>
+    </div>
+    <div class="color-row"><div class="color-chip" style="background:${bg};border:1px solid ${sectionBorder};"></div><div class="color-token-name">--bg</div><div class="color-desc">ページ背景</div><div class="color-hex-val">${bg}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${txtMain};"></div><div class="color-token-name">--c-text</div><div class="color-desc">メインテキスト・見出し</div><div class="color-hex-val">${txtMain}</div><div><span class="contrast-badge contrast-aaa">AAA</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${accent};"></div><div class="color-token-name">--c-accent</div><div class="color-desc">アクセント・ラベル・ボタン</div><div class="color-hex-val">${accent}</div><div><span class="contrast-badge contrast-aa">AA</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${pal1};"></div><div class="color-token-name">--c-pal-1</div><div class="color-desc">パレット 1</div><div class="color-hex-val">${pal1}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${pal2};border:1px solid ${sectionBorder};"></div><div class="color-token-name">--c-pal-2</div><div class="color-desc">パレット 2</div><div class="color-hex-val">${pal2}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${pal3};"></div><div class="color-token-name">--c-pal-3</div><div class="color-desc">パレット 3</div><div class="color-hex-val">${pal3}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${pal4};"></div><div class="color-token-name">--c-pal-4</div><div class="color-desc">パレット 4</div><div class="color-hex-val">${pal4}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+    <div class="color-row"><div class="color-chip" style="background:${pal5};"></div><div class="color-token-name">--c-pal-5</div><div class="color-desc">パレット 5</div><div class="color-hex-val">${pal5}</div><div><span class="contrast-badge contrast-fail">—</span></div></div>
+  </div>
+  <div class="code-block">
+    <button class="copy-btn" onclick="this.textContent='COPIED';setTimeout(()=>this.textContent='COPY',2000);navigator.clipboard.writeText(this.nextElementSibling.textContent)">COPY</button>
+    <pre><span class="code-comment">/* ${id} ${styleName} — CSS Variables */</span>
+<span class="code-prop">:root</span> {
+  <span class="code-comment">/* Color */</span>
+  <span class="code-prop">--bg</span>:        <span class="code-val">${bg}</span>;
+  <span class="code-prop">--c-text</span>:    <span class="code-val">${txtMain}</span>;
+  <span class="code-prop">--c-accent</span>:  <span class="code-val">${accent}</span>;
+  <span class="code-prop">--c-pal-1</span>:   <span class="code-val">${pal1}</span>;
+  <span class="code-prop">--c-pal-2</span>:   <span class="code-val">${pal2}</span>;
+  <span class="code-prop">--c-pal-3</span>:   <span class="code-val">${pal3}</span>;
+  <span class="code-prop">--c-pal-4</span>:   <span class="code-val">${pal4}</span>;
+  <span class="code-prop">--c-pal-5</span>:   <span class="code-val">${pal5}</span>;
+  <span class="code-comment">/* Font */</span>
+  <span class="code-prop">--f-display</span>: <span class="code-val">${fontFamily}</span>;
+  <span class="code-prop">--f-weight</span>:  <span class="code-val">${fontWeight}</span>;
+  <span class="code-prop">--f-body</span>:    <span class="code-val">'Inter', sans-serif</span>;
+  <span class="code-prop">--f-ja</span>:      <span class="code-val">'Noto Sans JP', sans-serif</span>;
+  <span class="code-comment">/* Shadow */</span>
+  <span class="code-prop">--shadow-sm</span>: <span class="code-val">0 1px 4px rgba(0,0,0,0.08)</span>;
+  <span class="code-prop">--shadow-md</span>: <span class="code-val">0 4px 16px rgba(0,0,0,0.12)</span>;
+  <span class="code-comment">/* Radius */</span>
+  <span class="code-prop">--radius-sm</span>: <span class="code-val">2px</span>;
+  <span class="code-prop">--radius-md</span>: <span class="code-val">4px</span>;
+  <span class="code-prop">--radius-lg</span>: <span class="code-val">8px</span>;
+}</pre>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div id="type" class="section">
+  <div class="section-label">Typography Scale</div>
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-label">Display</div>
+      <div class="t-display">The Standard<span class="t-ja">基準の美</span></div>
+      <div class="type-spec-detail">${fontName} / clamp(36,5vw,64px)<br>weight ${fontWeight}</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H1</div>
+      <div class="t-h1">Primary Heading<span class="t-ja">一次見出し</span></div>
+      <div class="type-spec-detail">${fontName} / 36px<br>weight ${fontWeight}</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H2</div>
+      <div class="t-h2">Secondary Heading<span class="t-ja">二次見出し</span></div>
+      <div class="type-spec-detail">${fontName} / 24px<br>weight ${fontWeight}</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">H3</div>
+      <div class="t-h3">Section Title</div>
+      <div class="type-spec-detail">Inter / 18px / weight 600</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body</div>
+      <div class="t-body">本文テキストのサンプル。フォントの読みやすさと雰囲気を確認するためのダミーテキストです。<br>Body text sample for checking readability.</div>
+      <div class="type-spec-detail">Inter / Noto Sans JP / 15px<br>weight 400 / lh 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Label</div>
+      <div class="t-label">LABEL / CAPTION TEXT</div>
+      <div class="type-spec-detail">Inter / 10px / weight 500<br>letter-spacing 0.2em</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div id="spacing" class="section">
+  <div class="section-label">Spacing Scale</div>
+  <div class="spacing-scale">
+    ${[[3,'sp-3','12px'],[4,'sp-4','16px'],[5,'sp-5','24px'],[6,'sp-6','32px'],[7,'sp-7','40px'],[8,'sp-8','64px'],[9,'sp-9','96px']].map(([n,token,px]) => `<div class="spacing-row">
+      <span class="spacing-token">--${token}</span>
+      <span class="spacing-px">${px}</span>
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:${parseInt(px)*0.8}px;"></div></div>
+    </div>`).join('\n    ')}
+  </div>
+</div>
+
+<!-- COMPONENTS -->
+<div id="components" class="section">
+  <div class="section-label">Components</div>
+  <div style="margin-bottom:40px;">
+    <div class="component-title">Button States</div>
+    <div class="btn-states">
+      <div class="state-item"><button class="btn btn-primary">Primary</button><span class="state-label" style="color:#888;">Default</span></div>
+      <div class="state-item"><button class="btn btn-secondary">Secondary</button><span class="state-label" style="color:#888;">Outline</span></div>
+      <div class="state-item"><button class="btn btn-ghost">Ghost →</button><span class="state-label" style="color:#888;">Ghost</span></div>
+    </div>
+    <div class="btn-states-light">
+      <div class="state-item"><button class="btn" style="background:var(--c-accent);color:var(--bg);font-size:10px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;padding:14px 28px;">Primary</button><span class="state-label">Default</span></div>
+      <div class="state-item"><button class="btn" style="background:transparent;color:var(--c-text);border:1px solid rgba(${accentRgb},0.4);font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;padding:13px 28px;">Secondary</button><span class="state-label">Outline</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="component-title">Cards</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div style="background:var(--c-text);padding:24px;">
+        <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-accent);margin-bottom:8px;">Category</div>
+        <div style="font-family:var(--f-display);font-size:20px;font-weight:var(--f-weight);color:var(--bg);margin-bottom:12px;">Card Title</div>
+        <div style="font-size:12px;color:rgba(${isDark?'200,200,200':'180,180,180'},0.7);line-height:1.6;">カードのダミーテキスト。コンテンツの雰囲気を確認する。</div>
+      </div>
+      <div style="background:var(--c-text);padding:24px;">
+        <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-accent);margin-bottom:8px;">Category</div>
+        <div style="font-family:var(--f-display);font-size:20px;font-weight:var(--f-weight);color:var(--bg);margin-bottom:12px;">Card Title</div>
+        <div style="font-size:12px;color:rgba(${isDark?'200,200,200':'180,180,180'},0.7);line-height:1.6;">カードのダミーテキスト。コンテンツの雰囲気を確認する。</div>
+      </div>
+      <div style="border:1px solid ${sectionBorder};padding:24px;">
+        <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-accent);margin-bottom:8px;">Category</div>
+        <div style="font-family:var(--f-display);font-size:20px;font-weight:var(--f-weight);color:var(--c-text);margin-bottom:12px;">Card Title</div>
+        <div style="font-size:12px;color:var(--c-sub);line-height:1.6;">カードのダミーテキスト。コンテンツの雰囲気を確認する。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div id="layout" class="section">
+  <div class="section-label">Layout Rules</div>
+  <div class="layout-grid-demo">
+    ${Array.from({length:12},(_,i)=>`<div class="grid-col">${i+1}</div>`).join('')}
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:12px;color:var(--c-sub);line-height:1.8;">
+    <div><strong style="color:var(--c-text);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">Grid</strong><br>12カラム / Gap: 24px<br>Max width: 900px<br>Padding: 64px</div>
+    <div><strong style="color:var(--c-text);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">Breakpoints</strong><br>Mobile: ≤768px<br>Tablet: 769〜1024px<br>Desktop: ≥1025px</div>
+    <div><strong style="color:var(--c-text);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">Border Radius</strong><br>sm: 2px（バッジ・ラベル）<br>md: 4px（ボタン・入力）<br>lg: 8px（カード）</div>
+  </div>
+</div>
+
+<textarea id="design-md-text" style="display:none;">${designMd.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+
+<script>
+function copyDesignMd(btn) {
+  const ta = document.getElementById('design-md-text');
+  const text = ta.value || ta.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'COPIED!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPY design.md'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+<\/script>
+</body>
+</html>`;
+}
+
+// カテゴリフィルター
+document.querySelectorAll('#cat-bar .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#cat-bar .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+});
+
+// カラートーンフィルター
+document.querySelectorAll('#tone-bar .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tone-bar .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTone = btn.dataset.tone;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
