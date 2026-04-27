@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金の時 — Package Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #1C1510;
+  min-height: 100vh;
+  font-family: 'Noto Serif JP', serif;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════
+   スタジオ背景
+══════════════════════════════ */
+.studio {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px 60px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(ellipse 55% 50% at 52% 40%, rgba(255,248,210,0.13) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    #2A2118;
+}
+
+/* スポットライト */
+.studio::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 50% 40% at 55% 42%, rgba(255,248,210,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.studio::after { display: none; }
+
+/* ラベル */
+.studio-label {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  color: rgba(201,168,76,0.35);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   シーン配置
+══════════════════════════════ */
+.scene-container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  margin-top: 20px;
+}
+
+/* ══════════════════════════════
+   CSS 3D Box
+══════════════════════════════ */
+.perspective-wrap {
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+}
+
+.box3d {
+  width: 240px;
+  height: 380px;
+  transform-style: preserve-3d;
+  transform: rotateX(-3deg) rotateY(-18deg);
+  position: relative;
+}
+
+/* ── 前面 ── */
+.f-front {
+  position: absolute;
+  width: 210px; height: 340px;
+  transform: translateZ(55px);
+  background: #2A2720;
+  overflow: hidden;
+}
+
+.f-front::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(255,248,210,0.12) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.08) 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 前面の縦ハイライト */
+.f-front::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 8px; width: 2px;
+  background: linear-gradient(to bottom, rgba(255,248,210,0.12), transparent 60%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── 右側面 ── */
+.f-right {
+  position: absolute;
+  width: 55px; height: 340px;
+  left: 210px;
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background: #17140F;
+  overflow: hidden;
+}
+
+.f-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+  pointer-events: none;
+}
+
+/* ── 上面 ── */
+.f-top {
+  position: absolute;
+  width: 210px; height: 55px;
+  top: 0;
+  transform-origin: top center;
+  transform: rotateX(90deg) translateZ(-55px);
+  background: #2E2820;
+  overflow: hidden;
+}
+
+.f-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,248,210,0.1) 0%, transparent 100%);
+}
+
+/* ══════════════════════════════
+   前面デザイン
+══════════════════════════════ */
+.front-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 金の細枠 */
+.front-inner::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 0.5px solid rgba(201,168,76,0.22);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fi-jhl {
+  align-self: flex-end;
+  font-family: 'EB Garamond', serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: #C9A84C;
+  opacity: 0.8;
+  position: relative; z-index: 1;
+}
+
+.fi-ring { margin: 12px 0 8px; position: relative; z-index: 1; }
+
+.fi-name {
+  font-size: 30px;
+  font-weight: 700;
+  color: #FAF7F2;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  position: relative; z-index: 1;
+}
+
+.fi-name-en {
+  font-family: 'EB Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: #C9A84C;
+  margin-top: 5px;
+  position: relative; z-index: 1;
+}
+
+.fi-line {
+  width: 55%;
+  height: 0.5px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+  margin: 12px 0;
+  position: relative; z-index: 1;
+}
+
+.fi-tagline {
+  font-size: 10px;
+  font-weight: 700;
+  color: #FAF7F2;
+  letter-spacing: 0.12em;
+  text-align: center;
+  line-height: 1.75;
+  position: relative; z-index: 1;
+}
+
+.fi-ingredient {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: #9A7B2E;
+  margin-top: 10px;
+  text-align: center;
+  position: relative; z-index: 1;
+}
+
+.fi-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  position: relative; z-index: 1;
+}
+
+.fi-badge {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 5.5px;
+  color: #9A7B2E;
+  border: 0.5px solid #5A4820;
+  border-radius: 10px;
+  padding: 2px 5px;
+  letter-spacing: 0.05em;
+}
+
+.fi-bottom {
+  margin-top: auto;
+  text-align: center;
+  position: relative; z-index: 1;
+}
+
+.fi-qty {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: #C9A84C;
+}
+
+.fi-made {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 5.5px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.3);
+  margin-top: 4px;
+  letter-spacing: 0.12em;
+}
+
+/* ══════════════════════════════
+   側面デザイン
+══════════════════════════════ */
+.side-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative; z-index: 1;
+}
+
+.si-name {
+  writing-mode: vertical-rl;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(250,247,242,0.7);
+  letter-spacing: 0.2em;
+}
+
+.si-en {
+  writing-mode: vertical-rl;
+  font-family: 'EB Garamond', serif;
+  font-size: 7px;
+  letter-spacing: 0.25em;
+  color: rgba(201,168,76,0.5);
+}
+
+.si-qty {
+  font-family: 'EB Garamond', serif;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: rgba(122,99,48,0.6);
+  margin-top: 10px;
+}
+
+/* ══════════════════════════════
+   床の影
+══════════════════════════════ */
+.box-shadow-floor {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(90deg);
+  width: 280px;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%);
+  filter: blur(12px);
+  z-index: -1;
+}
+
+/* ══════════════════════════════
+   スティックパック群
+══════════════════════════════ */
+.sticks-group {
+  position: relative;
+  margin-left: -20px;
+  margin-bottom: 10px;
+  align-self: flex-end;
+}
+
+.stick-wrap {
+  position: absolute;
+  bottom: 0;
+}
+
+.stick-item {
+  width: 32px;
+  height: 185px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    2px 4px 16px rgba(0,0,0,0.6),
+    inset 0 0 0 0.5px rgba(201,168,76,0.15);
+}
+
+/* スティックのフォイル感（金属光沢） */
+.stick-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255,255,255,0.06) 45%,
+      rgba(255,255,255,0.02) 50%,
+      transparent 60%
+    );
+  z-index: 2;
+}
+
+.stick-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #2E2B24, #232019);
+}
+
+/* 縦のゴールドライン */
+.stick-lines {
+  position: absolute;
+  inset: 0;
+  border-left: 0.5px solid rgba(201,168,76,0.12);
+  border-right: 0.5px solid rgba(201,168,76,0.12);
+  margin: 0 5px;
+}
+
+.stick-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+}
+
+.stick-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #C9A84C;
+  opacity: 0.5;
+}
+
+.stick-text-jp {
+  writing-mode: vertical-rl;
+  font-size: 9px;
+  font-weight: 700;
+  color: #FAF7F2;
+  letter-spacing: 0.18em;
+  opacity: 0.9;
+}
+
+.stick-text-en {
+  writing-mode: vertical-rl;
+  font-family: 'EB Garamond', serif;
+  font-size: 6.5px;
+  letter-spacing: 0.2em;
+  color: #C9A84C;
+  opacity: 0.7;
+}
+
+/* ══════════════════════════════
+   下部コピー
+══════════════════════════════ */
+.studio-copy {
+  margin-top: 64px;
+  text-align: center;
+  position: relative;
+}
+
+.studio-copy-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.35);
+  letter-spacing: 0.25em;
+}
+
+.studio-copy-en {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: rgba(201,168,76,0.45);
+  margin-top: 8px;
+}
+
+/* ══════════════════════════════
+   展開図セクション
+══════════════════════════════ */
+.flat-section {
+  background: #FAF7F2;
+  padding: 80px 60px;
+}
+
+.flat-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: #BCBAB4;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.flat-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.flat-face { overflow: hidden; position: relative; }
+
+/* 背面 */
+.flat-back {
+  width: 190px; height: 310px;
+  background: #2A2720;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px 20px;
+}
+
+.fl-label {
+  position: absolute;
+  top: 8px; left: 10px;
+  font-family: 'EB Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: rgba(201,168,76,0.3);
+  text-transform: uppercase;
+}
+
+.fl-brand { font-size: 16px; font-weight: 700; color: #FAF7F2; letter-spacing: 0.15em; margin-bottom: 3px; }
+.fl-en { font-family: 'EB Garamond', serif; font-size: 8px; letter-spacing: 0.35em; color: #C9A84C; margin-bottom: 18px; }
+.fl-stitle { font-family: 'Noto Sans JP', sans-serif; font-size: 6px; color: #C9A84C; letter-spacing: 0.15em; border-bottom: 0.5px solid #3A3830; padding-bottom: 3px; margin-bottom: 5px; }
+.fl-body { font-family: 'Noto Sans JP', sans-serif; font-size: 6.5px; font-weight: 300; color: #888880; line-height: 1.9; margin-bottom: 12px; }
+
+.fl-barcode {
+  margin-top: auto;
+  border: 0.5px solid #3A3830;
+  padding: 8px;
+  text-align: center;
+}
+
+.bc-bars {
+  display: flex;
+  gap: 1.5px;
+  height: 22px;
+  margin-bottom: 4px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.bc-bar { background: #FAF7F2; }
+.bc-num { font-family: 'EB Garamond', serif; font-size: 7px; color: #666; letter-spacing: 0.1em; }
+
+/* 側面 */
+.flat-side {
+  width: 96px; height: 310px;
+  background: #1A1712;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 前面 */
+.flat-front {
+  width: 190px; height: 310px;
+  background: #2A2720;
+  position: relative;
+}
+
+.ff-inner {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 16px 16px;
+  position: relative;
+}
+
+.ff-inner::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 0.5px solid rgba(201,168,76,0.2);
+  pointer-events: none;
+}
+
+/* フラップ */
+.flat-flap {
+  width: 190px;
+  height: 64px;
+  background: #201E18;
+  border: 1px solid #E8E4DC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flap-t {
+  font-family: 'EB Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: #7A6330;
+  text-transform: uppercase;
+}
+
+/* スティック展開図 */
+.stick-flat-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.stick-flat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.stick-flat-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: #BCBAB4;
+  text-transform: uppercase;
+}
+
+.stick-flat-body {
+  width: 64px;
+  height: 210px;
+  background: #2A2720;
+  border-radius: 6px;
+  border: 1px solid #3A3830;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stick-flat-body::before {
+  content: '';
+  position: absolute;
+  left: 7px; right: 7px;
+  top: 0; bottom: 0;
+  border-left: 0.5px solid rgba(201,168,76,0.12);
+  border-right: 0.5px solid rgba(201,168,76,0.12);
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ スタジオ ══════════ -->
+<div class="studio">
+  <div class="studio-label">Package Design — 金の時 / Golden Moments</div>
+
+  <div class="scene-container">
+
+    <!-- スティックパック（縦に3本） -->
+    <div class="sticks-group" style="width:110px; height:220px; margin-right:40px; position:relative;">
+
+      <!-- 1本目：少し前・左 -->
+      <div class="stick-wrap" style="bottom:0; left:0; transform:rotate(-4deg); z-index:3;">
+        <div class="stick-item" style="height:210px; width:34px;">
+          <div class="stick-bg"></div>
+          <div class="stick-lines"></div>
+          <div class="stick-content">
+            <div class="stick-dot"></div>
+            <div class="stick-text-jp">金の時</div>
+            <div class="stick-text-en">GOLDEN</div>
+            <div class="stick-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2本目：中央・やや後ろ -->
+      <div class="stick-wrap" style="bottom:0; left:36px; transform:rotate(2deg); z-index:2;">
+        <div class="stick-item" style="height:205px; width:34px; opacity:0.85;">
+          <div class="stick-bg"></div>
+          <div class="stick-lines"></div>
+          <div class="stick-content">
+            <div class="stick-dot"></div>
+            <div class="stick-text-jp">金の時</div>
+            <div class="stick-text-en">GOLDEN</div>
+            <div class="stick-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3本目：右・さらに後ろ -->
+      <div class="stick-wrap" style="bottom:0; left:70px; transform:rotate(-2deg); z-index:1;">
+        <div class="stick-item" style="height:200px; width:34px; opacity:0.7;">
+          <div class="stick-bg"></div>
+          <div class="stick-lines"></div>
+          <div class="stick-content">
+            <div class="stick-dot"></div>
+            <div class="stick-text-jp">金の時</div>
+            <div class="stick-text-en">GOLDEN</div>
+            <div class="stick-dot"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 箱 -->
+    <div class="perspective-wrap" style="position:relative;">
+      <div class="box3d">
+
+        <!-- 前面 -->
+        <div class="f-front" style="width:240px;height:380px;transform:translateZ(60px);">
+          <div class="front-inner">
+            <div class="fi-jhl">JHL+</div>
+            <div class="fi-ring">
+              <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+                <defs>
+                  <filter id="glow1">
+                    <feGaussianBlur stdDeviation="2.5" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <circle cx="34" cy="34" r="30" stroke="#C9A84C" stroke-width="0.5" opacity="0.18"/>
+                <circle cx="34" cy="34" r="22" stroke="#C9A84C" stroke-width="0.8" opacity="0.45"/>
+                <circle cx="34" cy="34" r="13" stroke="#C9A84C" stroke-width="1.2" opacity="0.65" filter="url(#glow1)"/>
+                <circle cx="34" cy="34" r="3.5" fill="#C9A84C" opacity="0.9" filter="url(#glow1)"/>
+                <line x1="34" y1="2" x2="34" y2="66" stroke="#C9A84C" stroke-width="0.35" opacity="0.18"/>
+                <line x1="2" y1="34" x2="66" y2="34" stroke="#C9A84C" stroke-width="0.35" opacity="0.18"/>
+              </svg>
+            </div>
+            <div class="fi-name">金の時</div>
+            <div class="fi-name-en">GOLDEN MOMENTS</div>
+            <div class="fi-line"></div>
+            <div class="fi-tagline">輝きは、<br>準備から始まる。</div>
+            <div class="fi-ingredient">Gynura Bicolor · 金時草</div>
+            <div class="fi-badges">
+              <span class="fi-badge">着色料無添加</span>
+              <span class="fi-badge">香料無添加</span>
+              <span class="fi-badge">保存料無添加</span>
+            </div>
+            <div class="fi-bottom">
+              <div class="fi-qty">2g × 30包</div>
+              <div class="fi-made">MADE IN JAPAN · KANAZAWA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側面 -->
+        <div class="f-right" style="width:60px;height:380px;left:240px;">
+          <div class="side-inner">
+            <div class="si-name">金の時</div>
+            <div class="si-en">GOLDEN MOMENTS</div>
+            <div class="si-qty">2g × 30</div>
+          </div>
+        </div>
+
+        <!-- 上面 -->
+        <div class="f-top" style="width:240px;height:60px;transform:rotateX(90deg) translateZ(-60px);">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;">
+            <span style="font-family:'EB Garamond',serif;font-size:8px;letter-spacing:0.3em;color:rgba(201,168,76,0.4);text-transform:uppercase;">Golden Moments</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 床影 -->
+      <div style="
+        position:absolute;
+        bottom:-24px;
+        left:50%;
+        transform:translateX(-40%);
+        width:300px;
+        height:40px;
+        background:radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%);
+        filter:blur(14px);
+        z-index:-1;
+      "></div>
+    </div>
+
+  </div>
+
+  <div class="studio-copy">
+    <div class="studio-copy-jp">加賀野菜「金時草」　自然由来サプリメント　2g × 30包</div>
+    <div class="studio-copy-en">Brilliance begins with preparation.</div>
+  </div>
+</div>
+
+
+<!-- ══════════ 展開図 ══════════ -->
+<div class="flat-section">
+  <div class="flat-title">Package Flat Design — 展開図</div>
+
+  <!-- 上フラップ -->
+  <div style="display:flex;justify-content:center;margin-bottom:2px;padding-left:288px;">
+    <div class="flat-flap"><div class="flap-t">Top Flap</div></div>
+  </div>
+
+  <div class="flat-row">
+
+    <!-- 背面 -->
+    <div class="flat-face flat-back">
+      <div class="fl-label">Back</div>
+      <div style="padding-top:16px;">
+        <div class="fl-brand">金の時</div>
+        <div class="fl-en">GOLDEN MOMENTS</div>
+
+        <div class="fl-stitle">商品情報 · Product Info</div>
+        <div class="fl-body">
+          名称：金時草加工食品<br>
+          原材料名：金時草末（国内製造）<br>
+          内容量：2g × 30包（60g）<br>
+          賞味期限：パッケージ側面参照<br>
+          保存方法：直射日光・高温多湿を避け常温保存
+        </div>
+
+        <div class="fl-stitle">お召し上がり方</div>
+        <div class="fl-body">
+          1日1包を目安に、水またはお湯に<br>
+          溶かしてお飲みください。
+        </div>
+
+        <div class="fl-stitle">製造者</div>
+        <div class="fl-body">
+          株式会社ジャパンヘルスラボ<br>
+          石川県金沢市 · MADE IN JAPAN
+        </div>
+      </div>
+
+      <div class="fl-barcode">
+        <div class="bc-bars">
+          <div class="bc-bar" style="width:1px"></div><div class="bc-bar" style="width:2px"></div>
+          <div class="bc-bar" style="width:1px"></div><div class="bc-bar" style="width:3px"></div>
+          <div class="bc-bar" style="width:1px"></div><div class="bc-bar" style="width:1px"></div>
+          <div class="bc-bar" style="width:2px"></div><div class="bc-bar" style="width:1px"></div>
+          <div class="bc-bar" style="width:3px"></div><div class="bc-bar" style="width:1px"></div>
+          <div class="bc-bar" style="width:2px"></div><div class="bc-bar" style="width:1px"></div>
+          <div class="bc-bar" style="width:1px"></div><div class="bc-bar" style="width:2px"></div>
+          <div class="bc-bar" style="width:1px"></div><div class="bc-bar" style="width:3px"></div>
+          <div class="bc-bar" style="width:1px"></div>
+        </div>
+        <div class="bc-num">4 901234 567890</div>
+      </div>
+    </div>
+
+    <!-- 左側面 -->
+    <div class="flat-face flat-side">
+      <div class="fl-label" style="color:rgba(201,168,76,0.2);">Side</div>
+      <div style="writing-mode:vertical-rl;font-size:15px;font-weight:700;color:rgba(250,247,242,0.7);letter-spacing:0.2em;">金の時</div>
+      <div style="writing-mode:vertical-rl;font-family:'EB Garamond',serif;font-size:8px;letter-spacing:0.25em;color:rgba(201,168,76,0.5);">GOLDEN MOMENTS</div>
+      <div style="font-family:'EB Garamond',serif;font-size:7px;color:rgba(122,99,48,0.5);letter-spacing:0.15em;margin-top:10px;">2g×30</div>
+    </div>
+
+    <!-- 前面 -->
+    <div class="flat-face flat-front">
+      <div class="fl-label" style="color:rgba(201,168,76,0.4);">Front</div>
+      <div class="ff-inner">
+        <div style="align-self:flex-end;font-family:'EB Garamond',serif;font-size:9px;letter-spacing:0.3em;color:#C9A84C;">JHL+</div>
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style="margin:12px 0 8px;">
+          <circle cx="36" cy="36" r="32" stroke="#C9A84C" stroke-width="0.5" opacity="0.15"/>
+          <circle cx="36" cy="36" r="24" stroke="#C9A84C" stroke-width="0.8" opacity="0.45"/>
+          <circle cx="36" cy="36" r="14" stroke="#C9A84C" stroke-width="1.2" opacity="0.65"/>
+          <circle cx="36" cy="36" r="3.5" fill="#C9A84C" opacity="0.9"/>
+          <line x1="36" y1="2" x2="36" y2="70" stroke="#C9A84C" stroke-width="0.35" opacity="0.18"/>
+          <line x1="2" y1="36" x2="70" y2="36" stroke="#C9A84C" stroke-width="0.35" opacity="0.18"/>
+        </svg>
+        <div style="font-size:32px;font-weight:700;color:#FAF7F2;letter-spacing:0.12em;line-height:1;">金の時</div>
+        <div style="font-family:'EB Garamond',serif;font-size:8.5px;letter-spacing:0.38em;color:#C9A84C;margin-top:5px;">GOLDEN MOMENTS</div>
+        <div style="width:52%;height:0.5px;background:linear-gradient(to right,transparent,#C9A84C,transparent);margin:12px 0;"></div>
+        <div style="font-size:10px;font-weight:700;color:#FAF7F2;letter-spacing:0.12em;text-align:center;line-height:1.75;">輝きは、<br>準備から始まる。</div>
+        <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:8.5px;letter-spacing:0.2em;color:#9A7B2E;margin-top:10px;text-align:center;">Gynura Bicolor · 金時草</div>
+        <div style="display:flex;gap:4px;margin-top:10px;flex-wrap:wrap;justify-content:center;">
+          <span style="font-family:'Noto Sans JP',sans-serif;font-size:5.5px;color:#9A7B2E;border:0.5px solid #5A4820;border-radius:10px;padding:2px 5px;">着色料無添加</span>
+          <span style="font-family:'Noto Sans JP',sans-serif;font-size:5.5px;color:#9A7B2E;border:0.5px solid #5A4820;border-radius:10px;padding:2px 5px;">香料無添加</span>
+          <span style="font-family:'Noto Sans JP',sans-serif;font-size:5.5px;color:#9A7B2E;border:0.5px solid #5A4820;border-radius:10px;padding:2px 5px;">保存料無添加</span>
+        </div>
+        <div style="margin-top:auto;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:11px;letter-spacing:0.22em;color:#C9A84C;">2g × 30包</div>
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:5.5px;font-weight:300;color:rgba(250,247,242,0.3);margin-top:4px;letter-spacing:0.1em;">MADE IN JAPAN · KANAZAWA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右側面 -->
+    <div class="flat-face flat-side">
+      <div class="fl-label" style="color:rgba(201,168,76,0.2);">Side</div>
+      <div style="writing-mode:vertical-rl;font-size:15px;font-weight:700;color:rgba(250,247,242,0.7);letter-spacing:0.2em;">金の時</div>
+      <div style="writing-mode:vertical-rl;font-family:'EB Garamond',serif;font-size:8px;letter-spacing:0.25em;color:rgba(201,168,76,0.5);">GOLDEN MOMENTS</div>
+      <div style="font-family:'EB Garamond',serif;font-size:7px;color:rgba(122,99,48,0.5);letter-spacing:0.15em;margin-top:10px;">2g×30</div>
+    </div>
+
+  </div>
+
+  <!-- 下フラップ -->
+  <div style="display:flex;justify-content:center;margin-top:2px;padding-left:288px;">
+    <div class="flat-flap"><div class="flap-t">Bottom Flap</div></div>
+  </div>
+
+  <!-- スティック展開図 -->
+  <div class="stick-flat-row">
+    <div class="stick-flat-item">
+      <div class="stick-flat-label">Stick — Front</div>
+      <div class="stick-flat-body">
+        <div style="position:relative;z-index:1;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="9" stroke="#C9A84C" stroke-width="0.7" opacity="0.5"/>
+            <circle cx="11" cy="11" r="4" stroke="#C9A84C" stroke-width="0.7" opacity="0.7"/>
+            <circle cx="11" cy="11" r="2" fill="#C9A84C" opacity="0.8"/>
+          </svg>
+        </div>
+        <div style="writing-mode:vertical-rl;font-size:20px;font-weight:700;color:#FAF7F2;letter-spacing:0.18em;position:relative;z-index:1;">金の時</div>
+        <div style="writing-mode:vertical-rl;font-family:'EB Garamond',serif;font-style:italic;font-size:9px;letter-spacing:0.22em;color:#C9A84C;position:relative;z-index:1;">GOLDEN</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:6.5px;writing-mode:vertical-rl;color:#6B6860;letter-spacing:0.1em;position:relative;z-index:1;">2g</div>
+      </div>
+    </div>
+
+    <div class="stick-flat-item">
+      <div class="stick-flat-label">Stick — Back</div>
+      <div class="stick-flat-body" style="background:#1A1712;">
+        <div style="writing-mode:vertical-rl;font-family:'Noto Sans JP',sans-serif;font-size:6.5px;font-weight:300;color:#6B6860;letter-spacing:0.1em;line-height:1.8;position:relative;z-index:1;">
+          名称：金時草加工食品<br>
+          原材料：金時草末<br>
+          内容量：2g<br>
+          MADE IN JAPAN
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
