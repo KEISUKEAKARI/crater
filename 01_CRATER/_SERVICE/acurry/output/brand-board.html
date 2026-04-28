@@ -714,92 +714,90 @@ details.acc[open] .acc-body { opacity: 1; }
       <div>
         <div class="lbl">Color System</div>
 
-        <!-- ドーナツチャート + 凡例 -->
-        <div style="display:flex;align-items:center;gap:24px;margin-bottom:20px;">
-          <div style="background:#fff;padding:16px;border-radius:4px;flex-shrink:0;">
-          <svg width="160" height="160" viewBox="0 0 160 160" style="display:block;">
-            <!-- 外側ベース（白） -->
-            <circle cx="80" cy="80" r="70" fill="#fff"/>
-            <!-- BG Light Gray 70% -->
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#C8C7C1" stroke-width="28"
-              stroke-dasharray="246.4 352" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
-            <!-- Mid Gray 15% -->
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#888888" stroke-width="28"
-              stroke-dasharray="52.8 352" stroke-dashoffset="-246.4" transform="rotate(-90 80 80)"/>
-            <!-- Dark Gray 10% -->
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#444444" stroke-width="28"
-              stroke-dasharray="35.2 352" stroke-dashoffset="-299.2" transform="rotate(-90 80 80)"/>
-            <!-- Black 5% -->
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#111111" stroke-width="28"
-              stroke-dasharray="17.6 352" stroke-dashoffset="-334.4" transform="rotate(-90 80 80)"/>
-            <!-- セグメント区切り（白） -->
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#fff" stroke-width="2"
-              stroke-dasharray="1 351" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#fff" stroke-width="2"
-              stroke-dasharray="1 351" stroke-dashoffset="-246.4" transform="rotate(-90 80 80)"/>
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#fff" stroke-width="2"
-              stroke-dasharray="1 351" stroke-dashoffset="-299.2" transform="rotate(-90 80 80)"/>
-            <circle cx="80" cy="80" r="56" fill="none" stroke="#fff" stroke-width="2"
-              stroke-dasharray="1 351" stroke-dashoffset="-334.4" transform="rotate(-90 80 80)"/>
-            <!-- 中央白抜き -->
-            <circle cx="80" cy="80" r="42" fill="var(--bg)"/>
-            <!-- 中央白抜き -->
-            <circle cx="80" cy="80" r="42" fill="#fff"/>
-          </svg>
-          </div>
-          <!-- 凡例：%のみ -->
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:10px;height:10px;background:#C8C7C1;border:1px solid rgba(0,0,0,0.15);flex-shrink:0;"></div>
-              <span style="font-size:13px;letter-spacing:0.1em;color:var(--black);">70%</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:10px;height:10px;background:#888888;flex-shrink:0;"></div>
-              <span style="font-size:13px;letter-spacing:0.1em;color:var(--black);">15%</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:10px;height:10px;background:#444444;flex-shrink:0;"></div>
-              <span style="font-size:13px;letter-spacing:0.1em;color:var(--black);">10%</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:10px;height:10px;background:#111111;flex-shrink:0;"></div>
-              <span style="font-size:13px;letter-spacing:0.1em;color:var(--black);">5%</span>
+        <!-- カード：やや暗め -->
+        <div style="background:#AEADA7;padding:28px 24px;">
+
+          <!-- ドーナツ + 凡例（左寄せ・大きく） -->
+          <div style="display:flex;align-items:center;gap:32px;margin-bottom:28px;">
+            <svg width="200" height="200" viewBox="0 0 200 200" style="flex-shrink:0;">
+              <!-- BG Light Gray 70% -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#C8C7C1" stroke-width="34"
+                stroke-dasharray="316.7 452.4" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+              <!-- Mid Gray 15% -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#888888" stroke-width="34"
+                stroke-dasharray="67.9 452.4" stroke-dashoffset="-316.7" transform="rotate(-90 100 100)"/>
+              <!-- Dark Gray 10% -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#444444" stroke-width="34"
+                stroke-dasharray="45.2 452.4" stroke-dashoffset="-384.6" transform="rotate(-90 100 100)"/>
+              <!-- Black 5% -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#111111" stroke-width="34"
+                stroke-dasharray="22.6 452.4" stroke-dashoffset="-429.8" transform="rotate(-90 100 100)"/>
+              <!-- 区切り -->
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#AEADA7" stroke-width="2"
+                stroke-dasharray="1.5 450.9" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#AEADA7" stroke-width="2"
+                stroke-dasharray="1.5 450.9" stroke-dashoffset="-316.7" transform="rotate(-90 100 100)"/>
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#AEADA7" stroke-width="2"
+                stroke-dasharray="1.5 450.9" stroke-dashoffset="-384.6" transform="rotate(-90 100 100)"/>
+              <circle cx="100" cy="100" r="72" fill="none" stroke="#AEADA7" stroke-width="2"
+                stroke-dasharray="1.5 450.9" stroke-dashoffset="-429.8" transform="rotate(-90 100 100)"/>
+              <!-- 中央抜き（カード同色） -->
+              <circle cx="100" cy="100" r="54" fill="#AEADA7"/>
+            </svg>
+            <!-- 凡例 -->
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#C8C7C1;border:1px solid rgba(0,0,0,0.2);flex-shrink:0;"></div>
+                <span style="font-size:14px;letter-spacing:0.1em;color:#111;font-weight:500;">70%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#888888;flex-shrink:0;"></div>
+                <span style="font-size:14px;letter-spacing:0.1em;color:#111;font-weight:500;">15%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#444444;flex-shrink:0;"></div>
+                <span style="font-size:14px;letter-spacing:0.1em;color:#111;font-weight:500;">10%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#111111;flex-shrink:0;"></div>
+                <span style="font-size:14px;letter-spacing:0.1em;color:#111;font-weight:500;">5%</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Primary swatches：キャプションを外に -->
-        <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:12px;">
-          <div style="background:#111111;height:72px;"></div>
-          <div style="background:#444444;height:48px;"></div>
-          <div style="background:#888888;height:48px;"></div>
-          <div style="background:#C8C7C1;height:32px;border:1px solid rgba(0,0,0,0.08);"></div>
-        </div>
-        <!-- キャプション（外） -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:16px;">
-          <div style="font-size:12px;font-weight:500;">Black</div>
-          <div style="font-size:12px;color:#555;">#111111</div>
-          <div style="font-size:12px;font-weight:500;">Dark Gray</div>
-          <div style="font-size:12px;color:#555;">#444444</div>
-          <div style="font-size:12px;font-weight:500;">Mid Gray</div>
-          <div style="font-size:12px;color:#555;">#888888</div>
-          <div style="font-size:12px;font-weight:500;">Background</div>
-          <div style="font-size:12px;color:#555;">#C8C7C1</div>
-        </div>
-
-        <!-- グラデーションバー -->
-        <div style="height:3px;background:linear-gradient(to right,#111,#444,#888,#C8C7C1);margin-bottom:20px;"></div>
-
-        <!-- Accent -->
-        <div style="border-top:1px solid rgba(0,0,0,0.15);padding-top:14px;">
-          <div style="font-size:10px;letter-spacing:0.2em;color:#B8723A;margin-bottom:10px;">PRODUCT ACCENT — 肉じゃがカレー</div>
-          <div style="display:flex;align-items:center;gap:0;margin-bottom:8px;">
-            <div style="width:48px;height:48px;background:#B8723A;flex-shrink:0;"></div>
-            <div style="width:48px;height:48px;background:#D9956A;flex-shrink:0;"></div>
-            <div style="width:48px;height:48px;background:#F0E4D8;flex-shrink:0;border:1px solid rgba(0,0,0,0.06);"></div>
+          <!-- スウォッチ -->
+          <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:10px;">
+            <div style="background:#111111;height:64px;"></div>
+            <div style="background:#444444;height:44px;"></div>
+            <div style="background:#888888;height:44px;"></div>
+            <div style="background:#C8C7C1;height:28px;"></div>
           </div>
-          <div style="font-size:12px;font-weight:500;color:#111;">#B8723A — 商品・製品文脈のみ使用</div>
-        </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 16px;margin-bottom:20px;">
+            <div style="font-size:12px;font-weight:500;color:#111;">Black</div>
+            <div style="font-size:12px;color:#555;">#111111</div>
+            <div style="font-size:12px;font-weight:500;color:#111;">Dark Gray</div>
+            <div style="font-size:12px;color:#555;">#444444</div>
+            <div style="font-size:12px;font-weight:500;color:#111;">Mid Gray</div>
+            <div style="font-size:12px;color:#555;">#888888</div>
+            <div style="font-size:12px;font-weight:500;color:#111;">Background</div>
+            <div style="font-size:12px;color:#555;">#C8C7C1</div>
+          </div>
+
+          <!-- グラデーションバー -->
+          <div style="height:3px;background:linear-gradient(to right,#111,#444,#888,#C8C7C1);margin-bottom:20px;"></div>
+
+          <!-- Accent -->
+          <div style="border-top:1px solid rgba(0,0,0,0.15);padding-top:14px;">
+            <div style="font-size:10px;letter-spacing:0.2em;color:#B8723A;margin-bottom:10px;">PRODUCT ACCENT — 肉じゃがカレー</div>
+            <div style="display:flex;align-items:center;gap:0;margin-bottom:8px;">
+              <div style="width:48px;height:48px;background:#B8723A;flex-shrink:0;"></div>
+              <div style="width:48px;height:48px;background:#D9956A;flex-shrink:0;"></div>
+              <div style="width:48px;height:48px;background:#F0E4D8;flex-shrink:0;border:1px solid rgba(0,0,0,0.06);"></div>
+            </div>
+            <div style="font-size:12px;font-weight:500;color:#111;">#B8723A — 商品・製品文脈のみ使用</div>
+          </div>
+
+        </div><!-- /カード -->
       </div>
     </div>
   </div>
