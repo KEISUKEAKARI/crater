@@ -547,9 +547,13 @@
   function renderPins() {
     imageWrap.querySelectorAll('.c-pin').forEach(function(p) { p.remove(); });
 
-    var visible = comments.filter(function(c) {
-      return showResolved || !c.resolved;
-    });
+    var visible = comments
+      .filter(function(c) { return showResolved || !c.resolved; })
+      .sort(function(a, b) {
+        var at = a.createdAt ? a.createdAt.seconds : 0;
+        var bt = b.createdAt ? b.createdAt.seconds : 0;
+        return at - bt;
+      });
 
     visible.forEach(function(c, i) {
       var pin = document.createElement('div');
