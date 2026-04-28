@@ -129,7 +129,7 @@ body {
 
 /* ── 黒ブロック（背景反転） ─────────────── */
 .block-dark {
-  background: var(--black);
+  background: #3A3A38;
   color: #fff;
   margin: 0 calc(-1 * var(--pad));
   padding: 56px var(--pad);
@@ -712,6 +712,27 @@ details.acc[open] .acc-body { opacity: 1; }
       <!-- Color -->
       <div>
         <div class="lbl">Color System</div>
+
+        <!-- ドーナツチャート -->
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <!-- Black 60% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#111111" stroke-width="28"
+              stroke-dasharray="211.2 352" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+            <!-- Dark Gray 20% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#444444" stroke-width="28"
+              stroke-dasharray="70.4 352" stroke-dashoffset="-211.2" transform="rotate(-90 80 80)"/>
+            <!-- Mid Gray 12% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#888888" stroke-width="28"
+              stroke-dasharray="42.2 352" stroke-dashoffset="-281.6" transform="rotate(-90 80 80)"/>
+            <!-- BG 8% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#D8D7D2" stroke-width="28"
+              stroke-dasharray="28.2 352" stroke-dashoffset="-323.8" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="42" fill="var(--bg)"/>
+            <text x="80" y="75" text-anchor="middle" font-family="'Roboto Condensed',sans-serif" font-size="10" fill="#888" letter-spacing="2">COLOR</text>
+            <text x="80" y="90" text-anchor="middle" font-family="'Roboto Condensed',sans-serif" font-size="9" fill="#aaa" letter-spacing="1">BALANCE</text>
+          </svg>
+        </div>
 
         <!-- Primary swatches: 横長・大きめ -->
         <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:16px;">
