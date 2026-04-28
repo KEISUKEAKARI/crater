@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A CURRY — Brand Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #D8D7D2;
+  --black: #111111;
+  --gray-dk: #444444;
+  --gray-md: #888888;
+  --gray-lt: rgba(0,0,0,0.1);
+  --accent: #B8723A;
+  --accent-bg: #F0E4D8;
+  --font: 'Inter Tight', 'Zen Kaku Gothic New', sans-serif;
+  --gap: 20px;
+  --pad: 40px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--black);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Lock Screen ─────────────────────────── */
+#lockScreen {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999; gap: 40px;
+}
+.lock-brand {
+  font-family: var(--font);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--black);
+}
+.lock-sub {
+  font-size: 11px; letter-spacing: 0.2em;
+  color: var(--gray-md); margin-top: -28px;
+}
+.lock-form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lock-form input {
+  background: transparent;
+  border: none; border-bottom: 1px solid rgba(0,0,0,0.2);
+  color: var(--black); padding: 10px 0;
+  font-family: var(--font);
+  font-size: 16px; letter-spacing: 0.2em;
+  text-align: center; width: 200px;
+  outline: none;
+}
+.lock-form input::placeholder { color: var(--gray-md); }
+.lock-form button {
+  background: var(--black); color: var(--bg);
+  border: none; padding: 10px 36px;
+  font-family: var(--font);
+  font-size: 11px; letter-spacing: 0.2em;
+  cursor: pointer; margin-top: 8px;
+  transition: opacity 0.2s;
+}
+.lock-form button:hover { opacity: 0.7; }
+.lock-err { font-size: 11px; color: #c06060; letter-spacing: 0.1em; min-height: 16px; }
+
+/* ── Main ────────────────────────────────── */
+#mainWrap { display: none; }
+
+/* ── Header ──────────────────────────────── */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  padding: 0 var(--pad);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+.header-brand {
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.25em; color: var(--black);
+}
+.header-sub {
+  font-size: 11px; letter-spacing: 0.15em;
+  color: var(--gray-md);
+}
+
+/* ── Tab Nav ─────────────────────────────── */
+.tab-nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--gray-lt);
+  display: flex; padding: 0 var(--pad); gap: 0;
+  overflow-x: auto;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  font-family: var(--font);
+  font-size: 11px; letter-spacing: 0.2em;
+  color: var(--gray-md); background: none; border: none;
+  padding: 14px 20px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.tab-btn:hover { color: var(--black); }
+.tab-btn.active { color: var(--black); border-bottom-color: var(--black); }
+
+/* ── Tab Content ─────────────────────────── */
+.tab-panel { display: none; max-width: 1200px; margin: 0 auto; padding: 0 var(--pad) 80px; }
+.tab-panel.active { display: block; }
+
+/* ── Section Block（カードなし） ─────────── */
+.block {
+  padding: 40px 0;
+  border-top: 1px solid var(--gray-lt);
+}
+.block:first-child { border-top: none; padding-top: 48px; }
+
+/* ── 黒ブロック（背景反転） ─────────────── */
+.block-dark {
+  background: var(--black);
+  color: #fff;
+  margin: 0 calc(-1 * var(--pad));
+  padding: 56px var(--pad);
+}
+
+/* ── アクセントライン ────────────────────── */
+.block-accent {
+  border-left: 2px solid var(--accent);
+  padding-left: 20px;
+}
+
+/* ── グリッド ────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; }
+.grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+
+/* ── ラベル ──────────────────────────────── */
+.lbl {
+  font-size: 10px; letter-spacing: 0.25em;
+  color: var(--gray-md); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── ディバイダー ────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--gray-lt); margin: 24px 0; }
+
+/* ── Brand Name ──────────────────────────── */
+.brand-name-display {
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--black);
+}
+.brand-name-ruby {
+  font-size: 12px; letter-spacing: 0.3em;
+  color: var(--gray-md); margin-top: 16px;
+}
+
+/* ── Tagline ─────────────────────────────── */
+.tagline-main {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+.tagline-en {
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 300;
+  color: var(--gray-dk);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ── Brand Voice (黒ブロック内) ─────────── */
+.brand-voice-text {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+  line-height: 1.2;
+}
+.brand-voice-sub {
+  font-size: 12px; letter-spacing: 0.15em;
+  color: #666; margin-top: 24px;
+}
+
+/* ── 4原則 ───────────────────────────────── */
+.principle-item { padding: 24px 0; border-top: 1px solid var(--gray-lt); }
+.principle-item:first-child { border-top: none; padding-top: 0; }
+.principle-en {
+  font-size: 15px; font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.principle-jp {
+  font-size: 11px; color: var(--gray-md);
+  margin-top: 2px; letter-spacing: 0.05em;
+}
+.principle-desc {
+  font-size: 12px; color: var(--gray-dk);
+  line-height: 1.9; margin-top: 8px;
+}
+
+/* ── Do Don't ────────────────────────────── */
+.dndlist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.dndlist li {
+  display: flex; align-items: flex-start; gap: 16px;
+  font-size: 13px; line-height: 1.6;
+  padding-bottom: 12px; border-bottom: 1px solid var(--gray-lt);
+}
+.dndlist li:last-child { border-bottom: none; padding-bottom: 0; }
+.dnd-mark {
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--gray-md); min-width: 32px;
+  padding-top: 3px;
+}
+
+/* ── Brand Codes ─────────────────────────── */
+.core-code-display {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 300; line-height: 1.5;
+}
+.code-item {
+  display: flex; gap: 24px; align-items: flex-start;
+  padding: 16px 0; border-top: 1px solid var(--gray-lt);
+}
+.code-num {
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--gray-md); min-width: 28px; padding-top: 3px;
+}
+.code-title { font-size: 13px; font-weight: 500; }
+.code-desc { font-size: 12px; color: var(--gray-dk); margin-top: 4px; line-height: 1.8; }
+
+/* ── Accordion ───────────────────────────── */
+details.acc { margin-top: 24px; }
+details.acc summary {
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-top: 1px solid var(--gray-lt);
+  font-size: 10px; letter-spacing: 0.2em; color: var(--gray-md);
+}
+details.acc summary::after {
+  content: '+'; font-size: 16px;
+  transition: transform 0.3s ease;
+}
+details.acc[open] summary::after { transform: rotate(45deg); }
+details.acc summary::-webkit-details-marker { display: none; }
+.acc-body { overflow: hidden; opacity: 0; transition: opacity 0.3s ease; }
+details.acc[open] .acc-body { opacity: 1; }
+.acc-inner { padding: 16px 0 20px; }
+
+/* ── Story text ──────────────────────────── */
+.story-text { font-size: 13px; line-height: 2.2; color: var(--gray-dk); }
+.naming-row {
+  display: flex; gap: 20px; padding: 16px 0;
+  border-bottom: 1px solid var(--gray-lt);
+}
+.naming-row:last-child { border-bottom: none; }
+.naming-letter {
+  font-size: 40px; font-weight: 300;
+  color: var(--black); line-height: 1; min-width: 36px;
+}
+.naming-text { font-size: 13px; color: var(--gray-dk); line-height: 1.9; padding-top: 4px; }
+
+
+/* ═══════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════ */
+.concept-name {
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 600; letter-spacing: 0.06em; line-height: 1;
+}
+.concept-label {
+  font-size: 10px; letter-spacing: 0.25em;
+  color: var(--gray-md); text-transform: uppercase; margin-bottom: 8px;
+}
+.concept-val { font-size: 13px; line-height: 1.9; color: var(--gray-dk); }
+
+/* Typography */
+.typo-block { padding: 28px 0; border-top: 1px solid var(--gray-lt); }
+.typo-block:first-child { border-top: none; padding-top: 0; }
+.typo-font-name {
+  font-size: 10px; letter-spacing: 0.2em; color: var(--gray-md); margin-bottom: 8px;
+}
+.typo-display {
+  font-family: var(--font); font-size: clamp(36px, 6vw, 72px);
+  font-weight: 600; letter-spacing: 0.05em; line-height: 1.1;
+}
+.typo-scale { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.typo-scale-row {
+  display: flex; align-items: baseline; gap: 16px;
+  border-top: 1px solid var(--gray-lt); padding-top: 8px;
+}
+.typo-scale-sz { font-size: 10px; color: var(--gray-md); letter-spacing: 0.1em; min-width: 44px; }
+
+/* Color */
+.color-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+.swatch {
+  height: 72px; position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 12px;
+}
+.swatch-sm { height: 48px; }
+.sw-name { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
+.sw-hex { font-size: 10px; letter-spacing: 0.08em; margin-top: 2px; }
+
+/* Icon */
+.icon-grid { display: grid; grid-template-columns: repeat(8,1fr); gap: 16px; }
+.icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.icon-box {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px solid var(--gray-lt);
+}
+.icon-lbl { font-size: 9px; letter-spacing: 0.1em; color: var(--gray-md); }
+
+/* UI */
+.ui-btn-primary {
+  display: inline-block; background: var(--black); color: var(--bg);
+  font-family: var(--font); font-size: 11px; letter-spacing: 0.2em;
+  padding: 11px 28px; text-decoration: none; margin-right: 8px; margin-bottom: 8px;
+}
+.ui-btn-outline {
+  display: inline-block; background: transparent; color: var(--black);
+  border: 1px solid var(--black);
+  font-family: var(--font); font-size: 11px; letter-spacing: 0.2em;
+  padding: 11px 28px; text-decoration: none; margin-right: 8px; margin-bottom: 8px;
+}
+.ui-tag {
+  display: inline-block; background: rgba(0,0,0,0.06); color: var(--gray-dk);
+  font-size: 10px; letter-spacing: 0.1em;
+  padding: 4px 12px; margin-right: 6px; margin-bottom: 6px;
+}
+.ui-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  font-size: 9px; letter-spacing: 0.15em;
+  padding: 3px 10px; text-transform: uppercase;
+}
+
+/* Web Hero */
+.web-hero {
+  background: var(--black); padding: 40px 32px;
+  min-height: 180px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.web-hero::before {
+  content: 'A'; font-size: 240px; font-weight: 300;
+  color: rgba(255,255,255,0.03);
+  position: absolute; right: -20px; top: -60px;
+  line-height: 1; letter-spacing: -0.05em;
+}
+.web-hero-tag { font-size: 10px; letter-spacing: 0.3em; color: #555; margin-bottom: 12px; }
+.web-hero-title {
+  font-size: clamp(20px, 3vw, 36px); font-weight: 300;
+  color: #fff; letter-spacing: 0.03em; line-height: 1.3;
+}
+.web-hero-cta {
+  display: inline-block; margin-top: 20px;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: #fff; border-bottom: 1px solid #444;
+  padding-bottom: 4px; width: fit-content;
+}
+
+/* Mobile preview */
+.mobile-preview {
+  background: var(--black); border-radius: 24px;
+  padding: 28px 16px; max-width: 220px; margin: 0 auto;
+}
+.mobile-notch { width: 72px; height: 5px; background: #333; border-radius: 3px; margin: 0 auto 20px; }
+.mobile-screen { background: var(--bg); border-radius: 10px; padding: 18px 14px; }
+.mobile-brand-text {
+  font-size: 18px; font-weight: 300; letter-spacing: 0.2em;
+  text-align: center; margin-bottom: 3px;
+}
+.mobile-tag-text { font-size: 9px; color: var(--gray-md); text-align: center; letter-spacing: 0.15em; margin-bottom: 14px; }
+.mobile-hero-blk {
+  background: var(--black); border-radius: 6px;
+  height: 100px; display: flex; align-items: center;
+  justify-content: center; margin-bottom: 10px;
+}
+.mobile-hero-txt {
+  font-size: 12px; font-weight: 300; color: #fff;
+  letter-spacing: 0.05em; text-align: center; line-height: 1.6;
+}
+
+/* Spacing demo */
+.spacing-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.spacing-row-item { display: flex; align-items: center; gap: 12px; }
+.spacing-bar { height: 3px; background: var(--black); }
+.spacing-val { font-size: 10px; color: var(--gray-md); letter-spacing: 0.1em; }
+
+/* Accent callout */
+.accent-callout {
+  border-left: 2px solid var(--accent);
+  padding: 16px 20px; background: var(--accent-bg);
+  margin-top: 16px;
+}
+.accent-callout-label {
+  font-size: 10px; letter-spacing: 0.25em; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+
+/* Layout principles */
+.principle-layout-item { padding: 20px 0; border-top: 1px solid var(--gray-lt); }
+.principle-layout-en { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.principle-layout-jp { font-size: 11px; color: var(--gray-md); margin-bottom: 8px; }
+.principle-layout-desc { font-size: 12px; color: var(--gray-dk); line-height: 1.9; }
+
+/* LOGO tab */
+.logo-display {
+  font-size: clamp(48px, 8vw, 96px); font-weight: 600;
+  letter-spacing: 0.12em; line-height: 1;
+}
+.sample-overlay {
+  position: absolute; inset: 0;
+  background: rgba(220,220,220,0.88);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.sample-tag {
+  font-size: 14px; letter-spacing: 0.4em; color: #AAAAAA;
+  background: var(--bg); padding: 8px 24px;
+}
+.logo-dont-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--gray-lt);
+  font-size: 13px; color: var(--gray-dk);
+}
+.logo-dont-item:last-child { border-bottom: none; }
+.logo-dont-mark { font-size: 10px; color: var(--gray-md); min-width: 24px; padding-top: 3px; }
+
+/* VISUAL tab */
+.visual-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.visual-cell {
+  position: relative; aspect-ratio: 16/9;
+  background: #2a2a2a; overflow: hidden;
+}
+.visual-label {
+  position: absolute; bottom: 10px; left: 12px;
+  font-size: 9px; letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4); text-transform: uppercase; z-index: 5;
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 768px) {
+  :root { --pad: 20px; }
+  .grid-2, .grid-2-1 { grid-template-columns: 1fr; gap: 24px; }
+  .grid-3 { grid-template-columns: 1fr; gap: 24px; }
+  .grid-4 { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .icon-grid { grid-template-columns: repeat(4,1fr); }
+  .color-row { grid-template-columns: 1fr 1fr; }
+  .visual-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Lock Screen ────────────────────────── -->
+<div id="lockScreen">
+  <div class="lock-brand">A CURRY</div>
+  <div class="lock-sub">BRAND BOARD — CONFIDENTIAL</div>
+  <div class="lock-form">
+    <input type="password" id="pwInput" placeholder="PASSWORD" autocomplete="off">
+    <button onclick="checkPw()">ENTER</button>
+    <div class="lock-err" id="pwErr"></div>
+  </div>
+</div>
+
+<div id="mainWrap">
+
+<!-- ── Header ────────────────────────────── -->
+<header class="site-header">
+  <div class="header-brand">A CURRY</div>
+  <div class="header-sub">BRAND BOARD 2026</div>
+</header>
+
+<!-- ── Tab Nav ────────────────────────────── -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('overview',this)">OVERVIEW</button>
+  <button class="tab-btn" onclick="switchTab('design',this)">DESIGN SYSTEM</button>
+  <button class="tab-btn" onclick="switchTab('logo',this)">LOGO</button>
+  <button class="tab-btn" onclick="switchTab('visual',this)">VISUAL</button>
+</nav>
+
+
+<!-- ══════════════════════════════
+     OVERVIEW
+══════════════════════════════ -->
+<div id="tab-overview" class="tab-panel active">
+
+  <!-- Brand Name -->
+  <div class="block">
+    <div class="lbl">Brand Name</div>
+    <div class="brand-name-display">A CURRY</div>
+    <div class="brand-name-ruby">ア・カリー &nbsp;/&nbsp; A CURRY &nbsp;/&nbsp; 株式会社クレーター</div>
+
+    <details class="acc">
+      <summary>NAMING STORY</summary>
+      <div class="acc-body"><div class="acc-inner">
+        <div class="naming-row">
+          <div class="naming-letter">A</div>
+          <div class="naming-text"><strong>最初の一文字。</strong><br>あらゆるカレーの前に立つ記号。順序でなく、姿勢を示す。</div>
+        </div>
+        <div class="naming-row">
+          <div class="naming-letter">A</div>
+          <div class="naming-text"><strong>アートのA。</strong><br>デザイン会社・クレーターが生み出した、デザインされたカレー。</div>
+        </div>
+        <div class="naming-row">
+          <div class="naming-letter">A</div>
+          <div class="naming-text"><strong>Ambition（野心）。</strong><br>日本のカレーの可能性を、まだ見ぬ味わいへと広げていく意志。</div>
+        </div>
+      </div></div>
+    </details>
+  </div>
+
+  <!-- Tagline -->
+  <div class="block">
+    <div class="grid-2">
+      <div>
+        <div class="lbl">Tagline</div>
+        <div class="tagline-main">記憶に残る、この一皿。</div>
+        <div class="tagline-en">A dish that stays with you.</div>
+      </div>
+      <div>
+        <div class="lbl">Concept</div>
+        <p class="story-text">数あるカレーの中から、食べた人の記憶に残り続ける一皿を目指してつくったカレー。<br><br>懐かしさと新しさが融合した、体験の質感を大切にするブランド。肉じゃがという日本の記憶に、32種のスパイスと直火焙煎ルウが交差する。</p>
+
+        <details class="acc">
+          <summary>BRAND STORY</summary>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="story-text">クレーターは、ブランドに「記憶」を宿すことを仕事にしてきた。<br><br>ロゴ、パッケージ、Webサイト——ビジュアルを通じて、人の心に残るものをつくり続けてきたデザイン会社が、ある日こう考えた。「食べ物も、ブランドになれるか。」<br><br>こうして生まれたのが A CURRY だ。肉じゃがという日本人なら誰でも知っている家庭の味に、32種のスパイスを掛け合わせた。デザインするように、素材を選び、配合し、ひとつの世界観をつくった。<br><br>食べた後に、ふと思い出す一皿。</p>
+          </div></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Attributes -->
+  <div class="block-dark">
+    <div class="lbl" style="color:#555;">Brand Voice</div>
+    <div class="brand-voice-text">語らない。<br>でも残る。</div>
+    <div class="brand-voice-sub">過剰に説明せず、食べた体験が記憶に語りかける。</div>
+  </div>
+
+  <div class="block">
+    <div class="lbl">Brand Attributes</div>
+    <div class="grid-2">
+      <div>
+        <div class="principle-item">
+          <div class="principle-en">Minimal</div>
+          <div class="principle-jp">削ぎ落とす美</div>
+          <div class="principle-desc">余計を排し、本質だけを皿に残す。引き算の美学。</div>
+        </div>
+        <div class="principle-item">
+          <div class="principle-en">Memory</div>
+          <div class="principle-jp">記憶に宿る</div>
+          <div class="principle-desc">食べた後も、ふと思い出される体験をつくる。</div>
+        </div>
+      </div>
+      <div>
+        <div class="principle-item">
+          <div class="principle-en">Mastery</div>
+          <div class="principle-jp">こだわりの技</div>
+          <div class="principle-desc">32種のスパイス、直火焙煎、国産素材——妥協しない製法。</div>
+        </div>
+        <div class="principle-item">
+          <div class="principle-en">Message</div>
+          <div class="principle-jp">食卓の物語</div>
+          <div class="principle-desc">一皿に小さな物語を添える。贈る理由があるカレー。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Do's & Don'ts -->
+  <div class="block">
+    <div class="grid-2">
+      <div>
+        <div class="lbl">Do's</div>
+        <ul class="dndlist">
+          <li><span class="dnd-mark">DO</span><span>余白と静けさで、上質さを表現する</span></li>
+          <li><span class="dnd-mark">DO</span><span>贈り物として機能するパッケージ・コンテキストで届ける</span></li>
+          <li><span class="dnd-mark">DO</span><span>ニッチな味の組み合わせで、驚きを提供する</span></li>
+          <li><span class="dnd-mark">DO</span><span>素材・製法のこだわりをきちんと語る</span></li>
+          <li><span class="dnd-mark">DO</span><span>おしゃれな文脈（雑誌・SNS）で紹介される</span></li>
+          <li><span class="dnd-mark">DO</span><span>口コミ・紹介で自然に広がる設計をつくる</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="lbl">Don'ts</div>
+        <ul class="dndlist">
+          <li><span class="dnd-mark">—</span><span>安さ・お得感・コスパを訴求する</span></li>
+          <li><span class="dnd-mark">—</span><span>ダサいビジュアルや弱いデザインで出す</span></li>
+          <li><span class="dnd-mark">—</span><span>大量・まとめ買いの言葉を使う</span></li>
+          <li><span class="dnd-mark">—</span><span>他ブランドと同じ訴求に埋没する</span></li>
+          <li><span class="dnd-mark">—</span><span>根拠のない最上級表現・誇張を使う</span></li>
+          <li><span class="dnd-mark">—</span><span>競合を意識した防衛的な表現をする</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Codes -->
+  <div class="block">
+    <div class="lbl">Brand Codes</div>
+    <div class="grid-2">
+      <div>
+        <div class="block-accent">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent);margin-bottom:10px;">CORE CODE</div>
+          <div class="core-code-display">デザイン会社が<br>つくるカレー</div>
+        </div>
+        <p class="story-text" style="margin-top:20px;">食品業界でカレーをつくる会社は多い。しかしデザイン会社がブランドとして設計し、届けるカレーは他にない。</p>
+      </div>
+      <div>
+        <details class="acc" open>
+          <summary>OTHER BRAND CODES</summary>
+          <div class="acc-body" style="opacity:1;"><div class="acc-inner">
+            <div class="code-item">
+              <div class="code-num">01</div>
+              <div><div class="code-title">おしゃれポジション</div><div class="code-desc">業界で唯一、デザイン会社発のカレーブランド。</div></div>
+            </div>
+            <div class="code-item">
+              <div class="code-num">02</div>
+              <div><div class="code-title">ニッチな味の掛け合わせ</div><div class="code-desc">肉じゃが×カレーのように、和の記憶とスパイスを交差させる。</div></div>
+            </div>
+            <div class="code-item">
+              <div class="code-num">03</div>
+              <div><div class="code-title">記憶に残る体験</div><div class="code-desc">食べた後も語られ、紹介され、再び選ばれる。</div></div>
+            </div>
+            <div class="code-item">
+              <div class="code-num">04</div>
+              <div><div class="code-title">ギフト文脈</div><div class="code-desc">¥1,080という価格帯と上質なパッケージがギフトとして機能する。</div></div>
+            </div>
+          </div></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════════════════
+     DESIGN SYSTEM
+══════════════════════════════ -->
+<div id="tab-design" class="tab-panel">
+
+  <!-- Design Concept -->
+  <div class="block">
+    <div class="lbl">Design Concept</div>
+    <div class="concept-name">SILENT PLATE</div>
+    <div class="grid-3" style="margin-top:32px;">
+      <div><div class="concept-label">TONE</div><div class="concept-val">静謐・余白・上質。語らない強さ。ダイナミックなシンプル感。</div></div>
+      <div><div class="concept-label">PALETTE</div><div class="concept-val">薄グレー × 黒をベースに、商品ごとのアクセントカラーのみで色を語る。</div></div>
+      <div><div class="concept-label">REFERENCE</div><div class="concept-val">clend.jp — ナチュラルラグジュアリー・余白・高コントラスト・雑誌の表紙感。</div></div>
+    </div>
+  </div>
+
+  <!-- Typography · Color -->
+  <div class="block">
+    <div class="grid-2-1">
+      <!-- Typography -->
+      <div>
+        <div class="lbl">Typography</div>
+        <div class="typo-block">
+          <div class="typo-font-name">DM Sans + Noto Sans JP — Primary</div>
+          <div class="typo-display">A CURRY</div>
+          <div class="typo-scale">
+            <div class="typo-scale-row"><span class="typo-scale-sz">96px</span><span style="font-size:28px;font-weight:300;letter-spacing:0.05em;">Hero Display</span></div>
+            <div class="typo-scale-row"><span class="typo-scale-sz">48px</span><span style="font-size:20px;font-weight:300;">Section Title</span></div>
+            <div class="typo-scale-row"><span class="typo-scale-sz">24px</span><span style="font-size:16px;font-weight:400;">Sub Heading</span></div>
+            <div class="typo-scale-row"><span class="typo-scale-sz">14px</span><span style="font-size:13px;font-weight:300;color:var(--gray-dk);">Body Text / 本文テキスト</span></div>
+            <div class="typo-scale-row"><span class="typo-scale-sz">11px</span><span style="font-size:11px;letter-spacing:0.2em;color:var(--gray-md);">LABEL / CAPTION</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Color -->
+      <div>
+        <div class="lbl">Color System</div>
+        <div class="color-row">
+          <div class="swatch" style="background:#111111;">
+            <div class="sw-name" style="color:#555;">Black</div>
+            <div class="sw-hex" style="color:#444;">#111</div>
+          </div>
+          <div class="swatch" style="background:#E9E8E4;border:1px solid rgba(0,0,0,0.08);">
+            <div class="sw-name" style="color:#999;">Gray BG</div>
+            <div class="sw-hex" style="color:#999;">#E9E8E4</div>
+          </div>
+          <div class="swatch" style="background:#888888;">
+            <div class="sw-name" style="color:#ccc;">Gray Mid</div>
+            <div class="sw-hex" style="color:#bbb;">#888</div>
+          </div>
+        </div>
+        <div class="color-row">
+          <div class="swatch swatch-sm" style="background:#444444;">
+            <div class="sw-hex" style="color:#888;font-size:9px;">#444</div>
+          </div>
+          <div class="swatch swatch-sm" style="background:rgba(0,0,0,0.08);">
+            <div class="sw-hex" style="color:#999;font-size:9px;">rgba 8%</div>
+          </div>
+          <div class="swatch swatch-sm" style="background:#F5F4F0;border:1px solid rgba(0,0,0,0.08);">
+            <div class="sw-hex" style="color:#bbb;font-size:9px;">#F5F4F0</div>
+          </div>
+        </div>
+        <div class="accent-callout" style="margin-top:12px;">
+          <div class="accent-callout-label">PRODUCT ACCENT — 肉じゃがカレー</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div style="width:32px;height:32px;background:#B8723A;flex-shrink:0;"></div>
+            <div style="font-size:13px;color:#B8723A;letter-spacing:0.1em;">#B8723A</div>
+          </div>
+          <div style="font-size:11px;color:var(--gray-dk);line-height:1.8;">ベースに使わない。商品・製品文脈のみ。</div>
+        </div>
+        <!-- グラデーションバー -->
+        <div style="height:4px;background:linear-gradient(to right,#111,#444,#888,rgba(0,0,0,0.1),#E9E8E4);margin-top:16px;"></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--gray-md);letter-spacing:0.1em;margin-top:6px;"><span>Dark</span><span>Light</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Icon Set -->
+  <div class="block">
+    <div class="lbl">Icon Set</div>
+    <div class="icon-grid">
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <div class="icon-lbl">Spice</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="icon-lbl">Memory</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+        <div class="icon-lbl">Gift</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="icon-lbl">Craft</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
+        <div class="icon-lbl">Minimal</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="icon-lbl">Quality</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div class="icon-lbl">Mastery</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="icon-lbl">Story</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;font-size:10px;color:var(--gray-md);letter-spacing:0.15em;">LINE ICONS — Stroke 1.5px / Monochrome #111 / 24×24px grid</div>
+  </div>
+
+  <!-- Layout Principles -->
+  <div class="block">
+    <div class="lbl">Layout Principles</div>
+    <div class="grid-3">
+      <div class="principle-layout-item" style="border-top:none;">
+        <div class="principle-layout-en">White Space Speaks</div>
+        <div class="principle-layout-jp">余白を語らせる</div>
+        <div class="principle-layout-desc">余白は「何もない」のではなく、ブランドの静謐さを語るデザイン要素。</div>
+      </div>
+      <div class="principle-layout-item" style="border-top:none;">
+        <div class="principle-layout-en">Vertical Rhythm</div>
+        <div class="principle-layout-jp">縦のリズム</div>
+        <div class="principle-layout-desc">情報は縦に流れ、視線を自然に導く。横に広げず縦のグリッドで秩序をつくる。</div>
+      </div>
+      <div class="principle-layout-item" style="border-top:none;">
+        <div class="principle-layout-en">Line over Box</div>
+        <div class="principle-layout-jp">箱より線</div>
+        <div class="principle-layout-desc">カードで囲わず、1pxラインとパディングで情報を構造化する。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UI · Web -->
+  <div class="block">
+    <div class="lbl">UI · Web</div>
+    <div class="grid-2" style="margin-bottom:var(--gap);">
+      <!-- Mobile -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:40px 0;">
+        <div class="mobile-preview">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <div class="mobile-brand-text">A CURRY</div>
+            <div class="mobile-tag-text">ア・カリー</div>
+            <div class="mobile-hero-blk">
+              <div class="mobile-hero-txt">記憶に残る、<br>この一皿。</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,0,0,0.1);padding-top:10px;font-size:10px;font-weight:500;">肉じゃがカレー</div>
+            <div style="font-size:10px;color:var(--gray-md);">¥1,080</div>
+          </div>
+        </div>
+      </div>
+      <!-- Web Hero + components -->
+      <div style="display:flex;flex-direction:column;gap:var(--gap);">
+        <div class="web-hero">
+          <div class="web-hero-tag">A CURRY — 2026</div>
+          <div class="web-hero-title">記憶に残る、<br>この一皿。</div>
+          <div class="web-hero-cta">SHOP NOW</div>
+        </div>
+        <div>
+          <div class="lbl">UI Components</div>
+          <div><span class="ui-btn-primary">ORDER</span><span class="ui-btn-outline">LEARN MORE</span></div>
+          <div style="margin-top:8px;"><span class="ui-badge">NEW</span></div>
+          <div style="margin-top:8px;"><span class="ui-tag">肉じゃが</span><span class="ui-tag">32スパイス</span><span class="ui-tag">国産素材</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing + Border -->
+    <div class="grid-2">
+      <div>
+        <div class="lbl">Spacing</div>
+        <div class="spacing-rows">
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:4px;"></div><span class="spacing-val">4px</span></div>
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:8px;"></div><span class="spacing-val">8px</span></div>
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:16px;"></div><span class="spacing-val">16px</span></div>
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:24px;"></div><span class="spacing-val">24px</span></div>
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:40px;"></div><span class="spacing-val">40px</span></div>
+          <div class="spacing-row-item"><div class="spacing-bar" style="width:64px;"></div><span class="spacing-val">64px</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="lbl">Border · Radius</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+          <div>
+            <div style="font-size:10px;color:var(--gray-md);letter-spacing:0.1em;margin-bottom:6px;">0px — Flat（ブランド標準）</div>
+            <div style="width:100%;height:32px;border:1px solid var(--black);border-radius:0;"></div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--gray-md);letter-spacing:0.1em;margin-bottom:6px;">4px — 最小限</div>
+            <div style="width:100%;height:32px;border:1px solid var(--black);border-radius:4px;"></div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--gray-md);letter-spacing:0.1em;margin-bottom:6px;">999px — Pill（タグ・バッジ）</div>
+            <div style="width:100%;height:32px;background:var(--black);border-radius:999px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /design -->
+
+
+<!-- ══════════════════════════════
+     LOGO
+══════════════════════════════ -->
+<div id="tab-logo" class="tab-panel">
+
+  <!-- Primary Logo -->
+  <div class="block">
+    <div class="lbl">Primary Logo</div>
+    <div style="position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin-bottom:var(--gap);">
+      <div class="sample-overlay"><div class="sample-tag">SAMPLE — ロゴ画像をここに配置</div></div>
+      <div style="text-align:center;">
+        <div class="logo-display">A CURRY</div>
+        <div style="font-size:12px;letter-spacing:0.4em;color:var(--gray-md);margin-top:12px;">ア・カリー</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variations -->
+  <div class="block">
+    <div class="lbl">Color Variations</div>
+    <div class="grid-2">
+      <div style="position:relative;background:var(--black);display:flex;align-items:center;justify-content:center;padding:56px 40px;min-height:200px;">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag">SAMPLE</div></div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;letter-spacing:0.25em;color:#555;margin-bottom:16px;">White — On Dark</div>
+          <div class="logo-display" style="font-size:clamp(36px,5vw,64px);color:#fff;">A CURRY</div>
+          <div style="font-size:10px;letter-spacing:0.35em;color:#666;margin-top:10px;">ア・カリー</div>
+        </div>
+      </div>
+      <div style="position:relative;background:rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;padding:56px 40px;min-height:200px;">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag">SAMPLE</div></div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;letter-spacing:0.25em;color:var(--gray-md);margin-bottom:16px;">Black — On Light</div>
+          <div class="logo-display" style="font-size:clamp(36px,5vw,64px);">A CURRY</div>
+          <div style="font-size:10px;letter-spacing:0.35em;color:var(--gray-md);margin-top:10px;">ア・カリー</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear Space -->
+  <div class="block">
+    <div class="lbl">Clear Space &nbsp;<span style="color:var(--gray-md);">X = ロゴ高さの 1/4</span></div>
+    <div style="position:relative;min-height:200px;display:flex;align-items:center;justify-content:center;">
+      <div class="sample-overlay"><div class="sample-tag">SAMPLE</div></div>
+      <div style="border:1px dashed rgba(0,0,0,0.15);padding:32px 56px;display:inline-block;">
+        <div style="font-size:36px;font-weight:300;letter-spacing:0.15em;">A CURRY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout Variations -->
+  <div class="block">
+    <div class="lbl">Layout Variations</div>
+    <div class="grid-4">
+      <div style="position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gray-lt);">
+        <div class="sample-overlay"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div style="font-size:10px;letter-spacing:0.2em;color:var(--gray-md);">Horizontal</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:11px;letter-spacing:0.3em;color:var(--gray-md);">A</div>
+          <div style="width:1px;height:24px;background:var(--gray-lt);"></div>
+          <div style="font-size:18px;font-weight:300;letter-spacing:0.15em;">CURRY</div>
+        </div>
+      </div>
+      <div style="position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gray-lt);">
+        <div class="sample-overlay"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div style="font-size:10px;letter-spacing:0.2em;color:var(--gray-md);">Stacked</div>
+        <div style="text-align:center;">
+          <div style="font-size:24px;font-weight:300;letter-spacing:0.2em;">A CURRY</div>
+          <div style="font-size:8px;letter-spacing:0.3em;color:var(--gray-md);margin-top:4px;">ア・カリー</div>
+        </div>
+      </div>
+      <div style="position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gray-lt);">
+        <div class="sample-overlay"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div style="font-size:10px;letter-spacing:0.2em;color:var(--gray-md);">Symbol</div>
+        <div style="width:52px;height:52px;border:1px solid var(--black);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:300;letter-spacing:0.1em;">A</div>
+      </div>
+      <div style="position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gray-lt);">
+        <div class="sample-overlay"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div style="font-size:10px;letter-spacing:0.2em;color:var(--gray-md);">Text Only</div>
+        <div style="font-size:20px;font-weight:300;letter-spacing:0.18em;">A CURRY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Don'ts -->
+  <div class="block">
+    <div class="lbl">Logo Don'ts</div>
+    <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>ロゴの縦横比を変えて使用する</span></div>
+    <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>規定以外のカラーで使用する</span></div>
+    <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>クリアスペース内に他の要素を入れる</span></div>
+    <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>背景と同化する組み合わせで使用する</span></div>
+    <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>最小サイズ以下で使用する（Web: 80px / 印刷: 20mm）</span></div>
+  </div>
+
+</div><!-- /logo -->
+
+
+<!-- ══════════════════════════════
+     VISUAL
+══════════════════════════════ -->
+<div id="tab-visual" class="tab-panel">
+
+  <!-- KV -->
+  <div class="block">
+    <div class="lbl">Key Visual</div>
+    <div style="position:relative;width:100%;aspect-ratio:16/9;background:var(--black);overflow:hidden;margin-bottom:32px;">
+      <img src="../assets/kv-main.jpg" alt="KV" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+      <div class="sample-overlay" style="background:rgba(220,220,220,0.88);">
+        <div class="sample-tag" style="font-size:18px;padding:10px 32px;">SAMPLE — KV画像をここに配置</div>
+      </div>
+      <div style="position:absolute;bottom:40px;left:48px;z-index:5;">
+        <div style="font-size:10px;letter-spacing:0.3em;color:rgba(255,255,255,0.4);margin-bottom:10px;">A CURRY — 2026</div>
+        <div style="font-size:clamp(24px,4vw,52px);font-weight:300;color:#fff;letter-spacing:0.03em;line-height:1.3;">記憶に残る、この一皿。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Concept -->
+  <div class="block">
+    <div class="lbl">Visual Concept</div>
+    <div class="grid-3">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.25em;color:var(--gray-md);text-transform:uppercase;margin-bottom:10px;">Atmosphere</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px;">静かな存在感</div>
+        <div style="font-size:12px;color:var(--gray-dk);line-height:2;">語りすぎない。騒がしくない。黒・グレーの静けさの中で、食欲をそそる一皿がじっと語りかける。</div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:0.25em;color:var(--gray-md);text-transform:uppercase;margin-bottom:10px;">Subject</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px;">素材と皿</div>
+        <div style="font-size:12px;color:var(--gray-dk);line-height:2;">スパイスの粒・煮込まれた肉・盛りつけた一皿。人物は出さず、食が主役。贈る場面の手元。</div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:0.25em;color:var(--gray-md);text-transform:uppercase;margin-bottom:10px;">Tone</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:8px;">雑誌の表紙感</div>
+        <div style="font-size:12px;color:var(--gray-dk);line-height:2;">暗部重視・高コントラスト。白飛びよりも影と質感。レトルト食品の典型的な明るい写真とは距離を置く。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Grid -->
+  <div class="block">
+    <div class="lbl">Visual Grid</div>
+    <div class="visual-grid">
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Spice</div>
+      </div>
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Plating</div>
+      </div>
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Product</div>
+      </div>
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Ingredient</div>
+      </div>
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Gift Scene</div>
+      </div>
+      <div class="visual-cell">
+        <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
+        <div class="visual-label">Texture</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /visual -->
+
+</div><!-- /mainWrap -->
+
+<script>
+function checkPw() {
+  if (document.getElementById('pwInput').value === 'view') {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('mainWrap').style.display = 'block';
+  } else {
+    document.getElementById('pwErr').textContent = 'INCORRECT';
+    setTimeout(() => document.getElementById('pwErr').textContent = '', 2000);
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// アコーディオン
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('details.acc').forEach(d => {
+    const body = d.querySelector('.acc-body');
+    if (!body) return;
+    if (d.open) { body.style.height = 'auto'; body.style.opacity = '1'; }
+    else { body.style.height = '0'; body.style.overflow = 'hidden'; body.style.opacity = '0'; }
+
+    d.addEventListener('click', e => {
+      e.preventDefault();
+      if (!d.open) {
+        d.open = true;
+        body.style.height = '0'; body.style.overflow = 'hidden';
+        const h = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          body.style.transition = 'height 0.3s ease, opacity 0.25s ease';
+          body.style.height = h; body.style.opacity = '1';
+        });
+        body.addEventListener('transitionend', () => { body.style.height = 'auto'; body.style.overflow = ''; }, { once: true });
+      } else {
+        body.style.height = body.scrollHeight + 'px'; body.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+          body.style.transition = 'height 0.3s ease, opacity 0.25s ease';
+          body.style.height = '0'; body.style.opacity = '0';
+        });
+        body.addEventListener('transitionend', () => { d.open = false; }, { once: true });
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

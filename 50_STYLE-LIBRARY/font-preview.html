@@ -3,125 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Font Preview</title>
+<title>Font Preview — A CURRY</title>
 
-<!-- ▼ここのテキストを変えるだけで確認テキストが変わる -->
 <script>
-  const BRAND   = '金の時';        // ブランド名（日本語）
-  const BRAND_EN = 'Golden Moments'; // ブランド名（英語）
-  const TAGLINE  = '輝きは、準備から始まる。'; // タグライン
-  const TAGLINE_EN = 'Brilliance begins with preparation.';
-  const BODY_TEXT  = '加賀の地で育まれた金時草。自然の恵みを、毎日の習慣に。';
+  const BRAND    = 'A CURRY';
+  const BRAND_JP = 'ア・カリー';
+  const TAGLINE  = '記憶に残る、この一皿。';
+  const TAGLINE_EN = 'A dish that stays with you.';
+  const BODY_TEXT = 'デザイン会社がつくるカレー。肉じゃがという記憶に、32種のスパイスが交わる。';
 </script>
 
-<!-- フォント候補 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?
-  family=Noto+Serif+JP:wght@400;500;700
-  &family=Shippori+Mincho:wght@400;500;700
-  &family=Zen+Old+Mincho:wght@400;700
-  &family=Shippori+Antique
-  &family=EB+Garamond:ital,wght@0,400;0,500;1,400
-  &family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400
-  &family=Playfair+Display:ital,wght@0,400;0,700;1,400
-  &family=Libre+Baskerville:ital,wght@0,400;0,700;1,400
-  &family=Crimson+Pro:ital,wght@0,400;0,600;1,400
-  &family=Noto+Sans+JP:wght@300;400
+  family=Barlow+Condensed:wght@400;500;600;700
+  &family=Barlow+Semi+Condensed:wght@400;500;600
+  &family=Barlow:wght@400;500;600
+  &family=Oswald:wght@400;500;600
+  &family=Roboto+Condensed:wght@400;500;600;700
+  &family=Inter+Tight:wght@400;500;600;700
+  &family=Kanit:wght@400;500;600
+  &family=Exo+2:wght@400;500;600;700
+  &family=Archivo+Narrow:wght@400;500;600;700
+  &family=Titillium+Web:wght@400;600;700
+  &family=League+Spartan:wght@500;600;700
+  &family=Chivo:wght@400;500;600;700
+  &family=Noto+Sans+JP:wght@400;500;700
+  &family=Zen+Kaku+Gothic+New:wght@400;500;700
+  &family=BIZ+UDGothic:wght@400;700
   &display=swap" rel="stylesheet">
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:#F5F2EC; font-family:'Noto Sans JP',sans-serif; color:#2C2C2C; padding:40px; }
-
-h1 { font-size:11px; letter-spacing:0.4em; color:#9A7B2E; text-transform:uppercase; margin-bottom:8px; }
+body {
+  background:#D8D7D2;
+  font-family:'Noto Sans JP', sans-serif;
+  color:#111;
+  padding:40px;
+  -webkit-font-smoothing: antialiased;
+}
+h1 { font-size:11px; letter-spacing:0.35em; color:#666; text-transform:uppercase; margin-bottom:8px; }
 .note { font-size:11px; color:#888; margin-bottom:40px; line-height:1.8; }
 
 .section-title {
   font-size:10px; letter-spacing:0.3em; text-transform:uppercase;
-  color:#B8B3A8; border-bottom:1px solid #E4E0D8; padding-bottom:8px;
-  margin:48px 0 24px;
+  color:#999; border-bottom:1px solid rgba(0,0,0,0.12);
+  padding-bottom:8px; margin:48px 0 24px;
 }
 
-.combos { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:2px; }
+.combos {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  gap:2px;
+}
 
 .combo {
-  background:#fff;
+  background:#E9E8E4;
   padding:32px 28px;
   cursor:pointer;
   border:2px solid transparent;
-  transition:border-color 0.2s;
+  transition:border-color 0.15s, background 0.15s;
 }
-.combo:hover { border-color:#9A7B2E; }
-.combo.selected { border-color:#9A7B2E; background:#FDFAF5; }
+.combo:hover { background:#EFEEE9; border-color:rgba(0,0,0,0.2); }
+.combo.selected { border-color:#111; background:#EFEEE9; }
+.combo.base { border-color:rgba(0,0,0,0.3); }
 
-.combo-num { font-size:9px; letter-spacing:0.3em; color:#B8B3A8; margin-bottom:16px; }
+.combo-num { font-size:9px; letter-spacing:0.3em; color:#999; margin-bottom:16px; }
+.combo-note { font-size:10px; color:#666; letter-spacing:0.05em; }
+.base-badge {
+  display:inline-block; background:#111; color:#E9E8E4;
+  font-size:8px; letter-spacing:0.15em; padding:2px 8px;
+  margin-left:8px; vertical-align:middle;
+}
 
-.c-brand    { font-size:36px; font-weight:500; line-height:1.1; margin-bottom:6px; }
-.c-tagline  { font-size:14px; font-weight:400; margin-bottom:12px; line-height:1.6; }
-.c-brand-en { font-size:13px; letter-spacing:0.3em; margin-bottom:12px; color:#9A7B2E; }
-.c-tagline-en { font-size:12px; margin-bottom:16px; line-height:1.7; color:#5C5956; }
-.c-body     { font-size:11px; font-weight:300; color:#5C5956; line-height:2; font-family:'Noto Sans JP',sans-serif; border-top:1px solid #E4E0D8; padding-top:12px; }
+.c-brand    { font-size:44px; font-weight:600; line-height:1; margin-bottom:4px; letter-spacing:0.06em; }
+.c-brand-jp { font-size:12px; letter-spacing:0.3em; color:#888; margin-bottom:14px; }
+.c-tagline  { font-size:16px; font-weight:500; margin-bottom:6px; line-height:1.5; }
+.c-tagline-en { font-size:13px; color:#666; margin-bottom:16px; line-height:1.7; }
+.c-body {
+  font-size:11px; font-weight:400; color:#666;
+  line-height:2; border-top:1px solid rgba(0,0,0,0.1); padding-top:12px;
+}
+.font-name { font-size:9px; letter-spacing:0.15em; color:#999; margin-top:12px; }
 
-.font-name  { font-size:9px; letter-spacing:0.2em; color:#B8B3A8; margin-top:14px; }
-
-/* 選択ボタン */
 .select-btn {
   display:inline-block; margin-top:12px;
   font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
-  background:#2C2C2C; color:#FAF7F2;
-  padding:6px 14px; border-radius:20px; cursor:pointer;
+  background:#111; color:#E9E8E4;
+  padding:7px 16px; cursor:pointer;
   border:none; font-family:'Noto Sans JP',sans-serif;
 }
+.select-btn:hover { background:#333; }
 </style>
 </head>
 <body>
 
-<h1>Font Preview</h1>
+<h1>Font Preview — A CURRY</h1>
 <p class="note">
-  クリックで選択。気に入ったら「No.○ で」と言えばブランドボードに反映します。<br>
-  テキストはHTMLの先頭の BRAND / TAGLINE を変更してください。
+  No.03（Barlow Condensed）を基準に、近い印象のゴシック10案を追加。<br>
+  気に入ったら「No.○ で」と言えばブランドボードに反映します。
 </p>
 
-<div class="section-title">日本語 serif × 英語 serif（候補）</div>
+<div class="section-title">縦長ゴシック系 候補一覧（No.03 基準）</div>
 <div class="combos" id="combos"></div>
 
 <script>
 const combos = [
-  { num:'01', jp:'Noto Serif JP',       en:'EB Garamond',         note:'現在使用中' },
-  { num:'02', jp:'Shippori Mincho',     en:'Cormorant Garamond',  note:'やわらかな格調' },
-  { num:'03', jp:'Shippori Mincho',     en:'EB Garamond',         note:'やわらかさ × クラシック' },
-  { num:'04', jp:'Zen Old Mincho',      en:'EB Garamond',         note:'古典的・力強い' },
-  { num:'05', jp:'Zen Old Mincho',      en:'Playfair Display',    note:'古典 × モダン高級' },
-  { num:'06', jp:'Noto Serif JP',       en:'Cormorant Garamond',  note:'安定 × エレガント' },
-  { num:'07', jp:'Noto Serif JP',       en:'Playfair Display',    note:'安定 × モダン' },
-  { num:'08', jp:'Shippori Antique',    en:'Cormorant Garamond',  note:'レトロ × 繊細' },
-  { num:'09', jp:'Zen Old Mincho',      en:'Crimson Pro',         note:'古典 × 読みやすい' },
-  { num:'10', jp:'Shippori Mincho',     en:'Libre Baskerville',   note:'やわらか × 堅実' },
+  // ─── 基準 ───
+  {
+    num:'03', en:'Barlow Condensed', jp:'Noto Sans JP',
+    enW:'600', jpW:'500',
+    note:'【基準】縦長・雑誌感。文字幅狭い', base: true,
+  },
+  // ─── 近似 10案 ───
+  {
+    num:'A', en:'Barlow Condensed', jp:'Noto Sans JP',
+    enW:'700', jpW:'700',
+    note:'03より太め。よりインパクト重視',
+  },
+  {
+    num:'B', en:'Barlow Semi Condensed', jp:'Noto Sans JP',
+    enW:'600', jpW:'500',
+    note:'03より少し幅広。読みやすさ寄り',
+  },
+  {
+    num:'C', en:'Oswald', jp:'Noto Sans JP',
+    enW:'500', jpW:'500',
+    note:'クラシック縦長。力強く整然としている',
+  },
+  {
+    num:'D', en:'Oswald', jp:'Zen Kaku Gothic New',
+    enW:'600', jpW:'700',
+    note:'Oswald × 角ゴシック。シャープで重厚',
+  },
+  {
+    num:'E', en:'Roboto Condensed', jp:'Noto Sans JP',
+    enW:'600', jpW:'500',
+    note:'スタンダード縦長。整理された印象',
+  },
+  {
+    num:'F', en:'Inter Tight', jp:'Noto Sans JP',
+    enW:'600', jpW:'500',
+    note:'モダン縦長。Interの狭幅版。今時',
+  },
+  {
+    num:'G', en:'Inter Tight', jp:'Zen Kaku Gothic New',
+    enW:'700', jpW:'700',
+    note:'Inter Tight太め × 角ゴシック太め。力強い',
+  },
+  {
+    num:'H', en:'Archivo Narrow', jp:'Noto Sans JP',
+    enW:'700', jpW:'500',
+    note:'実用的縦長。読みやすさと狭さを両立',
+  },
+  {
+    num:'I', en:'Exo 2', jp:'Noto Sans JP',
+    enW:'600', jpW:'500',
+    note:'鋭角的・モダン。ブランド感が出る',
+  },
+  {
+    num:'J', en:'League Spartan', jp:'Noto Sans JP',
+    enW:'600', jpW:'700',
+    note:'幅狭め・重心低め。ポスター的な強さ',
+  },
 ];
 
 const container = document.getElementById('combos');
+
 combos.forEach(c => {
   const div = document.createElement('div');
-  div.className = 'combo';
+  div.className = 'combo' + (c.base ? ' base' : '');
+
+  const baseBadge = c.base ? '<span class="base-badge">BASE</span>' : '';
+
   div.innerHTML = `
-    <div class="combo-num">No.${c.num} &nbsp;—&nbsp; ${c.note}</div>
-    <div class="c-brand" style="font-family:'${c.jp}',serif;">${BRAND}</div>
-    <div class="c-tagline" style="font-family:'${c.jp}',serif;">${TAGLINE}</div>
-    <div class="c-brand-en" style="font-family:'${c.en}',serif;">${BRAND_EN}</div>
-    <div class="c-tagline-en" style="font-family:'${c.en}',serif;">${TAGLINE_EN}</div>
-    <div class="c-body">${BODY_TEXT}</div>
-    <div class="font-name">JP: ${c.jp} &nbsp;/&nbsp; EN: ${c.en}</div>
-    <button class="select-btn" onclick="select(this, '${c.num}', '${c.jp}', '${c.en}')">Select</button>
+    <div class="combo-num">No.${c.num} ${baseBadge} &nbsp;—&nbsp; <span class="combo-note">${c.note}</span></div>
+    <div class="c-brand"
+      style="font-family:'${c.en}',sans-serif;font-weight:${c.enW};">${BRAND}</div>
+    <div class="c-brand-jp"
+      style="font-family:'${c.jp}',sans-serif;font-weight:${c.jpW};">${BRAND_JP}</div>
+    <div class="c-tagline"
+      style="font-family:'${c.jp}',sans-serif;font-weight:${c.jpW};">${TAGLINE}</div>
+    <div class="c-tagline-en"
+      style="font-family:'${c.en}',sans-serif;font-weight:${c.enW === '700' ? '500' : '400'};">${TAGLINE_EN}</div>
+    <div class="c-body"
+      style="font-family:'${c.jp}',sans-serif;">${BODY_TEXT}</div>
+    <div class="font-name">EN: ${c.en} w${c.enW} &nbsp;/&nbsp; JP: ${c.jp} w${c.jpW}</div>
+    <button class="select-btn" onclick="selectFont(this,'${c.num}','${c.en}','${c.jp}')">Select</button>
   `;
+
   container.appendChild(div);
 });
 
-function select(btn, num, jp, en) {
+function selectFont(btn, num, en, jp) {
   document.querySelectorAll('.combo').forEach(el => el.classList.remove('selected'));
   btn.closest('.combo').classList.add('selected');
-  alert(`No.${num} を選択\nJP: ${jp}\nEN: ${en}\n\n「No.${num} で」とクロコに伝えてください。`);
+  alert(`No.${num} を選択\nEN: ${en}\nJP: ${jp}\n\n「No.${num} で」とクロコに伝えてください。`);
 }
 </script>
-
 </body>
 </html>
