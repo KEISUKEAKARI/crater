@@ -147,8 +147,15 @@ body {
 .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; }
 .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
 
-/* ── ラベル ──────────────────────────────── */
+/* ── セクション見出し ────────────────────── */
 .lbl {
+  font-size: 40px; font-weight: 700;
+  letter-spacing: 0.03em; line-height: 1;
+  color: var(--black);
+  margin-bottom: 24px;
+}
+/* ── 小ラベル（ブロック内） ─────────────── */
+.lbl-sm {
   font-size: 10px; letter-spacing: 0.25em;
   color: var(--black); text-transform: uppercase;
   margin-bottom: 12px;
@@ -834,7 +841,7 @@ details.acc[open] .acc-body { opacity: 1; }
           <div class="web-hero-cta">SHOP NOW</div>
         </div>
         <div>
-          <div class="lbl">UI Components</div>
+          <div class="lbl-sm">UI Components</div>
           <div><span class="ui-btn-primary">ORDER</span><span class="ui-btn-outline">LEARN MORE</span></div>
           <div style="margin-top:8px;"><span class="ui-badge">NEW</span></div>
           <div style="margin-top:8px;"><span class="ui-tag">肉じゃが</span><span class="ui-tag">32スパイス</span><span class="ui-tag">国産素材</span></div>
@@ -845,7 +852,7 @@ details.acc[open] .acc-body { opacity: 1; }
     <!-- Spacing + Border -->
     <div class="grid-2">
       <div>
-        <div class="lbl">Spacing</div>
+        <div class="lbl-sm">Spacing</div>
         <div class="spacing-rows">
           <div class="spacing-row-item"><div class="spacing-bar" style="width:4px;"></div><span class="spacing-val">4px</span></div>
           <div class="spacing-row-item"><div class="spacing-bar" style="width:8px;"></div><span class="spacing-val">8px</span></div>
@@ -856,7 +863,7 @@ details.acc[open] .acc-body { opacity: 1; }
         </div>
       </div>
       <div>
-        <div class="lbl">Border · Radius</div>
+        <div class="lbl-sm">Border · Radius</div>
         <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
           <div>
             <div style="font-size:10px;color:var(--gray-dk);letter-spacing:0.1em;margin-bottom:6px;">0px — Flat（ブランド標準）</div>
