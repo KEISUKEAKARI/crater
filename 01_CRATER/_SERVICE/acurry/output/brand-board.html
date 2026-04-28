@@ -1052,16 +1052,23 @@ details.acc[open] .acc-body { opacity: 1; }
 </div><!-- /mainWrap -->
 
 <script>
+function unlock() {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('mainWrap').style.display = 'block';
+}
+
 function checkPw() {
   if (document.getElementById('pwInput').value === 'view') {
-    document.getElementById('lockScreen').style.display = 'none';
-    document.getElementById('mainWrap').style.display = 'block';
+    sessionStorage.setItem('unlocked', '1');
+    unlock();
   } else {
     document.getElementById('pwErr').textContent = 'INCORRECT';
     setTimeout(() => document.getElementById('pwErr').textContent = '', 2000);
   }
 }
 document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+
+if (sessionStorage.getItem('unlocked') === '1') unlock();
 
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
