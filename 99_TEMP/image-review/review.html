@@ -489,7 +489,7 @@
 
   // ===== コメント保存 =====
   function saveComment(x, y, text, name) {
-    db.collection('image_reviews').doc(PAGE_ID).collection('comments').add({
+    db.collection('comments').doc(PAGE_ID).collection('items').add({
       x: x,
       y: y,
       text: text,
@@ -561,14 +561,14 @@
     imageWrap.appendChild(viewPopup);
 
     viewPopup.querySelector('.resolve').addEventListener('click', function() {
-      db.collection('image_reviews').doc(PAGE_ID).collection('comments')
+      db.collection('comments').doc(PAGE_ID).collection('items')
         .doc(c.id).update({ resolved: !c.resolved });
       closeViewPopup();
     });
 
     viewPopup.querySelector('.delete').addEventListener('click', function() {
       if (!confirm('このコメントを削除しますか？')) return;
-      db.collection('image_reviews').doc(PAGE_ID).collection('comments').doc(c.id).delete();
+      db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).delete();
       closeViewPopup();
     });
   }
@@ -610,7 +610,7 @@
   }
 
   // ===== リアルタイム購読 =====
-  db.collection('image_reviews').doc(PAGE_ID).collection('comments')
+  db.collection('comments').doc(PAGE_ID).collection('items')
     .orderBy('createdAt')
     .onSnapshot(function(snap) {
       comments = snap.docs.map(function(doc) {
