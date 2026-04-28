@@ -620,7 +620,6 @@
 
   // ===== リアルタイム購読 =====
   db.collection('comments').doc(PAGE_ID).collection('items')
-    .orderBy('createdAt')
     .onSnapshot(function(snap) {
       comments = snap.docs.map(function(doc) {
         var d = doc.data();
