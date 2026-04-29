@@ -154,6 +154,12 @@ body {
   letter-spacing: 0.03em; line-height: 1;
   color: var(--black);
   margin-bottom: 24px;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.lbl-jp {
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.08em; color: var(--black);
+  opacity: 0.5;
 }
 /* ── 小ラベル（ブロック内） ─────────────── */
 .lbl-sm {
@@ -513,7 +519,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Brand Name -->
   <div class="block">
-    <div class="lbl">Brand Name</div>
+    <div class="lbl">Brand Name<span class="lbl-jp">ブランドネーム</span></div>
     <div class="brand-name-display">A CURRY</div>
     <div class="brand-name-ruby">ア・カリー &nbsp;/&nbsp; A CURRY &nbsp;/&nbsp; 株式会社クレーター</div>
 
@@ -540,12 +546,12 @@ details.acc[open] .acc-body { opacity: 1; }
   <div class="block">
     <div class="grid-2">
       <div>
-        <div class="lbl">Tagline</div>
+        <div class="lbl">Tagline<span class="lbl-jp">タグライン</span></div>
         <div class="tagline-main">記憶に残る、この一皿。</div>
         <div class="tagline-en">A dish that stays with you.</div>
       </div>
       <div>
-        <div class="lbl">Concept</div>
+        <div class="lbl">Concept<span class="lbl-jp">コンセプト</span></div>
         <p class="story-text">数あるカレーの中から、食べた人の記憶に残り続ける一皿を目指してつくったカレー。<br><br>懐かしさと新しさが融合した、体験の質感を大切にするブランド。肉じゃがという日本の記憶に、32種のスパイスと直火焙煎ルウが交差する。</p>
 
         <details class="acc">
@@ -566,7 +572,7 @@ details.acc[open] .acc-body { opacity: 1; }
   </div>
 
   <div class="block">
-    <div class="lbl">Brand Attributes</div>
+    <div class="lbl">Brand Attributes<span class="lbl-jp">ブランドらしさ</span></div>
     <div class="grid-2">
       <div>
         <div class="principle-item">
@@ -625,7 +631,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Brand Codes -->
   <div class="block">
-    <div class="lbl">Brand Codes</div>
+    <div class="lbl">Brand Codes<span class="lbl-jp">ブランドコード</span></div>
     <div class="grid-2">
       <div>
         <div class="block-accent" style="border-left-color:var(--black);">
@@ -670,7 +676,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Design Concept -->
   <div class="block">
-    <div class="lbl">Design Concept</div>
+    <div class="lbl">Design Concept<span class="lbl-jp">デザインコンセプト</span></div>
     <div class="concept-name">SILENT PLATE</div>
     <div class="grid-3" style="margin-top:32px;">
       <div><div class="concept-label">TONE</div><div class="concept-val">静謐・余白・上質。語らない強さ。ダイナミックなシンプル感。</div></div>
@@ -684,7 +690,7 @@ details.acc[open] .acc-body { opacity: 1; }
     <div class="grid-2-1">
       <!-- Typography -->
       <div>
-        <div class="lbl">Typography</div>
+        <div class="lbl">Typography<span class="lbl-jp">タイポグラフィ</span></div>
 
         <!-- EN: Roboto Condensed -->
         <div class="typo-block" style="border-top:none;padding-top:0;">
@@ -713,7 +719,7 @@ details.acc[open] .acc-body { opacity: 1; }
       </div>
       <!-- Color -->
       <div>
-        <div class="lbl">Color System</div>
+        <div class="lbl">Color System<span class="lbl-jp">カラーシステム</span></div>
 
         <!-- カード：やや暗め -->
         <div style="background:#BDBCB6;padding:28px 24px;">
@@ -796,7 +802,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Icon Set -->
   <div class="block">
-    <div class="lbl">Icon Set</div>
+    <div class="lbl">Icon Set<span class="lbl-jp">アイコン</span></div>
     <div class="icon-grid">
       <div class="icon-item">
         <div class="icon-box"><svg width="42" height="42" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
@@ -836,7 +842,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Layout Principles -->
   <div class="block">
-    <div class="lbl">Layout Principles</div>
+    <div class="lbl">Layout Principles<span class="lbl-jp">レイアウト原則</span></div>
     <div class="grid-3">
       <div class="principle-layout-item" style="border-top:none;">
         <div class="principle-layout-en">White Space Speaks</div>
@@ -858,7 +864,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- UI · Web -->
   <div class="block">
-    <div class="lbl">UI · Web</div>
+    <div class="lbl">UI · Web<span class="lbl-jp">UIとウェブ</span></div>
 
     <!-- スマホ + Webヒーロー -->
     <div class="grid-2" style="margin-bottom:32px;align-items:start;">
@@ -982,7 +988,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Primary Logo -->
   <div class="block">
-    <div class="lbl">Primary Logo</div>
+    <div class="lbl">Primary Logo<span class="lbl-jp">プライマリロゴ</span></div>
     <!-- Black on BG -->
     <div style="aspect-ratio:16/9;background:#D5D4CE;display:flex;align-items:center;justify-content:center;padding:40px;margin-bottom:var(--gap);">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="228 230 382 132" style="width:75%;fill:#111111;">
@@ -998,7 +1004,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Variations -->
   <div class="block">
-    <div class="lbl">Color Variations</div>
+    <div class="lbl">Color Variations<span class="lbl-jp">カラーバリエーション</span></div>
     <div>
       <!-- White on Black -->
       <div style="background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 40px;gap:12px;">
@@ -1048,7 +1054,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Don'ts -->
   <div class="block">
-    <div class="lbl">Logo Don'ts</div>
+    <div class="lbl">Logo Don'ts<span class="lbl-jp">禁止事項</span></div>
     <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>ロゴの縦横比を変えて使用する</span></div>
     <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>規定以外のカラーで使用する</span></div>
     <div class="logo-dont-item"><span class="logo-dont-mark">—</span><span>クリアスペース内に他の要素を入れる</span></div>
@@ -1066,7 +1072,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- KV -->
   <div class="block">
-    <div class="lbl">Key Visual</div>
+    <div class="lbl">Key Visual<span class="lbl-jp">キービジュアル</span></div>
     <div style="position:relative;width:100%;aspect-ratio:16/9;background:var(--black);overflow:hidden;margin-bottom:32px;">
       <img src="../assets/kv-main.jpg" alt="KV" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
       <div class="sample-overlay" style="background:rgba(220,220,220,0.88);">
@@ -1081,7 +1087,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Visual Concept -->
   <div class="block">
-    <div class="lbl">Visual Concept</div>
+    <div class="lbl">Visual Concept<span class="lbl-jp">ビジュアルコンセプト</span></div>
     <div class="grid-3">
       <div>
         <div style="font-size:10px;letter-spacing:0.25em;color:var(--gray-dk);text-transform:uppercase;margin-bottom:10px;">Atmosphere</div>
@@ -1103,7 +1109,7 @@ details.acc[open] .acc-body { opacity: 1; }
 
   <!-- Visual Grid -->
   <div class="block">
-    <div class="lbl">Visual Grid</div>
+    <div class="lbl">Visual Grid<span class="lbl-jp">ビジュアル一覧</span></div>
     <div class="visual-grid">
       <div class="visual-cell">
         <div class="sample-overlay" style="background:rgba(220,220,220,0.88);"><div class="sample-tag" style="font-size:10px;padding:4px 12px;">SAMPLE</div></div>
