@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>わたしたちについて - ONE WF</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f5f5f5; color: #111; overflow-x: hidden; padding-top: 48px; padding-right: 280px; }
+#wf-bar { position: fixed; top: 0; left: 0; right: 0; height: 48px; background: #111; border-bottom: 1px solid #333; display: flex; align-items: center; padding: 0 14px; gap: 10px; z-index: 9999; }
+.wf-bar-logo { font-size: 12px; font-weight: bold; letter-spacing: 0.15em; color: #fff; white-space: nowrap; }
+.wf-bar-sep { color: #444; }
+.wf-bar-page { font-size: 11px; color: #888; white-space: nowrap; }
+.wf-bar-nav { display: flex; gap: 4px; }
+.wf-bar-nav a { font-size: 10px; color: #666; text-decoration: none; padding: 3px 7px; border: 1px solid #333; border-radius: 3px; white-space: nowrap; }
+.wf-bar-nav a:hover { color: #aaa; border-color: #555; }
+.wf-bar-nav a.cur { color: #fff; background: #333; border-color: #555; }
+.wf-bar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+#wf-count { font-size: 11px; color: #666; background: #222; padding: 3px 9px; border-radius: 10px; }
+#wf-toggle-resolved { background: #222; border: 1px solid #333; color: #888; padding: 5px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+#wf-comment-btn { background: #2563eb; border: none; color: #fff; padding: 6px 12px; border-radius: 5px; font-size: 11px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+#wf-comment-btn.wf-active { background: #ef4444; }
+#wf-panel { position: fixed; top: 48px; right: 0; width: 280px; height: calc(100vh - 48px); background: #111; border-left: 1px solid #222; overflow-y: auto; padding: 16px; z-index: 9998; }
+.wf-panel-title { font-size: 11px; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.panel-item { background: #1f2937; border-radius: 7px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; border: 1px solid transparent; }
+.panel-item:hover { border-color: #374151; }
+.panel-item.resolved { opacity: 0.5; }
+.panel-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.panel-num { width: 20px; height: 20px; background: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: #fff; flex-shrink: 0; }
+.panel-num.resolved { background: #6b7280; }
+.panel-name { font-size: 11px; color: #6b7280; }
+.panel-text { font-size: 12px; color: #d1d5db; line-height: 1.5; white-space: pre-wrap; }
+.panel-actions { display: flex; gap: 6px; margin-top: 8px; }
+.panel-edit-btn, .panel-resolve-btn, .panel-delete-btn { background: none; border: 1px solid #374151; color: #6b7280; border-radius: 4px; padding: 3px 8px; font-size: 11px; cursor: pointer; font-family: inherit; }
+.panel-delete-btn { border-color: #7f1d1d; color: #f87171; }
+#wf-panel-empty { font-size: 12px; color: #4b5563; text-align: center; padding: 40px 0; }
+#wf-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 500; }
+.c-pin { position: absolute; width: 28px; height: 28px; border-radius: 50% 50% 50% 0; transform: translate(-50%,-100%) rotate(-45deg); background: #2563eb; box-shadow: 0 2px 8px rgba(0,0,0,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #fff; pointer-events: auto; }
+.c-pin.resolved { background: #6b7280; }
+.c-pin-num { transform: rotate(45deg); }
+.c-input-popup, .c-view-popup { background: #1f2937; border: 1px solid #374151; border-radius: 10px; padding: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.c-view-popup { min-width: 240px; max-width: 300px; }
+.c-input-popup { min-width: 260px; }
+.c-input-popup textarea, .c-edit-textarea { width: 100%; background: #111827; border: 1px solid #374151; border-radius: 6px; color: #e5e7eb; font-size: 13px; padding: 8px 10px; resize: none; font-family: inherit; line-height: 1.5; outline: none; }
+.c-edit-textarea { min-height: 70px; border-color: #2563eb; }
+.c-input-row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+.c-input-name { flex: 1; background: #111827; border: 1px solid #374151; border-radius: 6px; color: #e5e7eb; font-size: 16px; padding: 6px 8px; font-family: inherit; outline: none; }
+.c-send-btn { background: #2563eb; color: #fff; border: none; border-radius: 6px; padding: 7px 14px; font-size: 12px; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+.c-cancel-btn { background: #374151; color: #9ca3af; border: none; border-radius: 6px; padding: 7px 10px; font-size: 12px; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+.c-view-popup-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.c-view-num { font-size: 11px; color: #6b7280; font-weight: bold; }
+.c-view-actions { display: flex; gap: 6px; }
+.c-view-btn { background: none; border: 1px solid #374151; color: #9ca3af; border-radius: 5px; padding: 3px 8px; font-size: 11px; cursor: pointer; font-family: inherit; }
+.c-view-btn.resolve { border-color: #10b981; color: #10b981; }
+.c-view-btn.delete { border-color: #ef4444; color: #ef4444; }
+.c-view-text { font-size: 13px; line-height: 1.6; color: #e5e7eb; white-space: pre-wrap; }
+.c-view-meta { margin-top: 8px; font-size: 11px; color: #6b7280; }
+.c-view-resolved-badge { display: inline-block; background: #064e3b; color: #10b981; font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-top: 6px; }
+/* WF本体 */
+.wf-label { display: inline-block; font-size: 10px; letter-spacing: 0.15em; color: #999; border: 1px solid #ddd; padding: 2px 8px; margin-bottom: 8px; background: #fff; }
+.ph { background: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px; letter-spacing: 0.1em; }
+.wf-btn { display: inline-block; border: 1.5px solid #111; padding: 12px 32px; font-size: 12px; letter-spacing: 0.2em; background: #fff; cursor: pointer; text-decoration: none; color: #111; }
+.wf-btn.fill { background: #111; color: #fff; }
+.page { background: #fff; max-width: 1200px; margin: 32px auto; box-shadow: 0 2px 24px rgba(0,0,0,0.08); position: relative; padding-left: 70px; }
+.sec-num { position: absolute; left: -50px; top: 80px; width: 32px; height: 32px; border-radius: 50%; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666; font-weight: bold; }
+.header { margin-left: -70px; width: calc(100% + 70px); padding: 20px 40px 20px 110px; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 48px; background: #fff; z-index: 100; }
+.header-logo { font-size: 22px; letter-spacing: 0.2em; font-weight: 300; text-decoration: none; color: #111; }
+.header-nav { display: flex; gap: 24px; list-style: none; }
+.header-nav li a { font-size: 11px; letter-spacing: 0.15em; color: #444; text-decoration: none; }
+.header-nav li.active a { border-bottom: 1.5px solid #111; padding-bottom: 2px; }
+.header-cta { font-size: 11px; letter-spacing: 0.15em; border: 1px solid #111; padding: 8px 20px; text-decoration: none; color: #111; }
+.section { padding: 80px 40px; position: relative; border-bottom: 1px solid #f0f0f0; }
+.sec-tag { font-size: 10px; letter-spacing: 0.3em; color: #aaa; margin-bottom: 16px; display: block; }
+.sec-title { font-size: 28px; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 8px; line-height: 1.4; }
+.sec-title-ja { font-size: 13px; letter-spacing: 0.2em; color: #666; margin-bottom: 32px; }
+.sec-body { font-size: 14px; line-height: 1.9; color: #444; max-width: 480px; }
+.more-link { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.25em; color: #111; margin-top: 32px; border-bottom: 1px solid #111; padding-bottom: 4px; text-decoration: none; }
+.kv-small { margin-left: -70px; width: calc(100% + 70px); height: 320px; background: #d0d0d0; display: flex; align-items: flex-end; padding: 48px 80px; position: relative; }
+.kv-small-en { font-size: 10px; letter-spacing: 0.4em; color: rgba(255,255,255,0.6); margin-bottom: 12px; display: block; }
+.kv-small-title { font-size: 28px; font-weight: 300; color: #fff; letter-spacing: 0.1em; }
+.kv-ph { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.2em; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 16px; }
+.img-ph { background: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px; letter-spacing: 0.1em; }
+.numbers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 40px; }
+.number-item { text-align: center; padding: 40px 20px; border: 1px solid #f0f0f0; }
+.number-val { font-size: 48px; font-weight: 200; letter-spacing: 0.05em; color: #111; line-height: 1; margin-bottom: 12px; }
+.number-unit { font-size: 16px; color: #666; margin-left: 4px; }
+.number-label { font-size: 12px; letter-spacing: 0.2em; color: #999; }
+.news-list { margin-top: 40px; border-top: 1px solid #e0e0e0; }
+.news-item { display: flex; align-items: baseline; gap: 24px; padding: 20px 0; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+.news-date { font-size: 11px; letter-spacing: 0.15em; color: #999; white-space: nowrap; }
+.news-cat { font-size: 10px; letter-spacing: 0.15em; color: #888; border: 1px solid #ddd; padding: 2px 10px; white-space: nowrap; }
+.news-title { font-size: 14px; letter-spacing: 0.05em; color: #222; }
+.footer { margin-left: -70px; width: calc(100% + 70px); padding: 60px 40px 40px 110px; background: #111; color: #fff; }
+.footer-inner { display: grid; grid-template-columns: 200px 1fr; gap: 60px; margin-bottom: 48px; }
+.footer-logo { font-size: 20px; letter-spacing: 0.25em; font-weight: 300; margin-bottom: 16px; text-decoration: none; color: #fff; display: block; }
+.footer-address { font-size: 11px; letter-spacing: 0.1em; color: #888; line-height: 1.9; }
+.footer-nav { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; list-style: none; }
+.footer-nav li a { font-size: 11px; letter-spacing: 0.15em; color: #888; text-decoration: none; }
+.footer-bottom { border-top: 1px solid #333; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 10px; letter-spacing: 0.15em; color: #555; }
+@media (max-width: 768px) {
+  body { padding-right: 0; }
+  #wf-panel { display: none; }
+  .page { padding-left: 0; margin: 0; box-shadow: none; }
+  .sec-num { display: none; }
+  .header { margin-left: 0; width: 100%; padding: 16px 20px; }
+  .header-nav { display: none; }
+  .kv-small { margin-left: 0; width: 100%; padding: 32px 24px; }
+  .section { padding: 60px 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .numbers-grid { grid-template-columns: 1fr; }
+  .footer { margin-left: 0; width: 100%; padding: 40px 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-nav { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">わたしたちについて</span>
+  <div class="wf-bar-nav">
+    <a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html" class="cur">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html">NEWS</a>
+  </div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li>
+      <li class="active"><a href="wireframe-about.html">ABOUT</a></li>
+      <li><a href="wireframe-property.html">PROPERTY ↗</a></li>
+      <li><a href="wireframe-staff-list.html">STAFF</a></li>
+      <li><a href="wireframe-voice-list.html">VOICE</a></li>
+      <li><a href="wireframe-recruit.html">RECRUIT</a></li>
+      <li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <!-- KV -->
+  <div class="kv-small">
+    <div>
+      <span class="kv-small-en">ABOUT US</span>
+      <div class="kv-small-title">わたしたちについて</div>
+    </div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <!-- 01 理念 -->
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01</span>
+    <span class="sec-tag">PHILOSOPHY</span>
+    <div class="two-col">
+      <div>
+        <h2 class="sec-title">いちいち、<br>きにかける。</h2>
+        <p class="sec-title-ja">わたしたちの姿勢</p>
+        <p class="sec-body">お客様一人ひとりの「第一歩」を、丁寧にお手伝いすること。それがONEの変わらないスタンスです。<br><br>一本の幹から枝が増えて育つ木のように、わたしたちも一つひとつの出会いを大切に、共に成長していきます。</p>
+      </div>
+      <div class="img-ph" style="height:360px;">IMAGE</div>
+    </div>
+  </section>
+
+  <!-- 02 数字 -->
+  <section class="section" style="background:#fafafa;">
+    <div class="sec-num">2</div>
+    <span class="wf-label">SECTION 02</span>
+    <span class="sec-tag">NUMBERS</span>
+    <h2 class="sec-title">数字で見るONE</h2>
+    <p class="sec-title-ja">実績</p>
+    <div class="numbers-grid">
+      <div class="number-item"><div class="number-val">3<span class="number-unit">店舗</span></div><div class="number-label">三郷中央 / 亀有 / 金町</div></div>
+      <div class="number-item"><div class="number-val">2019<span class="number-unit">年</span></div><div class="number-label">設立</div></div>
+      <div class="number-item"><div class="number-val">XX<span class="number-unit">名</span></div><div class="number-label">スタッフ在籍数</div></div>
+    </div>
+  </section>
+
+  <!-- 03 サービス -->
+  <section class="section">
+    <div class="sec-num">3</div>
+    <span class="wf-label">SECTION 03</span>
+    <span class="sec-tag">SERVICE</span>
+    <h2 class="sec-title">わたしたちにできること</h2>
+    <p class="sec-title-ja">サービス一覧</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;">
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">01</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">賃貸仲介</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">お部屋探しから入居まで、丁寧にサポートします。</div>
+      </div>
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">02</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">売買仲介</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">購入・売却のご相談を一貫してサポートします。</div>
+      </div>
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">03</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">賃貸管理</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">オーナー様の物件を安心・安全に管理します。</div>
+      </div>
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">04</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">リフォーム</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">内装・設備のリフォームをトータルでご提案。</div>
+      </div>
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">05</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">相続・遺言</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">不動産にまつわる相続のご相談も承ります。</div>
+      </div>
+      <div style="padding:32px 24px;border:1px solid #f0f0f0;">
+        <div style="font-size:11px;letter-spacing:0.2em;color:#aaa;margin-bottom:12px;">06</div>
+        <div style="font-size:16px;font-weight:300;margin-bottom:12px;">買取保証・家賃保証</div>
+        <div style="font-size:13px;color:#666;line-height:1.8;">安心できる保証制度をご用意しています。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 スタッフ紹介リンク -->
+  <section class="section" style="background:#fafafa;">
+    <div class="sec-num">4</div>
+    <span class="wf-label">SECTION 04</span>
+    <span class="sec-tag">STAFF</span>
+    <h2 class="sec-title">チームを知る</h2>
+    <p class="sec-title-ja">わたしたちのメンバー</p>
+    <p class="sec-body" style="margin-bottom:32px;">三郷・亀有・金町の3拠点で、それぞれの地域に根ざしたスタッフが皆さまをお迎えします。</p>
+    <a href="wireframe-staff-list.html" class="wf-btn">STAFF 一覧を見る</a>
+  </section>
+
+  <!-- 05 ニュース -->
+  <section class="section">
+    <div class="sec-num">5</div>
+    <span class="wf-label">SECTION 05</span>
+    <span class="sec-tag">NEWS</span>
+    <h2 class="sec-title">ニュース</h2>
+    <p class="sec-title-ja">お知らせ</p>
+    <div class="news-list">
+      <a href="wireframe-news-detail.html" class="news-item"><span class="news-date">2025.04.01</span><span class="news-cat">お知らせ</span><span class="news-title">春のキャンペーン開始のお知らせ</span></a>
+      <a href="wireframe-news-detail.html" class="news-item"><span class="news-date">2025.03.15</span><span class="news-cat">スタッフ</span><span class="news-title">新スタッフ紹介：○○が仲間に加わりました</span></a>
+      <a href="wireframe-news-detail.html" class="news-item"><span class="news-date">2025.02.28</span><span class="news-cat">お知らせ</span><span class="news-title">金町店オープンのお知らせ</span></a>
+    </div>
+    <a href="wireframe-news-list.html" class="more-link">NEWS 一覧を見る <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" width="24" height="12" fill="none"><path d="M0 6h22M16 1l6 5-6 5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000<br><br>三郷中央店 / 亀有店 / 金町店</div></div>
+      <ul class="footer-nav">
+        <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li>
+        <li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li>
+        <li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+(function(){
+  var PAGE_ID='one-wf-about';
+  try{firebase.initializeApp({apiKey:"AIzaSyArq3B1YkeiBv-PgpBkMrRGWsOkuXx4fxo",authDomain:"view-crater.firebaseapp.com",projectId:"view-crater",storageBucket:"view-crater.firebasestorage.app",messagingSenderId:"523845906687",appId:"1:523845906687:web:b5b6612eabe1af9544dcca"});}catch(e){}
+  var db=firebase.firestore(),commentMode=false,showResolved=true,comments=[],activePopupId=null,inputPopup=null,viewPopup=null;
+  var overlay=document.getElementById('wf-overlay');
+  document.getElementById('wf-comment-btn').addEventListener('click',function(){commentMode=!commentMode;overlay.style.pointerEvents=commentMode?'auto':'none';overlay.style.cursor=commentMode?'crosshair':'default';this.classList.toggle('wf-active',commentMode);this.textContent=commentMode?'✕ 完了':'💬 コメント追加';if(!commentMode)closeInput();});
+  document.getElementById('wf-toggle-resolved').addEventListener('click',function(){showResolved=!showResolved;this.textContent=showResolved?'解決済みを隠す':'解決済みを表示';renderPins();});
+  overlay.addEventListener('click',function(e){
+    if(e.target.closest('.c-pin')||e.target.closest('.c-input-popup'))return;
+    closeInput();closeView();
+    var rect=overlay.getBoundingClientRect();
+    var x=((e.clientX-rect.left)/rect.width*100).toFixed(2);
+    var pageEl=document.querySelector('.page');var pageRect=pageEl.getBoundingClientRect();
+    var y=((e.clientY-pageRect.top+window.pageYOffset)/pageEl.offsetHeight*100).toFixed(2);
+    inputPopup=document.createElement('div');inputPopup.className='c-input-popup';
+    inputPopup.style.cssText='position:fixed;left:'+Math.min(e.clientX+12,window.innerWidth-290)+'px;top:'+Math.min(e.clientY+12,window.innerHeight-160)+'px;z-index:10000;';
+    inputPopup.innerHTML='<textarea id="c-text" rows="3" placeholder="コメントを入力…"></textarea><div class="c-input-row"><input class="c-input-name" id="c-name" type="text" placeholder="名前（任意）"><button class="c-cancel-btn" id="c-cancel">キャンセル</button><button class="c-send-btn" id="c-send">送信</button></div>';
+    document.body.appendChild(inputPopup);document.getElementById('c-text').focus();
+    document.getElementById('c-cancel').addEventListener('click',closeInput);
+    document.getElementById('c-send').addEventListener('click',function(){var text=document.getElementById('c-text').value.trim();var name=document.getElementById('c-name').value.trim()||'匿名';if(!text)return;db.collection('comments').doc(PAGE_ID).collection('items').add({x:parseFloat(x),y:parseFloat(y),text:text,name:name,resolved:false,createdAt:firebase.firestore.FieldValue.serverTimestamp()});closeInput();});
+    document.getElementById('c-text').addEventListener('keydown',function(ev){if(ev.key==='Enter'&&!ev.shiftKey){ev.preventDefault();document.getElementById('c-send').click();}});
+  });
+  function renderPins(){
+    overlay.querySelectorAll('.c-pin').forEach(function(p){p.remove();});
+    var visible=comments.filter(function(c){return showResolved||!c.resolved;}).sort(function(a,b){return(a.createdAt?a.createdAt.seconds:0)-(b.createdAt?b.createdAt.seconds:0);});
+    visible.forEach(function(c,i){var pin=document.createElement('div');pin.className='c-pin'+(c.resolved?' resolved':'');pin.style.left=c.x+'%';pin.style.top=c.y+'%';pin.innerHTML='<span class="c-pin-num">'+(i+1)+'</span>';pin.dataset.id=c.id;pin.addEventListener('click',function(e){e.stopPropagation();if(activePopupId===c.id){closeView();return;}closeView();closeInput();showView(c,pin,i+1);});overlay.appendChild(pin);});
+    renderPanel(visible);document.getElementById('wf-count').textContent=comments.length+'件';
+  }
+  function showView(c,pin,num){activePopupId=c.id;var pr=pin.getBoundingClientRect();viewPopup=document.createElement('div');viewPopup.className='c-view-popup';viewPopup.style.cssText='position:fixed;left:'+Math.min(pr.right+8,window.innerWidth-320)+'px;top:'+Math.max(pr.top-40,60)+'px;z-index:10001;';var date=c.createdAt?new Date(c.createdAt.seconds*1000).toLocaleDateString('ja-JP'):'';viewPopup.innerHTML='<div class="c-view-popup-header"><span class="c-view-num">#'+num+' '+esc(c.name||'匿名')+'</span><div class="c-view-actions"><button class="c-view-btn edit">編集</button><button class="c-view-btn resolve">'+(c.resolved?'再開':'解決')+'</button><button class="c-view-btn delete">削除</button></div></div><div class="c-view-text" id="pvt-'+c.id+'">'+esc(c.text)+'</div>'+(c.resolved?'<span class="c-view-resolved-badge">✓ 解決済み</span>':'')+(date?'<div class="c-view-meta">'+date+'</div>':'');document.body.appendChild(viewPopup);viewPopup.querySelector('.edit').addEventListener('click',function(){startEditPopup(c,viewPopup);});viewPopup.querySelector('.resolve').addEventListener('click',function(){db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).update({resolved:!c.resolved});closeView();});viewPopup.querySelector('.delete').addEventListener('click',function(){if(!confirm('削除しますか？'))return;db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).delete();closeView();});}
+  function startEditPopup(c,popup){var el=popup.querySelector('#pvt-'+c.id);el.outerHTML='<textarea class="c-edit-textarea" id="pve-'+c.id+'">'+esc(c.text)+'</textarea><div class="c-input-row" style="margin-top:8px"><button class="c-cancel-btn" id="ec-'+c.id+'">キャンセル</button><button class="c-send-btn" id="es-'+c.id+'">保存</button></div>';popup.querySelector('#ec-'+c.id).addEventListener('click',closeView);popup.querySelector('#es-'+c.id).addEventListener('click',function(){var t=popup.querySelector('#pve-'+c.id).value.trim();if(!t)return;db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).update({text:t});closeView();});}
+  function renderPanel(visible){var list=document.getElementById('wf-panel-list');list.querySelectorAll('.panel-item').forEach(function(el){el.remove();});var empty=document.getElementById('wf-panel-empty');if(!visible.length){empty.style.display='block';return;}empty.style.display='none';visible.forEach(function(c,i){var item=document.createElement('div');item.className='panel-item'+(c.resolved?' resolved':'');item.innerHTML='<div class="panel-item-header"><div class="panel-num'+(c.resolved?' resolved':'')+'">'+( i+1)+'</div><span class="panel-name">'+esc(c.name||'匿名')+'</span></div><div class="panel-text" id="pt-'+c.id+'">'+esc(c.text)+'</div><div class="panel-actions"><button class="panel-edit-btn">編集</button><button class="panel-resolve-btn">'+(c.resolved?'再開':'解決')+'</button><button class="panel-delete-btn">削除</button></div>';item.querySelector('.panel-edit-btn').addEventListener('click',function(e){e.stopPropagation();startEditPanel(c,item);});item.querySelector('.panel-resolve-btn').addEventListener('click',function(e){e.stopPropagation();db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).update({resolved:!c.resolved});});item.querySelector('.panel-delete-btn').addEventListener('click',function(e){e.stopPropagation();if(!confirm('削除？'))return;db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).delete();});item.addEventListener('click',function(e){if(e.target.closest('button'))return;var pin=overlay.querySelector('.c-pin[data-id="'+c.id+'"]');if(pin){pin.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){pin.click();},400);}});list.appendChild(item);});}
+  function startEditPanel(c,item){var el=item.querySelector('#pt-'+c.id);el.outerHTML='<textarea class="c-edit-textarea" id="pe-'+c.id+'">'+esc(c.text)+'</textarea><div class="c-input-row" style="margin-top:6px"><button class="c-cancel-btn" id="pec-'+c.id+'">キャンセル</button><button class="c-send-btn" id="pes-'+c.id+'">保存</button></div>';item.querySelector('#pec-'+c.id).addEventListener('click',function(e){e.stopPropagation();renderPins();});item.querySelector('#pes-'+c.id).addEventListener('click',function(e){e.stopPropagation();var t=item.querySelector('#pe-'+c.id).value.trim();if(!t)return;db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).update({text:t});});}
+  db.collection('comments').doc(PAGE_ID).collection('items').onSnapshot(function(snap){comments=snap.docs.map(function(doc){var d=doc.data();d.id=doc.id;return d;});renderPins();},function(err){console.error(err);});
+  document.addEventListener('click',function(e){if(viewPopup&&!e.target.closest('.c-view-popup')&&!e.target.closest('.c-pin'))closeView();});
+  function closeInput(){if(inputPopup){inputPopup.remove();inputPopup=null;}}
+  function closeView(){if(viewPopup){viewPopup.remove();viewPopup=null;}activePopupId=null;}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+})();
+</script>
+</body>
+</html>

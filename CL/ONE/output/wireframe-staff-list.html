@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スタッフ紹介一覧 - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+<style>
+.staff-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 40px; }
+.staff-card { text-decoration: none; display: block; }
+.staff-photo { width: 100%; aspect-ratio: 3/4; background: #e0e0e0; display: flex; align-items: flex-start; justify-content: flex-end; padding: 12px; margin-bottom: 16px; position: relative; }
+.staff-badge { background: #111; color: #fff; font-size: 10px; letter-spacing: 0.2em; padding: 4px 10px; }
+.staff-num { font-size: 16px; font-weight: 300; color: #999; margin-left: 6px; }
+.staff-store { font-size: 10px; letter-spacing: 0.15em; color: #aaa; margin-bottom: 4px; }
+.staff-name { font-size: 15px; letter-spacing: 0.1em; color: #111; margin-bottom: 2px; }
+.staff-role { font-size: 11px; letter-spacing: 0.1em; color: #888; margin-bottom: 4px; }
+.staff-since { font-size: 10px; letter-spacing: 0.2em; color: #ccc; }
+.filter-row { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+.filter-btn { font-size: 11px; letter-spacing: 0.15em; border: 1px solid #ddd; padding: 8px 20px; color: #666; background: #fff; cursor: pointer; text-decoration: none; }
+.filter-btn.active { border-color: #111; color: #111; background: #111; color: #fff; }
+@media (max-width: 768px) { .staff-grid { grid-template-columns: repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">スタッフ紹介一覧</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html" class="cur">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li>
+      <li class="active"><a href="wireframe-staff-list.html">STAFF</a></li>
+      <li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <div class="kv-small">
+    <div><span class="kv-small-en">STAFF</span><div class="kv-small-title">スタッフ紹介</div></div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01</span>
+    <span class="sec-tag">STAFF</span>
+    <h2 class="sec-title">わたしたちのチーム</h2>
+    <p class="sec-title-ja">3拠点のスタッフを紹介します</p>
+
+    <!-- 店舗フィルター -->
+    <div class="filter-row">
+      <a href="#" class="filter-btn active">ALL</a>
+      <a href="#" class="filter-btn">三郷中央店</a>
+      <a href="#" class="filter-btn">亀有店</a>
+      <a href="#" class="filter-btn">金町店</a>
+    </div>
+
+    <div class="staff-grid">
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#1</span></div></div>
+        <div class="staff-store">三郷中央店</div><div class="staff-name">田中 太郎</div><div class="staff-role">売買担当</div><div class="staff-since">since 2019</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#2</span></div></div>
+        <div class="staff-store">亀有店</div><div class="staff-name">鈴木 花子</div><div class="staff-role">賃貸担当</div><div class="staff-since">since 2021</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#3</span></div></div>
+        <div class="staff-store">金町店</div><div class="staff-name">佐藤 健</div><div class="staff-role">管理担当</div><div class="staff-since">since 2022</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#4</span></div></div>
+        <div class="staff-store">三郷中央店</div><div class="staff-name">山田 美咲</div><div class="staff-role">リフォーム担当</div><div class="staff-since">since 2023</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#5</span></div></div>
+        <div class="staff-store">亀有店</div><div class="staff-name">伊藤 翔</div><div class="staff-role">売買担当</div><div class="staff-since">since 2024</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#6</span></div></div>
+        <div class="staff-store">金町店</div><div class="staff-name">中村 さくら</div><div class="staff-role">賃貸担当</div><div class="staff-since">since 2024</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#7</span></div></div>
+        <div class="staff-store">三郷中央店</div><div class="staff-name">小林 大輔</div><div class="staff-role">コンサル担当</div><div class="staff-since">since 2020</div>
+      </a>
+      <a href="wireframe-staff-detail.html" class="staff-card">
+        <div class="staff-photo"><div style="display:flex;align-items:center;gap:6px;"><span class="staff-badge">STAFF</span><span class="staff-num">#8</span></div></div>
+        <div class="staff-store">亀有店</div><div class="staff-name">加藤 美穂</div><div class="staff-role">管理担当</div><div class="staff-since">since 2022</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:#fafafa;text-align:center;">
+    <div class="sec-num">2</div>
+    <h2 class="sec-title" style="font-size:20px;">わたしたちに相談する</h2>
+    <p style="font-size:14px;color:#666;line-height:1.9;margin:16px 0 32px;max-width:480px;margin-left:auto;margin-right:auto;">スタッフが丁寧にお答えします。お気軽にお問合せください。</p>
+    <a href="wireframe-contact.html" class="wf-btn">CONTACT</a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000<br><br>三郷中央店 / 亀有店 / 金町店</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-staff-list';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>

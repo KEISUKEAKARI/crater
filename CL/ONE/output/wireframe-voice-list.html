@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お客様の声一覧 - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+<style>
+.voice-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 40px; }
+.voice-card { text-decoration: none; display: block; border: 1px solid #f0f0f0; }
+.voice-photo { height: 200px; background: #e0e0e0; display: flex; align-items: flex-start; justify-content: space-between; padding: 12px; }
+.voice-badge { background: #111; color: #fff; font-size: 10px; letter-spacing: 0.2em; padding: 4px 10px; }
+.voice-num { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); }
+.voice-body { padding: 20px; }
+.voice-type { font-size: 10px; letter-spacing: 0.2em; color: #aaa; margin-bottom: 8px; }
+.voice-name { font-size: 14px; letter-spacing: 0.1em; color: #111; margin-bottom: 4px; }
+.voice-detail { font-size: 11px; color: #999; margin-bottom: 12px; }
+.voice-excerpt { font-size: 13px; color: #555; line-height: 1.7; }
+@media (max-width: 768px) { .voice-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">お客様の声一覧</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html" class="cur">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li>
+      <li class="active"><a href="wireframe-voice-list.html">VOICE</a></li>
+      <li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <div class="kv-small">
+    <div><span class="kv-small-en">VOICE</span><div class="kv-small-title">お客様の声</div></div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01</span>
+    <span class="sec-tag">CUSTOMER VOICE</span>
+    <h2 class="sec-title">お客様の声</h2>
+    <p class="sec-title-ja">実際にご利用いただいたお客様からのメッセージ</p>
+
+    <div class="voice-grid">
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #1</span><span class="voice-num">since 2023</span></div>
+        <div class="voice-body"><div class="voice-type">売買仲介</div><div class="voice-name">T.N様 ご夫婦</div><div class="voice-detail">三郷市・30代</div><div class="voice-excerpt">初めての家購入で不安でしたが、スタッフの方が一から丁寧に教えてくださいました…</div></div>
+      </a>
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #2</span><span class="voice-num">since 2022</span></div>
+        <div class="voice-body"><div class="voice-type">賃貸仲介</div><div class="voice-name">K.S様</div><div class="voice-detail">亀有エリア・20代</div><div class="voice-excerpt">引っ越しの条件を細かく聞いてもらえて、希望通りの物件が見つかりました…</div></div>
+      </a>
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #3</span><span class="voice-num">since 2023</span></div>
+        <div class="voice-body"><div class="voice-type">リフォーム</div><div class="voice-name">M.A様</div><div class="voice-detail">金町エリア・50代</div><div class="voice-excerpt">リフォームの内容を細かく相談でき、予算内で満足のいく仕上がりになりました…</div></div>
+      </a>
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #4</span><span class="voice-num">since 2024</span></div>
+        <div class="voice-body"><div class="voice-type">売買仲介</div><div class="voice-name">H.W様</div><div class="voice-detail">三郷市・40代</div><div class="voice-excerpt">売却を急いでいましたが、スムーズに手続きを進めていただきました…</div></div>
+      </a>
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #5</span><span class="voice-num">since 2024</span></div>
+        <div class="voice-body"><div class="voice-type">賃貸管理</div><div class="voice-name">Y.O様（オーナー）</div><div class="voice-detail">三郷市・60代</div><div class="voice-excerpt">管理をお任せしてから、入居者トラブルが激減しました…</div></div>
+      </a>
+      <a href="wireframe-voice-detail.html" class="voice-card">
+        <div class="voice-photo"><span class="voice-badge">VOICE #6</span><span class="voice-num">since 2024</span></div>
+        <div class="voice-body"><div class="voice-type">相続コンサル</div><div class="voice-name">I.F様</div><div class="voice-detail">亀有エリア・50代</div><div class="voice-excerpt">相続の手続きで悩んでいたところ、不動産の観点から丁寧にアドバイスいただきました…</div></div>
+      </a>
+    </div>
+
+    <!-- ページネーション -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:48px;">
+      <span style="width:36px;height:36px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;">1</span>
+      <a href="#" style="width:36px;height:36px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px;color:#666;text-decoration:none;">2</a>
+      <a href="#" style="width:36px;height:36px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px;color:#666;text-decoration:none;">3</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-voice-list';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>

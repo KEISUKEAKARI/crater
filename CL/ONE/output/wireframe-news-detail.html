@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ニュース詳細 - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+<style>
+.article-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: start; margin-top: 40px; }
+.article-main { }
+.article-header { border-bottom: 1px solid #f0f0f0; padding-bottom: 24px; margin-bottom: 40px; }
+.article-cat { font-size: 10px; letter-spacing: 0.25em; color: #aaa; border: 1px solid #ddd; padding: 3px 12px; display: inline-block; margin-bottom: 16px; }
+.article-title { font-size: 24px; font-weight: 300; letter-spacing: 0.05em; line-height: 1.5; margin-bottom: 16px; }
+.article-date { font-size: 11px; letter-spacing: 0.15em; color: #aaa; }
+.article-body { font-size: 14px; line-height: 2; color: #333; }
+.article-body p { margin-bottom: 24px; }
+.article-img { width: 100%; height: 300px; background: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px; letter-spacing: 0.1em; margin: 32px 0; }
+.article-sidebar { position: sticky; top: 112px; }
+.sidebar-section { margin-bottom: 40px; }
+.sidebar-title { font-size: 11px; letter-spacing: 0.2em; color: #aaa; border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; margin-bottom: 16px; }
+.sidebar-news-item { border-bottom: 1px solid #f8f8f8; padding: 12px 0; text-decoration: none; display: block; }
+.sidebar-news-date { font-size: 10px; color: #bbb; letter-spacing: 0.1em; margin-bottom: 4px; }
+.sidebar-news-title { font-size: 12px; color: #444; line-height: 1.5; }
+.sidebar-cat { display: block; font-size: 11px; letter-spacing: 0.1em; color: #888; border: 1px solid #eee; padding: 6px 12px; margin-bottom: 6px; text-decoration: none; }
+.article-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; padding-top: 40px; border-top: 1px solid #f0f0f0; }
+.article-nav-link { text-decoration: none; display: block; padding: 16px 20px; border: 1px solid #f0f0f0; }
+.article-nav-direction { font-size: 10px; letter-spacing: 0.2em; color: #bbb; margin-bottom: 8px; }
+.article-nav-title { font-size: 13px; color: #333; line-height: 1.5; }
+@media (max-width: 768px) { .article-wrap { grid-template-columns: 1fr; gap: 40px; } .article-nav { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">ニュース詳細</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html" class="cur">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <!-- パンくず -->
+  <div style="padding:20px 40px;border-bottom:1px solid #f5f5f5;font-size:11px;color:#aaa;letter-spacing:0.15em;">
+    <a href="wireframe-top.html" style="color:#aaa;text-decoration:none;">HOME</a> &nbsp;/&nbsp;
+    <a href="wireframe-news-list.html" style="color:#aaa;text-decoration:none;">NEWS</a> &nbsp;/&nbsp;
+    春のキャンペーン開始のお知らせ
+  </div>
+
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01（CMS / WordPress）</span>
+
+    <div class="article-wrap">
+      <!-- 記事本体 -->
+      <div class="article-main">
+        <div class="article-header">
+          <span class="article-cat">お知らせ</span>
+          <h1 class="article-title">春のキャンペーン開始のお知らせ</h1>
+          <div class="article-date">2025.04.01</div>
+        </div>
+        <div class="article-body">
+          <p>いつもONEをご利用いただき、誠にありがとうございます。この度、春の特別キャンペーンを開始いたします。</p>
+          <div class="article-img">アイキャッチ画像</div>
+          <p>期間中は以下のサービスを特別価格でご提供いたします。詳細はスタッフまでお気軽にお問合せください。</p>
+          <p>キャンペーン期間：2025年4月1日（火）〜 2025年4月30日（水）<br>対象：賃貸仲介・売買仲介サービス</p>
+          <p>この機会にぜひ、わたしたちにご相談ください。いちいち、きにかけて、最適なご提案をさせていただきます。</p>
+        </div>
+
+        <!-- 記事ナビゲーション -->
+        <div class="article-nav">
+          <a href="wireframe-news-detail.html" class="article-nav-link">
+            <div class="article-nav-direction">← 前の記事</div>
+            <div class="article-nav-title">金町店オープンのお知らせ</div>
+          </a>
+          <a href="wireframe-news-detail.html" class="article-nav-link" style="text-align:right;">
+            <div class="article-nav-direction">次の記事 →</div>
+            <div class="article-nav-title">新スタッフ紹介：○○が仲間に加わりました</div>
+          </a>
+        </div>
+
+        <div style="text-align:center;margin-top:32px;">
+          <a href="wireframe-news-list.html" class="more-link" style="margin-top:0;">NEWS 一覧に戻る <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" width="24" height="12" fill="none"><path d="M0 6h22M16 1l6 5-6 5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <!-- サイドバー -->
+      <div class="article-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">最新ニュース</div>
+          <a href="wireframe-news-detail.html" class="sidebar-news-item"><div class="sidebar-news-date">2025.04.01</div><div class="sidebar-news-title">春のキャンペーン開始のお知らせ</div></a>
+          <a href="wireframe-news-detail.html" class="sidebar-news-item"><div class="sidebar-news-date">2025.03.15</div><div class="sidebar-news-title">新スタッフ紹介：○○が仲間に加わりました</div></a>
+          <a href="wireframe-news-detail.html" class="sidebar-news-item"><div class="sidebar-news-date">2025.02.28</div><div class="sidebar-news-title">金町店オープンのお知らせ</div></a>
+          <a href="wireframe-news-detail.html" class="sidebar-news-item"><div class="sidebar-news-date">2025.02.01</div><div class="sidebar-news-title">2月限定！賃貸仲介手数料無料キャンペーン</div></a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">カテゴリ</div>
+          <a href="#" class="sidebar-cat">お知らせ</a>
+          <a href="#" class="sidebar-cat">スタッフ</a>
+          <a href="#" class="sidebar-cat">キャンペーン</a>
+          <a href="#" class="sidebar-cat">イベント</a>
+        </div>
+        <div style="padding:20px;background:#f7f7f7;margin-top:8px;">
+          <div style="font-size:12px;color:#888;line-height:1.8;margin-bottom:16px;">お問合せ・ご相談はこちら</div>
+          <a href="wireframe-contact.html" class="wf-btn" style="display:block;text-align:center;padding:12px;">CONTACT</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-news-detail';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>

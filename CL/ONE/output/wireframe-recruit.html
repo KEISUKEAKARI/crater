@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>採用 - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+<style>
+.recruit-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+.recruit-table th { width: 200px; padding: 20px 24px; background: #f7f7f7; border: 1px solid #e8e8e8; font-size: 12px; letter-spacing: 0.15em; color: #666; font-weight: normal; text-align: left; vertical-align: top; }
+.recruit-table td { padding: 20px 24px; border: 1px solid #e8e8e8; font-size: 14px; color: #333; line-height: 1.8; }
+.flow-steps { display: flex; gap: 0; margin-top: 40px; }
+.flow-step { flex: 1; text-align: center; padding: 32px 20px; border: 1px solid #f0f0f0; position: relative; }
+.flow-step + .flow-step::before { content: '→'; position: absolute; left: -16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #ccc; }
+.flow-num { font-size: 10px; letter-spacing: 0.3em; color: #ccc; margin-bottom: 8px; }
+.flow-label { font-size: 13px; letter-spacing: 0.1em; color: #333; margin-bottom: 8px; }
+.flow-desc { font-size: 11px; color: #999; line-height: 1.6; }
+@media (max-width: 768px) {
+  .recruit-table th { width: auto; display: block; }
+  .recruit-table td { display: block; }
+  .flow-steps { flex-direction: column; }
+  .flow-step + .flow-step::before { content: '↓'; left: 50%; top: -16px; transform: translateX(-50%); }
+}
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">採用</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html" class="cur">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li>
+      <li class="active"><a href="wireframe-recruit.html">RECRUIT</a></li>
+      <li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <div class="kv-small">
+    <div><span class="kv-small-en">RECRUIT</span><div class="kv-small-title">採用情報</div></div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <!-- 01 採用メッセージ -->
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01</span>
+    <span class="sec-tag">MESSAGE</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        <h2 class="sec-title">いちいち、<br>きにかける人を<br>探しています。</h2>
+        <p class="sec-title-ja">採用メッセージ</p>
+        <p class="sec-body">不動産の知識よりも、人に寄り添える気持ちを大切にしています。経験不問。まずはお気軽にお話しましょう。</p>
+      </div>
+      <div class="ph" style="height:360px;">IMAGE</div>
+    </div>
+  </section>
+
+  <!-- 02 募集要項 -->
+  <section class="section" style="background:#fafafa;">
+    <div class="sec-num">2</div>
+    <span class="wf-label">SECTION 02</span>
+    <span class="sec-tag">REQUIREMENTS</span>
+    <h2 class="sec-title">募集要項</h2>
+    <p class="sec-title-ja">採用条件</p>
+    <table class="recruit-table">
+      <tr><th>職種</th><td>不動産営業スタッフ（売買・賃貸）</td></tr>
+      <tr><th>雇用形態</th><td>正社員 / パート・アルバイト</td></tr>
+      <tr><th>勤務地</th><td>三郷中央店 / 亀有店 / 金町店（希望考慮）</td></tr>
+      <tr><th>給与</th><td>月給 XXX,000円〜（経験・能力により優遇）<br>各種手当あり</td></tr>
+      <tr><th>勤務時間</th><td>9:00〜18:00（休憩1時間）</td></tr>
+      <tr><th>休日休暇</th><td>週休2日制（水・木）、年次有給休暇、特別休暇</td></tr>
+      <tr><th>待遇・福利厚生</th><td>各種社会保険完備 / 交通費支給 / 資格取得支援</td></tr>
+      <tr><th>応募資格</th><td>不問（宅建資格者優遇）<br>不動産業界未経験歓迎</td></tr>
+    </table>
+  </section>
+
+  <!-- 03 選考フロー -->
+  <section class="section">
+    <div class="sec-num">3</div>
+    <span class="wf-label">SECTION 03</span>
+    <span class="sec-tag">FLOW</span>
+    <h2 class="sec-title">選考フロー</h2>
+    <p class="sec-title-ja">応募から入社まで</p>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-num">01</div><div class="flow-label">エントリー</div><div class="flow-desc">フォームまたはお電話でご応募ください</div></div>
+      <div class="flow-step"><div class="flow-num">02</div><div class="flow-label">書類選考</div><div class="flow-desc">5営業日以内にご連絡します</div></div>
+      <div class="flow-step"><div class="flow-num">03</div><div class="flow-label">面接</div><div class="flow-desc">1〜2回（対面またはオンライン）</div></div>
+      <div class="flow-step"><div class="flow-num">04</div><div class="flow-label">内定</div><div class="flow-desc">面接後1週間以内にご連絡</div></div>
+      <div class="flow-step"><div class="flow-num">05</div><div class="flow-label">入社</div><div class="flow-desc">ご希望の時期に合わせて対応</div></div>
+    </div>
+  </section>
+
+  <!-- 04 スタッフ紹介リンク -->
+  <section class="section" style="background:#fafafa;">
+    <div class="sec-num">4</div>
+    <span class="wf-label">SECTION 04</span>
+    <p style="font-size:14px;color:#666;line-height:1.9;margin-bottom:32px;max-width:480px;">一緒に働くメンバーを紹介します。先輩スタッフの声もご覧ください。</p>
+    <a href="wireframe-staff-list.html" class="wf-btn">スタッフ紹介を見る</a>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center;">
+    <div class="sec-num">5</div>
+    <span class="wf-label">SECTION 05 — CTA</span>
+    <h2 class="sec-title" style="font-size:22px;">まずはお気軽にどうぞ</h2>
+    <p style="font-size:14px;color:#666;line-height:1.9;margin:16px 0 40px;max-width:480px;margin-left:auto;margin-right:auto;">採用に関するお問合せは下記フォームからお送りください。</p>
+    <a href="wireframe-contact.html" class="wf-btn fill">採用に応募する</a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-recruit';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>

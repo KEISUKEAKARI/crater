@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ワイヤーフレーム一覧 - ONE WF</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #111; color: #fff; min-height: 100vh; padding: 60px 40px; }
+.title { font-size: 11px; letter-spacing: 0.4em; color: #555; margin-bottom: 8px; }
+h1 { font-size: 32px; font-weight: 300; letter-spacing: 0.2em; color: #fff; margin-bottom: 48px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; max-width: 1000px; }
+.card { border: 1px solid #222; background: #1a1a1a; padding: 28px 24px; text-decoration: none; display: block; transition: border-color 0.2s; }
+.card:hover { border-color: #444; }
+.card-tag { font-size: 10px; letter-spacing: 0.3em; color: #555; margin-bottom: 12px; }
+.card-title { font-size: 16px; letter-spacing: 0.1em; color: #ddd; margin-bottom: 8px; }
+.card-desc { font-size: 11px; color: #555; line-height: 1.7; }
+.card-type { display: inline-block; margin-top: 16px; font-size: 10px; letter-spacing: 0.2em; padding: 2px 8px; border-radius: 2px; }
+.type-static { background: #222; color: #666; }
+.type-cms { background: #0c2a3a; color: #38bdf8; }
+.type-ext { background: #1a2a1a; color: #4ade80; }
+.type-prog { background: #2a1a2a; color: #c084fc; }
+.divider { font-size: 10px; letter-spacing: 0.3em; color: #333; margin: 40px 0 20px; max-width: 1000px; border-top: 1px solid #222; padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="title">ONE WIREFRAME</div>
+<h1>ページ一覧</h1>
+
+<div class="grid">
+  <a href="wireframe-top.html" class="card">
+    <div class="card-tag">01</div>
+    <div class="card-title">トップページ</div>
+    <div class="card-desc">KV・物件検索・About・ニュース・スタッフ・CTA</div>
+    <span class="card-type type-static">静的</span>
+  </a>
+  <a href="wireframe-about.html" class="card">
+    <div class="card-tag">02</div>
+    <div class="card-title">わたしたちについて</div>
+    <div class="card-desc">企業理念・数字・チーム・ニュース</div>
+    <span class="card-type type-static">静的</span>
+  </a>
+  <a href="wireframe-property.html" class="card">
+    <div class="card-tag">03</div>
+    <div class="card-title">物件紹介</div>
+    <div class="card-desc">ピタットハウス外部サイト埋め込み</div>
+    <span class="card-type type-ext">外部</span>
+  </a>
+  <a href="wireframe-staff-list.html" class="card">
+    <div class="card-tag">04</div>
+    <div class="card-title">スタッフ紹介一覧</div>
+    <div class="card-desc">スタッフカードグリッド</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-staff-detail.html" class="card">
+    <div class="card-tag">05</div>
+    <div class="card-title">スタッフ詳細</div>
+    <div class="card-desc">プロフィール・インタビュー</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-voice-list.html" class="card">
+    <div class="card-tag">06</div>
+    <div class="card-title">お客様の声一覧</div>
+    <div class="card-desc">VOICEカードグリッド</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-voice-detail.html" class="card">
+    <div class="card-tag">07</div>
+    <div class="card-title">お客様の声詳細</div>
+    <div class="card-desc">プロフィール・インタビュー</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-recruit.html" class="card">
+    <div class="card-tag">08</div>
+    <div class="card-title">採用</div>
+    <div class="card-desc">採用メッセージ・募集要項・選考フロー</div>
+    <span class="card-type type-static">静的</span>
+  </a>
+  <a href="wireframe-company.html" class="card">
+    <div class="card-tag">09</div>
+    <div class="card-title">会社案内</div>
+    <div class="card-desc">会社概要・3店舗アクセス</div>
+    <span class="card-type type-static">静的</span>
+  </a>
+  <a href="wireframe-contact.html" class="card">
+    <div class="card-tag">10</div>
+    <div class="card-title">お問合せ</div>
+    <div class="card-desc">入力→確認→完了（BOWNOW）</div>
+    <span class="card-type type-prog">プログラム</span>
+  </a>
+  <a href="wireframe-assessment.html" class="card">
+    <div class="card-tag">11</div>
+    <div class="card-title">無料査定フォーム</div>
+    <div class="card-desc">入力→確認→完了（BOWNOW）</div>
+    <span class="card-type type-prog">プログラム</span>
+  </a>
+  <a href="wireframe-news-list.html" class="card">
+    <div class="card-tag">12</div>
+    <div class="card-title">ニュース一覧</div>
+    <div class="card-desc">記事一覧・カテゴリフィルター</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-news-detail.html" class="card">
+    <div class="card-tag">13</div>
+    <div class="card-title">ニュース詳細</div>
+    <div class="card-desc">記事本文・関連記事</div>
+    <span class="card-type type-cms">CMS（WP）</span>
+  </a>
+  <a href="wireframe-privacy.html" class="card">
+    <div class="card-tag">14</div>
+    <div class="card-title">プライバシーポリシー</div>
+    <div class="card-desc">テキストページ</div>
+    <span class="card-type type-static">静的</span>
+  </a>
+</div>
+</body>
+</html>

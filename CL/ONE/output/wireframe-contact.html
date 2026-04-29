@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問合せ - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">お問合せ</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html" class="cur">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta" style="border-color:#111;background:#111;color:#fff;">CONTACT</a>
+  </header>
+
+  <div class="kv-small">
+    <div><span class="kv-small-en">CONTACT</span><div class="kv-small-title">お問合せ</div></div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <!-- フォーム -->
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01 — FORM（BOWNOW）</span>
+    <span class="sec-tag">CONTACT</span>
+    <h2 class="sec-title">お問合せフォーム</h2>
+    <p style="font-size:13px;color:#888;line-height:1.8;margin-bottom:48px;">お問合せ内容をご記入のうえ、送信してください。通常2営業日以内にご返答いたします。</p>
+    <p style="font-size:11px;color:#e05555;margin-bottom:32px;letter-spacing:0.1em;">※ フォームはBOWNOW仕様で実装します（入力→確認→送信完了）</p>
+
+    <div class="form-section">
+      <div class="form-row">
+        <label class="form-label">お問合せ種別 <span class="req">必須</span></label>
+        <div class="form-radio-group">
+          <label class="form-radio"><input type="radio" name="type" checked> お部屋探し（賃貸）</label>
+          <label class="form-radio"><input type="radio" name="type"> 不動産購入</label>
+          <label class="form-radio"><input type="radio" name="type"> 売却・査定</label>
+          <label class="form-radio"><input type="radio" name="type"> リフォーム</label>
+          <label class="form-radio"><input type="radio" name="type"> その他</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">ご希望の店舗</label>
+        <select class="form-select"><option>指定なし</option><option>三郷中央店</option><option>亀有店</option><option>金町店</option></select>
+      </div>
+      <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <label class="form-label">お名前 <span class="req">必須</span></label>
+          <input type="text" class="form-input" placeholder="山田 太郎">
+        </div>
+        <div>
+          <label class="form-label">フリガナ <span class="req">必須</span></label>
+          <input type="text" class="form-input" placeholder="ヤマダ タロウ">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">電話番号 <span class="req">必須</span></label>
+        <input type="tel" class="form-input" placeholder="000-0000-0000" style="max-width:280px;">
+        <div class="form-note">※ 日中にご連絡が取れる番号をご入力ください</div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">メールアドレス <span class="req">必須</span></label>
+        <input type="email" class="form-input" placeholder="example@mail.com">
+      </div>
+      <div class="form-row">
+        <label class="form-label">お問合せ内容 <span class="req">必須</span></label>
+        <textarea class="form-textarea" placeholder="ご質問・ご相談内容をご記入ください"></textarea>
+      </div>
+      <div class="form-row">
+        <div style="padding:16px;background:#f7f7f7;font-size:12px;color:#888;line-height:1.8;">
+          <a href="wireframe-privacy.html" style="color:#666;">プライバシーポリシー</a>に同意のうえ、送信してください。<br>
+          <label style="display:flex;align-items:center;gap:10px;margin-top:12px;cursor:pointer;"><input type="checkbox"> プライバシーポリシーに同意する</label>
+        </div>
+      </div>
+      <button class="form-submit">内容を確認する →</button>
+    </div>
+  </section>
+
+  <!-- 確認・完了ページ案内 -->
+  <section class="section" style="background:#f7f7f7;">
+    <div class="sec-num">2</div>
+    <span class="wf-label">SECTION 02 — FLOW（プログラムページ）</span>
+    <h2 class="sec-title" style="font-size:18px;">フォーム遷移フロー</h2>
+    <div style="display:flex;gap:0;margin-top:32px;max-width:600px;">
+      <div style="flex:1;text-align:center;padding:24px 16px;background:#fff;border:1px solid #e0e0e0;">
+        <div style="font-size:10px;letter-spacing:0.2em;color:#aaa;margin-bottom:8px;">STEP 1</div>
+        <div style="font-size:13px;letter-spacing:0.1em;">入力フォーム</div>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 8px;color:#ccc;">→</div>
+      <div style="flex:1;text-align:center;padding:24px 16px;background:#fff;border:1px solid #e0e0e0;">
+        <div style="font-size:10px;letter-spacing:0.2em;color:#aaa;margin-bottom:8px;">STEP 2</div>
+        <div style="font-size:13px;letter-spacing:0.1em;">内容確認</div>
+        <div style="font-size:10px;color:#bbb;margin-top:4px;">BOWNOW仕様</div>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 8px;color:#ccc;">→</div>
+      <div style="flex:1;text-align:center;padding:24px 16px;background:#fff;border:1px solid #e0e0e0;">
+        <div style="font-size:10px;letter-spacing:0.2em;color:#aaa;margin-bottom:8px;">STEP 3</div>
+        <div style="font-size:13px;letter-spacing:0.1em;">送信完了</div>
+        <div style="font-size:10px;color:#bbb;margin-top:4px;">BOWNOW仕様</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-contact';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>

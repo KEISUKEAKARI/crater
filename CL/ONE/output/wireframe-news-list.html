@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ニュース一覧 - ONE WF</title>
+<link rel="stylesheet" href="_wf-shared.css">
+<style>
+.news-full-list { margin-top: 40px; border-top: 1px solid #e0e0e0; }
+.news-full-item { display: grid; grid-template-columns: 160px 100px 1fr; align-items: baseline; gap: 24px; padding: 20px 0; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+.news-full-item:hover .news-title-link { text-decoration: underline; }
+.news-date-full { font-size: 11px; letter-spacing: 0.15em; color: #999; }
+.news-cat-full { font-size: 10px; letter-spacing: 0.15em; color: #888; border: 1px solid #ddd; padding: 3px 12px; text-align: center; }
+.news-title-link { font-size: 14px; letter-spacing: 0.05em; color: #222; }
+.cat-filter { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.cat-btn { font-size: 11px; letter-spacing: 0.15em; border: 1px solid #ddd; padding: 6px 16px; color: #888; background: #fff; cursor: pointer; text-decoration: none; }
+.cat-btn.active { border-color: #111; color: #111; background: #111; color: #fff; }
+@media (max-width: 768px) { .news-full-item { grid-template-columns: 1fr; gap: 6px; } }
+</style>
+</head>
+<body>
+<div id="wf-bar">
+  <span class="wf-bar-logo">ONE WF</span><span class="wf-bar-sep">|</span><span class="wf-bar-page">ニュース一覧</span>
+  <div class="wf-bar-nav"><a href="wireframe-index.html">INDEX</a><a href="wireframe-top.html">TOP</a><a href="wireframe-about.html">ABOUT</a><a href="wireframe-property.html">PROPERTY</a><a href="wireframe-staff-list.html">STAFF</a><a href="wireframe-voice-list.html">VOICE</a><a href="wireframe-recruit.html">RECRUIT</a><a href="wireframe-company.html">COMPANY</a><a href="wireframe-contact.html">CONTACT</a><a href="wireframe-assessment.html">査定</a><a href="wireframe-news-list.html" class="cur">NEWS</a></div>
+  <div class="wf-bar-right"><span id="wf-count">0件</span><button id="wf-toggle-resolved">解決済みを隠す</button><button id="wf-comment-btn">💬 コメント追加</button></div>
+</div>
+<div id="wf-panel"><div class="wf-panel-title">コメント一覧</div><div id="wf-panel-list"><div id="wf-panel-empty">コメントはまだありません</div></div></div>
+
+<div class="page">
+  <div id="wf-overlay"></div>
+  <header class="header">
+    <a href="wireframe-top.html" class="header-logo">ONE</a>
+    <ul class="header-nav">
+      <li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY ↗</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li>
+    </ul>
+    <a href="wireframe-contact.html" class="header-cta">CONTACT</a>
+  </header>
+
+  <div class="kv-small">
+    <div><span class="kv-small-en">NEWS</span><div class="kv-small-title">ニュース</div></div>
+    <div class="kv-ph">KEY VISUAL</div>
+  </div>
+
+  <section class="section">
+    <div class="sec-num">1</div>
+    <span class="wf-label">SECTION 01（CMS / WordPress）</span>
+    <span class="sec-tag">NEWS</span>
+    <h2 class="sec-title">ニュース</h2>
+    <p class="sec-title-ja">お知らせ</p>
+
+    <!-- カテゴリフィルター -->
+    <div class="cat-filter">
+      <a href="#" class="cat-btn active">ALL</a>
+      <a href="#" class="cat-btn">お知らせ</a>
+      <a href="#" class="cat-btn">スタッフ</a>
+      <a href="#" class="cat-btn">キャンペーン</a>
+      <a href="#" class="cat-btn">イベント</a>
+    </div>
+
+    <div class="news-full-list">
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2025.04.01</span><span class="news-cat-full">お知らせ</span><span class="news-title-link">春のキャンペーン開始のお知らせ</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2025.03.15</span><span class="news-cat-full">スタッフ</span><span class="news-title-link">新スタッフ紹介：○○が仲間に加わりました</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2025.02.28</span><span class="news-cat-full">お知らせ</span><span class="news-title-link">金町店オープンのお知らせ</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2025.02.01</span><span class="news-cat-full">キャンペーン</span><span class="news-title-link">2月限定！賃貸仲介手数料無料キャンペーン</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2025.01.15</span><span class="news-cat-full">お知らせ</span><span class="news-title-link">年末年始の営業時間について</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2024.12.01</span><span class="news-cat-full">イベント</span><span class="news-title-link">住まいの相談会開催のお知らせ（三郷中央店）</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2024.11.10</span><span class="news-cat-full">スタッフ</span><span class="news-title-link">スタッフブログ更新：○○の一日</span></a>
+      <a href="wireframe-news-detail.html" class="news-full-item"><span class="news-date-full">2024.10.05</span><span class="news-cat-full">お知らせ</span><span class="news-title-link">Webサイトをリニューアルしました</span></a>
+    </div>
+
+    <!-- ページネーション -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:48px;">
+      <span style="width:36px;height:36px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;">1</span>
+      <a href="#" style="width:36px;height:36px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px;color:#666;text-decoration:none;">2</a>
+      <a href="#" style="width:36px;height:36px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px;color:#666;text-decoration:none;">3</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><a href="wireframe-top.html" class="footer-logo">ONE</a><div class="footer-address">〒341-0053 埼玉県三郷市○○○<br>TEL: 000-0000-0000</div></div>
+      <ul class="footer-nav"><li><a href="wireframe-top.html">HOME</a></li><li><a href="wireframe-about.html">ABOUT</a></li><li><a href="wireframe-property.html">PROPERTY</a></li><li><a href="wireframe-staff-list.html">STAFF</a></li><li><a href="wireframe-voice-list.html">VOICE</a></li><li><a href="wireframe-recruit.html">RECRUIT</a></li><li><a href="wireframe-company.html">COMPANY</a></li><li><a href="wireframe-contact.html">CONTACT</a></li><li><a href="wireframe-assessment.html">無料査定</a></li><li><a href="wireframe-privacy.html">プライバシーポリシー</a></li></ul>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2024 ONE Inc. All Rights Reserved.</div></div>
+  </footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>var WF_PAGE_ID='one-wf-news-list';</script>
+<script src="_wf-comment.js"></script>
+</body>
+</html>
