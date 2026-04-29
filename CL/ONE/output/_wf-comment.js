@@ -1,12 +1,28 @@
 // ONE ワイヤーフレーム コメントシステム
 // 各ページで var WF_PAGE_ID = 'one-wf-xxx'; を先に定義してから読み込む
+// URLに ?client=1 をつけると「クロードに渡す」ボタンが非表示になる（クライアント公開モード）
 (function(){
   try{firebase.initializeApp({apiKey:"AIzaSyArq3B1YkeiBv-PgpBkMrRGWsOkuXx4fxo",authDomain:"view-crater.firebaseapp.com",projectId:"view-crater",storageBucket:"view-crater.firebasestorage.app",messagingSenderId:"523845906687",appId:"1:523845906687:web:b5b6612eabe1af9544dcca"});}catch(e){}
   var db=firebase.firestore();
   var PAGE_ID=window.WF_PAGE_ID||'one-wf-unknown';
+  var PAGE_NAME=window.WF_PAGE_NAME||(document.querySelector('.wf-bar-page')?document.querySelector('.wf-bar-page').textContent:'このページ');
+  var CLIENT_MODE=(new URLSearchParams(window.location.search)).get('client')==='1';
+
   var commentMode=false,showResolved=true,comments=[],activePopupId=null,inputPopup=null,viewPopup=null;
   var overlay=document.getElementById('wf-overlay');
 
+  // クロードに渡すボタンをパネルに追加
+  var panel=document.getElementById('wf-panel');
+  if(panel&&!CLIENT_MODE){
+    var claudeBtn=document.createElement('div');
+    claudeBtn.id='wf-claude-wrap';
+    claudeBtn.style.cssText='margin-top:24px;border-top:1px solid #222;padding-top:16px;';
+    claudeBtn.innerHTML='<button id="wf-claude-btn" style="width:100%;background:#1a3a2a;border:1px solid #2a6a4a;color:#4ade80;padding:10px 16px;border-radius:6px;font-size:12px;letter-spacing:0.15em;cursor:pointer;font-family:inherit;text-align:left;">📋 クロードに渡す</button><div style="font-size:10px;color:#444;margin-top:8px;line-height:1.6;">コメントをまとめてコピーできます。<br>クロードのチャットに貼り付けてください。</div>';
+    panel.appendChild(claudeBtn);
+    document.getElementById('wf-claude-btn').addEventListener('click',showClaudeModal);
+  }
+
+  // コメントモード
   document.getElementById('wf-comment-btn').addEventListener('click',function(){
     commentMode=!commentMode;
     overlay.style.pointerEvents=commentMode?'auto':'none';
@@ -16,12 +32,14 @@
     if(!commentMode)closeInput();
   });
 
+  // 解決済みトグル
   document.getElementById('wf-toggle-resolved').addEventListener('click',function(){
     showResolved=!showResolved;
     this.textContent=showResolved?'解決済みを隠す':'解決済みを表示';
     renderPins();
   });
 
+  // クリックでコメント入力
   overlay.addEventListener('click',function(e){
     if(e.target.closest('.c-pin')||e.target.closest('.c-input-popup'))return;
     closeInput();closeView();
@@ -109,6 +127,95 @@
     item.querySelector('#pes-'+c.id).addEventListener('click',function(e){e.stopPropagation();var t=item.querySelector('#pe-'+c.id).value.trim();if(!t)return;db.collection('comments').doc(PAGE_ID).collection('items').doc(c.id).update({text:t});});
   }
 
+  // ===== クロードに渡すモーダル =====
+  function showClaudeModal(){
+    var sorted=comments.slice().sort(function(a,b){return(a.createdAt?a.createdAt.seconds:0)-(b.createdAt?b.createdAt.seconds:0);});
+    var open=sorted.filter(function(c){return!c.resolved;});
+    var resolved=sorted.filter(function(c){return c.resolved;});
+    var now=new Date();
+    var dateStr=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+(now.getDate())+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+
+    var lines=[];
+    lines.push('【ONE ワイヤーフレーム コメントまとめ】');
+    lines.push('ページ：'+PAGE_NAME);
+    lines.push('出力日時：'+dateStr);
+    lines.push('合計：'+comments.length+'件（未解決：'+open.length+'件 / 解決済み：'+resolved.length+'件）');
+    lines.push('');
+
+    if(open.length){
+      lines.push('━━ 未解決コメント（'+open.length+'件） ━━');
+      open.forEach(function(c,i){
+        lines.push('');
+        lines.push('#'+(i+1)+' 【'+esc2(c.name||'匿名')+'】');
+        lines.push(esc2(c.text));
+      });
+    }
+
+    if(resolved.length){
+      lines.push('');
+      lines.push('━━ 解決済みコメント（'+resolved.length+'件） ━━');
+      resolved.forEach(function(c,i){
+        lines.push('');
+        lines.push('#'+(open.length+i+1)+' 【'+esc2(c.name||'匿名')+'】✓解決済み');
+        lines.push(esc2(c.text));
+      });
+    }
+
+    if(!comments.length){
+      lines.push('（コメントはまだありません）');
+    }
+
+    var text=lines.join('\n');
+
+    // モーダル
+    var modal=document.createElement('div');
+    modal.id='wf-claude-modal';
+    modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:99999;display:flex;align-items:center;justify-content:center;';
+    modal.innerHTML=
+      '<div style="background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:32px;width:90%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;gap:16px;">'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;">'+
+          '<div style="font-size:14px;font-weight:bold;color:#fff;letter-spacing:0.1em;">📋 クロードに渡す</div>'+
+          '<button id="wf-claude-close" style="background:none;border:none;color:#666;font-size:20px;cursor:pointer;line-height:1;">✕</button>'+
+        '</div>'+
+        '<div style="font-size:11px;color:#555;line-height:1.7;">以下のテキストをコピーして、クロードのチャットに貼り付けてください。<br>「このコメントを元にワイヤーを修正して」と一言添えるだけでOKです。</div>'+
+        '<textarea id="wf-claude-text" style="flex:1;min-height:240px;background:#111;border:1px solid #333;border-radius:6px;color:#ccc;font-size:12px;padding:14px;line-height:1.8;font-family:monospace;resize:vertical;outline:none;" readonly>'+escHtml(text)+'</textarea>'+
+        '<div style="display:flex;gap:10px;">'+
+          '<button id="wf-claude-copy" style="flex:1;background:#2563eb;border:none;color:#fff;padding:12px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;letter-spacing:0.1em;">コピーする</button>'+
+          '<button id="wf-claude-close2" style="background:#333;border:none;color:#aaa;padding:12px 20px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;">閉じる</button>'+
+        '</div>'+
+      '</div>';
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click',function(e){if(e.target===modal)modal.remove();});
+    document.getElementById('wf-claude-close').addEventListener('click',function(){modal.remove();});
+    document.getElementById('wf-claude-close2').addEventListener('click',function(){modal.remove();});
+
+    // テキスト全選択
+    var ta=document.getElementById('wf-claude-text');
+    ta.addEventListener('focus',function(){this.select();});
+
+    document.getElementById('wf-claude-copy').addEventListener('click',function(){
+      ta.select();
+      try{
+        navigator.clipboard.writeText(text).then(function(){
+          document.getElementById('wf-claude-copy').textContent='✓ コピーしました！';
+          document.getElementById('wf-claude-copy').style.background='#059669';
+          setTimeout(function(){
+            if(document.getElementById('wf-claude-copy')){
+              document.getElementById('wf-claude-copy').textContent='コピーする';
+              document.getElementById('wf-claude-copy').style.background='#2563eb';
+            }
+          },2000);
+        });
+      }catch(err){
+        document.execCommand('copy');
+        document.getElementById('wf-claude-copy').textContent='✓ コピーしました！';
+        document.getElementById('wf-claude-copy').style.background='#059669';
+      }
+    });
+  }
+
+  // Firebase リアルタイム購読
   db.collection('comments').doc(PAGE_ID).collection('items').onSnapshot(function(snap){
     comments=snap.docs.map(function(doc){var d=doc.data();d.id=doc.id;return d;});
     renderPins();
@@ -121,4 +228,6 @@
   function closeInput(){if(inputPopup){inputPopup.remove();inputPopup=null;}}
   function closeView(){if(viewPopup){viewPopup.remove();viewPopup=null;}activePopupId=null;}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function esc2(s){return String(s);}
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 })();
