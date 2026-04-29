@@ -216,6 +216,8 @@ body { background:var(--bg); color:var(--ch); font-family:'Zen Old Mincho',serif
     </div>
     <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
     <button class="tab-btn" onclick="switchTab('design',this)">Design System</button>
+    <button class="tab-btn" onclick="switchTab('logo',this)">Logo</button>
+    <button class="tab-btn" onclick="switchTab('visual',this)">Visual</button>
   </nav>
 </div>
 
@@ -371,6 +373,154 @@ body { background:var(--bg); color:var(--ch); font-family:'Zen Old Mincho',serif
   </div>
 
 </div><!-- /overview -->
+
+<!-- ══════════════════════════════
+     LOGO
+══════════════════════════════ -->
+<div id="tab-logo" class="tab-content">
+
+  <div class="section-heading" style="margin-top:0;">
+    <span class="section-heading-text">Logo</span>
+    <span class="section-heading-jp">ロゴ</span>
+  </div>
+
+  <!-- メインロゴ -->
+  <div class="row">
+    <div class="card" style="min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+      <div style="width:320px; height:200px; border:2px dashed var(--pur-lt); border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;">
+        <div style="font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.3em; color:var(--pur-lt);">LOGO PLACEHOLDER</div>
+        <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:var(--gray-lt);">ロゴ制作後に差し替え</div>
+      </div>
+      <div class="lbl" style="margin-bottom:0;">Primary Logo</div>
+    </div>
+  </div>
+
+  <!-- バリエーション -->
+  <div class="section-heading">
+    <span class="section-heading-text">Logo Variations</span>
+    <span class="section-heading-jp">カラーバリエーション</span>
+  </div>
+  <div class="grid-3 row">
+    <div class="card" style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:36px 24px;">
+      <div style="width:100%; height:120px; border:2px dashed var(--pur-lt); border-radius:6px; display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">FULL COLOR</span>
+      </div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:400; color:var(--gray);">フルカラー版</div>
+    </div>
+    <div class="card-dark" style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:36px 24px;">
+      <div style="width:100%; height:120px; border:2px dashed rgba(143,122,170,0.3); border-radius:6px; display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:rgba(143,122,170,0.5);">WHITE VERSION</span>
+      </div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:rgba(245,241,232,0.5);">白抜き版</div>
+    </div>
+    <div class="card-muted" style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:36px 24px;">
+      <div style="width:100%; height:120px; border:2px dashed #ccc; border-radius:6px; display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:#bbb;">MONO</span>
+      </div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:400; color:var(--gray);">モノクロ版</div>
+    </div>
+  </div>
+
+  <!-- クリアスペース・最小サイズ -->
+  <div class="section-heading">
+    <span class="section-heading-text">Clear Space · Min Size</span>
+    <span class="section-heading-jp">クリアスペース・最小サイズ</span>
+  </div>
+  <div class="grid-2 row">
+    <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; min-height:200px;">
+      <div style="position:relative; padding:32px; border:1px dashed var(--pur-lt); border-radius:4px;">
+        <div style="width:120px; height:60px; border:2px dashed var(--pur-lt); border-radius:4px; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:0.15em; color:var(--pur-lt);">LOGO</span>
+        </div>
+        <div style="position:absolute; top:8px; left:50%; transform:translateX(-50%); font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:0.15em; color:var(--pur);">X</div>
+        <div style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:0.15em; color:var(--pur);">X</div>
+      </div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:var(--gray);">四方にロゴ高さ×1倍の余白を確保</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Minimum Size</div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div style="width:80px; height:40px; border:2px dashed var(--pur-lt); border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Oswald',sans-serif; font-size:8px; color:var(--pur-lt);">LOGO</span>
+          </div>
+          <div>
+            <div style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.15em; color:var(--ch);">Web: 80px 以上</div>
+            <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:var(--gray-lt); margin-top:4px;">横幅基準</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div style="width:60px; height:30px; border:2px dashed var(--pur-lt); border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Oswald',sans-serif; font-size:7px; color:var(--pur-lt);">LOGO</span>
+          </div>
+          <div>
+            <div style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.15em; color:var(--ch);">印刷: 20mm 以上</div>
+            <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:var(--gray-lt); margin-top:4px;">横幅基準</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /logo -->
+
+<!-- ══════════════════════════════
+     VISUAL
+══════════════════════════════ -->
+<div id="tab-visual" class="tab-content">
+
+  <div class="section-heading" style="margin-top:0;">
+    <span class="section-heading-text">Key Visual</span>
+    <span class="section-heading-jp">キービジュアル</span>
+  </div>
+
+  <!-- KV メイン -->
+  <div class="row">
+    <div style="width:100%; aspect-ratio:16/9; background:var(--ch); border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; position:relative; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:radial-gradient(circle at 60% 40%, rgba(143,122,170,0.12) 0%, transparent 60%);"></div>
+      <div style="border:2px dashed rgba(143,122,170,0.3); border-radius:8px; padding:40px 60px; display:flex; flex-direction:column; align-items:center; gap:12px; position:relative; z-index:1;">
+        <div style="font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.4em; color:rgba(143,122,170,0.5);">KEY VISUAL PLACEHOLDER</div>
+        <div style="font-family:'Zen Old Mincho',serif; font-size:28px; font-weight:500; color:rgba(245,241,232,0.2); letter-spacing:0.08em;">能登マロン堂</div>
+        <div style="font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:300; color:rgba(245,241,232,0.25);">KV制作後に差し替え</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Concept -->
+  <div class="section-heading">
+    <span class="section-heading-text">Visual Concept</span>
+    <span class="section-heading-jp">ビジュアルコンセプト</span>
+  </div>
+  <div class="grid-3 row">
+    <div class="card">
+      <div class="lbl">Atmosphere</div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:400; color:var(--ch); line-height:2;">静謐・余白・和の空気感。にぎやかでなく、品で魅せる。</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Subject</div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:400; color:var(--ch); line-height:2;">栗・ベビーカステラ・手・包装。素材の質感を丁寧に見せる。</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Tone</div>
+      <div style="font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:400; color:var(--ch); line-height:2;">暗めのトーン・ローキー。タンニン紫と黒と生成りの世界観。</div>
+    </div>
+  </div>
+
+  <!-- Visual Grid -->
+  <div class="section-heading">
+    <span class="section-heading-text">Visual Grid</span>
+    <span class="section-heading-jp">ビジュアルグリッド</span>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:var(--gap);">
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 01</span></div>
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 02</span></div>
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 03</span></div>
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 04</span></div>
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 05</span></div>
+    <div style="aspect-ratio:3/2; background:var(--bg2); border-radius:6px; border:2px dashed var(--pur-lt); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:0.2em; color:var(--pur-lt);">IMAGE 06</span></div>
+  </div>
+
+</div><!-- /visual -->
 
 <!-- ══════════════════════════════
      DESIGN SYSTEM
