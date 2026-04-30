@@ -36,19 +36,23 @@
     z-index: 1;
   }
 
-  /* 両方に screen を当てて色が本気で混ざる */
+  .kv-slide {
+    /* クラス切り替え時のカクつきをopacityでなだらかに */
+    transition: opacity 0.4s ease;
+  }
+
   .kv-slide.leaving {
     z-index: 1;
     opacity: 1;
-
+    /* 幅250%の超ソフトグラデーションで線を消す */
     mask-image: linear-gradient(
       -45deg,
-      transparent calc(var(--wipe) - 160%),
+      transparent calc(var(--wipe) - 250%),
       black var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
       -45deg,
-      transparent calc(var(--wipe) - 160%),
+      transparent calc(var(--wipe) - 250%),
       black var(--wipe)
     );
   }
@@ -56,15 +60,14 @@
   .kv-slide.entering {
     opacity: 1;
     z-index: 2;
-
     mask-image: linear-gradient(
       -45deg,
-      black calc(var(--wipe) - 160%),
+      black calc(var(--wipe) - 250%),
       transparent var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
       -45deg,
-      black calc(var(--wipe) - 160%),
+      black calc(var(--wipe) - 250%),
       transparent var(--wipe)
     );
   }
@@ -144,14 +147,14 @@
   const blendSwitcher = document.getElementById('blendSwitcher');
   let current = 0;
   let isAnimating = false;
-  let currentBlend = 'soft-light';
+  let currentBlend = 'lighten';
 
   // 比較できるブレンドモード
   const blendModes = ['screen', 'soft-light', 'overlay', 'multiply', 'lighten', 'color-dodge'];
 
   blendModes.forEach(mode => {
     const btn = document.createElement('button');
-    btn.className = 'blend-btn' + (mode === currentBlend ? ' active' : '');
+    btn.className = 'blend-btn' + (mode === 'lighten' ? ' active' : '');
     btn.textContent = mode;
     btn.addEventListener('click', () => {
       currentBlend = mode;
