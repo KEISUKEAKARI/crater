@@ -29,33 +29,45 @@
     z-index: 1;
   }
 
-  /* @property でカスタムプロパティをアニメーション可能にする */
   @property --wipe {
     syntax: '<percentage>';
-    initial-value: -30%;
+    initial-value: -60%;
     inherits: false;
+  }
+
+  /* フェードアウト：前の画像がゆっくり消える */
+  .kv-slide.leaving {
+    z-index: 1;
+    animation: fade-out 2.8s ease-in-out forwards;
+  }
+
+  @keyframes fade-out {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
   }
 
   .kv-slide.entering {
     opacity: 1;
     z-index: 2;
-    --wipe: -30%;
-    /* 左下→右上への斜めグラデーションマスク */
+    --wipe: -60%;
+    /* 左下→右上・グラデーション幅を広くして混じり合う表現に */
     mask-image: linear-gradient(
       135deg,
-      black calc(var(--wipe) - 25%),
+      black calc(var(--wipe) - 60%),
+      rgba(0,0,0,0.5) calc(var(--wipe) - 10%),
       transparent var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
       135deg,
-      black calc(var(--wipe) - 25%),
+      black calc(var(--wipe) - 60%),
+      rgba(0,0,0,0.5) calc(var(--wipe) - 10%),
       transparent var(--wipe)
     );
-    animation: diag-fade 1.4s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+    animation: diag-fade 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   @keyframes diag-fade {
-    to { --wipe: 160%; }
+    to { --wipe: 180%; }
   }
 
   /* ドットナビ */
@@ -100,7 +112,7 @@
   const nav = document.getElementById('kvNav');
   let current = 0;
   let isAnimating = false;
-  const INTERVAL = 4000; // 切り替え間隔（ms）
+  const INTERVAL = 6000; // 切り替え間隔（ms）
 
   // ドット生成
   slides.forEach((_, i) => {
@@ -122,11 +134,12 @@
       d.classList.toggle('active', i === current);
     });
 
-    // entering クラスを付与してアニメーション開始
+    // 前の画像にleaving、新しい画像にenteringを付与（同時に動かして混じり合わせる）
+    slides[prev].classList.add('leaving');
     slides[next].classList.add('entering');
 
     slides[next].addEventListener('animationend', () => {
-      slides[prev].classList.remove('active');
+      slides[prev].classList.remove('active', 'leaving');
       slides[next].classList.remove('entering');
       slides[next].classList.add('active');
       isAnimating = false;
