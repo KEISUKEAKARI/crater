@@ -36,10 +36,6 @@
     z-index: 1;
   }
 
-  .kv-slide {
-    /* クラス切り替え時のカクつきをopacityでなだらかに */
-    transition: opacity 0.4s ease;
-  }
 
   .kv-slide.leaving {
     z-index: 1;
@@ -230,16 +226,22 @@
     );
 
     anim.onfinish = () => {
-      slides[prev].classList.remove('leaving');
-      slides[next].classList.remove('entering');
-      slides[prev].classList.remove('active');
-      slides[next].classList.add('active');
-      slides[prev].style.mixBlendMode = '';
-      slides[next].style.mixBlendMode = '';
-      slides[prev].style.maskImage = '';
-      slides[prev].style.webkitMaskImage = '';
+      // 1. next をマスク・blend解除してからactiveに昇格
       slides[next].style.maskImage = '';
       slides[next].style.webkitMaskImage = '';
+      slides[next].style.mixBlendMode = '';
+      slides[next].classList.remove('entering');
+      slides[next].classList.add('active');
+
+      // 2. prev は opacity:0 を直接セットしてから一瞬で非表示化（transitionなし）
+      slides[prev].style.opacity = '0';
+      slides[prev].style.maskImage = '';
+      slides[prev].style.webkitMaskImage = '';
+      slides[prev].style.mixBlendMode = '';
+      slides[prev].classList.remove('active', 'leaving');
+      // opacityのインラインを戻す（次回表示のため）
+      requestAnimationFrame(() => { slides[prev].style.opacity = ''; });
+
       anim.cancel();
       isAnimating = false;
     };
