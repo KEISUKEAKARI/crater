@@ -6,7 +6,7 @@
 <title>KV 対角フェード サンプル</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #000; }
+  body { background: #000; overflow: hidden; }
 
   .kv {
     position: relative;
@@ -29,38 +29,53 @@
     z-index: 1;
   }
 
+  /* --wipe を親から継承させて leaving と entering を同期させる */
   @property --wipe {
     syntax: '<percentage>';
-    initial-value: -60%;
-    inherits: false;
+    initial-value: -90%;
+    inherits: true;
   }
 
-  /* 前の画像はそのまま残す（新画像が上に乗って透けることでダブルエクスポージャーに） */
+  /* .kv.transitioning に --wipe アニメーションをかける */
+  .kv.transitioning {
+    --wipe: -90%;
+    animation: wipe-move 3.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes wipe-move {
+    to { --wipe: 200%; }
+  }
+
+  /* 前の画像：右上→左下方向に消えていく（逆マスク） */
   .kv-slide.leaving {
     z-index: 1;
     opacity: 1;
+    mask-image: linear-gradient(
+      -45deg,
+      transparent calc(var(--wipe) - 120%),
+      black var(--wipe)
+    );
+    -webkit-mask-image: linear-gradient(
+      -45deg,
+      transparent calc(var(--wipe) - 120%),
+      black var(--wipe)
+    );
   }
 
+  /* 新しい画像：左上→右下方向に現れる */
   .kv-slide.entering {
     opacity: 1;
     z-index: 2;
-    --wipe: -80%;
-    /* 左下→右上・超広いグラデーション帯でダブルエクスポージャー風に */
     mask-image: linear-gradient(
-      135deg,
-      black calc(var(--wipe) - 100%),
+      -45deg,
+      black calc(var(--wipe) - 120%),
       transparent var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
-      135deg,
-      black calc(var(--wipe) - 100%),
+      -45deg,
+      black calc(var(--wipe) - 120%),
       transparent var(--wipe)
     );
-    animation: diag-fade 3.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  @keyframes diag-fade {
-    to { --wipe: 200%; }
   }
 
   /* ドットナビ */
@@ -92,7 +107,6 @@
 <body>
 
 <div class="kv" id="kv">
-  <!-- 画像はお好きなものに差し替えてください -->
   <div class="kv-slide active" style="background-image: url('https://picsum.photos/seed/shrine1/1600/900')"></div>
   <div class="kv-slide" style="background-image: url('https://picsum.photos/seed/forest2/1600/900')"></div>
   <div class="kv-slide" style="background-image: url('https://picsum.photos/seed/japan3/1600/900')"></div>
@@ -101,13 +115,14 @@
 <div class="kv-nav" id="kvNav"></div>
 
 <script>
+  const kv = document.getElementById('kv');
   const slides = document.querySelectorAll('.kv-slide');
   const nav = document.getElementById('kvNav');
   let current = 0;
   let isAnimating = false;
-  const INTERVAL = 7000; // 切り替え間隔（ms）
+  const DURATION = 3600;
+  const INTERVAL = 7000;
 
-  // ドット生成
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'kv-dot' + (i === 0 ? ' active' : '');
@@ -122,24 +137,28 @@
     const prev = current;
     current = next;
 
-    // ドット更新
     nav.querySelectorAll('.kv-dot').forEach((d, i) => {
       d.classList.toggle('active', i === current);
     });
 
-    // 前の画像にleaving、新しい画像にenteringを付与（同時に動かして混じり合わせる）
+    // 親に transitioning を付けて --wipe を同期アニメーション
     slides[prev].classList.add('leaving');
     slides[next].classList.add('entering');
 
-    slides[next].addEventListener('animationend', () => {
+    // アニメーションをリセットしてから再付与
+    kv.classList.remove('transitioning');
+    void kv.offsetWidth; // reflow
+    kv.classList.add('transitioning');
+
+    setTimeout(() => {
+      kv.classList.remove('transitioning');
       slides[prev].classList.remove('active', 'leaving');
       slides[next].classList.remove('entering');
       slides[next].classList.add('active');
       isAnimating = false;
-    }, { once: true });
+    }, DURATION);
   }
 
-  // 自動切り替え
   setInterval(() => {
     goTo((current + 1) % slides.length);
   }, INTERVAL);
