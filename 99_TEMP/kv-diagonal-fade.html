@@ -40,7 +40,7 @@
   .kv-slide.leaving {
     z-index: 1;
     opacity: 1;
-    mix-blend-mode: screen;
+
     mask-image: linear-gradient(
       -45deg,
       transparent calc(var(--wipe) - 160%),
@@ -56,7 +56,7 @@
   .kv-slide.entering {
     opacity: 1;
     z-index: 2;
-    mix-blend-mode: screen;
+
     mask-image: linear-gradient(
       -45deg,
       black calc(var(--wipe) - 160%),
@@ -91,6 +91,38 @@
   }
 
   .kv-dot.active { background: #fff; }
+
+  /* blend mode 切り替えUI */
+  .blend-switcher {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 12px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+  }
+
+  .blend-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .blend-btn.active {
+    background: #fff;
+    color: #000;
+  }
 </style>
 </head>
 <body>
@@ -103,12 +135,30 @@
 
 <div class="kv-nav" id="kvNav"></div>
 
+<div class="blend-switcher" id="blendSwitcher"></div>
+
 <script>
   const kv = document.getElementById('kv');
   const slides = document.querySelectorAll('.kv-slide');
   const nav = document.getElementById('kvNav');
+  const blendSwitcher = document.getElementById('blendSwitcher');
   let current = 0;
   let isAnimating = false;
+  let currentBlend = 'soft-light';
+
+  // 比較できるブレンドモード
+  const blendModes = ['screen', 'soft-light', 'overlay', 'multiply', 'lighten', 'color-dodge'];
+
+  blendModes.forEach(mode => {
+    const btn = document.createElement('button');
+    btn.className = 'blend-btn' + (mode === currentBlend ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', () => {
+      currentBlend = mode;
+      blendSwitcher.querySelectorAll('.blend-btn').forEach(b => b.classList.toggle('active', b.textContent === mode));
+    });
+    blendSwitcher.appendChild(btn);
+  });
 
   const DURATION = 5800;   // アニメーション時間（ms）
   const INTERVAL = 10000;  // 切り替え間隔（ms）
@@ -136,6 +186,10 @@
     slides[prev].classList.add('leaving');
     slides[next].classList.add('entering');
 
+    // 選択中のblend modeを適用
+    slides[prev].style.mixBlendMode = currentBlend;
+    slides[next].style.mixBlendMode = currentBlend;
+
     // Web Animations API で --wipe を親要素に直接アニメーション
     // → クラス削除時のリセット問題がなくなる
     const anim = kv.animate(
@@ -144,12 +198,13 @@
     );
 
     anim.onfinish = () => {
-      // マスクを外してからアニメーションを削除（チラつき防止）
       slides[prev].classList.remove('leaving');
       slides[next].classList.remove('entering');
       slides[prev].classList.remove('active');
       slides[next].classList.add('active');
-      anim.cancel(); // fill:forwards を解除して --wipe をリセット
+      slides[prev].style.mixBlendMode = '';
+      slides[next].style.mixBlendMode = '';
+      anim.cancel();
       isAnimating = false;
     };
   }
