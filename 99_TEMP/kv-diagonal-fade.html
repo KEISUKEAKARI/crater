@@ -13,7 +13,13 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    isolation: isolate; /* mix-blend-mode を外に漏らさない */
+    isolation: isolate;
+  }
+
+  @property --wipe {
+    syntax: '<percentage>';
+    initial-value: -90%;
+    inherits: true;
   }
 
   .kv-slide {
@@ -30,52 +36,35 @@
     z-index: 1;
   }
 
-  /* --wipe を親から継承させて leaving と entering を同期させる */
-  @property --wipe {
-    syntax: '<percentage>';
-    initial-value: -90%;
-    inherits: true;
-  }
-
-  /* .kv.transitioning に --wipe アニメーションをかける */
-  .kv.transitioning {
-    --wipe: -90%;
-    animation: wipe-move 5.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  @keyframes wipe-move {
-    to { --wipe: 200%; }
-  }
-
-  /* 前の画像：右上→左下方向に消えていく（逆マスク） */
+  /* 両方に screen を当てて色が本気で混ざる */
   .kv-slide.leaving {
     z-index: 1;
     opacity: 1;
+    mix-blend-mode: screen;
     mask-image: linear-gradient(
       -45deg,
-      transparent calc(var(--wipe) - 120%),
+      transparent calc(var(--wipe) - 160%),
       black var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
       -45deg,
-      transparent calc(var(--wipe) - 120%),
+      transparent calc(var(--wipe) - 160%),
       black var(--wipe)
     );
   }
 
-  /* 新しい画像：左上→右下方向に現れる + screen合成で色が混じり合う */
   .kv-slide.entering {
     opacity: 1;
     z-index: 2;
     mix-blend-mode: screen;
     mask-image: linear-gradient(
       -45deg,
-      black calc(var(--wipe) - 120%),
+      black calc(var(--wipe) - 160%),
       transparent var(--wipe)
     );
     -webkit-mask-image: linear-gradient(
       -45deg,
-      black calc(var(--wipe) - 120%),
+      black calc(var(--wipe) - 160%),
       transparent var(--wipe)
     );
   }
@@ -101,9 +90,7 @@
     transition: background 0.3s;
   }
 
-  .kv-dot.active {
-    background: #fff;
-  }
+  .kv-dot.active { background: #fff; }
 </style>
 </head>
 <body>
@@ -122,8 +109,11 @@
   const nav = document.getElementById('kvNav');
   let current = 0;
   let isAnimating = false;
-  const DURATION = 5500;
-  const INTERVAL = 10000;
+
+  const DURATION = 5800;   // アニメーション時間（ms）
+  const INTERVAL = 10000;  // 切り替え間隔（ms）
+  // 最初は速く・そのあとゆっくり減速
+  const EASING = 'cubic-bezier(0.05, 0, 0.15, 1)';
 
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
@@ -143,22 +133,25 @@
       d.classList.toggle('active', i === current);
     });
 
-    // 親に transitioning を付けて --wipe を同期アニメーション
     slides[prev].classList.add('leaving');
     slides[next].classList.add('entering');
 
-    // アニメーションをリセットしてから再付与
-    kv.classList.remove('transitioning');
-    void kv.offsetWidth; // reflow
-    kv.classList.add('transitioning');
+    // Web Animations API で --wipe を親要素に直接アニメーション
+    // → クラス削除時のリセット問題がなくなる
+    const anim = kv.animate(
+      [{ '--wipe': '-90%' }, { '--wipe': '200%' }],
+      { duration: DURATION, easing: EASING, fill: 'forwards' }
+    );
 
-    setTimeout(() => {
-      kv.classList.remove('transitioning');
-      slides[prev].classList.remove('active', 'leaving');
+    anim.onfinish = () => {
+      // マスクを外してからアニメーションを削除（チラつき防止）
+      slides[prev].classList.remove('leaving');
       slides[next].classList.remove('entering');
+      slides[prev].classList.remove('active');
       slides[next].classList.add('active');
+      anim.cancel(); // fill:forwards を解除して --wipe をリセット
       isAnimating = false;
-    }, DURATION);
+    };
   }
 
   setInterval(() => {
