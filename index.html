@@ -9,9 +9,10 @@
 
     body {
       font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
-      background: #f4f4f4;
+      background: #f0f0f0;
       color: #333;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* パスワード画面 */
@@ -79,85 +80,162 @@
     /* ヘッダー */
     .header {
       background: #111;
-      padding: 32px 48px;
+      padding: 28px 48px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
     .header .logo {
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.3em;
       color: #fff;
-      opacity: 0.4;
-      margin-bottom: 6px;
+      opacity: 0.35;
     }
 
     .header h1 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 600;
       color: #fff;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
+    }
+
+    /* タブフィルター */
+    .tabs {
+      display: flex;
+      gap: 0;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+
+    .tab:hover { color: #aaa; }
+
+    .tab.active {
+      color: #fff;
+      border-bottom-color: #fff;
     }
 
     /* コンテンツ */
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 48px 40px;
+      padding: 40px 40px 80px;
     }
 
     /* セクション */
     .section {
-      margin-bottom: 40px;
+      margin-bottom: 12px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
     }
 
     .section-header {
       display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #1e2d3d;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .section-header:hover { background: #fafafa; }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .section-label {
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: 0.2em;
-      color: #888;
+      color: #fff;
+      background: #999;
+      padding: 3px 7px;
+      border-radius: 3px;
     }
 
+    .section-label.tool  { background: #5b7fa6; }
+    .section-label.crater { background: #1e2d3d; }
+    .section-label.client { background: #6a6a6a; }
+
     .section-title {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 600;
       color: #1e2d3d;
     }
 
+    .section-count {
+      font-size: 11px;
+      color: #bbb;
+      margin-left: 4px;
+    }
+
+    .section-toggle {
+      font-size: 18px;
+      color: #bbb;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .section.open .section-toggle { transform: rotate(180deg); }
+
     /* カード一覧 */
+    .cards-wrap {
+      display: none;
+      padding: 4px 20px 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .section.open .cards-wrap { display: block; }
+
     .cards {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
+      margin-top: 14px;
     }
 
     .card {
-      background: white;
-      border: 1px solid #ddd;
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
       border-radius: 6px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      min-width: 160px;
+      gap: 3px;
+      transition: border-color 0.15s, background 0.15s;
+      min-width: 140px;
     }
 
     .card:hover {
       border-color: #1e2d3d;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #fff;
     }
 
     .card-type {
-      font-size: 10px;
-      color: #888;
+      font-size: 9px;
+      color: #aaa;
       letter-spacing: 0.1em;
     }
 
@@ -177,8 +255,9 @@
     }
 
     @media (max-width: 600px) {
-      .header { padding: 24px 20px; }
-      .container { padding: 32px 20px; }
+      .header { padding: 20px 16px 0; }
+      .container { padding: 24px 16px 60px; }
+      .tab { padding: 10px 14px; font-size: 10px; }
       .cards { flex-direction: column; }
       .card { min-width: unset; }
     }
@@ -201,227 +280,257 @@
   <div id="mainContent" style="display:none;">
 
     <div class="header">
-      <div class="logo">CRATER INC.</div>
-      <h1>VIEW</h1>
+      <div class="header-top">
+        <div class="logo">CRATER INC.</div>
+        <h1>VIEW</h1>
+      </div>
+      <div class="tabs">
+        <div class="tab active" data-filter="all">ALL</div>
+        <div class="tab" data-filter="tool">TOOL</div>
+        <div class="tab" data-filter="crater">CRATER</div>
+        <div class="tab" data-filter="client">CLIENT</div>
+      </div>
     </div>
 
     <div class="container">
 
       <!-- ツール -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">TOOL</span>
-          <span class="section-title">デザインツール</span>
+      <div class="section open" data-category="tool">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label tool">TOOL</span>
+            <span class="section-title">デザインツール</span>
+            <span class="section-count">2</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/50_STYLE-LIBRARY/font-preview.html">
-            <span class="card-type">TOOL</span>
-            <span class="card-name">フォントプレビュー</span>
-          </a>
-          <a class="card" href="/50_STYLE-LIBRARY/index.html">
-            <span class="card-type">LIBRARY</span>
-            <span class="card-name">スタイルライブラリ</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/50_STYLE-LIBRARY/font-preview.html">
+              <span class="card-type">TOOL</span>
+              <span class="card-name">フォントプレビュー</span>
+            </a>
+            <a class="card" href="/50_STYLE-LIBRARY/index.html">
+              <span class="card-type">LIBRARY</span>
+              <span class="card-name">スタイルライブラリ</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRATER -->
+      <div class="section open" data-category="crater">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label crater">CRATER</span>
+            <span class="section-title">自社案件</span>
+            <span class="section-count">5</span>
+          </div>
+          <span class="section-toggle">⌄</span>
+        </div>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/01_CRATER/スライド/output/index.html">
+              <span class="card-type">SLIDE</span>
+              <span class="card-name">ウェビナー用スライド</span>
+            </a>
+            <a class="card" href="/01_CRATER/スライド/output/company-profile.html">
+              <span class="card-type">SLIDE</span>
+              <span class="card-name">会社案内</span>
+            </a>
+            <a class="card" href="/01_CRATER/デザイン顧問/output/lp/komon-design-v1.html">
+              <span class="card-type">LP</span>
+              <span class="card-name">デザイン顧問 v1</span>
+            </a>
+            <a class="card" href="/01_CRATER/_SERVICE/acurry/output/brand-board.html">
+              <span class="card-type">BRAND BOARD</span>
+              <span class="card-name">A CURRY</span>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- JHL：金の時 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CLIENT</span>
-          <span class="section-title">JHL｜金の時</span>
+      <div class="section open" data-category="client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label client">CLIENT</span>
+            <span class="section-title">JHL｜金の時</span>
+            <span class="section-count">1</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/CL/JHL/金の時/output/brand-board.html">
-            <span class="card-type">BRAND BOARD</span>
-            <span class="card-name">金の時</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- 自社案件：スライド -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CRATER</span>
-          <span class="section-title">スライド</span>
-        </div>
-        <div class="cards">
-          <a class="card" href="/01_CRATER/スライド/output/index.html">
-            <span class="card-type">SLIDE</span>
-            <span class="card-name">ウェビナー用スライド</span>
-          </a>
-          <a class="card" href="/01_CRATER/スライド/output/company-profile.html">
-            <span class="card-type">SLIDE</span>
-            <span class="card-name">会社案内</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/CL/JHL/金の時/output/brand-board.html">
+              <span class="card-type">BRAND BOARD</span>
+              <span class="card-name">金の時</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- 自社案件：デザイン顧問LP -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CRATER</span>
-          <span class="section-title">社内デザイナー顧問 LP</span>
+      <!-- MU -->
+      <div class="section open" data-category="client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label client">CLIENT</span>
+            <span class="section-title">MU</span>
+            <span class="section-count">3</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/01_CRATER/デザイン顧問/output/lp/komon-design-v1.html">
-            <span class="card-type">LP</span>
-            <span class="card-name">デザイン顧問 v1</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- クライアント：人と空間 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CLIENT</span>
-          <span class="section-title">人と空間</span>
-        </div>
-        <div class="cards">
-          <a class="card" href="/CL/人と空間/output/sitemap.html">
-            <span class="card-type">SITEMAP</span>
-            <span class="card-name">サイトマップ</span>
-          </a>
-          <a class="card" href="/CL/人と空間/output/content-map.html">
-            <span class="card-type">CONTENT MAP</span>
-            <span class="card-name">コンテンツマップ</span>
-          </a>
-          <a class="card" href="/CL/人と空間/output/wireframe.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">ワイヤーフレーム</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/CL/MU/output/brand-board.html">
+              <span class="card-type">BRAND BOARD</span>
+              <span class="card-name">ブランドボード</span>
+            </a>
+            <a class="card" href="/CL/MU/output/font-preview.html">
+              <span class="card-type">TOOL</span>
+              <span class="card-name">フォントプレビュー</span>
+            </a>
+            <a class="card" href="/CL/MU/output/color-preview.html">
+              <span class="card-type">TOOL</span>
+              <span class="card-name">カラープレビュー</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- クライアント：MU -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CLIENT</span>
-          <span class="section-title">MU</span>
+      <!-- ONE -->
+      <div class="section" data-category="client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label client">CLIENT</span>
+            <span class="section-title">ONE</span>
+            <span class="section-count">15</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/CL/MU/output/brand-board.html">
-            <span class="card-type">BRAND BOARD</span>
-            <span class="card-name">ブランドボード</span>
-          </a>
-          <a class="card" href="/CL/MU/output/font-preview.html">
-            <span class="card-type">TOOL</span>
-            <span class="card-name">フォントプレビュー</span>
-          </a>
-          <a class="card" href="/CL/MU/output/color-preview.html">
-            <span class="card-type">TOOL</span>
-            <span class="card-name">カラープレビュー</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- クライアント：ONE -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CLIENT</span>
-          <span class="section-title">ONE</span>
-        </div>
-        <div class="cards">
-          <a class="card" href="/CL/ONE/output/wireframe-top.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">TOP</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-index.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">物件一覧</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-property.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">物件詳細</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-about.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">会社案内</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-assessment.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">査定</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-company.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">会社概要</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-staff-list.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">スタッフ一覧</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-staff-detail.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">スタッフ詳細</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-voice-list.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">お客様の声一覧</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-voice-detail.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">お客様の声詳細</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-news-list.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">お知らせ一覧</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-news-detail.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">お知らせ詳細</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-recruit.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">採用</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-contact.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">お問い合わせ</span>
-          </a>
-          <a class="card" href="/CL/ONE/output/wireframe-privacy.html">
-            <span class="card-type">WIREFRAME</span>
-            <span class="card-name">プライバシーポリシー</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/CL/ONE/output/wireframe-top.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">TOP</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-index.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">物件一覧</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-property.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">物件詳細</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-about.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">会社案内</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-assessment.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">査定</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-company.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">会社概要</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-staff-list.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">スタッフ一覧</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-staff-detail.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">スタッフ詳細</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-voice-list.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">お客様の声一覧</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-voice-detail.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">お客様の声詳細</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-news-list.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">お知らせ一覧</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-news-detail.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">お知らせ詳細</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-recruit.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">採用</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-contact.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">お問い合わせ</span>
+            </a>
+            <a class="card" href="/CL/ONE/output/wireframe-privacy.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">プライバシーポリシー</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- 自社サービス：A CURRY -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CRATER SERVICE</span>
-          <span class="section-title">A CURRY</span>
+      <!-- 人と空間 -->
+      <div class="section open" data-category="client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label client">CLIENT</span>
+            <span class="section-title">人と空間</span>
+            <span class="section-count">3</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/01_CRATER/_SERVICE/acurry/output/brand-board.html">
-            <span class="card-type">BRAND BOARD</span>
-            <span class="card-name">A CURRY</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/CL/人と空間/output/sitemap.html">
+              <span class="card-type">SITEMAP</span>
+              <span class="card-name">サイトマップ</span>
+            </a>
+            <a class="card" href="/CL/人と空間/output/content-map.html">
+              <span class="card-type">CONTENT MAP</span>
+              <span class="card-name">コンテンツマップ</span>
+            </a>
+            <a class="card" href="/CL/人と空間/output/wireframe.html">
+              <span class="card-type">WIREFRAME</span>
+              <span class="card-name">ワイヤーフレーム</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- クライアント：志賀町 -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-label">CLIENT</span>
-          <span class="section-title">志賀町</span>
+      <!-- 志賀町 -->
+      <div class="section open" data-category="client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-header-left">
+            <span class="section-label client">CLIENT</span>
+            <span class="section-title">志賀町</span>
+            <span class="section-count">4</span>
+          </div>
+          <span class="section-toggle">⌄</span>
         </div>
-        <div class="cards">
-          <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項.html">
-            <span class="card-type">PROPOSAL</span>
-            <span class="card-name">公募要項</span>
-          </a>
-          <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項_A地域認知拡大型.html">
-            <span class="card-type">PROPOSAL A</span>
-            <span class="card-name">地域認知拡大型</span>
-          </a>
-          <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項_B地域経済活性型.html">
-            <span class="card-type">PROPOSAL B</span>
-            <span class="card-name">地域経済活性型</span>
-          </a>
-          <a class="card" href="/CL/志賀町/output/概算見積書_シルシカプロジェクト.html">
-            <span class="card-type">ESTIMATE</span>
-            <span class="card-name">概算見積書</span>
-          </a>
+        <div class="cards-wrap">
+          <div class="cards">
+            <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項.html">
+              <span class="card-type">PROPOSAL</span>
+              <span class="card-name">公募要項</span>
+            </a>
+            <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項_A地域認知拡大型.html">
+              <span class="card-type">PROPOSAL A</span>
+              <span class="card-name">地域認知拡大型</span>
+            </a>
+            <a class="card" href="/CL/志賀町/output/公募型プロポーザル募集要項_B地域経済活性型.html">
+              <span class="card-type">PROPOSAL B</span>
+              <span class="card-name">地域経済活性型</span>
+            </a>
+            <a class="card" href="/CL/志賀町/output/概算見積書_シルシカプロジェクト.html">
+              <span class="card-type">ESTIMATE</span>
+              <span class="card-name">概算見積書</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -444,11 +553,29 @@
       }
     }
 
-    // セッション中は再入力不要
     if (sessionStorage.getItem('crater_auth') === '1') {
       document.getElementById('lockScreen').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
     }
+
+    function toggleSection(header) {
+      header.closest('.section').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        document.querySelectorAll('.section').forEach(section => {
+          if (filter === 'all' || section.dataset.category === filter) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
   </script>
 
 </body>
