@@ -16,9 +16,12 @@
   if(panel&&!CLIENT_MODE){
     var claudeWrap=document.createElement('div');
     claudeWrap.style.cssText='position:sticky;bottom:0;padding:16px;background:#111;border-top:1px solid #222;margin-top:16px;';
-    claudeWrap.innerHTML='<button id="wf-claude-btn" style="width:100%;background:#1a3a2a;border:1px solid #2a6a4a;color:#4ade80;padding:10px 16px;border-radius:6px;font-size:12px;letter-spacing:0.15em;cursor:pointer;font-family:inherit;">COMMENT ALLCOPY</button>';
+    var claudeBtn=document.createElement('button');
+    claudeBtn.textContent='COMMENT ALLCOPY';
+    claudeBtn.style.cssText='width:100%;background:#1a3a2a;border:1px solid #2a6a4a;color:#4ade80;padding:10px 16px;border-radius:6px;font-size:12px;letter-spacing:0.15em;cursor:pointer;font-family:inherit;';
+    claudeBtn.addEventListener('click',showClaudeModal);
+    claudeWrap.appendChild(claudeBtn);
     panel.appendChild(claudeWrap);
-    document.getElementById('wf-claude-btn').addEventListener('click',showClaudeModal);
   }
 
   // コメントモード
