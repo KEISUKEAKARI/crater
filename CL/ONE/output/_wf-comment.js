@@ -11,15 +11,14 @@
   var commentMode=false,showResolved=true,comments=[],activePopupId=null,inputPopup=null,viewPopup=null;
   var overlay=document.getElementById('wf-overlay');
 
-  // クロードに渡すボタンをパネルに追加
-  var panel=document.getElementById('wf-panel');
-  if(panel&&!CLIENT_MODE){
-    var claudeBtn=document.createElement('div');
-    claudeBtn.id='wf-claude-wrap';
-    claudeBtn.style.cssText='margin-top:24px;border-top:1px solid #222;padding-top:16px;';
-    claudeBtn.innerHTML='<button id="wf-claude-btn" style="width:100%;background:#1a3a2a;border:1px solid #2a6a4a;color:#4ade80;padding:10px 16px;border-radius:6px;font-size:12px;letter-spacing:0.15em;cursor:pointer;font-family:inherit;text-align:left;">COMMENT ALLCOPY</button>';
-    panel.appendChild(claudeBtn);
-    document.getElementById('wf-claude-btn').addEventListener('click',showClaudeModal);
+  // COMMENT ALLCOPYボタンを画面下部に固定表示
+  if(!CLIENT_MODE){
+    var claudeBtn=document.createElement('button');
+    claudeBtn.id='wf-claude-btn';
+    claudeBtn.textContent='COMMENT ALLCOPY';
+    claudeBtn.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a3a2a;border:1px solid #2a6a4a;color:#4ade80;padding:10px 24px;border-radius:6px;font-size:12px;letter-spacing:0.15em;cursor:pointer;font-family:inherit;z-index:9999;white-space:nowrap;';
+    document.body.appendChild(claudeBtn);
+    claudeBtn.addEventListener('click',showClaudeModal);
   }
 
   // コメントモード
