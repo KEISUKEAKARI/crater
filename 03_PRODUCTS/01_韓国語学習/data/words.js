@@ -1,0 +1,61 @@
+const words = [
+  // あいさつ
+  { id:"w001", hangul:"안녕하세요", reading:"アンニョンハセヨ", japanese:"こんにちは", category:"あいさつ" },
+  { id:"w002", hangul:"안녕히 가세요", reading:"アンニョンヒ カセヨ", japanese:"さようなら（去る人に）", category:"あいさつ" },
+  { id:"w003", hangul:"안녕히 계세요", reading:"アンニョンヒ ケセヨ", japanese:"さようなら（残る人に）", category:"あいさつ" },
+  { id:"w004", hangul:"감사합니다", reading:"カムサハムニダ", japanese:"ありがとうございます", category:"あいさつ" },
+  { id:"w005", hangul:"죄송합니다", reading:"チェソンハムニダ", japanese:"申し訳ありません", category:"あいさつ" },
+  { id:"w006", hangul:"괜찮아요", reading:"ケンチャナヨ", japanese:"大丈夫です", category:"あいさつ" },
+  { id:"w007", hangul:"네", reading:"ネ", japanese:"はい", category:"あいさつ" },
+  { id:"w008", hangul:"아니요", reading:"アニヨ", japanese:"いいえ", category:"あいさつ" },
+  { id:"w009", hangul:"처음 뵙겠습니다", reading:"チョウム ペプケッスムニダ", japanese:"はじめまして", category:"あいさつ" },
+  { id:"w010", hangul:"잘 부탁드립니다", reading:"チャル プタクトゥリムニダ", japanese:"よろしくお願いします", category:"あいさつ" },
+
+  // 数字
+  { id:"w011", hangul:"일", reading:"イル", japanese:"1（漢数字）", category:"数字" },
+  { id:"w012", hangul:"이", reading:"イ", japanese:"2（漢数字）", category:"数字" },
+  { id:"w013", hangul:"삼", reading:"サム", japanese:"3（漢数字）", category:"数字" },
+  { id:"w014", hangul:"사", reading:"サ", japanese:"4（漢数字）", category:"数字" },
+  { id:"w015", hangul:"오", reading:"オ", japanese:"5（漢数字）", category:"数字" },
+  { id:"w016", hangul:"육", reading:"ユク", japanese:"6（漢数字）", category:"数字" },
+  { id:"w017", hangul:"칠", reading:"チル", japanese:"7（漢数字）", category:"数字" },
+  { id:"w018", hangul:"팔", reading:"パル", japanese:"8（漢数字）", category:"数字" },
+  { id:"w019", hangul:"구", reading:"ク", japanese:"9（漢数字）", category:"数字" },
+  { id:"w020", hangul:"십", reading:"シプ", japanese:"10（漢数字）", category:"数字" },
+
+  // 日常語
+  { id:"w021", hangul:"밥", reading:"パプ", japanese:"ご飯", category:"日常語" },
+  { id:"w022", hangul:"물", reading:"ムル", japanese:"水", category:"日常語" },
+  { id:"w023", hangul:"커피", reading:"コピ", japanese:"コーヒー", category:"日常語" },
+  { id:"w024", hangul:"맥주", reading:"メクチュ", japanese:"ビール", category:"日常語" },
+  { id:"w025", hangul:"화장실", reading:"ファジャンシル", japanese:"トイレ", category:"日常語" },
+  { id:"w026", hangul:"역", reading:"ヨク", japanese:"駅", category:"日常語" },
+  { id:"w027", hangul:"지하철", reading:"チハチョル", japanese:"地下鉄", category:"日常語" },
+  { id:"w028", hangul:"버스", reading:"ポス", japanese:"バス", category:"日常語" },
+  { id:"w029", hangul:"택시", reading:"テクシ", japanese:"タクシー", category:"日常語" },
+  { id:"w030", hangul:"호텔", reading:"ホテル", japanese:"ホテル", category:"日常語" },
+
+  // 動詞
+  { id:"w031", hangul:"먹다", reading:"モクタ", japanese:"食べる", category:"動詞" },
+  { id:"w032", hangul:"마시다", reading:"マシダ", japanese:"飲む", category:"動詞" },
+  { id:"w033", hangul:"가다", reading:"カダ", japanese:"行く", category:"動詞" },
+  { id:"w034", hangul:"오다", reading:"オダ", japanese:"来る", category:"動詞" },
+  { id:"w035", hangul:"보다", reading:"ポダ", japanese:"見る", category:"動詞" },
+  { id:"w036", hangul:"사다", reading:"サダ", japanese:"買う", category:"動詞" },
+  { id:"w037", hangul:"말하다", reading:"マラダ", japanese:"話す", category:"動詞" },
+  { id:"w038", hangul:"듣다", reading:"トゥッタ", japanese:"聞く", category:"動詞" },
+  { id:"w039", hangul:"알다", reading:"アルダ", japanese:"わかる・知る", category:"動詞" },
+  { id:"w040", hangul:"좋아하다", reading:"チョアハダ", japanese:"好きだ", category:"動詞" },
+
+  // 形容詞
+  { id:"w041", hangul:"맛있다", reading:"マシッタ", japanese:"おいしい", category:"形容詞" },
+  { id:"w042", hangul:"맛없다", reading:"マドプタ", japanese:"まずい", category:"形容詞" },
+  { id:"w043", hangul:"크다", reading:"クダ", japanese:"大きい", category:"形容詞" },
+  { id:"w044", hangul:"작다", reading:"チャクタ", japanese:"小さい", category:"形容詞" },
+  { id:"w045", hangul:"비싸다", reading:"ピッサダ", japanese:"高い（値段）", category:"形容詞" },
+  { id:"w046", hangul:"싸다", reading:"ッサダ", japanese:"安い", category:"形容詞" },
+  { id:"w047", hangul:"덥다", reading:"トプタ", japanese:"暑い", category:"形容詞" },
+  { id:"w048", hangul:"춥다", reading:"チュプタ", japanese:"寒い", category:"形容詞" },
+  { id:"w049", hangul:"예쁘다", reading:"イェップダ", japanese:"きれいだ・かわいい", category:"形容詞" },
+  { id:"w050", hangul:"재미있다", reading:"チェミイッタ", japanese:"おもしろい", category:"形容詞" },
+];
