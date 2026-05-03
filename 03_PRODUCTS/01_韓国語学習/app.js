@@ -1,3 +1,13 @@
+// ---- 音声読み上げ ----
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  utter.rate = 0.9;
+  window.speechSynthesis.speak(utter);
+}
+
 // ---- localStorage管理 ----
 function getProgress() {
   return JSON.parse(localStorage.getItem('kr-progress') || '{}');
@@ -48,7 +58,7 @@ function renderWords(category) {
     const learnedLabel = p.learned ? '✓ 覚えた' : '覚えた';
     return `
       <div class="card">
-        <div class="card-hangul">${w.hangul}</div>
+        <div class="card-hangul">${w.hangul} <button class="btn-speak" data-text="${w.hangul}">🔊</button></div>
         <div class="card-reading">${w.reading}</div>
         <div class="card-japanese">${w.japanese}</div>
         <button class="btn-learned ${learned}" data-id="${w.id}">${learnedLabel}</button>
@@ -63,6 +73,11 @@ function renderWords(category) {
       currentCategory = btn.dataset.cat;
       renderWords(currentCategory);
     });
+  });
+
+  // 🔊ボタン
+  container.querySelectorAll('.btn-speak').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); speak(btn.dataset.text); });
   });
 
   // 覚えたボタン
@@ -90,7 +105,7 @@ function renderPhrases() {
     const badge = p.kchoice ? '<span class="badge-kchoice">K CHOICE!</span>' : '';
     return `
       <div class="card">
-        <div class="card-hangul">${p.hangul}${badge}</div>
+        <div class="card-hangul">${p.hangul}${badge} <button class="btn-speak" data-text="${p.hangul}">🔊</button></div>
         <div class="card-reading">${p.reading}</div>
         <div class="card-japanese">${p.japanese}</div>
         <button class="btn-learned ${learned}" data-id="${p.id}">${learnedLabel}</button>
@@ -98,6 +113,10 @@ function renderPhrases() {
   }).join('');
 
   container.innerHTML = cards;
+
+  container.querySelectorAll('.btn-speak').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); speak(btn.dataset.text); });
+  });
 
   container.querySelectorAll('.btn-learned').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -146,6 +165,10 @@ function renderTestQuestion() {
   }
   if (currentTestMode === 'handwrite') {
     renderHandwrite();
+    return;
+  }
+  if (currentTestMode === 'listening') {
+    renderListening();
     return;
   }
 
@@ -199,7 +222,7 @@ function recordResult(id, isCorrect) {
 
 function showTestResult() {
   const area = document.getElementById('test-area');
-  const modeLabel = { 'ja-to-ko':'日→韓', 'ko-to-ja':'韓→日', 'handwrite':'手書き' }[currentTestMode];
+  const modeLabel = { 'ja-to-ko':'日→韓', 'ko-to-ja':'韓→日', 'handwrite':'手書き', 'listening':'リスニング' }[currentTestMode];
   area.innerHTML = `
     <div class="test-result">
       <div class="result-score">${testCorrect} / ${testItems.length}</div>
@@ -218,6 +241,45 @@ function showTestResult() {
   saveHistory(history.slice(0, 50));
 
   document.getElementById('retry-btn').addEventListener('click', startTest);
+}
+
+// ---- リスニングモード ----
+function renderListening() {
+  const area = document.getElementById('test-area');
+  const item = testItems[testIndex];
+  const badge = item.kchoice ? '<span class="badge-kchoice">K CHOICE!</span>' : '';
+
+  const all = [...words, ...phrases];
+  const wrongs = shuffle(all.filter(i => i.id !== item.id)).slice(0, 3);
+  const choices = shuffle([item, ...wrongs]);
+
+  area.innerHTML = `
+    <div class="test-question">
+      <button class="btn-play-audio" id="play-audio">🔊 再生</button>${badge}
+      <div class="sub">${testIndex + 1} / ${testItems.length} — 日本語を選んでください</div>
+    </div>
+    <div class="choices">
+      ${choices.map(c => `<button class="choice-btn" data-id="${c.id}" data-correct="${c.id === item.id}">${c.japanese}</button>`).join('')}
+    </div>`;
+
+  // 最初に自動再生
+  setTimeout(() => speak(item.hangul), 300);
+
+  document.getElementById('play-audio').addEventListener('click', () => speak(item.hangul));
+
+  area.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isCorrect = btn.dataset.correct === 'true';
+      area.querySelectorAll('.choice-btn').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') b.classList.add('correct');
+        else if (b === btn && !isCorrect) b.classList.add('wrong');
+      });
+      recordResult(item.id, isCorrect);
+      if (isCorrect) testCorrect++;
+      setTimeout(() => { testIndex++; renderTestQuestion(); }, 1000);
+    });
+  });
 }
 
 // ---- 手書きモード ----
