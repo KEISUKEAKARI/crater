@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせありがとうございます — APOLLOS</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+  <!-- BowNow トラッキング -->
+  <script id="_bownow_ts">
+  var _bownow_ts = document.createElement('script');
+  _bownow_ts.charset = 'utf-8';
+  _bownow_ts.src = 'https://contents.bownow.jp/js/UTC_3600524bf2526af1c143/trace.js';
+  document.getElementsByTagName('head')[0].appendChild(_bownow_ts);
+  </script>
+  <style>
+    :root {
+      --dark: #0E0D0B;
+      --bg: #C8C7C1;
+      --accent: #E8C525;
+      --font: 'Roboto Condensed', 'Zen Kaku Gothic New', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: #F0EDE8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      padding: 28px 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.28em; color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 48px;
+    }
+
+    .content {
+      text-align: center;
+      max-width: 560px;
+    }
+
+    .icon {
+      width: 56px; height: 56px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 40px;
+    }
+
+    .icon::after {
+      content: '';
+      width: 18px; height: 10px;
+      border-left: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(-45deg) translateY(-3px);
+      display: block;
+    }
+
+    .label {
+      font-size: 10px; letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700; letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-size: 14px; font-weight: 300;
+      line-height: 2; color: rgba(240,237,232,0.5);
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 40px auto;
+    }
+
+    .back-link {
+      font-size: 11px; letter-spacing: 0.15em;
+      color: rgba(240,237,232,0.35);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240,237,232,0.15);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover {
+      color: rgba(240,237,232,0.7);
+      border-color: rgba(240,237,232,0.4);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    .footer-copy {
+      font-size: 11px; color: rgba(255,255,255,0.15);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 24px; }
+      main { padding: 64px 24px; }
+      footer { padding: 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://apollos.jp" class="nav-logo">APOLLOS</a>
+  </nav>
+
+  <main>
+    <div class="content">
+      <div class="icon"></div>
+      <p class="label">Thank you</p>
+      <h1>お問い合わせ<br>ありがとうございます。</h1>
+      <p>内容を確認のうえ、2営業日以内に<br>担当よりご連絡いたします。</p>
+      <p>しばらくお待ちください。</p>
+      <div class="divider"></div>
+      <a href="https://apollos.jp" class="back-link">← トップページへ戻る</a>
+    </div>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 APOLLOS. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

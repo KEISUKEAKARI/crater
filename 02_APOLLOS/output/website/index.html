@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APOLLOS — 認知戦略</title>
+  <meta name="description" content="埋もれている価値を、次の世界へ。APOLLOSは、価値が届き・理解され・選ばれる状態をつくる認知特化のクリエイティブ会社です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #C8C7C1;
+      --dark: #0E0D0B;
+      --black: #111111;
+      --gray-dk: #4A4845;
+      --gray-md: #8A8784;
+      --gray-lt: rgba(0,0,0,0.08);
+      --accent: #E8C525;
+      --accent-on-light: #111111;
+      --font: 'Roboto Condensed', 'Zen Kaku Gothic New', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--black);
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ────────────────────────────────────────
+       NAV
+    ──────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 56px;
+      background: rgba(14,13,11,0.88);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.28em; color: #F0EDE8;
+      text-decoration: none;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 40px; }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(240,237,232,0.4); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: rgba(240,237,232,0.9); }
+
+    .nav-cta {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--dark);
+      background: var(--accent); padding: 8px 20px; font-weight: 700;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ────────────────────────────────────────
+       HERO
+    ──────────────────────────────────────── */
+    .hero {
+      position: relative; height: 100vh; min-height: 700px;
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 56px 72px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--accent);
+    }
+
+    .hero-title {
+      font-size: clamp(48px, 6.5vw, 96px);
+      font-weight: 700; letter-spacing: 0.01em;
+      line-height: 1.02; color: #F0EDE8;
+      margin-bottom: 36px;
+    }
+
+    .hero-title em {
+      font-style: italic; font-weight: 300;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 14px; font-weight: 300; line-height: 2;
+      color: rgba(240,237,232,0.5);
+      max-width: 380px; margin-bottom: 52px;
+    }
+
+    .hero-btns { display: flex; align-items: center; gap: 20px; }
+
+    .btn-accent {
+      display: inline-block; padding: 15px 44px;
+      background: var(--accent); color: var(--dark);
+      font-family: var(--font); font-size: 11px;
+      font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-accent:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      font-size: 11px; letter-spacing: 0.15em;
+      color: rgba(240,237,232,0.45); text-decoration: none;
+      border-bottom: 1px solid rgba(240,237,232,0.2);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: rgba(240,237,232,0.8); border-color: rgba(240,237,232,0.5); }
+
+    /* 背景大文字 */
+    .hero-bg-text {
+      position: absolute; bottom: -40px; left: 40px;
+      font-size: clamp(120px, 18vw, 260px);
+      font-weight: 700; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.025);
+      line-height: 1; pointer-events: none; z-index: 1;
+      white-space: nowrap;
+    }
+
+    /* 右パネル: 画像 */
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      filter: grayscale(25%) brightness(0.75);
+      transition: transform 8s ease;
+    }
+
+    .hero:hover .hero-img { transform: scale(1.04); }
+
+    .hero-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--dark) 0%, transparent 30%);
+    }
+
+    /* 右下のラベル */
+    .hero-badge {
+      position: absolute; bottom: 40px; right: 40px;
+      text-align: right; z-index: 2;
+    }
+    .hero-badge-num {
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.15); line-height: 1;
+    }
+    .hero-badge-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ────────────────────────────────────────
+       TICKER
+    ──────────────────────────────────────── */
+    .ticker {
+      background: var(--accent); overflow: hidden;
+      padding: 12px 0;
+    }
+    .ticker-track {
+      display: flex; gap: 0;
+      animation: ticker-move 18s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      padding: 0 48px; flex-shrink: 0;
+    }
+    .ticker-sep { color: rgba(255,255,255,0.3); }
+    @keyframes ticker-move {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ────────────────────────────────────────
+       PHILOSOPHY
+    ──────────────────────────────────────── */
+    .philosophy {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      min-height: 100vh;
+      border-bottom: 1px solid var(--gray-lt);
+    }
+
+    .philosophy-sidebar {
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      writing-mode: vertical-rl;
+      font-size: 9px; letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .philosophy-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .philosophy-text-col {
+      padding: 80px 56px;
+      border-right: 1px solid var(--gray-lt);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .sec-label {
+      font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--black); opacity: 0.45; margin-bottom: 40px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .sec-label::before {
+      content: ''; width: 28px; height: 1px; background: var(--black); opacity: 0.3;
+    }
+    .sec-label-light {
+      color: var(--accent); opacity: 1;
+    }
+    .sec-label-light::before { background: var(--accent); opacity: 1; }
+
+    .philosophy-heading {
+      font-size: clamp(32px, 3.8vw, 56px);
+      font-weight: 700; letter-spacing: 0.01em; line-height: 1.2;
+      margin-bottom: 36px;
+    }
+    .philosophy-heading span { color: var(--black); font-style: italic; font-weight: 300; }
+
+    .philosophy-body {
+      font-size: 14px; font-weight: 300; line-height: 2.2;
+      color: var(--gray-dk);
+    }
+    .philosophy-body p + p { margin-top: 20px; }
+
+    .philosophy-img-col { position: relative; overflow: hidden; }
+
+    .philosophy-img-col img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      filter: grayscale(20%);
+      transition: transform 0.6s ease;
+    }
+    .philosophy-img-col:hover img { transform: scale(1.04); }
+
+    .philosophy-num {
+      position: absolute; top: 40px; right: 40px;
+      font-size: 120px; font-weight: 700;
+      line-height: 1; color: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    /* ────────────────────────────────────────
+       SERVICES
+    ──────────────────────────────────────── */
+    .services-intro {
+      padding: 80px 56px 0;
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .services-intro h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700; letter-spacing: 0.01em; line-height: 1;
+    }
+
+    .services-intro p {
+      font-size: 13px; font-weight: 300; line-height: 2;
+      color: var(--gray-dk); max-width: 280px;
+    }
+
+    /* サービス：ホバー展開リスト */
+    .services-list {
+      margin: 48px 0 0;
+    }
+
+    .service-row {
+      position: relative; overflow: hidden;
+      border-top: 1px solid var(--gray-lt);
+      cursor: default;
+    }
+    .service-row:last-child { border-bottom: 1px solid var(--gray-lt); }
+
+    .service-row-inner {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      padding: 36px 56px;
+      gap: 32px;
+      transition: padding 0.4s ease;
+    }
+
+    .service-row:hover .service-row-inner { padding-top: 48px; padding-bottom: 48px; }
+
+    .service-row-num {
+      font-size: 12px; letter-spacing: 0.2em;
+      color: var(--gray-md); font-weight: 600;
+    }
+
+    .service-row-title {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 700; letter-spacing: 0.01em;
+      transition: color 0.3s;
+    }
+
+    .service-row-tags {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: flex-end;
+      opacity: 0; transform: translateX(16px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .service-row:hover .service-row-tags { opacity: 1; transform: none; }
+
+    .service-row-desc {
+      grid-column: 2;
+      font-size: 13px; font-weight: 300; line-height: 1.9;
+      color: var(--gray-dk);
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .service-row:hover .service-row-desc { max-height: 80px; padding-top: 12px; }
+
+    /* 背景画像ホバー */
+    .service-row-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 0.5s ease;
+      filter: grayscale(30%) brightness(0.35);
+    }
+    .service-row:hover .service-row-bg { opacity: 1; }
+    .service-row:hover .service-row-title { color: #F0EDE8; }
+    .service-row:hover .service-row-num { color: var(--accent); }
+
+    .tag-sm {
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid rgba(0,0,0,0.15); padding: 3px 10px;
+      color: var(--gray-md); background: rgba(200,199,193,0.7);
+    }
+    .service-row:hover .tag-sm {
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ────────────────────────────────────────
+       STATEMENT FULL BLEED
+    ──────────────────────────────────────── */
+    .statement {
+      position: relative;
+      min-height: 70vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; background: var(--dark);
+    }
+
+    .statement-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=80&auto=format&fit=crop');
+      background-size: cover; background-position: center;
+      filter: grayscale(30%) brightness(0.2);
+    }
+
+    .statement-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 80px 48px;
+    }
+
+    .statement-kicker {
+      font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 40px;
+    }
+
+    .statement-text {
+      font-size: clamp(32px, 5.5vw, 76px);
+      font-weight: 700; letter-spacing: 0.02em; line-height: 1.2;
+      color: #F0EDE8; max-width: 960px; margin: 0 auto 24px;
+    }
+
+    .statement-text em { font-style: italic; font-weight: 300; color: var(--accent); }
+    /* 暗背景のsec-labelは黄色OK */
+    .sec-label-on-dark { color: var(--accent) !important; opacity: 1 !important; }
+    .sec-label-on-dark::before { background: var(--accent) !important; opacity: 1 !important; }
+
+    .statement-attr {
+      font-size: 11px; letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ────────────────────────────────────────
+       ABOUT
+    ──────────────────────────────────────── */
+    .about {
+      position: relative; min-height: 90vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .about-img-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1920&q=85&auto=format&fit=crop');
+      background-size: cover; background-position: center 30%;
+      filter: grayscale(20%) brightness(0.5);
+    }
+
+    .about-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(14,13,11,0.95) 0%,
+        rgba(14,13,11,0.6) 50%,
+        rgba(14,13,11,0.1) 100%
+      );
+    }
+
+    .about-content {
+      position: relative; z-index: 2;
+      padding: 80px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; width: 100%;
+    }
+
+    .about-left .sec-label { color: var(--accent); }
+
+    .about-heading {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 700; letter-spacing: 0.01em; line-height: 1.15;
+      color: #F0EDE8;
+    }
+    .about-heading span { color: var(--accent); } /* 暗背景なので黄色OK */
+
+    .about-right {
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+
+    .about-body {
+      font-size: 14px; font-weight: 300; line-height: 2.1;
+      color: rgba(240,237,232,0.55);
+      margin-bottom: 40px;
+    }
+    .about-body p + p { margin-top: 16px; }
+
+    .profile-strip {
+      display: flex; align-items: center; gap: 20px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .profile-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      filter: grayscale(10%);
+      flex-shrink: 0;
+    }
+
+    .profile-name-lg {
+      font-size: 16px; font-weight: 700;
+      letter-spacing: 0.05em; color: #F0EDE8;
+      margin-bottom: 2px;
+    }
+
+    .profile-role-sm {
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ────────────────────────────────────────
+       CONTACT
+    ──────────────────────────────────────── */
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .contact-left {
+      background: var(--dark);
+      padding: 80px 56px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+
+    .contact-left-bg-text {
+      position: absolute; bottom: -20px; left: -16px;
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 700; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.025); line-height: 1;
+      pointer-events: none;
+    }
+
+    .contact-heading {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 700; letter-spacing: 0.01em; line-height: 1.15;
+      color: #F0EDE8; margin-bottom: 20px; position: relative;
+    }
+    .contact-heading span { color: var(--accent); } /* 暗背景なので黄色OK */
+
+    .contact-sub {
+      font-size: 13px; font-weight: 300; line-height: 2;
+      color: rgba(240,237,232,0.4); position: relative;
+    }
+
+    .contact-meta {
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 28px;
+    }
+
+    .contact-meta p {
+      font-size: 11px; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.2); line-height: 2.2;
+    }
+
+    .contact-right {
+      background: var(--bg);
+      padding: 80px 56px;
+    }
+
+    .form-group { margin-bottom: 32px; }
+
+    .form-label {
+      display: block; font-size: 9px;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(0,0,0,0.35); margin-bottom: 12px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1px solid rgba(0,0,0,0.15);
+      color: var(--black); font-family: var(--font);
+      font-size: 15px; font-weight: 400;
+      padding: 10px 0; outline: none;
+      transition: border-color 0.25s;
+      -webkit-appearance: none;
+    }
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8784' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 24px;
+    }
+    .form-select option { background: var(--bg); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-bottom-color: var(--accent); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(0,0,0,0.18); }
+    .form-textarea { resize: none; height: 88px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .submit-row { margin-top: 40px; display: flex; align-items: center; gap: 24px; }
+
+    .btn-submit {
+      display: inline-block; padding: 14px 44px;
+      background: var(--black); color: var(--bg);
+      font-family: var(--font); font-size: 11px;
+      font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; border: none;
+      cursor: pointer; transition: background 0.25s;
+      font-family: var(--font);
+    }
+    .btn-submit:hover { background: var(--accent); }
+
+    .form-note { font-size: 11px; color: var(--gray-md); line-height: 1.7; }
+    .submit-msg { display: none; font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
+
+    /* ────────────────────────────────────────
+       FOOTER
+    ──────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      padding: 28px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.15); letter-spacing: 0.05em; }
+
+    /* ────────────────────────────────────────
+       SCROLL REVEAL
+    ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ────────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 0 24px 56px; }
+
+      .philosophy { grid-template-columns: 1fr; }
+      .philosophy-sidebar { display: none; }
+      .philosophy-main { grid-template-columns: 1fr; }
+      .philosophy-text-col { padding: 56px 24px; border-right: none; border-bottom: 1px solid var(--gray-lt); }
+      .philosophy-img-col { min-height: 280px; }
+
+      .services-intro { padding: 56px 24px 0; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .service-row-inner { padding: 28px 24px; grid-template-columns: 60px 1fr; }
+      .service-row-tags { display: none; }
+      .service-row-title { font-size: 28px; }
+
+      .about-content { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px; }
+
+      .contact { grid-template-columns: 1fr; }
+      .contact-left { padding: 56px 24px; }
+      .contact-right { padding: 56px 24px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+
+      footer { padding: 24px; flex-direction: column; gap: 10px; }
+
+      .statement-content { padding: 64px 24px; }
+    }
+  </style>
+  <!-- BowNow トラッキング -->
+  <script id="_bownow_ts">
+  var _bownow_ts = document.createElement('script');
+  _bownow_ts.charset = 'utf-8';
+  _bownow_ts.src = 'https://contents.bownow.jp/js/UTC_3600524bf2526af1c143/trace.js';
+  document.getElementsByTagName('head')[0].appendChild(_bownow_ts);
+  </script>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">APOLLOS</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">相談する</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-bg-text">APOLLOS</div>
+      <p class="hero-eyebrow">Creative Strategy / 認知戦略</p>
+      <h1 class="hero-title">
+        埋もれている価値を、<br><em>次の世界へ。</em>
+      </h1>
+      <p class="hero-sub">アポロスは、価値が届き・理解され・選ばれる状態をつくる認知特化のクリエイティブ会社です。</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-accent">相談する</a>
+        <a href="#services" class="btn-ghost">サービスを見る →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=85&auto=format&fit=crop&crop=center"
+        alt="APOLLOS">
+      <div class="hero-img-overlay"></div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">2026</div>
+        <div class="hero-badge-label">Est. Tokyo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">認知戦略 <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">広告運用 <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">SNS・PR <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">選ばれる状態をつくる <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">価値を届ける <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">Creative Strategy <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">認知戦略 <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">広告運用 <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">SNS・PR <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">選ばれる状態をつくる <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">価値を届ける <span class="ticker-sep">—</span></span>
+      <span class="ticker-item">Creative Strategy <span class="ticker-sep">—</span></span>
+    </div>
+  </div>
+
+  <!-- ── PHILOSOPHY ── -->
+  <section class="philosophy reveal" id="philosophy">
+    <div class="philosophy-sidebar">Philosophy — 思想</div>
+    <div class="philosophy-main">
+      <div class="philosophy-text-col">
+        <p class="sec-label">Philosophy</p>
+        <h2 class="philosophy-heading">
+          知られていなければ、<br><span>存在しないのと同じだ。</span>
+        </h2>
+        <div class="philosophy-body">
+          <p>私たちが扱うのは、単なる商品やサービスではありません。それらが持つ「価値」が、正しく認識されていない状態と向き合います。</p>
+          <p>アポロスは、認知を軸に、価値が届き・理解され・選ばれる状態をつくります。まだ知られていないものを、「知っている」「理解している」世界へ引き上げる。それが私たちの仕事です。</p>
+        </div>
+      </div>
+      <div class="philosophy-img-col">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=85&auto=format&fit=crop&crop=center" alt="Philosophy">
+        <div class="philosophy-num">01</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="services-intro reveal">
+      <h2>SERVICES<br><span style="font-size:14px;font-weight:300;letter-spacing:0.06em;opacity:0.45;">サービス</span></h2>
+      <p>認知の課題に応じて、最適な手段を組み合わせて提案します。手段から考えるのではなく、目的から逆算します。</p>
+    </div>
+
+    <div class="services-list">
+      <!-- Service 01 -->
+      <div class="service-row reveal">
+        <div class="service-row-bg" style="background-image: url('https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=1600&q=80&auto=format&fit=crop');"></div>
+        <div class="service-row-inner">
+          <span class="service-row-num">01</span>
+          <div>
+            <div class="service-row-title">認知戦略設計</div>
+            <div class="service-row-desc">ターゲット・競合・市場を分析し、最適な認知チャネルと打ち手を設計します。「誰に・何を・どこで」を明確にし、認知の地図を描きます。</div>
+          </div>
+          <div class="service-row-tags">
+            <span class="tag-sm">戦略立案</span>
+            <span class="tag-sm">チャネル選定</span>
+            <span class="tag-sm">KPI設計</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 02 -->
+      <div class="service-row reveal">
+        <div class="service-row-bg" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&auto=format&fit=crop');"></div>
+        <div class="service-row-inner">
+          <span class="service-row-num">02</span>
+          <div>
+            <div class="service-row-title">広告・デジタル施策</div>
+            <div class="service-row-desc">Meta・Google等のデジタル広告を活用し、精度の高いターゲティングで認知と集客を実現します。データドリブンな改善も担います。</div>
+          </div>
+          <div class="service-row-tags">
+            <span class="tag-sm">Meta広告</span>
+            <span class="tag-sm">Google広告</span>
+            <span class="tag-sm">運用改善</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 03 -->
+      <div class="service-row reveal">
+        <div class="service-row-bg" style="background-image: url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1600&q=80&auto=format&fit=crop');"></div>
+        <div class="service-row-inner">
+          <span class="service-row-num">03</span>
+          <div>
+            <div class="service-row-title">SNS・PR支援</div>
+            <div class="service-row-desc">SNS戦略設計から運用、プレスリリース・メディア掲載、インフルエンサー活用まで。認知を広げるすべての接点を支援します。</div>
+          </div>
+          <div class="service-row-tags">
+            <span class="tag-sm">SNS運用</span>
+            <span class="tag-sm">PR・メディア</span>
+            <span class="tag-sm">インフルエンサー</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATEMENT ── -->
+  <div class="statement">
+    <div class="statement-bg"></div>
+    <div class="statement-content reveal">
+      <p class="statement-kicker">— Brand Statement</p>
+      <p class="statement-text">
+        埋もれている価値を、<br><em>次の世界へ。</em>
+      </p>
+      <p class="statement-attr">APOLLOS / 2026</p>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <section class="about" id="about">
+    <div class="about-img-bg"></div>
+    <div class="about-gradient"></div>
+    <div class="about-content reveal">
+      <div class="about-left">
+        <p class="sec-label sec-label-on-dark">About</p>
+        <h2 class="about-heading">
+          認知を起点に、<br><span>事業を動かす。</span>
+        </h2>
+      </div>
+      <div class="about-right">
+        <div class="about-body">
+          <p>APOLLOSは2026年7月設立、認知特化のクリエイティブ会社です。「価値が届き・理解され・選ばれる状態をつくる」ことを専門とし、広告・SNS・PR・認知戦略の設計から実行までを一貫して支援します。</p>
+          <p>私たちのアプローチは、手段から考えません。まずクライアントのビジネス・ターゲット・競合環境を深く理解し、最も効果的な認知経路を設計します。デザイン・制作はグループ会社のクレーターと連携します。</p>
+        </div>
+        <div class="profile-strip">
+          <img class="profile-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&q=80&auto=format&fit=crop&crop=faces" alt="Founder">
+          <div>
+            <p class="profile-name-lg">明里 圭修</p>
+            <p class="profile-role-sm">Founder / Creative Director</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact" id="contact">
+    <div class="contact-left">
+      <div class="contact-left-bg-text">TALK</div>
+      <div>
+        <p class="sec-label sec-label-on-dark">Contact</p>
+        <h2 class="contact-heading">
+          まず、<br><span>話しましょう。</span>
+        </h2>
+        <p class="contact-sub">ご相談・お見積もりは無料です。<br>2営業日以内にご返信いたします。</p>
+      </div>
+      <div class="contact-meta">
+        <p>APOLLOS<br>Tokyo, Japan<br>apollos.jp</p>
+      </div>
+    </div>
+    <div class="contact-right">
+      <!-- BowNow フォーム -->
+      <script id="_bownow_cs_sid_de55ffdeafd2615a2906">
+      var _bownow_cs_sid_de55ffdeafd2615a2906 = document.createElement('script');
+      _bownow_cs_sid_de55ffdeafd2615a2906.charset = 'utf-8';
+      _bownow_cs_sid_de55ffdeafd2615a2906.src = 'https://contents.bownow.jp/forms/sid_de55ffdeafd2615a2906/trace.js';
+      document.getElementsByTagName('head')[0].appendChild(_bownow_cs_sid_de55ffdeafd2615a2906);
+      </script>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p class="footer-logo">APOLLOS</p>
+    <p class="footer-copy">© 2026 APOLLOS. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // スクロールリビール
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+          observer.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.05) + 's';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
