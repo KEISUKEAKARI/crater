@@ -33,18 +33,20 @@ html,body{
 }
 
 /* ── COMMENT UI ── */
-/* パネル開閉ボタン（固定） */
+/* パネル開閉ボタン（右上） */
 #wf-open-btn{
-  position:fixed;right:0;top:50%;transform:translateY(-50%);
-  width:32px;height:56px;
+  position:fixed;right:16px;top:16px;
+  width:36px;height:36px;
   background:#2C2C2C;color:#fff;border:none;
+  border-radius:8px;
   cursor:pointer;z-index:9999;
-  font-size:16px;
   display:flex;align-items:center;justify-content:center;
-  transition:right .3s,background .2s;
+  transition:background .2s, right .3s;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 #wf-open-btn:hover{background:#111;}
-#wf-open-btn.shifted{right:280px;}
+#wf-open-btn.shifted{right:296px;}
+#wf-open-btn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;}
 
 #wf-panel{
   position:fixed;top:0;right:0;width:280px;
@@ -64,7 +66,7 @@ html,body{
 }
 .wf-panel-title{font-size:11px;color:#aaa;letter-spacing:0.12em;text-transform:uppercase;}
 #wf-panel-header-right{display:flex;align-items:center;gap:8px;}
-#wf-count{font-size:11px;color:#666;background:#222;padding:2px 8px;border-radius:8px;}
+#wf-count{font-size:11px;color:#ccc;background:#333;padding:2px 8px;border-radius:8px;font-weight:500;}
 #wf-close-btn{
   background:none;border:none;color:#555;
   font-size:18px;cursor:pointer;line-height:1;
@@ -81,6 +83,7 @@ html,body{
   padding:8px;font-size:11px;cursor:pointer;
   font-family:'Noto Sans JP',sans-serif;
   letter-spacing:0.1em;transition:background .2s;
+  border-radius:999px;
 }
 #wf-comment-btn:hover{background:#1d4ed8;}
 #wf-comment-btn.wf-active{background:#ef4444;}
@@ -938,7 +941,9 @@ body:hover .side-arrow{opacity:1;}
 </div>
 
 <!-- パネル開閉ボタン -->
-<button id="wf-open-btn" onclick="togglePanel()">💬</button>
+<button id="wf-open-btn" onclick="togglePanel()">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
 
 <!-- コメントパネル -->
 <div id="wf-panel">
@@ -1046,8 +1051,15 @@ document.querySelector('.stage').addEventListener('click', e => {
     comments.push({ id:Date.now(), slide:cur, slideName:SLIDE_NAMES[cur], x, y, text });
     save(); closeInput(); toggleMode(); update();
   });
-  document.getElementById('c-text').addEventListener('keydown', ev=>{
-    if(ev.key==='Enter'&&!ev.shiftKey){ ev.preventDefault(); document.getElementById('c-send').click(); }
+  let isComposing = false;
+  const ta = document.getElementById('c-text');
+  ta.addEventListener('compositionstart', ()=>{ isComposing=true; });
+  ta.addEventListener('compositionend',   ()=>{ isComposing=false; });
+  ta.addEventListener('keydown', ev=>{
+    if(ev.key==='Enter'&&!ev.shiftKey&&!isComposing){
+      ev.preventDefault();
+      document.getElementById('c-send').click();
+    }
   });
 });
 
