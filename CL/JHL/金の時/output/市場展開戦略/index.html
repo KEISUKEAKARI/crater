@@ -148,6 +148,8 @@ html,body{
   transition:transform .15s;
 }
 .c-pin:hover{transform:translate(-50%,-50%) scale(1.2);}
+.c-pin{cursor:grab;}
+.c-pin:active{cursor:grabbing;}
 
 /* 入力ポップアップ */
 .c-input-popup{
@@ -1065,7 +1067,47 @@ function renderPins(){
     pin.className = 'c-pin';
     pin.style.left = c.x+'%'; pin.style.top = c.y+'%';
     pin.textContent = i+1;
+    pin.title = c.text;
+    makeDraggable(pin, c.id, slide);
     slide.appendChild(pin);
+  });
+}
+
+function makeDraggable(pin, id, slide){
+  let dragging = false, startX, startY, startLeft, startTop;
+
+  pin.addEventListener('mousedown', e => {
+    e.stopPropagation();
+    dragging = false;
+    startX = e.clientX; startY = e.clientY;
+    const rect = slide.getBoundingClientRect();
+    startLeft = parseFloat(pin.style.left);
+    startTop  = parseFloat(pin.style.top);
+
+    const onMove = ev => {
+      const dx = ev.clientX - startX;
+      const dy = ev.clientY - startY;
+      if(!dragging && Math.abs(dx)+Math.abs(dy) > 4) dragging = true;
+      if(!dragging) return;
+      const newX = Math.max(0, Math.min(100, startLeft + dx / rect.width  * 100));
+      const newY = Math.max(0, Math.min(100, startTop  + dy / rect.height * 100));
+      pin.style.left = newX+'%';
+      pin.style.top  = newY+'%';
+    };
+
+    const onUp = ev => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      if(!dragging) return;
+      const rect2 = slide.getBoundingClientRect();
+      const newX = parseFloat(pin.style.left).toFixed(1);
+      const newY = parseFloat(pin.style.top).toFixed(1);
+      const c = comments.find(x=>x.id===id);
+      if(c){ c.x = newX; c.y = newY; save(); }
+    };
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
   });
 }
 
