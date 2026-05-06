@@ -32,142 +32,116 @@ html,body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ── COMMENT PANEL ── */
-#commentPanel{
-  position:fixed;right:0;top:0;bottom:5.5vh;
-  width:260px;
-  background:#fff;
-  border-left:1px solid #E8E4DC;
+/* ── COMMENT UI (ONE style) ── */
+#wf-bar{
+  position:fixed;top:0;left:0;right:0;height:44px;
+  background:#111;border-bottom:1px solid #333;
+  display:flex;align-items:center;padding:0 14px;gap:10px;
+  z-index:9999;font-family:'Noto Sans JP',sans-serif;
+}
+.wf-bar-logo{font-size:12px;font-weight:700;letter-spacing:0.15em;color:#fff;}
+.wf-bar-sep{color:#444;}
+.wf-bar-page{font-size:11px;color:#888;}
+.wf-bar-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+#wf-count{font-size:11px;color:#666;background:#222;padding:3px 9px;border-radius:10px;}
+#wf-comment-btn{
+  background:#2563eb;border:none;color:#fff;
+  padding:5px 12px;font-size:11px;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;border-radius:4px;
+}
+#wf-comment-btn.wf-active{background:#ef4444;}
+
+#wf-panel{
+  position:fixed;top:44px;right:0;width:280px;
+  height:calc(100vh - 44px - 5.5vh);
+  background:#111;border-left:1px solid #222;
   display:flex;flex-direction:column;
-  z-index:300;
-  transform:translateX(260px);
-  transition:transform .3s ease;
-  font-family:'Noto Sans JP',sans-serif;
+  z-index:9998;font-family:'Noto Sans JP',sans-serif;
 }
-#commentPanel.open{transform:none;}
-
-#cpHeader{
-  padding:14px 16px;
-  border-bottom:1px solid #E8E4DC;
-  display:flex;align-items:center;justify-content:space-between;
-  background:#FAF8F4;
-}
-#cpTitle{font-size:12px;font-weight:500;color:#2C2C2C;letter-spacing:0.08em;}
-
-#cpToggleMode{
-  font-size:11px;padding:5px 10px;
-  background:none;border:1px solid #C8C4BC;
-  cursor:pointer;color:#5C5956;
-  transition:background .2s,color .2s,border-color .2s;
-  font-family:'Noto Sans JP',sans-serif;
-}
-#cpToggleMode.active{
-  background:#9A7B2E;color:#fff;border-color:#9A7B2E;
-}
-
-#cpList{
-  flex:1;overflow-y:auto;padding:8px;
-}
-
-.cp-item{
-  background:#F5F2EC;
-  border-left:2px solid #9A7B2E;
+.wf-panel-title{font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;padding:16px 16px 8px;}
+#wf-panel-list{flex:1;overflow-y:auto;padding:0 16px;}
+.panel-item{
+  background:#1f2937;border-radius:7px;
   padding:10px 12px;margin-bottom:8px;
-  position:relative;
+  border:1px solid transparent;
 }
-.cp-item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
-.cp-pin{
-  width:20px;height:20px;min-width:20px;
-  background:#9A7B2E;color:#fff;
-  border-radius:50%;
-  font-size:10px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:1px;
+.panel-item:hover{border-color:#374151;}
+.panel-item-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.panel-num{
+  width:20px;height:20px;background:#2563eb;
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:700;
+  color:#fff;flex-shrink:0;
 }
-.cp-text{font-size:12px;color:#2C2C2C;line-height:1.6;flex:1;}
-.cp-slide-label{font-size:10px;color:#9A7B2E;margin-top:4px;letter-spacing:0.05em;}
-.cp-del{
-  background:none;border:none;cursor:pointer;
-  color:#B8B3A8;font-size:14px;line-height:1;
-  padding:0 2px;
-}
-.cp-del:hover{color:#c06060;}
-
-#cpCopyWrap{
-  padding:12px;border-top:1px solid #E8E4DC;
-  background:#FAF8F4;
-}
-#cpCopy{
-  width:100%;padding:10px;
-  background:#2C2C2C;color:#F5F2EC;
-  border:none;cursor:pointer;
-  font-size:11px;letter-spacing:0.2em;
+.panel-slide-name{font-size:11px;color:#6b7280;}
+.panel-text{font-size:12px;color:#d1d5db;line-height:1.5;}
+.panel-actions{display:flex;gap:6px;margin-top:8px;}
+.panel-del-btn{
+  background:none;border:1px solid #7f1d1d;
+  color:#f87171;border-radius:4px;
+  padding:3px 8px;font-size:11px;cursor:pointer;
   font-family:'Noto Sans JP',sans-serif;
-  transition:background .2s;
 }
-#cpCopy:hover{background:#9A7B2E;}
+.panel-del-btn:hover{background:#7f1d1d;}
+#wf-panel-empty{font-size:12px;color:#4b5563;text-align:center;padding:40px 0;}
 
-/* コメントモード時のカーソル */
-body.comment-mode .slide.active{cursor:crosshair;}
+#wf-copy-wrap{
+  padding:12px;border-top:1px solid #222;background:#111;
+}
+#wf-copy-btn{
+  width:100%;background:#1a3a2a;border:1px solid #2a6a4a;
+  color:#4ade80;padding:10px 16px;border-radius:6px;
+  font-size:12px;letter-spacing:0.15em;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
+}
+#wf-copy-btn:hover{background:#2a5a3a;}
 
-/* ピンマーカー */
-.comment-pin{
+/* ピン */
+.c-pin{
   position:absolute;
-  width:22px;height:22px;
-  background:#9A7B2E;color:#fff;
-  border-radius:50% 50% 50% 0;
-  transform:rotate(-45deg);
+  width:26px;height:26px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#2563eb;
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+  cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:700;
-  cursor:pointer;z-index:50;
-  box-shadow:0 2px 6px rgba(0,0,0,0.25);
-  pointer-events:all;
+  font-size:11px;font-weight:700;color:#fff;
+  pointer-events:all;z-index:50;
+  transition:transform .15s;
 }
-.comment-pin span{transform:rotate(45deg);}
+.c-pin:hover{transform:translate(-50%,-50%) scale(1.2);}
 
-/* コメント入力モーダル */
-#commentModal{
-  display:none;
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.3);
-  z-index:500;
-  align-items:center;justify-content:center;
+/* 入力ポップアップ */
+.c-input-popup{
+  background:#1f2937;border:1px solid #374151;
+  border-radius:10px;padding:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  min-width:260px;
 }
-#commentModal.show{display:flex;}
-#commentModalBox{
-  background:#fff;padding:24px;
-  width:340px;
+.c-input-popup textarea{
+  width:100%;background:#111827;border:1px solid #374151;
+  border-radius:6px;color:#e5e7eb;
+  font-size:13px;padding:8px 10px;
+  resize:none;font-family:'Noto Sans JP',sans-serif;
+  line-height:1.5;outline:none;
+}
+.c-input-popup textarea:focus{border-color:#2563eb;}
+.c-input-row{display:flex;gap:8px;margin-top:8px;}
+.c-send-btn{
+  background:#2563eb;color:#fff;border:none;
+  border-radius:6px;padding:7px 14px;
+  font-size:12px;cursor:pointer;
   font-family:'Noto Sans JP',sans-serif;
 }
-#commentModalBox h3{font-size:13px;font-weight:500;color:#2C2C2C;margin-bottom:12px;}
-#commentInput{
-  width:100%;height:80px;
-  border:1px solid #C8C4BC;padding:10px;
-  font-size:13px;font-family:'Noto Sans JP',sans-serif;
-  resize:none;outline:none;
-  color:#2C2C2C;
+.c-cancel-btn{
+  background:#374151;color:#9ca3af;border:none;
+  border-radius:6px;padding:7px 10px;
+  font-size:12px;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
 }
-#commentInput:focus{border-color:#9A7B2E;}
-.cm-btns{display:flex;gap:8px;margin-top:12px;}
-.cm-btn{
-  flex:1;padding:10px;border:none;cursor:pointer;
-  font-size:12px;font-family:'Noto Sans JP',sans-serif;
-}
-.cm-btn.ok{background:#9A7B2E;color:#fff;}
-.cm-btn.ok:hover{background:#7A6330;}
-.cm-btn.cancel{background:#E8E4DC;color:#5C5956;}
 
-/* パネル開閉ボタン */
-#cpToggle{
-  position:fixed;right:0;top:50%;transform:translateY(-50%);
-  width:28px;height:56px;
-  background:#9A7B2E;color:#fff;
-  border:none;cursor:pointer;
-  font-size:16px;z-index:301;
-  display:flex;align-items:center;justify-content:center;
-  transition:right .3s;
-}
-#cpToggle.shifted{right:260px;}
+/* コメントモード */
+body.comment-mode .slide.active{cursor:crosshair;}
 
 .stage{
   width:100vw;height:100vh;
@@ -222,7 +196,7 @@ body.comment-mode .slide.active{cursor:crosshair;}
 
 /* ── NAV ── */
 .nav{
-  position:fixed;bottom:0;left:0;right:0;
+  position:fixed;bottom:0;left:0;right:280px;
   height:5.5vh;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 3cqw;
@@ -923,15 +897,23 @@ body:hover .side-arrow{opacity:1;}
 
 </div>
 
-<!-- コメントパネル -->
-<div id="commentPanel">
-  <div id="cpHeader">
-    <span id="cpTitle">コメント</span>
-    <button id="cpToggleMode" onclick="toggleCommentMode()">📌 ピンを追加</button>
+<!-- コメントバー -->
+<div id="wf-bar">
+  <span class="wf-bar-logo">金の時</span>
+  <span class="wf-bar-sep">|</span>
+  <span class="wf-bar-page" id="wf-page-name">表紙</span>
+  <div class="wf-bar-right">
+    <span id="wf-count">0件</span>
+    <button id="wf-comment-btn">💬 コメント追加</button>
   </div>
-  <div id="cpList"></div>
-  <div id="cpCopyWrap">
-    <button id="cpCopy" onclick="copyAllComments()">COMMENT ALLCOPY</button>
+</div>
+
+<!-- コメントパネル -->
+<div id="wf-panel">
+  <div class="wf-panel-title">Comments</div>
+  <div id="wf-panel-list"><div id="wf-panel-empty">コメントなし</div></div>
+  <div id="wf-copy-wrap">
+    <button id="wf-copy-btn" onclick="copyAllComments()">COMMENT ALLCOPY</button>
   </div>
 </div>
 
@@ -949,145 +931,122 @@ body:hover .side-arrow{opacity:1;}
   </div>
 </nav>
 
-<button id="cpToggle" onclick="togglePanel()">💬</button>
-<div id="commentModal">
-  <div id="commentModalBox">
-    <h3>コメントを入力</h3>
-    <textarea id="commentInput" placeholder="修正内容を入力してください…"></textarea>
-    <div class="cm-btns">
-      <button class="cm-btn ok" onclick="saveComment()">追加</button>
-      <button class="cm-btn cancel" onclick="cancelComment()">キャンセル</button>
-    </div>
-  </div>
-</div>
-
 <script>
+const SLIDE_NAMES = ['表紙','ブランド概要','国内戦略','ターゲット','コアメッセージ','Instagram','PR・メディア','国内フェーズ','国内予算','台湾戦略','台湾市場','台湾フェーズ','代理店','VIブリッジ','VIロードマップ','締め'];
+const STORE_KEY = 'kinnotoki_slide_comments';
 const slides = document.querySelectorAll('.slide');
 const counter = document.getElementById('counter');
 const progress = document.getElementById('progress');
 let cur = 0;
+let commentMode = false;
+let comments = JSON.parse(localStorage.getItem(STORE_KEY)||'[]');
+let inputPopup = null;
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(comments)); }
 
 function update(){
   slides.forEach((s,i) => s.classList.toggle('active', i===cur));
   counter.textContent = `${cur+1} / ${slides.length}`;
   progress.style.width = `${((cur+1)/slides.length)*100}%`;
+  document.getElementById('wf-page-name').textContent = SLIDE_NAMES[cur]||`スライド${cur+1}`;
+  document.getElementById('wf-count').textContent = `${comments.length}件`;
   renderPins();
+  renderPanel();
 }
+
 function go(dir){
   cur = Math.max(0, Math.min(slides.length-1, cur+dir));
   update();
 }
+
 document.addEventListener('keydown', e => {
-  if(e.key==='Escape') { cancelComment(); if(commentMode) toggleCommentMode(); }
+  if(e.key==='Escape'){ closeInput(); if(commentMode) toggleMode(); return; }
   if(commentMode) return;
   if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
   if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
 });
 
-// ── COMMENT SYSTEM ──
-const STORE_KEY = 'kinnotoki_slide_comments';
-let comments = JSON.parse(localStorage.getItem(STORE_KEY)||'[]');
-let commentMode = false;
-let pendingX, pendingY;
-
-function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(comments)); }
-
-function togglePanel(){
-  const panel = document.getElementById('commentPanel');
-  const btn = document.getElementById('cpToggle');
-  panel.classList.toggle('open');
-  btn.classList.toggle('shifted');
-}
-
-function toggleCommentMode(){
+// コメントモード
+document.getElementById('wf-comment-btn').addEventListener('click', toggleMode);
+function toggleMode(){
   commentMode = !commentMode;
   document.body.classList.toggle('comment-mode', commentMode);
-  const btn = document.getElementById('cpToggleMode');
-  btn.classList.toggle('active', commentMode);
-  btn.textContent = commentMode ? '✕ キャンセル' : '📌 ピンを追加';
+  const btn = document.getElementById('wf-comment-btn');
+  btn.classList.toggle('wf-active', commentMode);
+  btn.textContent = commentMode ? '✕ 完了' : '💬 コメント追加';
+  if(!commentMode) closeInput();
 }
 
-// スライドクリックでピン配置
+// スライドクリック
 document.querySelector('.stage').addEventListener('click', e => {
   if(!commentMode) return;
+  if(e.target.closest('.c-pin')||e.target.closest('.c-input-popup')) return;
+  closeInput();
   const slide = document.querySelector('.slide.active');
-  if(!slide) return;
   const rect = slide.getBoundingClientRect();
-  pendingX = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-  pendingY = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-  document.getElementById('commentModal').classList.add('show');
-  document.getElementById('commentInput').value = '';
-  setTimeout(()=>document.getElementById('commentInput').focus(), 100);
+  const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+  const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+  inputPopup = document.createElement('div');
+  inputPopup.className = 'c-input-popup';
+  inputPopup.style.cssText = `position:fixed;left:${Math.min(e.clientX+12,window.innerWidth-280)}px;top:${Math.min(e.clientY+12,window.innerHeight-140)}px;z-index:10000;`;
+  inputPopup.innerHTML = `<textarea rows="3" id="c-text" placeholder="コメントを入力…"></textarea><div class="c-input-row"><button class="c-cancel-btn" id="c-cancel">キャンセル</button><button class="c-send-btn" id="c-send">送信</button></div>`;
+  document.body.appendChild(inputPopup);
+  document.getElementById('c-text').focus();
+  document.getElementById('c-cancel').addEventListener('click', closeInput);
+  document.getElementById('c-send').addEventListener('click', ()=>{
+    const text = document.getElementById('c-text').value.trim();
+    if(!text) return;
+    comments.push({ id:Date.now(), slide:cur, slideName:SLIDE_NAMES[cur], x, y, text });
+    save(); closeInput(); toggleMode(); update();
+  });
+  document.getElementById('c-text').addEventListener('keydown', ev=>{
+    if(ev.key==='Enter'&&!ev.shiftKey){ ev.preventDefault(); document.getElementById('c-send').click(); }
+  });
 });
 
-function saveComment(){
-  const text = document.getElementById('commentInput').value.trim();
-  if(!text) return;
-  const slideNames = ['表紙','ブランド概要','国内戦略','ターゲット','コアメッセージ','Instagram','PR・メディア','国内フェーズ','国内予算','台湾戦略','台湾市場','台湾フェーズ','代理店','VIブリッジ','VIロードマップ','締め'];
-  comments.push({
-    id: Date.now(),
-    slide: cur,
-    slideName: slideNames[cur] || `スライド${cur+1}`,
-    x: pendingX,
-    y: pendingY,
-    text,
-    num: comments.filter(c=>c.slide===cur).length + 1
-  });
-  save();
-  document.getElementById('commentModal').classList.remove('show');
-  toggleCommentMode();
-  renderPins();
-  renderList();
-}
-
-function cancelComment(){
-  document.getElementById('commentModal').classList.remove('show');
-}
+function closeInput(){ if(inputPopup){ inputPopup.remove(); inputPopup=null; } }
 
 function deleteComment(id){
   comments = comments.filter(c=>c.id!==id);
-  save();
-  renderPins();
-  renderList();
+  save(); update();
 }
 
 function renderPins(){
-  document.querySelectorAll('.comment-pin').forEach(p=>p.remove());
+  document.querySelectorAll('.c-pin').forEach(p=>p.remove());
   const slide = document.querySelector('.slide.active');
   if(!slide) return;
-  const curComments = comments.filter(c=>c.slide===cur);
-  curComments.forEach((c,i)=>{
+  comments.filter(c=>c.slide===cur).forEach((c,i)=>{
     const pin = document.createElement('div');
-    pin.className = 'comment-pin';
-    pin.style.left = c.x+'%';
-    pin.style.top = c.y+'%';
-    pin.innerHTML = `<span>${i+1}</span>`;
-    pin.title = c.text;
+    pin.className = 'c-pin';
+    pin.style.left = c.x+'%'; pin.style.top = c.y+'%';
+    pin.textContent = i+1;
     slide.appendChild(pin);
   });
 }
 
-function renderList(){
-  const list = document.getElementById('cpList');
+function renderPanel(){
+  const list = document.getElementById('wf-panel-list');
   if(!comments.length){
-    list.innerHTML = '<p style="font-size:12px;color:#B8B3A8;padding:16px;text-align:center;">コメントなし</p>';
-    return;
+    list.innerHTML = '<div id="wf-panel-empty">コメントなし</div>'; return;
   }
   list.innerHTML = comments.map((c,i)=>`
-    <div class="cp-item">
-      <div class="cp-item-top">
-        <div class="cp-pin">${i+1}</div>
-        <div class="cp-text">${c.text}</div>
-        <button class="cp-del" onclick="deleteComment(${c.id})">×</button>
+    <div class="panel-item">
+      <div class="panel-item-header">
+        <div class="panel-num">${i+1}</div>
+        <span class="panel-slide-name">${c.slideName}</span>
       </div>
-      <div class="cp-slide-label">📄 ${c.slideName}</div>
+      <div class="panel-text">${c.text}</div>
+      <div class="panel-actions">
+        <button class="panel-del-btn" onclick="deleteComment(${c.id})">削除</button>
+      </div>
     </div>
   `).join('');
+  document.getElementById('wf-count').textContent = `${comments.length}件`;
 }
 
 function copyAllComments(){
   if(!comments.length){ alert('コメントがありません'); return; }
-  const lines = ['=== COMMENT ALLCOPY ===', `金の時 市場展開戦略 / ${new Date().toLocaleString('ja-JP')}`, `件数：${comments.length}件`, ''];
+  const lines = ['=== COMMENT ALLCOPY ===',`金の時 市場展開戦略 / ${new Date().toLocaleString('ja-JP')}`,`件数：${comments.length}件`,''];
   comments.forEach((c,i)=>{
     lines.push(`[${i+1}] ${c.slideName}`);
     lines.push(`位置：X${c.x}% Y${c.y}%`);
@@ -1095,14 +1054,12 @@ function copyAllComments(){
     lines.push('');
   });
   navigator.clipboard.writeText(lines.join('\n')).then(()=>{
-    const btn = document.getElementById('cpCopy');
-    const orig = btn.textContent;
-    btn.textContent = 'コピーしました！';
-    setTimeout(()=>btn.textContent=orig, 2000);
+    const btn = document.getElementById('wf-copy-btn');
+    btn.textContent='コピーしました！';
+    setTimeout(()=>btn.textContent='COMMENT ALLCOPY',2000);
   });
 }
 
-renderList();
 update();
 </script>
 </body>
