@@ -186,21 +186,20 @@ html,body{
 /* コメントモード */
 body.comment-mode .slide.active{cursor:crosshair;}
 
+:root{ --avail: 100vw; }
+
 .stage{
-  width:100vw;height:100vh;
+  width:var(--avail);height:100vh;
   display:grid;place-items:center;
   background:#6e6b67;
   container-type:size;
   transition:width .3s ease;
 }
-.stage.panel-open{
-  width:calc(100vw - 280px);
-}
 
 .slide{
-  width:100vw;height:100vh;
+  width:var(--avail);height:100vh;
   max-width:calc(100vh * 16/9);
-  max-height:calc(100vw * 9/16);
+  max-height:calc(var(--avail) * 9/16);
   margin:auto;
   position:absolute;
   overflow:hidden;
@@ -1008,7 +1007,8 @@ function togglePanel(){
   const btn = document.getElementById('wf-open-btn');
   panel.classList.toggle('open');
   btn.classList.toggle('shifted');
-  document.querySelector('.stage').classList.toggle('panel-open');
+  const isOpen = panel.classList.contains('open');
+  document.documentElement.style.setProperty('--avail', isOpen ? 'calc(100vw - 280px)' : '100vw');
 }
 
 function go(dir){
