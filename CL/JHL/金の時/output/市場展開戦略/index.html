@@ -191,6 +191,10 @@ body.comment-mode .slide.active{cursor:crosshair;}
   display:grid;place-items:center;
   background:#6e6b67;
   container-type:size;
+  transition:width .3s ease;
+}
+.stage.panel-open{
+  width:calc(100vw - 280px);
 }
 
 .slide{
@@ -1004,6 +1008,7 @@ function togglePanel(){
   const btn = document.getElementById('wf-open-btn');
   panel.classList.toggle('open');
   btn.classList.toggle('shifted');
+  document.querySelector('.stage').classList.toggle('panel-open');
 }
 
 function go(dir){
