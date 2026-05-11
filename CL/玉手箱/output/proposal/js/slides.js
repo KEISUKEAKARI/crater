@@ -166,7 +166,7 @@ function slide05Dos() {
 function slide06LogoMain() {
   return `<section class="slide" style="background:#fff;" data-section="logo-main" data-notes="玉手箱のロゴです。">
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo</span></div>
-    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:8cqw;">
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:5cqw;">
       <img src="../../brief/logo/03oju_logo-03.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
     </div>
     <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
@@ -185,7 +185,7 @@ function slide07LogoConcept() {
           <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
         </div>
         <!-- 右：コンセプト 中央寄り -->
-        <div style="flex:0.6; display:flex; flex-direction:column; justify-content:center; padding:8cqw 5cqw 6cqw 0; gap:2.2cqw;">
+        <div style="flex:0.7; display:flex; flex-direction:column; justify-content:center; padding:4cqw 5cqw 4cqw 4cqw; gap:2.2cqw;">
           <div style="display:flex; flex-direction:column; gap:2cqw;">
             <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
               <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Mark</div>
