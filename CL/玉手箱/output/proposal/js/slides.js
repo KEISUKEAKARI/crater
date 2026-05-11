@@ -65,19 +65,23 @@ function slide04BrandCode() {
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
           <div style="border:1px solid #e0e0e0; padding:2cqw;">
             <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">◎</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black);">蓋を開ける瞬間</div>
+            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">蓋を開ける瞬間</div>
+            <div class="slide-body" style="color:var(--c-pt);">受け取った人が蓋を開けるその一瞬。玉手箱はこの体験のためにすべてを設計する。</div>
           </div>
           <div style="border:1px solid #e0e0e0; padding:2cqw;">
             <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">⬛</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black);">漆黒×金×緋</div>
+            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">漆黒×金×緋</div>
+            <div class="slide-body" style="color:var(--c-pt);">深い黒、金の輝き、緋のきわ。この三色の組み合わせが、玉手箱の視覚的な顔になる。</div>
           </div>
           <div style="border:1px solid #e0e0e0; padding:2cqw;">
             <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">✦</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black);">選び抜く目利き</div>
+            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">選び抜く目利き</div>
+            <div class="slide-body" style="color:var(--c-pt);">何でもお重に入れるのではない。目利きで選んだ逸品だけを扱う。それが信頼の根拠になる。</div>
           </div>
           <div style="border:1px solid #e0e0e0; padding:2cqw;">
             <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">⊡</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black);">越境する和の美</div>
+            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">越境する和の美</div>
+            <div class="slide-body" style="color:var(--c-pt);">お重という形は、日本語がわからない人にも伝わる。海外展開を見据えた普遍的な日本美。</div>
           </div>
         </div>
       </div>
@@ -147,7 +151,11 @@ function slide07LogoConcept() {
         <div style="display:flex; flex-direction:column; gap:2cqh;">
           <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
             <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Mark</div>
-            <div class="slide-body">玉手箱そのもの、お重をイメージしたマーク。「玉」の字をシンボルに落とし込んでいる。</div>
+            <div class="slide-body">玉手箱そのもの、お重をイメージしたマーク。</div>
+          </div>
+          <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
+            <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Symbol</div>
+            <div class="slide-body">「玉」の字をシンボルに落とし込んでいる。</div>
           </div>
           <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
             <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Hanko</div>
