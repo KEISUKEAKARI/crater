@@ -138,21 +138,23 @@ body {
    OVERVIEW — HERO
 ══════════════════════════════ */
 .ov-hero {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 40px; margin-bottom: 56px;
-  min-height: 280px;
+  display: block;
+  margin-bottom: 56px;
+  padding: 48px 0;
+  border-top: 1px solid var(--pt-lt);
+  border-bottom: 1px solid var(--pt-lt);
 }
-.ov-left { display: flex; flex-direction: column; justify-content: center; }
+.ov-left { display: flex; flex-direction: row; align-items: baseline; gap: 40px; flex-wrap: wrap; }
 .ov-brand-jp {
-  font-size: clamp(48px, 6vw, 80px);
+  font-size: clamp(64px, 9vw, 120px);
   font-weight: 300; letter-spacing: 0.15em;
-  color: var(--gold); line-height: 1.1;
+  color: var(--gold); line-height: 1;
 }
 .ov-brand-en {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(14px, 1.5vw, 18px);
+  font-size: clamp(16px, 2vw, 24px);
   letter-spacing: 0.5em; color: var(--pt);
-  text-transform: uppercase; margin-top: 12px;
+  text-transform: uppercase;
 }
 .ov-brand-ruby {
   font-family: 'Noto Sans JP', sans-serif;
@@ -705,19 +707,18 @@ body {
         <div class="ov-brand-jp">玉手箱</div>
         <div class="ov-brand-en">TAMATEBAKO</div>
         <div class="ov-brand-ruby">たまてばこ</div>
-        <details class="accordion" style="margin-top:24px;">
-          <summary>Naming Story <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;margin-left:8px;">ネーミングの由来</span></summary>
-          <div class="accordion-body">
-            <ul>
-              <li>「玉手箱」は日本の昔話に登場する、開けると特別な何かが現れる神秘の箱</li>
-              <li>お重箱という器に、選び抜いた逸品を入れてお届けするというコンセプトと重なる</li>
-              <li>受け取った人が蓋を開けた瞬間の感動・驚き・喜びを名前に込めた</li>
-            </ul>
-          </div>
-        </details>
       </div>
-      <div class="ov-right"></div>
     </div>
+    <details class="accordion" style="margin-bottom:48px;">
+      <summary>Naming Story <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;margin-left:8px;">ネーミングの由来</span></summary>
+      <div class="accordion-body">
+        <ul>
+          <li>「玉手箱」は日本の昔話に登場する、開けると特別な何かが現れる神秘の箱</li>
+          <li>お重箱という器に、選び抜いた逸品を入れてお届けするというコンセプトと重なる</li>
+          <li>受け取った人が蓋を開けた瞬間の感動・驚き・喜びを名前に込めた</li>
+        </ul>
+      </div>
+    </details>
 
     <!-- Tagline -->
     <div class="section-heading">
