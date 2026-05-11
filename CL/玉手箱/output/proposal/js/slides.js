@@ -221,11 +221,10 @@ function slide08LogoVariation() {
 // SLIDE 09: デザインコンセプト | concept
 function slide09Concept() {
   return `<section class="slide" style="background:var(--c-black);" data-section="concept" data-notes="デザインコンセプトは『箔と漆と重』。">
-    <div class="accent-top red"></div><div class="accent-bottom red"></div>
     <div class="s-wrap">
       <div class="s-top"><span class="badge" style="background:rgba(200,168,75,0.2);color:var(--c-gold);">Design Concept</span></div>
       <div class="s-main" style="gap:4cqw;">
-        <div class="t-h1 c-white" style="letter-spacing:0.2em;">箔と漆と重</div>
+        <div class="t-h1" style="letter-spacing:0.2em;"><span style="color:var(--c-gold);">箔</span><span class="c-white">と</span><span style="color:var(--c-red);">漆</span><span class="c-white">と重</span></div>
         <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:4cqw; width:75cqw;">
           <div>
             <div class="t-label c-gold" style="margin-bottom:1.2cqw; font-weight:400;">Tone</div>
