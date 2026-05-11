@@ -180,7 +180,7 @@ function slide07LogoConcept() {
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
     <div style="display:flex; align-items:center; height:100%; padding:5cqw 18cqw 5cqw 18cqw; gap:5cqw;">
       <!-- 左：ロゴ -->
-      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:1.85cqw;">
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:2.7cqw;">
         <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
       </div>
       <!-- 右：コンセプト4項目 -->
