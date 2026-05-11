@@ -23,7 +23,7 @@ function updateNav(index) {
   navCounter.textContent = `${index + 1} / ${total}`;
 
   // 暗いスライドではナビを白に
-  const darkSlides = new Set(['cover', 'tagline', 'corecode', 'concept']);
+  const darkSlides = new Set(['cover', 'tagline-story', 'corecode', 'brandcode', 'concept', 'kv']);
   const slide = stage.querySelectorAll('.slide')[index];
   const section = slide ? slide.dataset.section : '';
   const isLight = darkSlides.has(section);
