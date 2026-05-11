@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玉手箱 — Brand Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0D0D0D;
+  --bg2:#161616;
+  --bg3:#1E1E1E;
+  --white:#FFFFFF;
+  --gold:#C8A84B;
+  --gold-lt:#E8D5A3;
+  --gold-dk:#A07830;
+  --beige:#D6C9A8;
+  --beige-lt:#EDE6D5;
+  --pt:#888880;
+  --pt-lt:#444440;
+  --ch:#F5F0E8;
+  --ch2:#FFFFFF;
+  --gray:#999990;
+  --gap:20px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ch);
+  font-family: 'Noto Serif JP', serif;
+  min-height: 100vh;
+}
+#mainWrap { overflow-x: clip; }
+
+/* ══════════════════════════════
+   LOCK SCREEN
+══════════════════════════════ */
+#lockScreen {
+  position: fixed; inset: 0;
+  background: #111;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999; gap: 24px;
+}
+#lockScreen .lock-brand {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px; letter-spacing: 0.2em; color: var(--gold);
+  margin-bottom: 8px;
+}
+#lockScreen .lock-sub {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.4em; color: var(--pt);
+  text-transform: uppercase; margin-bottom: 32px;
+}
+#lockScreen input {
+  background: #222; border: 1px solid #444; color: #fff;
+  padding: 12px 20px; font-size: 16px; letter-spacing: 0.2em;
+  text-align: center; width: 220px; outline: none;
+}
+#lockScreen button {
+  background: var(--gold); color: #000;
+  border: none; padding: 12px 40px;
+  font-family: 'EB Garamond', serif;
+  font-size: 12px; letter-spacing: 0.3em;
+  text-transform: uppercase; cursor: pointer;
+}
+#pwErr { color: #c66; font-size: 11px; letter-spacing: 0.2em; height: 16px; }
+
+/* ══════════════════════════════
+   TAB NAV
+══════════════════════════════ */
+.tab-nav-sticky {
+  position: sticky; top: 0; z-index: 100;
+  background: #0D0D0D;
+  border-bottom: 1px solid var(--pt-lt);
+}
+.tab-nav {
+  max-width: 1440px; margin: 0 auto;
+  display: flex; align-items: stretch;
+  padding: 0 56px; gap: 0;
+}
+.tab-nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  margin-right: 48px; padding: 18px 40px 18px 0;
+  border-right: 1px solid var(--pt-lt);
+}
+.tab-nav-brand-jp {
+  font-size: 18px; font-weight: 300;
+  letter-spacing: 0.15em; color: var(--gold);
+}
+.tab-nav-brand-en {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.4em; color: var(--pt);
+  text-transform: uppercase; margin-top: 3px;
+}
+.tab-btn {
+  padding: 20px 28px 18px;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.3em; color: var(--pt);
+  text-transform: uppercase; cursor: pointer;
+  border: none; background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn:hover { color: var(--ch); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ══════════════════════════════
+   TAB CONTENT
+══════════════════════════════ */
+.tab-content { display: none; padding: 48px 56px 80px; max-width: 1440px; margin: 0 auto; }
+.tab-content.active { display: block; }
+
+/* ══════════════════════════════
+   SECTION HEADING
+══════════════════════════════ */
+.section-heading { margin-top: 32px; margin-bottom: var(--gap); }
+.section-heading:first-child { margin-top: 0; }
+.lbl {
+  display: flex; align-items: baseline; gap: 12px;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--gold);
+}
+.lbl-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; font-weight: 400; opacity: 0.45; letter-spacing: 0.1em;
+}
+.section-divider {
+  border: none; border-top: 1px solid var(--pt-lt);
+  margin: 8px 0 24px;
+}
+
+/* ══════════════════════════════
+   OVERVIEW — HERO
+══════════════════════════════ */
+.ov-hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; margin-bottom: 56px;
+  min-height: 280px;
+}
+.ov-left { display: flex; flex-direction: column; justify-content: center; }
+.ov-brand-jp {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300; letter-spacing: 0.15em;
+  color: var(--gold); line-height: 1.1;
+}
+.ov-brand-en {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(14px, 1.5vw, 18px);
+  letter-spacing: 0.5em; color: var(--pt);
+  text-transform: uppercase; margin-top: 12px;
+}
+.ov-brand-ruby {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; color: var(--pt);
+  letter-spacing: 0.2em; margin-top: 6px;
+}
+.ov-right {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  position: relative; overflow: hidden;
+}
+.ov-deco {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ov-deco-circle {
+  width: 200px; height: 200px; border-radius: 50%;
+  border: 1px solid rgba(200,168,75,0.2);
+  position: absolute;
+}
+.ov-deco-circle:nth-child(2) { width: 150px; height: 150px; border-color: rgba(200,168,75,0.3); }
+.ov-deco-circle:nth-child(3) { width: 100px; height: 100px; border-color: rgba(200,168,75,0.4); background: rgba(200,168,75,0.05); }
+.ov-deco-kanji {
+  font-size: 80px; font-weight: 300;
+  color: rgba(200,168,75,0.12);
+  letter-spacing: -0.05em;
+  z-index: 1;
+}
+
+/* アコーディオン */
+.accordion {
+  border: 1px solid var(--pt-lt);
+  margin-top: 16px;
+}
+.accordion summary {
+  padding: 16px 20px;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--pt);
+  cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: color 0.2s;
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary:hover { color: var(--ch); }
+.accordion summary::after {
+  content: '+'; font-size: 16px;
+  background: rgba(255,255,255,0.1); color: #fff;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s;
+}
+.accordion[open] summary::after { transform: rotate(45deg); }
+.accordion-body { padding: 20px; border-top: 1px solid var(--pt-lt); }
+.accordion-body p { font-size: 14px; line-height: 2; color: var(--ch); }
+.accordion-body ul { padding-left: 16px; }
+.accordion-body li {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; line-height: 2.2; color: var(--pt);
+}
+
+/* タグライン */
+.tagline-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; align-items: start;
+}
+.tagline-main {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 300; letter-spacing: 0.1em;
+  color: var(--gold); line-height: 1.5;
+}
+.tagline-en {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px; color: var(--pt);
+  letter-spacing: 0.15em; margin-top: 12px;
+  font-style: italic;
+}
+.tagline-concept {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; line-height: 2.2;
+  color: var(--pt);
+}
+
+/* ブランドアトリビュート */
+.attr-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; align-items: start;
+}
+.attr-voice {
+  background: var(--gold); color: #000;
+  padding: 32px;
+}
+.attr-voice-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.4em;
+  text-transform: uppercase; opacity: 0.6; margin-bottom: 16px;
+}
+.attr-voice-text {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 300; letter-spacing: 0.05em; line-height: 1.6;
+}
+.attr-principles {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.attr-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  padding: 20px;
+}
+.attr-icon { font-size: 24px; margin-bottom: 10px; }
+.attr-en {
+  font-family: 'EB Garamond', serif;
+  font-size: 14px; letter-spacing: 0.2em; color: var(--gold);
+}
+.attr-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; color: var(--pt); margin-top: 2px;
+}
+.attr-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; line-height: 1.8; color: var(--pt);
+  margin-top: 8px;
+}
+
+/* Do's & Don'ts */
+.dos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.dos-card { background: var(--bg2); border: 1px solid var(--pt-lt); padding: 28px; }
+.dos-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px; letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.dos-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.dos-dot.gold { background: var(--gold); }
+.dos-dot.pt { background: var(--pt); }
+.dos-list li {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; line-height: 2.4; color: var(--pt);
+  list-style: none; padding-left: 16px; position: relative;
+}
+.dos-list li::before { content: '—'; position: absolute; left: 0; color: var(--pt-lt); }
+
+/* ブランドコード */
+.code-hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; margin-bottom: 24px;
+}
+.code-name {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300; color: var(--gold);
+  letter-spacing: 0.05em; line-height: 1.2;
+}
+.code-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px; line-height: 2.2; color: var(--pt);
+}
+.code-others {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 16px;
+}
+.code-other-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  padding: 20px;
+}
+.code-num {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em; color: var(--pt); margin-bottom: 8px;
+}
+.code-other-name {
+  font-size: 14px; font-weight: 300; color: var(--ch);
+  letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.code-other-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; line-height: 1.8; color: var(--pt);
+}
+
+/* ══════════════════════════════
+   DESIGN SYSTEM
+══════════════════════════════ */
+
+/* デザインコンセプト */
+.ds-concept {
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  padding: 48px; margin-bottom: 32px;
+}
+.ds-concept-name {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: 0.3em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 32px;
+}
+.ds-concept-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+}
+.ds-concept-item-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--pt);
+  margin-bottom: 10px;
+}
+.ds-concept-item-text {
+  font-size: 15px; font-weight: 300; line-height: 1.8;
+  color: var(--ch); letter-spacing: 0.05em;
+}
+
+/* タイポグラフィ・カラー */
+.ds-typo-color {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 32px;
+}
+.typo-item { margin-bottom: 32px; border-bottom: 1px solid var(--pt-lt); padding-bottom: 28px; }
+.typo-item:last-child { border-bottom: none; margin-bottom: 0; }
+.typo-header { display: flex; gap: 32px; align-items: flex-start; }
+.typo-sample-large {
+  font-size: 64px; font-weight: 300; line-height: 1;
+  color: var(--gold); letter-spacing: 0.05em; flex-shrink: 0;
+}
+.typo-font-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px; letter-spacing: 0.2em; color: var(--ch);
+  line-height: 2; margin-top: 5px;
+}
+.typo-role {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; color: var(--pt);
+}
+.typo-scale { margin-top: 12px; }
+.typo-scale-item {
+  display: flex; align-items: baseline; gap: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 6px 0;
+}
+.typo-scale-size {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--pt);
+  width: 40px; flex-shrink: 0;
+}
+
+/* カラーシステム */
+.color-system { }
+.donut-wrap {
+  display: flex; justify-content: center; margin-bottom: 24px;
+}
+.donut-center text { font-family: 'EB Garamond', serif; }
+.color-primary {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px;
+}
+.color-sub {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;
+}
+.color-swatch-lg { height: 80px; }
+.color-swatch-sm { height: 44px; }
+.color-swatch { border-radius: 2px; }
+.color-info {
+  margin-top: 6px;
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.15em; color: var(--pt);
+}
+.color-info-name { color: var(--ch); font-size: 11px; }
+.color-grad {
+  height: 6px;
+  background: linear-gradient(to right, #0D0D0D, #A07830, #C8A84B, #E8D5A3, #FFFFFF);
+  border-radius: 3px; margin-top: 8px;
+}
+
+/* アイコンセット */
+.icon-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  padding: 32px;
+}
+.icon-grid {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 16px;
+}
+.icon-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.icon-svg { color: var(--gold); }
+.icon-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--pt); text-align: center;
+}
+
+/* レイアウト原則 */
+.layout-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt); padding: 32px;
+}
+.layout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.layout-item-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 10px;
+}
+.layout-item-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; line-height: 2; color: var(--pt);
+}
+.layout-visual {
+  margin-bottom: 16px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* UI セクション */
+.ui-section { }
+.ui-top {
+  display: grid; grid-template-columns: 220px 1fr; gap: 32px;
+  margin-bottom: 24px; align-items: start;
+}
+.iphone-wrap { display: flex; justify-content: center; }
+.iphone {
+  width: 200px; height: 400px;
+  background: #1A1A1A;
+  border-radius: 36px;
+  border: 8px solid #2A2A2A;
+  box-shadow: 0 0 0 1px #333, 0 20px 60px rgba(0,0,0,0.8);
+  position: relative; overflow: hidden;
+}
+.iphone-notch {
+  width: 80px; height: 22px;
+  background: #2A2A2A;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 0;
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+}
+.iphone-screen {
+  position: absolute; inset: 0;
+  background: #0D0D0D;
+  display: flex; flex-direction: column;
+}
+.iphone-status {
+  height: 28px; background: #0D0D0D;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 12px; margin-top: 6px;
+}
+.iphone-status-time {
+  font-family: 'EB Garamond', serif;
+  font-size: 9px; color: var(--ch); letter-spacing: 0.1em;
+}
+.iphone-content {
+  flex: 1; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.iphone-header {
+  text-align: center; padding: 8px 0;
+  border-bottom: 1px solid rgba(200,168,75,0.2);
+  font-size: 10px; color: var(--gold); letter-spacing: 0.2em;
+}
+.iphone-hero-area {
+  background: var(--bg2); border: 1px solid rgba(200,168,75,0.15);
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 4px;
+}
+.iphone-hero-title { font-size: 14px; color: var(--gold); letter-spacing: 0.15em; font-weight: 300; }
+.iphone-hero-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 7px; color: var(--pt); letter-spacing: 0.1em;
+}
+.iphone-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt);
+  padding: 6px 8px; font-size: 7px;
+  font-family: 'Noto Sans JP', sans-serif; color: var(--pt);
+}
+.iphone-btn {
+  background: var(--gold); color: #000;
+  padding: 5px; text-align: center;
+  font-size: 7px; letter-spacing: 0.15em;
+  font-family: 'EB Garamond', serif;
+}
+.ui-right { display: flex; flex-direction: column; gap: 20px; }
+.ui-typo-web {
+  background: var(--bg2); border: 1px solid var(--pt-lt); padding: 20px;
+}
+.ui-typo-web-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em; color: var(--pt); margin-bottom: 12px;
+}
+.ui-web-h1 { font-size: 28px; font-weight: 300; color: var(--gold); letter-spacing: 0.1em; }
+.ui-web-h2 { font-size: 18px; font-weight: 300; color: var(--ch); letter-spacing: 0.08em; margin-top: 6px; }
+.ui-web-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; line-height: 2; color: var(--pt); margin-top: 8px;
+}
+.ui-bottom {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.ui-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt); padding: 20px;
+}
+.ui-card-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em; color: var(--pt);
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.ui-btn-demo {
+  display: inline-block; padding: 8px 16px;
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  cursor: default;
+}
+.ui-btn-primary { background: var(--gold); color: #000; }
+.ui-btn-outline { border: 1px solid var(--gold); color: var(--gold); margin-top: 8px; display: block; }
+.ui-material-item {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.ui-material-swatch { width: 28px; height: 28px; border: 1px solid var(--pt-lt); }
+.ui-material-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px; color: var(--pt);
+}
+.ui-spacing-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.ui-spacing-bar { height: 4px; background: var(--gold); }
+.ui-spacing-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--pt);
+}
+.ui-radius-row {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;
+}
+.ui-radius-box {
+  width: 40px; height: 40px; border: 1px solid var(--gold-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif; font-size: 9px; color: var(--pt);
+}
+
+/* ══════════════════════════════
+   LOGO TAB
+══════════════════════════════ */
+.logo-placeholder-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.logo-placeholder-main {
+  background: var(--bg2); border: 2px dashed var(--pt-lt);
+  height: 300px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+}
+.logo-placeholder-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--pt);
+}
+.logo-placeholder-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px; color: rgba(255,255,255,0.2);
+}
+.logo-var-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.logo-var-card {
+  background: var(--bg2); border: 2px dashed var(--pt-lt);
+  height: 120px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+
+/* ══════════════════════════════
+   VISUAL TAB
+══════════════════════════════ */
+.visual-kv-placeholder {
+  background: var(--bg2); border: 2px dashed var(--pt-lt);
+  aspect-ratio: 16/9; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+  margin-bottom: 32px;
+}
+.visual-concept-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;
+}
+.visual-concept-card {
+  background: var(--bg2); border: 1px solid var(--pt-lt); padding: 24px;
+}
+.visual-concept-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+}
+.visual-concept-items li {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; line-height: 2.2; color: var(--pt); list-style: none;
+}
+.visual-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.visual-grid-item {
+  background: var(--bg2); border: 2px dashed var(--pt-lt);
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em; color: var(--pt);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 768px) {
+  body { overflow-x: hidden; }
+  .tab-nav { padding: 0 20px; overflow-x: auto; }
+  .tab-content { padding: 32px 20px 60px; }
+  .ov-hero, .tagline-grid, .attr-grid, .code-hero, .dos-grid,
+  .logo-placeholder-grid, .ds-typo-color { grid-template-columns: 1fr; }
+  .attr-principles { grid-template-columns: 1fr 1fr; }
+  .code-others { grid-template-columns: repeat(2, 1fr); }
+  .ds-concept-grid, .layout-grid, .ui-bottom { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: repeat(4, 1fr); }
+  .ui-top { grid-template-columns: 1fr; }
+  .iphone-wrap { margin-bottom: 20px; }
+  .visual-concept-grid { grid-template-columns: 1fr; }
+  .visual-grid { grid-template-columns: repeat(2, 1fr); }
+  .logo-var-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-heading .lbl { font-size: 10px; }
+  .lbl-jp { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-brand">玉手箱</div>
+  <div class="lock-sub">Brand Board — Confidential</div>
+  <input type="password" id="pwInput" placeholder="PASSWORD" autocomplete="off">
+  <button onclick="checkPw()">ENTER</button>
+  <div id="pwErr"></div>
+</div>
+
+<!-- MAIN -->
+<div id="mainWrap" style="display:none;">
+
+  <!-- TAB NAV -->
+  <div class="tab-nav-sticky">
+    <nav class="tab-nav">
+      <div class="tab-nav-brand">
+        <div>
+          <div class="tab-nav-brand-jp">玉手箱</div>
+          <div class="tab-nav-brand-en">TAMATEBAKO</div>
+        </div>
+      </div>
+      <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
+      <button class="tab-btn" onclick="switchTab('design', this)">Design System</button>
+      <button class="tab-btn" onclick="switchTab('logo', this)">Logo</button>
+      <button class="tab-btn" onclick="switchTab('visual', this)">Visual</button>
+    </nav>
+  </div>
+
+  <!-- ══ OVERVIEW ══ -->
+  <div id="tab-overview" class="tab-content active">
+
+    <!-- Hero -->
+    <div class="ov-hero">
+      <div class="ov-left">
+        <div class="ov-brand-jp">玉手箱</div>
+        <div class="ov-brand-en">TAMATEBAKO</div>
+        <div class="ov-brand-ruby">たまてばこ</div>
+        <details class="accordion" style="margin-top:24px;">
+          <summary>Naming Story <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;margin-left:8px;">ネーミングの由来</span></summary>
+          <div class="accordion-body">
+            <ul>
+              <li>「玉手箱」は日本の昔話に登場する、開けると特別な何かが現れる神秘の箱</li>
+              <li>お重箱という器に、選び抜いた逸品を入れてお届けするというコンセプトと重なる</li>
+              <li>受け取った人が蓋を開けた瞬間の感動・驚き・喜びを名前に込めた</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+      <div class="ov-right">
+        <div class="ov-deco">
+          <div class="ov-deco-circle"></div>
+          <div class="ov-deco-circle"></div>
+          <div class="ov-deco-circle"></div>
+          <div class="ov-deco-kanji">重</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tagline -->
+    <div class="section-heading">
+      <div class="lbl">Tagline · Concept Copy <span class="lbl-jp">タグライン・コンセプトコピー</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="tagline-grid">
+      <div>
+        <div class="tagline-main">重は、特別を宿す</div>
+        <div class="tagline-en">The vessel holds the extraordinary.</div>
+        <details class="accordion">
+          <summary>Brand Story <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;margin-left:8px;">ブランドストーリー</span></summary>
+          <div class="accordion-body">
+            <p>お重の器には、幾重の時間が重なっている。<br>
+            開けるたびに記憶が宿り、重ねるたびに歴史が刻まれる。<br>
+            玉手箱は、そんな器に選び抜いた逸品を入れてお届けしています。<br>
+            この重から始まる物語を、感じてください。</p>
+          </div>
+        </details>
+      </div>
+      <div class="tagline-concept">
+        日本の食文化に根ざした「お重」という器。<br>
+        ハレの日に使われ、特別な記憶を封じ込めてきたその形に、<br>
+        現代の逸品を合わせることで、<br>
+        受け取る人の「開ける瞬間」を最高の体験にする。<br><br>
+        自分へのご褒美にも、大切な人への贈り物にも。<br>
+        手にしたその瞬間から、物語が始まる。
+      </div>
+    </div>
+
+    <!-- Brand Attributes -->
+    <div class="section-heading" style="margin-top:48px;">
+      <div class="lbl">Brand Attributes <span class="lbl-jp">ブランドらしさ</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="attr-grid">
+      <div class="attr-voice">
+        <div class="attr-voice-label">Brand Voice</div>
+        <div class="attr-voice-text">静かに、<br>確かに、<br>特別を届ける。</div>
+      </div>
+      <div class="attr-principles">
+        <div class="attr-card">
+          <div class="attr-icon">⬛</div>
+          <div class="attr-en">Ceremonial</div>
+          <div class="attr-jp">ハレの器</div>
+          <div class="attr-desc">日常ではなく、特別な瞬間のための存在。</div>
+        </div>
+        <div class="attr-card">
+          <div class="attr-icon">✦</div>
+          <div class="attr-en">Curated</div>
+          <div class="attr-jp">選び抜かれた</div>
+          <div class="attr-desc">妥協のない目利きで選んだ逸品のみを詰める。</div>
+        </div>
+        <div class="attr-card">
+          <div class="attr-icon">◎</div>
+          <div class="attr-en">Moment</div>
+          <div class="attr-jp">瞬間の感動</div>
+          <div class="attr-desc">蓋を開けるその一瞬のために、すべてを設計する。</div>
+        </div>
+        <div class="attr-card">
+          <div class="attr-icon">⊡</div>
+          <div class="attr-en">Heritage</div>
+          <div class="attr-jp">和の継承</div>
+          <div class="attr-desc">日本の器文化を現代に。伝統を纏い、今を生きる。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Do's & Don'ts -->
+    <div class="section-heading" style="margin-top:48px;">
+      <hr class="section-divider">
+    </div>
+    <div class="dos-grid">
+      <div class="dos-card">
+        <div class="dos-title" style="color:var(--gold);">
+          <div class="dos-dot gold"></div>Do's
+          <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;">やること</span>
+        </div>
+        <ul class="dos-list">
+          <li>開ける瞬間の体験を最優先に設計する</li>
+          <li>器（お重）の品格を常に保つ</li>
+          <li>選び抜いたという文脈を伝える</li>
+          <li>余白・静けさをデザインに活かす</li>
+          <li>日本の伝統美を現代の感覚で表現する</li>
+          <li>自分へのご褒美用途も大切にする</li>
+        </ul>
+      </div>
+      <div class="dos-card">
+        <div class="dos-title" style="color:var(--pt);">
+          <div class="dos-dot pt"></div>Don'ts
+          <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;">やらないこと</span>
+        </div>
+        <ul class="dos-list">
+          <li>賑やかすぎるビジュアル・POPな配色</li>
+          <li>安売り・数量限定の煽り文句</li>
+          <li>お重の格を下げるカジュアルな表現</li>
+          <li>情報を詰め込みすぎた窮屈なレイアウト</li>
+          <li>和のテイストを損なう洋風のコミュニケーション</li>
+          <li>「プレゼント」の文脈だけに偏る（自分用も大事）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Brand Codes -->
+    <div class="section-heading" style="margin-top:48px;">
+      <div class="lbl">Brand Codes <span class="lbl-jp">ブランドコード（独自資産）</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="code-hero">
+      <div>
+        <div class="code-name">お重という器</div>
+        <div style="font-family:'EB Garamond',serif;font-size:13px;letter-spacing:0.3em;color:var(--pt);margin-top:4px;">Core Code</div>
+      </div>
+      <div class="code-desc">
+        玉手箱の最大のコアコードは「お重箱」そのもの。<br>
+        単なる容器ではなく、日本の食文化・贈答文化・記憶の器。<br>
+        この形を持つだけで、ブランドは唯一の存在になれる。<br>
+        内容物が変わっても、お重がブランドの顔であり続ける。
+      </div>
+    </div>
+    <details class="accordion">
+      <summary>Other Codes <span style="font-family:'Noto Sans JP',sans-serif;font-size:10px;opacity:0.5;margin-left:8px;">その他のブランドコード</span></summary>
+      <div class="accordion-body">
+        <div class="code-others">
+          <div class="code-other-card">
+            <div class="code-num">01</div>
+            <div class="code-other-name">蓋を開ける瞬間</div>
+            <div class="code-other-desc">体験の設計がブランド価値の核。</div>
+          </div>
+          <div class="code-other-card">
+            <div class="code-num">02</div>
+            <div class="code-other-name">漆黒×金</div>
+            <div class="code-other-desc">カラーシステムとしてのビジュアルコード。</div>
+          </div>
+          <div class="code-other-card">
+            <div class="code-num">03</div>
+            <div class="code-other-name">選び抜く目利き</div>
+            <div class="code-other-desc">中身への信頼感を担保する姿勢。</div>
+          </div>
+          <div class="code-other-card">
+            <div class="code-num">04</div>
+            <div class="code-other-name">越境する和の美</div>
+            <div class="code-other-desc">海外展開を視野に入れた普遍的な日本美。</div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div><!-- /overview -->
+
+  <!-- ══ DESIGN SYSTEM ══ -->
+  <div id="tab-design" class="tab-content">
+
+    <!-- デザインコンセプト -->
+    <div class="section-heading" style="margin-top:0;">
+      <div class="lbl">Design Concept <span class="lbl-jp">デザインコンセプト</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="ds-concept">
+      <div class="ds-concept-name">LACQUER &amp; GOLD</div>
+      <div class="ds-concept-grid">
+        <div>
+          <div class="ds-concept-item-label">Tone</div>
+          <div class="ds-concept-item-text">漆黒の静謐と<br>金の輝き。<br>和の格調。</div>
+        </div>
+        <div>
+          <div class="ds-concept-item-label">Palette</div>
+          <div class="ds-concept-item-text">深い黒をベースに<br>ゴールドをアクセント。<br>ベージュで柔らかさを添える。</div>
+        </div>
+        <div>
+          <div class="ds-concept-item-label">Direction</div>
+          <div class="ds-concept-item-text">余白を活かした<br>静的な構成。<br>情報より体験を優先する設計。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- タイポグラフィ・カラー -->
+    <div class="section-heading">
+      <div class="lbl">Typography · Color <span class="lbl-jp">タイポグラフィ・カラー</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="ds-typo-color">
+      <!-- タイポグラフィ -->
+      <div>
+        <div class="typo-item">
+          <div class="typo-header">
+            <div class="typo-sample-large" style="font-family:'Noto Serif JP',serif;">玉</div>
+            <div>
+              <div class="typo-font-name">Noto Serif JP</div>
+              <div class="typo-role">見出し・ブランド名</div>
+              <div class="typo-scale">
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">64px</span>
+                  <span style="font-size:28px;font-weight:300;color:var(--ch);">玉手箱</span>
+                </div>
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">32px</span>
+                  <span style="font-size:18px;font-weight:300;color:var(--ch);">重は、特別を宿す</span>
+                </div>
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">16px</span>
+                  <span style="font-size:13px;font-weight:400;color:var(--pt);">選び抜いた逸品を、器に。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-header">
+            <div class="typo-sample-large" style="font-family:'EB Garamond',serif;color:var(--gold);">T</div>
+            <div>
+              <div class="typo-font-name" style="font-family:'EB Garamond',serif;">EB Garamond</div>
+              <div class="typo-role">英語・ラベル・キャプション</div>
+              <div class="typo-scale">
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">28px</span>
+                  <span style="font-family:'EB Garamond',serif;font-size:20px;color:var(--gold);letter-spacing:0.1em;">TAMATEBAKO</span>
+                </div>
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">14px</span>
+                  <span style="font-family:'EB Garamond',serif;font-size:13px;color:var(--pt);letter-spacing:0.3em;text-transform:uppercase;">Brand Board</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-header">
+            <div class="typo-sample-large" style="font-family:'Noto Sans JP',sans-serif;font-weight:300;color:var(--pt);">あ</div>
+            <div>
+              <div class="typo-font-name" style="font-family:'Noto Sans JP',sans-serif;">Noto Sans JP</div>
+              <div class="typo-role">本文・補足テキスト</div>
+              <div class="typo-scale">
+                <div class="typo-scale-item">
+                  <span class="typo-scale-size">14px</span>
+                  <span style="font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--pt);">開けるたびに記憶が宿り、重ねるたびに歴史が刻まれる。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- カラーシステム -->
+      <div class="color-system">
+        <div class="donut-wrap">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <!-- Black 55% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#0D0D0D" stroke-width="28"
+              stroke-dasharray="197.8 359.6" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+            <!-- Gold 25% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#C8A84B" stroke-width="28"
+              stroke-dasharray="89.9 467.5" stroke-dashoffset="-197.8" transform="rotate(-90 80 80)"/>
+            <!-- Beige 12% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#D6C9A8" stroke-width="28"
+              stroke-dasharray="43.2 514.2" stroke-dashoffset="-287.7" transform="rotate(-90 80 80)"/>
+            <!-- White 8% -->
+            <circle cx="80" cy="80" r="56" fill="none" stroke="#F5F0E8" stroke-width="28"
+              stroke-dasharray="28.8 528.6" stroke-dashoffset="-330.9" transform="rotate(-90 80 80)"/>
+            <text x="80" y="76" text-anchor="middle" font-family="EB Garamond" font-size="9" fill="#888" letter-spacing="2">COLOR</text>
+            <text x="80" y="90" text-anchor="middle" font-family="EB Garamond" font-size="9" fill="#888" letter-spacing="2">BALANCE</text>
+          </svg>
+        </div>
+        <div class="color-primary">
+          <div>
+            <div class="color-swatch color-swatch-lg" style="background:#0D0D0D;border:1px solid #333;"></div>
+            <div class="color-info"><div class="color-info-name">Black</div>#0D0D0D<br>ベース</div>
+          </div>
+          <div>
+            <div class="color-swatch color-swatch-lg" style="background:#C8A84B;"></div>
+            <div class="color-info"><div class="color-info-name">Gold</div>#C8A84B<br>プライマリ</div>
+          </div>
+          <div>
+            <div class="color-swatch color-swatch-lg" style="background:#D6C9A8;"></div>
+            <div class="color-info"><div class="color-info-name">Beige</div>#D6C9A8<br>アクセント</div>
+          </div>
+        </div>
+        <div class="color-sub">
+          <div>
+            <div class="color-swatch color-swatch-sm" style="background:#1E1E1E;border:1px solid #333;"></div>
+            <div class="color-info"><div class="color-info-name">Dark</div>#1E1E1E</div>
+          </div>
+          <div>
+            <div class="color-swatch color-swatch-sm" style="background:#A07830;"></div>
+            <div class="color-info"><div class="color-info-name">Gold Dk</div>#A07830</div>
+          </div>
+          <div>
+            <div class="color-swatch color-swatch-sm" style="background:#F5F0E8;"></div>
+            <div class="color-info"><div class="color-info-name">Off White</div>#F5F0E8</div>
+          </div>
+        </div>
+        <div class="color-grad"></div>
+      </div>
+    </div>
+
+    <!-- アイコンセット -->
+    <div class="section-heading">
+      <div class="lbl">Icon Set <span class="lbl-jp">アイコンセット</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="icon-card">
+      <div class="icon-grid">
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="6" y="10" width="20" height="16" rx="1"/>
+            <path d="M10 10V8a6 6 0 0 1 12 0v2"/>
+          </svg>
+          <div class="icon-label">Gift</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="4" y="16" width="24" height="10" rx="1"/>
+            <rect x="4" y="12" width="24" height="4" rx="1"/>
+            <path d="M10 12V8M22 12V8"/>
+          </svg>
+          <div class="icon-label">Jubako</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M16 4l2.5 7.5H26l-6.3 4.6 2.4 7.4L16 19l-6.1 4.5 2.4-7.4L6 11.5h7.5z"/>
+          </svg>
+          <div class="icon-label">Special</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="16" cy="16" r="10"/>
+            <path d="M16 10v6l4 2"/>
+          </svg>
+          <div class="icon-label">Moment</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M8 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+            <path d="M5 20h22M16 4v4"/>
+          </svg>
+          <div class="icon-label">Heritage</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M16 6C10.5 6 6 10.5 6 16s4.5 10 10 10 10-4.5 10-10"/>
+            <path d="M22 6l4 4-4 4"/>
+            <path d="M26 10H18"/>
+          </svg>
+          <div class="icon-label">Delivery</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M16 28V16M8 20l8-4 8 4"/>
+            <path d="M6 12l10-8 10 8"/>
+          </svg>
+          <div class="icon-label">Craft</div>
+        </div>
+        <div class="icon-item">
+          <svg class="icon-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="16" cy="16" r="3"/>
+            <path d="M16 6v4M16 22v4M6 16h4M22 16h4"/>
+            <path d="M9.2 9.2l2.8 2.8M20 20l2.8 2.8M9.2 22.8l2.8-2.8M20 12l2.8-2.8"/>
+          </svg>
+          <div class="icon-label">Curated</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- レイアウト原則 -->
+    <div class="section-heading">
+      <div class="lbl">Layout Principles <span class="lbl-jp">レイアウト・余白の原則</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="layout-card">
+      <div class="layout-grid">
+        <div>
+          <div class="layout-visual">
+            <div style="display:flex;gap:4px;align-items:flex-end;">
+              <div style="width:2px;height:60px;background:var(--gold-dk);opacity:0.3;"></div>
+              <div style="width:40px;height:40px;border:1px solid var(--gold);"></div>
+              <div style="width:2px;height:60px;background:var(--gold-dk);opacity:0.3;"></div>
+            </div>
+          </div>
+          <div class="layout-item-title">余白を語らせる</div>
+          <div class="layout-item-desc">情報を詰め込まない。余白こそが品格を語る。黒い空間は静寂であり、格調のひとつ。</div>
+        </div>
+        <div>
+          <div class="layout-visual">
+            <div style="display:flex;flex-direction:column;gap:8px;width:80px;">
+              <div style="height:2px;background:var(--gold);opacity:0.8;"></div>
+              <div style="height:2px;background:var(--gold);opacity:0.5;"></div>
+              <div style="height:2px;background:var(--gold);opacity:0.3;"></div>
+            </div>
+          </div>
+          <div class="layout-item-title">縦のリズム</div>
+          <div class="layout-item-desc">縦方向の一定間隔（8の倍数）でリズムをつくる。目の流れが自然に下へ向かう設計。</div>
+        </div>
+        <div>
+          <div class="layout-visual">
+            <div style="border:1px solid var(--pt-lt);padding:8px;width:80px;">
+              <div style="border:1px dashed rgba(200,168,75,0.3);height:40px;"></div>
+            </div>
+          </div>
+          <div class="layout-item-title">内枠と呼吸</div>
+          <div class="layout-item-desc">カードの内側にも十分な余白を。要素が窮屈に見えたら余白を足すのが正解。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UI -->
+    <div class="section-heading">
+      <div class="lbl">UI · Material · Web <span class="lbl-jp">UIコンポーネント・マテリアル・ウェブ</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="ui-section">
+      <div class="ui-top">
+        <div class="iphone-wrap">
+          <div class="iphone">
+            <div class="iphone-notch"></div>
+            <div class="iphone-screen">
+              <div class="iphone-status">
+                <span class="iphone-status-time">9:41</span>
+                <span class="iphone-status-time">●●●</span>
+              </div>
+              <div class="iphone-content">
+                <div class="iphone-header">玉手箱</div>
+                <div class="iphone-hero-area">
+                  <div class="iphone-hero-title">玉手箱</div>
+                  <div class="iphone-hero-sub">重は、特別を宿す</div>
+                </div>
+                <div class="iphone-card">お重のモンブラン — 秋限定</div>
+                <div class="iphone-btn">ORDER</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui-right">
+          <div class="ui-typo-web">
+            <div class="ui-typo-web-title">TYPOGRAPHY ON WEB</div>
+            <div class="ui-web-h1">玉手箱</div>
+            <div class="ui-web-h2">重は、特別を宿す</div>
+            <div class="ui-web-body">お重の器には、幾重の時間が重なっている。<br>開けるたびに記憶が宿り、重ねるたびに歴史が刻まれる。</div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-bottom">
+        <div class="ui-card">
+          <div class="ui-card-title">UI Components</div>
+          <div class="ui-btn-demo ui-btn-primary">ORDER NOW</div>
+          <div class="ui-btn-demo ui-btn-outline">LEARN MORE</div>
+          <div style="margin-top:12px;padding:8px 12px;border:1px solid var(--pt-lt);font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--pt);">お名前を入力</div>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-title">Material</div>
+          <div class="ui-material-item">
+            <div class="ui-material-swatch" style="background:#0D0D0D;"></div>
+            <div class="ui-material-name">漆黒</div>
+          </div>
+          <div class="ui-material-item">
+            <div class="ui-material-swatch" style="background:#C8A84B;"></div>
+            <div class="ui-material-name">金蒔絵</div>
+          </div>
+          <div class="ui-material-item">
+            <div class="ui-material-swatch" style="background:#D6C9A8;border:1px solid #333;"></div>
+            <div class="ui-material-name">和紙ベージュ</div>
+          </div>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-title">Spacing</div>
+          <div class="ui-spacing-row"><div class="ui-spacing-bar" style="width:8px;"></div><div class="ui-spacing-label">4px — XS</div></div>
+          <div class="ui-spacing-row"><div class="ui-spacing-bar" style="width:16px;"></div><div class="ui-spacing-label">8px — SM</div></div>
+          <div class="ui-spacing-row"><div class="ui-spacing-bar" style="width:32px;"></div><div class="ui-spacing-label">16px — MD</div></div>
+          <div class="ui-spacing-row"><div class="ui-spacing-bar" style="width:56px;"></div><div class="ui-spacing-label">32px — LG</div></div>
+          <div class="ui-spacing-row"><div class="ui-spacing-bar" style="width:80px;"></div><div class="ui-spacing-label">56px — XL</div></div>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-title">Border · Radius</div>
+          <div class="ui-radius-row">
+            <div class="ui-radius-box" style="border-radius:0;">0</div>
+            <div class="ui-radius-box" style="border-radius:4px;">4</div>
+            <div class="ui-radius-box" style="border-radius:8px;">8</div>
+          </div>
+          <div style="margin-top:12px;font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--pt);line-height:2;">
+            角丸は控えめに。<br>シャープさが格調を生む。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /design -->
+
+  <!-- ══ LOGO ══ -->
+  <div id="tab-logo" class="tab-content">
+    <div class="section-heading" style="margin-top:0;">
+      <div class="lbl">Logo System <span class="lbl-jp">ロゴシステム</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="logo-placeholder-grid">
+      <div class="logo-placeholder-main">
+        <div style="font-size:48px;color:rgba(200,168,75,0.15);">玉手箱</div>
+        <div class="logo-placeholder-label">LOGO PLACEHOLDER</div>
+        <div class="logo-placeholder-sub">制作後に差し替え</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:var(--bg2);border:1px solid var(--pt-lt);padding:24px;">
+          <div style="font-family:'EB Garamond',serif;font-size:10px;letter-spacing:0.3em;color:var(--pt);margin-bottom:12px;">LOGO CONCEPT</div>
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:13px;line-height:2.2;color:var(--pt);">
+            漢字「玉手箱」を主役にした明朝系ロゴ。<br>
+            英語表記は「TAMATEBAKO」のEB Garamondで。<br>
+            海外向けは英字ロゴに切り替え。<br>
+            家紋・紋様の要素を補助的に検討。
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logo-var-grid">
+      <div class="logo-var-card">
+        <div class="logo-placeholder-label">フルカラー</div>
+        <div class="logo-placeholder-sub">黒背景・金文字</div>
+      </div>
+      <div class="logo-var-card" style="background:#F5F0E8;border-color:#ccc;">
+        <div class="logo-placeholder-label" style="color:#333;">白バージョン</div>
+        <div class="logo-placeholder-sub" style="color:#999;">白背景・黒文字</div>
+      </div>
+      <div class="logo-var-card">
+        <div class="logo-placeholder-label">モノクロ</div>
+        <div class="logo-placeholder-sub">単色版</div>
+      </div>
+    </div>
+  </div><!-- /logo -->
+
+  <!-- ══ VISUAL ══ -->
+  <div id="tab-visual" class="tab-content">
+    <div class="section-heading" style="margin-top:0;">
+      <div class="lbl">Key Visual <span class="lbl-jp">キービジュアル</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="visual-kv-placeholder">
+      <div style="font-family:'EB Garamond',serif;font-size:11px;letter-spacing:0.4em;color:var(--pt);text-transform:uppercase;">Key Visual Placeholder</div>
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:11px;color:rgba(255,255,255,0.2);">制作後に差し替え</div>
+    </div>
+
+    <div class="section-heading">
+      <div class="lbl">Visual Concept <span class="lbl-jp">ビジュアルコンセプト</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="visual-concept-grid">
+      <div class="visual-concept-card">
+        <div class="visual-concept-title">Atmosphere</div>
+        <ul class="visual-concept-items">
+          <li>漆黒の背景・静寂な空間</li>
+          <li>光源は絞って・スポット的に</li>
+          <li>余白を多くとった構図</li>
+          <li>和の情景（石・木・布）を背景に</li>
+        </ul>
+      </div>
+      <div class="visual-concept-card">
+        <div class="visual-concept-title">Subject</div>
+        <ul class="visual-concept-items">
+          <li>お重箱が必ず主役</li>
+          <li>蓋を開ける瞬間・半開きの構図</li>
+          <li>中の逸品（モンブランなど）が輝く</li>
+          <li>手元・開ける動作も被写体に</li>
+        </ul>
+      </div>
+      <div class="visual-concept-card">
+        <div class="visual-concept-title">Tone</div>
+        <ul class="visual-concept-items">
+          <li>暗め・コントラスト強め</li>
+          <li>金・ベージュのハイライト</li>
+          <li>彩度は抑えめ・上品さ優先</li>
+          <li>参考：黒漆器×金箔×白の静物写真</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <div class="lbl">Visual Grid <span class="lbl-jp">ビジュアルグリッド</span></div>
+      <hr class="section-divider">
+    </div>
+    <div class="visual-grid">
+      <div class="visual-grid-item">Image 01</div>
+      <div class="visual-grid-item">Image 02</div>
+      <div class="visual-grid-item">Image 03</div>
+      <div class="visual-grid-item">Image 04</div>
+      <div class="visual-grid-item">Image 05</div>
+      <div class="visual-grid-item">Image 06</div>
+    </div>
+  </div><!-- /visual -->
+
+</div><!-- /mainWrap -->
+
+<script>
+// パスワード
+function unlock() {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('mainWrap').style.display = 'block';
+}
+function checkPw() {
+  if (document.getElementById('pwInput').value === 'view') {
+    sessionStorage.setItem('unlocked_tamatebako', '1');
+    unlock();
+  } else {
+    document.getElementById('pwErr').textContent = 'INCORRECT';
+    setTimeout(() => document.getElementById('pwErr').textContent = '', 2000);
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+if (sessionStorage.getItem('unlocked_tamatebako') === '1') unlock();
+
+// タブ切替
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// アコーディオン アニメーション
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('details.accordion').forEach(details => {
+    const summary = details.querySelector('summary');
+    const body = details.querySelector('.accordion-body');
+    if (!body) return;
+    body.style.overflow = 'hidden';
+    body.style.opacity = '0';
+    body.style.maxHeight = '0';
+    body.style.transition = 'max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s';
+    summary.addEventListener('click', e => {
+      e.preventDefault();
+      if (details.open) {
+        body.style.maxHeight = '0';
+        body.style.opacity = '0';
+        setTimeout(() => { details.open = false; }, 350);
+      } else {
+        details.open = true;
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font Preview — 玉手箱 日本語ゴシック</title>
+
+<script>
+  const BRAND_JP = '玉手箱';
+  const TAGLINE  = '重は、特別を宿す。';
+  const BODY_TEXT = 'お重の器には、幾重の時間が重なっている。開けるたびに記憶が宿り、重ねるたびに歴史が刻まれる。';
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?
+  family=Noto+Sans+JP:wght@200;300;400;500
+  &family=Zen+Kaku+Gothic+New:wght@300;400;500;700
+  &family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700
+  &family=BIZ+UDGothic:wght@400;700
+  &family=M+PLUS+1p:wght@300;400;500
+  &family=M+PLUS+Rounded+1c:wght@300;400;500
+  &family=Kaisei+Decol:wght@400;500
+  &display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#111;
+  font-family:'Noto Sans JP', sans-serif;
+  color:#F5F0E8;
+  padding:40px;
+  -webkit-font-smoothing: antialiased;
+}
+h1 { font-size:11px; letter-spacing:0.35em; color:#888; text-transform:uppercase; margin-bottom:8px; }
+.note { font-size:11px; color:#666; margin-bottom:40px; line-height:1.8; }
+
+.section-title {
+  font-size:10px; letter-spacing:0.3em; text-transform:uppercase;
+  color:#555; border-bottom:1px solid rgba(255,255,255,0.08);
+  padding-bottom:8px; margin:48px 0 24px;
+}
+
+.combos {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+  gap:2px;
+}
+
+.combo {
+  background:#1A1A1A;
+  padding:32px 28px;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:border-color 0.15s, background 0.15s;
+}
+.combo:hover { background:#222; border-color:rgba(200,168,75,0.3); }
+.combo.selected { border-color:#C8A84B; background:#1E1C16; }
+
+.combo-num { font-size:9px; letter-spacing:0.3em; color:#666; margin-bottom:16px; }
+.combo-note { font-size:10px; color:#666; letter-spacing:0.05em; }
+
+.c-brand-jp { font-size:52px; line-height:1.1; margin-bottom:8px; color:#C8A84B; }
+.c-tagline  { font-size:18px; margin-bottom:10px; line-height:1.6; color:#F5F0E8; }
+.c-body {
+  font-size:12px; font-weight:400; color:#888;
+  line-height:2.2; border-top:1px solid rgba(255,255,255,0.08); padding-top:14px;
+}
+.font-name { font-size:9px; letter-spacing:0.15em; color:#555; margin-top:12px; }
+
+.select-btn {
+  display:inline-block; margin-top:14px;
+  font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  background:#C8A84B; color:#111;
+  padding:7px 16px; cursor:pointer;
+  border:none; font-family:'Noto Sans JP',sans-serif;
+}
+.select-btn:hover { background:#E8D5A3; }
+</style>
+</head>
+<body>
+
+<h1>Font Preview — 玉手箱 日本語ゴシック</h1>
+<p class="note">
+  Google Fontsで使える和文ゴシック候補。気に入ったら「No.○ で」とクロコに伝えてください。
+</p>
+
+<div class="section-title">日本語ゴシック 候補一覧</div>
+<div class="combos" id="combos"></div>
+
+<script>
+const combos = [
+  {
+    num:'01', jp:'Noto Sans JP', jpW:'200',
+    note:'Noto Sans JP — w200（極細）',
+  },
+  {
+    num:'02', jp:'Noto Sans JP', jpW:'300',
+    note:'Noto Sans JP — w300（細め）',
+  },
+  {
+    num:'03', jp:'Noto Sans JP', jpW:'400',
+    note:'Noto Sans JP — w400（レギュラー）',
+  },
+  {
+    num:'04', jp:'Zen Kaku Gothic New', jpW:'300',
+    note:'Zen Kaku Gothic New — w300（細め・すっきりモダン）',
+  },
+  {
+    num:'05', jp:'Zen Kaku Gothic New', jpW:'400',
+    note:'Zen Kaku Gothic New — w400（レギュラー）',
+  },
+  {
+    num:'06', jp:'Zen Kaku Gothic Antique', jpW:'300',
+    note:'Zen Kaku Gothic Antique — w300（少しレトロ・格調）',
+  },
+  {
+    num:'07', jp:'Zen Kaku Gothic Antique', jpW:'400',
+    note:'Zen Kaku Gothic Antique — w400',
+  },
+  {
+    num:'08', jp:'BIZ UDGothic', jpW:'400',
+    note:'BIZ UDGothic — 視認性高め・上品',
+  },
+  {
+    num:'09', jp:'M PLUS 1p', jpW:'300',
+    note:'M PLUS 1p — w300（柔らかめ）',
+  },
+  {
+    num:'10', jp:'M PLUS 1p', jpW:'400',
+    note:'M PLUS 1p — w400',
+  },
+  {
+    num:'11', jp:'M PLUS Rounded 1c', jpW:'300',
+    note:'M PLUS Rounded 1c — 丸み・やわらかさ',
+  },
+  {
+    num:'12', jp:'Kaisei Decol', jpW:'400',
+    note:'Kaisei Decol — 明朝×ゴシックの中間。独特の風格',
+  },
+];
+
+const container = document.getElementById('combos');
+
+combos.forEach(c => {
+  const div = document.createElement('div');
+  div.className = 'combo';
+
+  div.innerHTML = `
+    <div class="combo-num">No.${c.num} &nbsp;—&nbsp; <span class="combo-note">${c.note}</span></div>
+    <div class="c-brand-jp" style="font-family:'${c.jp}',sans-serif;font-weight:${c.jpW};">${BRAND_JP}</div>
+    <div class="c-tagline" style="font-family:'${c.jp}',sans-serif;font-weight:${c.jpW};">${TAGLINE}</div>
+    <div class="c-body" style="font-family:'${c.jp}',sans-serif;font-weight:${c.jpW};">${BODY_TEXT}</div>
+    <div class="font-name">${c.jp} / weight ${c.jpW}</div>
+    <button class="select-btn" onclick="selectFont(this,'${c.num}','${c.jp}','${c.jpW}')">Select</button>
+  `;
+
+  container.appendChild(div);
+});
+
+function selectFont(btn, num, jp, w) {
+  document.querySelectorAll('.combo').forEach(el => el.classList.remove('selected'));
+  btn.closest('.combo').classList.add('selected');
+  alert(`No.${num} を選択\nJP: ${jp} / weight ${w}\n\n「No.${num} で」とクロコに伝えてください。`);
+}
+</script>
+</body>
+</html>
