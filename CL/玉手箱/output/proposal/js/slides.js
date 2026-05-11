@@ -46,7 +46,7 @@ function slide03TaglineStory() {
         <!-- 右：ストーリー -->
         <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:8cqw 5cqw 6cqw;">
           <div class="t-label c-gold" style="margin-bottom:2.5cqw;">Brand Story</div>
-          <div style="font-family:'Noto Serif JP',serif; font-size:1.6cqw; font-weight:200; letter-spacing:0.08em; line-height:2.6; color:var(--c-white);">
+          <div style="font-family:'Noto Serif JP',serif; font-size:1.8cqw; font-weight:200; letter-spacing:0.08em; line-height:2.6; color:var(--c-white);">
             お重の器には、幾重の時間が重なっている。<br>
             開けるたびに記憶が宿り、<br>
             重ねるたびに歴史が刻まれる。<br>
