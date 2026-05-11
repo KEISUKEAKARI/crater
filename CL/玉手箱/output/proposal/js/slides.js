@@ -113,7 +113,7 @@ function slide05Dos() {
       <div class="s-top"><span class="badge">Brand Direction</span></div>
       <div class="s-main" style="flex-direction:row; gap:6cqw; align-items:stretch;">
         <!-- Do's -->
-        <div style="flex:1;">
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
             <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:var(--c-gold);"></div>
             <div class="t-label c-gold" style="font-weight:400;">Do's</div>
@@ -135,7 +135,7 @@ function slide05Dos() {
           </ul>
         </div>
         <!-- Don'ts -->
-        <div style="flex:1;">
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
             <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:#999;"></div>
             <div class="t-label" style="color:#999; font-weight:400;">Don'ts</div>
