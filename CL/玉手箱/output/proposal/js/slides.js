@@ -180,12 +180,12 @@ function slide07LogoConcept() {
     <div class="s-wrap" style="padding:0;">
       <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
       <div style="display:flex; width:100%; height:100%;">
-        <!-- 左：ロゴ 大きめ -->
-        <div style="flex:1.4; display:flex; align-items:center; justify-content:center; padding:4cqw 3cqw;">
+        <!-- 左：ロゴ 大きめ・左寄せ -->
+        <div style="flex:1.4; display:flex; align-items:center; justify-content:flex-start; padding:4cqw 2cqw 4cqw 4cqw;">
           <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
         </div>
-        <!-- 右：コンセプト 左寄せ -->
-        <div style="flex:0.6; display:flex; flex-direction:column; justify-content:center; padding:8cqw 4cqw 6cqw 2cqw; gap:2.2cqw;">
+        <!-- 右：コンセプト 中央寄り -->
+        <div style="flex:0.6; display:flex; flex-direction:column; justify-content:center; padding:8cqw 5cqw 6cqw 0; gap:2.2cqw;">
           <div style="display:flex; flex-direction:column; gap:2cqw;">
             <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
               <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Mark</div>
