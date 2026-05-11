@@ -211,7 +211,7 @@ function slide07LogoConcept() {
 function slide08LogoVariation() {
   return `<section class="slide" style="background:#fff;" data-section="logo-variation" data-notes="ロゴのバリエーションです。">
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Variation</span></div>
-    <div style="width:100%; height:100%; display:flex; align-items:flex-end; justify-content:center; padding:7cqw 5cqw 4cqw;">
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:6cqw 5cqw 6cqw;">
       <img src="../../brief/logo/03oju_logo_アートボード 1.svg" style="width:100%; height:auto; display:block;" alt="玉手箱ロゴ バリエーション">
     </div>
     <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
