@@ -28,7 +28,7 @@ body {
 .slide-stage {
   width: 100vw;
   height: 100vh;
-  background: var(--c-base);
+  background: #0D0D0D;
   overflow: hidden;
   position: relative;
 }
@@ -70,10 +70,10 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 5cqw;
+  padding: 4.5cqw 5cqw 6cqw 5cqw;
   position: relative;
 }
-.s-top { flex-shrink: 0; }
+.s-top { flex-shrink: 0; margin-bottom: 0; }
 .s-main {
   flex: 1;
   display: flex;
