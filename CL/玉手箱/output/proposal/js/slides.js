@@ -251,7 +251,7 @@ function slide10KV() {
   return `<section class="slide" data-section="kv" data-notes="ビジュアルの方向性です。">
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge" style="background:rgba(200,168,75,0.2);color:var(--c-gold);">Key Visual Image</span></div>
     <div style="position:relative; width:100%; height:100%; overflow:hidden;">
-      <img src="../../brief/AdobeStock_680912265.png" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;" alt="Key Visual">
+      <img src="../../brief/kv.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;" alt="Key Visual">
       <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(13,13,13,0.72) 45%, transparent); display:flex; flex-direction:column; justify-content:center; padding:7cqw; gap:2.5cqw;">
         <div class="t-h1 c-white" style="font-weight:200; letter-spacing:0.15em; margin-top:4cqw;">重は、特別を宿す。</div>
         <div class="t-en" style="color:rgba(245,240,232,0.5);">The vessel holds the extraordinary.</div>
