@@ -70,10 +70,10 @@ function slide04BrandCode() {
       <div class="s-main" style="gap:3cqw;">
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5cqw;">
           <!-- Core Code -->
-          <div style="border:1px solid #d0d0d0; padding:3cqw;">
+          <div style="padding:1cqw 3cqw 1cqw 0; display:flex; flex-direction:column; justify-content:center;">
             <div class="t-label c-gold" style="margin-bottom:1.5cqw; font-weight:400;">Core Code</div>
-            <div class="t-h2" style="color:var(--c-black); margin-bottom:1.5cqw; letter-spacing:0.1em; font-size:3.5cqw; font-weight:400;">逸品を、伝統で。</div>
-            <div class="t-small" style="color:var(--c-black);">お重という伝統の形が、中の逸品をさらに格上げする。器の品格と逸品の価値が重なったとき、はじめて玉手箱になる。</div>
+            <div class="t-h1" style="color:var(--c-black); margin-bottom:1.8cqw; letter-spacing:0.1em;">逸品を、伝統で。</div>
+            <div class="t-en" style="color:var(--c-pt); font-style:normal; letter-spacing:0.08em; font-size:1.3cqw; line-height:1.9;">お重という伝統の形が、中の逸品をさらに格上げする。<br>器の品格と逸品の価値が重なったとき、<br>はじめて玉手箱になる。</div>
           </div>
           <!-- Other Codes -->
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
