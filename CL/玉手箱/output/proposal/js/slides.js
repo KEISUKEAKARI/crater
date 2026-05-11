@@ -260,6 +260,15 @@ function slide10KV() {
   </section>`;
 }
 
+// SLIDE 11: エンド | end
+function slide11End() {
+  return `<section class="slide" style="background:#fff;" data-section="end" data-notes="以上です。">
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:10cqw 8cqw;">
+      <img src="../../brief/logo/03oju_logo-04.svg" style="width:100%; height:auto;" alt="玉手箱">
+    </div>
+  </section>`;
+}
+
 window.slideFactories = [
   slide01Cover,
   slide03TaglineStory,
@@ -270,6 +279,7 @@ window.slideFactories = [
   slide08LogoVariation,
   slide09Concept,
   slide10KV,
+  slide11End,
 ];
 
 window.agendaItems = [
@@ -282,4 +292,5 @@ window.agendaItems = [
   { id: 'logo-variation', label: 'ロゴ バリエーション' },
   { id: 'concept',        label: 'デザインコンセプト' },
   { id: 'kv',             label: 'Key Visual Image' },
+  { id: 'end',            label: 'エンド' },
 ];
