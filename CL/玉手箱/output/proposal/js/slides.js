@@ -223,7 +223,7 @@ function slide10KV() {
     <div class="kv-wrap">
       <img src="../../brief/AdobeStock_680912265.png" alt="Key Visual">
       <div class="kv-overlay">
-        <div class="slide-label" style="color:rgba(200,168,75,0.7); letter-spacing:0.5em;">Key Visual</div>
+        <div class="slide-label" style="color:rgba(200,168,75,0.7); letter-spacing:0.5em;">Key Visual Image</div>
         <div class="slide-h2 c-white" style="font-weight:200; letter-spacing:0.15em;">重は、特別を宿す。</div>
         <div class="slide-en" style="color:rgba(245,240,232,0.5);">The vessel holds the extraordinary.</div>
       </div>
