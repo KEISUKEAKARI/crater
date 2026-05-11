@@ -177,37 +177,33 @@ function slide06LogoMain() {
 function slide07LogoConcept() {
   return `<section class="slide" style="background:#fff;" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。">
     <div class="accent-top"></div><div class="accent-bottom"></div>
-    <div class="s-wrap" style="padding:0;">
-      <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
-      <div style="display:flex; width:100%; height:100%;">
-        <!-- 左：ロゴ 大きめ・左寄せ -->
-        <div style="flex:1.4; display:flex; align-items:center; justify-content:flex-start; padding:4cqw 2cqw 4cqw 4cqw;">
-          <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
+    <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; height:100%;">
+      <!-- 左：ロゴ -->
+      <div style="display:flex; align-items:center; justify-content:center; padding:7cqw 4cqw 7cqw 5cqw;">
+        <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
+      </div>
+      <!-- 右：コンセプト 2×2グリッド -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:0; padding:7cqw 5cqw 7cqw 4cqw;">
+        <div style="padding:0 2cqw 2cqw 0; border-bottom:1px solid #e8e8e8; border-right:1px solid #e8e8e8; display:flex; flex-direction:column; justify-content:flex-start; padding:2cqw;">
+          <div class="t-label c-gold" style="margin-bottom:0.8cqw; font-weight:400;">Mark</div>
+          <div class="t-small" style="color:var(--c-black);">玉手箱そのもの、お重をイメージしたマーク。</div>
         </div>
-        <!-- 右：コンセプト 中央寄り -->
-        <div style="flex:0.7; display:flex; flex-direction:column; justify-content:center; padding:4cqw 5cqw 4cqw 4cqw; gap:2.2cqw;">
-          <div style="display:flex; flex-direction:column; gap:2cqw;">
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Mark</div>
-              <div class="t-small" style="color:var(--c-black);">玉手箱そのもの、お重をイメージしたマーク。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Symbol</div>
-              <div class="t-small" style="color:var(--c-black);">「玉」の字をシンボルに落とし込んでいる。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Hanko</div>
-              <div class="t-small" style="color:var(--c-black);">落款に「手箱」と記し、マークと合わせて「玉手箱」として成立する構造。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Shoulder / English</div>
-              <div class="t-small" style="color:var(--c-black);">ショルダー名は「御重屋」。英語は「The oju」。海外展開を見据えた国際表記。</div>
-            </div>
-          </div>
+        <div style="border-bottom:1px solid #e8e8e8; display:flex; flex-direction:column; justify-content:flex-start; padding:2cqw 0 2cqw 2cqw;">
+          <div class="t-label c-gold" style="margin-bottom:0.8cqw; font-weight:400;">Symbol</div>
+          <div class="t-small" style="color:var(--c-black);">「玉」の字をシンボルに落とし込んでいる。</div>
+        </div>
+        <div style="border-right:1px solid #e8e8e8; display:flex; flex-direction:column; justify-content:flex-start; padding:2cqw 2cqw 0 0; padding-top:2cqw;">
+          <div class="t-label c-gold" style="margin-bottom:0.8cqw; font-weight:400;">Hanko</div>
+          <div class="t-small" style="color:var(--c-black);">落款に「手箱」と記し、マークと合わせて「玉手箱」として成立する構造。</div>
+        </div>
+        <div style="display:flex; flex-direction:column; justify-content:flex-start; padding:2cqw 0 0 2cqw;">
+          <div class="t-label c-gold" style="margin-bottom:0.8cqw; font-weight:400;">Shoulder / English</div>
+          <div class="t-small" style="color:var(--c-black);">ショルダー名は「御重屋」。英語は「The oju」。海外展開を見据えた国際表記。</div>
         </div>
       </div>
-      <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
     </div>
+    <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
   </section>`;
 }
 
