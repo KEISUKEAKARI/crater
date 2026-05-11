@@ -178,13 +178,13 @@ function slide07LogoConcept() {
   return `<section class="slide" style="background:#fff;" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。">
     <div class="accent-top"></div><div class="accent-bottom"></div>
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
-    <div style="display:flex; align-items:center; height:100%; padding:7cqw 8cqw 7cqw 10cqw; gap:8cqw;">
+    <div style="display:flex; align-items:center; height:100%; padding:5cqw 18cqw 5cqw 18cqw; gap:5cqw;">
       <!-- 左：ロゴ -->
-      <div style="flex:1.5; display:flex; align-items:center; justify-content:center;">
+      <div style="flex:1; display:flex; align-items:center; justify-content:center;">
         <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
       </div>
       <!-- 右：コンセプト4項目 -->
-      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:2.8cqw;">
+      <div style="flex:1.2; display:flex; flex-direction:column; justify-content:center; gap:2.8cqw;">
         <div>
           <div class="t-label c-gold" style="font-weight:400; margin-bottom:0.8cqw;">Mark</div>
           <div class="t-small" style="color:var(--c-black);">玉手箱そのもの、お重をイメージしたマーク。</div>
