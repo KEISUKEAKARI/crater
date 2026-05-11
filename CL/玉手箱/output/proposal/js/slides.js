@@ -77,22 +77,22 @@ function slide04BrandCode() {
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">◎</div>
-              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">蓋を開ける瞬間</div>
+              <div class="t-small" style="font-family:'Noto Serif JP',serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">蓋を開ける瞬間</div>
               <div class="t-small c-pt" style="font-size:0.85cqw;">受け取った人が蓋を開けるその一瞬。玉手箱はこの体験のためにすべてを設計する。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">⬛</div>
-              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">漆黒×金×緋</div>
+              <div class="t-small" style="font-family:'Noto Serif JP',serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">漆黒×金×緋</div>
               <div class="t-small c-pt" style="font-size:0.85cqw;">深い黒、金の輝き、緋のきわ。この三色が玉手箱の視覚的な顔になる。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">✦</div>
-              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">選び抜く目利き</div>
+              <div class="t-small" style="font-family:'Noto Serif JP',serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">選び抜く目利き</div>
               <div class="t-small c-pt" style="font-size:0.85cqw;">何でもお重に入れるのではない。目利きで選んだ逸品だけを扱う姿勢が信頼になる。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">⊡</div>
-              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">越境する和の美</div>
+              <div class="t-small" style="font-family:'Noto Serif JP',serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">越境する和の美</div>
               <div class="t-small c-pt" style="font-size:0.85cqw;">お重という形は、日本語がわからない人にも伝わる。海外展開を見据えた普遍的な日本美。</div>
             </div>
           </div>
