@@ -88,9 +88,15 @@
     if (e.key === 'Escape') closeSidebar();
   });
 
-  // ── クリックで進む ──
+  // ── クリックで進む・戻る（左半分:前、右半分:次） ──
   stage.addEventListener('click', function (e) {
-    if (!e.target.closest('.hamburger') && !e.target.closest('.nav')) goTo(current + 1);
+    if (e.target.closest('.hamburger') || e.target.closest('.nav')) return;
+    var half = stage.getBoundingClientRect().width / 2;
+    if (e.clientX < half) {
+      goTo(current - 1);
+    } else {
+      goTo(current + 1);
+    }
   });
 
   // ── サイドバー ──
