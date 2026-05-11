@@ -143,8 +143,8 @@ function slide07LogoConcept() {
   return `<section class="slide bg-white" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。マークは玉手箱そのもの、お重をイメージ。玉の字をシンボルに、落款に手箱と記して玉手箱として成立する構造になっています。ショルダー名は御重屋、英語はThe oju。海外展開も見据えた国際表記を用意しています。">
     <div class="accent-line-top"></div>
     <div class="slide-content" style="flex-direction:row; gap:0; padding:0; align-items:stretch;">
-      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:5cqw; border-right:1px solid #e0e0e0;">
-        <img src="../../brief/logo/03oju_logo-03.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:2cqw; border-right:1px solid #e0e0e0;">
+        <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
       </div>
       <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:5cqw; gap:2.5cqh;">
         <div class="slide-label c-pt">Logo Concept</div>
