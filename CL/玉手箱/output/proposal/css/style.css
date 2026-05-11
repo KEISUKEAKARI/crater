@@ -106,12 +106,17 @@ body {
 .c-white { color: var(--c-white); }
 .c-pt    { color: var(--c-pt); }
 
-/* ── アクセントライン（上部） ── */
+/* ── アクセントライン ── */
 .accent-top {
   position: absolute; top: 0; left: 0; right: 0;
-  height: 4px; background: var(--c-gold);
+  height: 4px; background: var(--c-gold); z-index: 1;
 }
 .accent-top.red { background: var(--c-red); }
+.accent-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px; background: var(--c-gold); z-index: 1;
+}
+.accent-bottom.red { background: var(--c-red); }
 
 /* ── ナビ ── */
 .nav {

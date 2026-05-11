@@ -20,7 +20,7 @@ function slide01Cover() {
 // SLIDE 02: 問い | question
 function slide02Question() {
   return `<section class="slide" data-section="question" data-notes="まず最初に、一つ問いかけさせてください。">
-    <div class="accent-top"></div>
+    <div class="accent-top"></div><div class="accent-bottom"></div>
     <div class="s-wrap">
       <div class="s-top"><span class="badge">A Question</span></div>
       <div class="s-main">
@@ -64,7 +64,7 @@ function slide03TaglineStory() {
 // SLIDE 04: Brand Code | brandcode
 function slide04BrandCode() {
   return `<section class="slide" data-section="brandcode" data-notes="玉手箱のブランドコードです。">
-    <div class="accent-top"></div>
+    <div class="accent-top"></div><div class="accent-bottom"></div>
     <div class="s-wrap">
       <div class="s-top"><span class="badge">Brand Code</span></div>
       <div class="s-main" style="gap:3cqw;">
@@ -108,8 +108,8 @@ function slide04BrandCode() {
 // SLIDE 05: Do's & Don'ts | dos
 function slide05Dos() {
   return `<section class="slide" data-section="dos" data-notes="玉手箱のブランドが守るべき世界観の境界線です。">
-    <div class="accent-top"></div>
-    <div class="s-wrap">
+    <div class="accent-top"></div><div class="accent-bottom"></div>
+    <div class="s-wrap" style="padding:4.5cqw 5cqw 8cqw 5cqw;">
       <div class="s-top"><span class="badge">Brand Direction</span></div>
       <div class="s-main" style="flex-direction:row; gap:6cqw; align-items:stretch;">
         <!-- Do's -->
@@ -176,16 +176,16 @@ function slide06LogoMain() {
 // SLIDE 07: ロゴ② + コンセプト | logo-concept
 function slide07LogoConcept() {
   return `<section class="slide" style="background:#fff;" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。">
-    <div class="accent-top"></div>
+    <div class="accent-top"></div><div class="accent-bottom"></div>
     <div class="s-wrap" style="padding:0;">
       <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
       <div style="display:flex; width:100%; height:100%;">
-        <!-- 左：ロゴ -->
-        <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:5cqw;">
+        <!-- 左：ロゴ 大きめ -->
+        <div style="flex:1.4; display:flex; align-items:center; justify-content:center; padding:4cqw 3cqw;">
           <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
         </div>
-        <!-- 右：コンセプト -->
-        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:8cqw 5cqw 6cqw; gap:2.2cqw;">
+        <!-- 右：コンセプト 左寄せ -->
+        <div style="flex:0.6; display:flex; flex-direction:column; justify-content:center; padding:8cqw 4cqw 6cqw 2cqw; gap:2.2cqw;">
           <div style="display:flex; flex-direction:column; gap:2cqw;">
             <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
               <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Mark</div>
@@ -215,8 +215,8 @@ function slide07LogoConcept() {
 function slide08LogoVariation() {
   return `<section class="slide" style="background:#fff;" data-section="logo-variation" data-notes="ロゴのバリエーションです。">
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Variation</span></div>
-    <div style="width:100%; height:100%; display:flex; align-items:flex-end; justify-content:center; padding:5cqw 8cqw 6cqw;">
-      <img src="../../brief/logo/03oju_logo_アートボード 1.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ バリエーション">
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:7cqw 6cqw 8cqw;">
+      <img src="../../brief/logo/03oju_logo_アートボード 1.svg" style="max-width:100%; max-height:100%; width:auto; height:auto; display:block;" alt="玉手箱ロゴ バリエーション">
     </div>
     <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
   </section>`;
@@ -225,7 +225,7 @@ function slide08LogoVariation() {
 // SLIDE 09: デザインコンセプト | concept
 function slide09Concept() {
   return `<section class="slide" style="background:var(--c-black);" data-section="concept" data-notes="デザインコンセプトは『箔と漆と重』。">
-    <div class="accent-top red"></div>
+    <div class="accent-top red"></div><div class="accent-bottom red"></div>
     <div class="s-wrap">
       <div class="s-top"><span class="badge" style="background:rgba(200,168,75,0.2);color:var(--c-gold);">Design Concept</span></div>
       <div class="s-main" style="gap:4cqw;">
@@ -255,7 +255,7 @@ function slide10KV() {
   return `<section class="slide" data-section="kv" data-notes="ビジュアルの方向性です。">
     <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge" style="background:rgba(200,168,75,0.2);color:var(--c-gold);">Key Visual Image</span></div>
     <div style="position:relative; width:100%; height:100%; overflow:hidden;">
-      <img src="../../brief/AdobeStock_680912265.png" style="width:100%; height:100%; object-fit:cover;" alt="Key Visual">
+      <img src="../../brief/AdobeStock_680912265.png" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;" alt="Key Visual">
       <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(13,13,13,0.72) 45%, transparent); display:flex; flex-direction:column; justify-content:center; padding:7cqw; gap:2.5cqw;">
         <div class="t-h1 c-white" style="font-weight:200; letter-spacing:0.15em; margin-top:4cqw;">重は、特別を宿す。</div>
         <div class="t-en" style="color:rgba(245,240,232,0.5);">The vessel holds the extraordinary.</div>
