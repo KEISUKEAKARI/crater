@@ -1,91 +1,105 @@
-// 玉手箱 提案スライド — アプリケーション
+// 玉手箱 提案スライド — app.js
+// 1920×1080固定 / transform scale方式
 
-const stage = document.querySelector('.slide-stage');
-const navPrev = document.getElementById('nav-prev');
-const navNext = document.getElementById('nav-next');
-const navCounter = document.getElementById('nav-counter');
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const backdrop = document.getElementById('backdrop');
+(function () {
 
-let current = 0;
-const total = slideFactories.length;
-const rendered = new Set();
+  var stage      = document.getElementById('slide-stage');
+  var navPrev    = document.getElementById('nav-prev');
+  var navNext    = document.getElementById('nav-next');
+  var navCounter = document.getElementById('nav-counter');
+  var hamburger  = document.getElementById('hamburger');
+  var sidebar    = document.getElementById('sidebar');
+  var backdrop   = document.getElementById('backdrop');
+  var sideList   = document.getElementById('sidebar-list');
 
-function ensureRendered(index) {
-  if (rendered.has(index) || index < 0 || index >= total) return;
-  const frag = document.createRange().createContextualFragment(slideFactories[index]());
-  stage.appendChild(frag);
-  rendered.add(index);
-}
+  var current  = 0;
+  var total    = slideFactories.length;
+  var rendered = {};
 
-function updateNav(index) {
-  navCounter.textContent = `${index + 1} / ${total}`;
+  // ── 1920×1080 固定スケーリング ──
+  var currentScale = 1;
+  function scaleSlides() {
+    currentScale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    document.querySelectorAll('.slide').forEach(function (s) {
+      s.style.transform = 'translate(-50%, -50%) scale(' + currentScale + ')';
+    });
+  }
+  window.addEventListener('resize', scaleSlides);
 
-  // 暗いスライドではナビを白に
-  const darkSlides = new Set(['cover', 'tagline-story', 'corecode', 'brandcode', 'concept', 'kv']);
-  const slide = stage.querySelectorAll('.slide')[index];
-  const section = slide ? slide.dataset.section : '';
-  const isLight = darkSlides.has(section);
+  // ── スライドレンダリング ──
+  function ensureRendered(i) {
+    if (rendered[i] || i < 0 || i >= total) return;
+    var frag = document.createRange().createContextualFragment(slideFactories[i]());
+    stage.appendChild(frag);
+    rendered[i] = true;
+    scaleSlides();
+  }
 
-  navPrev.className = 'nav-btn' + (isLight ? ' light' : '');
-  navNext.className = 'nav-btn' + (isLight ? ' light' : '');
-  navCounter.className = 'nav-counter' + (isLight ? ' light' : '');
-  hamburger.className = 'hamburger' + (isLight ? ' light' : '');
-}
+  // ── 暗いスライドの判定 ──
+  var darkSlides = { cover: 1, 'tagline-story': 1, corecode: 1, brandcode: 0, concept: 1, kv: 1 };
 
-function goTo(index) {
-  if (index < 0 || index >= total) return;
+  function updateNav(i) {
+    navCounter.textContent = (i + 1) + ' / ' + total;
+    var slides = stage.querySelectorAll('.slide');
+    var sec = slides[i] ? slides[i].dataset.section : '';
+    var dark = !!darkSlides[sec];
+    navPrev.className    = 'nav-btn'     + (dark ? ' light' : '');
+    navNext.className    = 'nav-btn'     + (dark ? ' light' : '');
+    navCounter.className = 'nav-counter' + (dark ? ' light' : '');
+    hamburger.className  = 'hamburger'   + (dark ? ' light' : '');
+  }
 
-  [index - 1, index, index + 1].forEach(i => ensureRendered(i));
+  // ── スライド移動 ──
+  function goTo(i) {
+    if (i < 0 || i >= total) return;
+    [i - 1, i, i + 1].forEach(function (j) { ensureRendered(j); });
+    var slides = stage.querySelectorAll('.slide');
+    slides.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+    document.querySelectorAll('.sidebar-item').forEach(function (btn, idx) {
+      btn.classList.toggle('active', idx === i);
+    });
+    current = i;
+    updateNav(i);
+  }
 
-  const slides = stage.querySelectorAll('.slide');
-  slides.forEach((s, i) => s.classList.toggle('active', i === index));
+  // ── 初期化 ──
+  scaleSlides();
+  [0, 1, 2].forEach(function (i) { ensureRendered(i); });
 
-  // サイドバーのアクティブ更新
-  document.querySelectorAll('.sidebar-item').forEach((btn, i) => {
-    btn.classList.toggle('active', i === index);
+  // サイドバー構築
+  agendaItems.forEach(function (item, i) {
+    var btn = document.createElement('button');
+    btn.className = 'sidebar-item';
+    btn.textContent = ('0' + (i + 1)).slice(-2) + '  ' + item.label;
+    btn.addEventListener('click', function () { goTo(i); closeSidebar(); });
+    sideList.appendChild(btn);
   });
 
-  current = index;
-  updateNav(index);
-}
+  goTo(0);
 
-// 初期レンダリング
-[0, 1, 2].forEach(i => ensureRendered(i));
+  // ── ナビ ──
+  navPrev.addEventListener('click', function () { goTo(current - 1); });
+  navNext.addEventListener('click', function () { goTo(current + 1); });
 
-// サイドバー構築
-const sidebarList = document.getElementById('sidebar-list');
-agendaItems.forEach((item, i) => {
-  const btn = document.createElement('button');
-  btn.className = 'sidebar-item';
-  btn.textContent = `${String(i + 1).padStart(2, '0')}  ${item.label}`;
-  btn.addEventListener('click', () => { goTo(i); closeSidebar(); });
-  sidebarList.appendChild(btn);
-});
+  // ── キーボード ──
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')  goTo(current - 1);
+    if (e.key === 'Escape') closeSidebar();
+  });
 
-goTo(0);
+  // ── クリックで進む ──
+  stage.addEventListener('click', function (e) {
+    if (!e.target.closest('.hamburger') && !e.target.closest('.nav')) goTo(current + 1);
+  });
 
-// ナビ
-navPrev.addEventListener('click', () => goTo(current - 1));
-navNext.addEventListener('click', () => goTo(current + 1));
+  // ── サイドバー ──
+  function openSidebar()  { sidebar.classList.add('open');  backdrop.classList.add('show'); }
+  function closeSidebar() { sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  backdrop.addEventListener('click', closeSidebar);
 
-// キーボード
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goTo(current + 1);
-  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')  goTo(current - 1);
-  if (e.key === 'Escape') closeSidebar();
-});
-
-// クリックで進む（ナビ・サイドバー以外）
-stage.addEventListener('click', e => {
-  if (!e.target.closest('.nav') && !e.target.closest('.sidebar') && !e.target.closest('.hamburger')) {
-    goTo(current + 1);
-  }
-});
-
-// サイドバー
-function openSidebar()  { sidebar.classList.add('open'); backdrop.classList.add('show'); }
-function closeSidebar() { sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
-hamburger.addEventListener('click', e => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
-backdrop.addEventListener('click', closeSidebar);
+})();

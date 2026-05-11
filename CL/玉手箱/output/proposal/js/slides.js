@@ -1,221 +1,263 @@
-// 玉手箱 ブランド提案スライド
+// 玉手箱 ブランド提案スライド — slides.js
+// 1920×1080px固定 / 1スライド = 1関数
 
-// SLIDE 01: 表紙 | F5 | cover
+// SLIDE 01: 表紙 | cover
 function slide01Cover() {
-  return `<section class="slide bg-black" data-section="cover" data-notes="本日は玉手箱のブランドコンセプトをご提案させていただきます。お重という日本の伝統的な器に、選び抜いた逸品を入れてお届けするというコンセプトです。ブランドの世界観から、デザインの方向性まで順番にご覧いただきます。">
-    <div class="cover-wrap">
-      <div style="font-family:'EB Garamond',serif; font-size:1cqw; letter-spacing:0.5em; color:var(--c-pt); text-transform:uppercase; margin-bottom:1cqh;">The Oju</div>
-      <div style="font-family:'Noto Serif JP',serif; font-size:5cqw; font-weight:200; letter-spacing:0.2em; color:var(--c-white);">TAMATEBAKO</div>
-      <div class="cover-divider"></div>
-      <div class="cover-subtitle">Brand Concept Proposal</div>
-      <div class="cover-date">2026</div>
-    </div>
-  </section>`;
-}
-
-// SLIDE 02: 問い | F1 | question
-function slide02Question() {
-  return `<section class="slide bg-white" data-section="question" data-notes="まず最初に、一つ問いかけさせてください。特別をどう届けるか。花束でも、高級品でも、気持ちは込めている。でも、受け取った瞬間の感動が設計されているものは、意外と少ない。次のスライドで、その答えをお伝えします。">
-    <div class="accent-line-top"></div>
-    <div class="statement-wrap">
-      <div class="statement-kicker">A Question</div>
-      <div class="statement-main">特別をどう<br>届けるか。</div>
-    </div>
-  </section>`;
-}
-
-// SLIDE 03: タグライン + ブランドストーリー | F1+F7 | tagline-story
-function slide03TaglineStory() {
-  return `<section class="slide bg-black" data-section="tagline-story" data-notes="玉手箱の答えはシンプルです。重は、特別を宿す。お重の器には、幾重もの時間が重なっています。開けるたびに記憶が宿り、重ねるたびに歴史が刻まれる。玉手箱は、そんな器に選び抜いた逸品を入れてお届けするブランドです。">
-    <div class="slide-content" style="flex-direction:row; gap:0; padding:0; justify-content:stretch; align-items:stretch;">
-      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 6cqw; border-right:1px solid rgba(200,168,75,0.15);">
-        <div class="slide-label c-gold" style="margin-bottom:2cqh;">Tagline</div>
-        <div class="statement-main light" style="font-size:3.8cqw;">重は、<br>特別を宿す。</div>
-        <div class="slide-en" style="color:var(--c-pt); margin-top:2cqh; font-size:1.1cqw;">The vessel holds the extraordinary.</div>
+  return `<section class="slide" style="background:var(--c-black);" data-section="cover" data-notes="本日は玉手箱のブランドコンセプトをご提案させていただきます。">
+    <div class="s-wrap">
+      <div class="s-top"><span class="badge" style="background:rgba(200,168,75,0.2);color:var(--c-gold);">Brand Concept Proposal</span></div>
+      <div class="s-main" style="align-items:flex-start; gap:2.5cqw;">
+        <div class="t-label c-pt" style="letter-spacing:0.5em;">The Oju</div>
+        <div class="t-display c-white" style="letter-spacing:0.2em;">TAMATEBAKO</div>
+        <div style="width:4cqw; height:1px; background:rgba(200,168,75,0.4);"></div>
+        <div class="t-en c-pt" style="font-style:normal; letter-spacing:0.5em; font-size:1cqw;">2026</div>
       </div>
-      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 6cqw;">
-        <div class="slide-label c-gold" style="margin-bottom:2cqh;">Brand Story</div>
-        <div style="font-family:'Noto Serif JP',serif; font-size:1.5cqw; font-weight:200; letter-spacing:0.1em; line-height:2.6; color:var(--c-white);">
+      <div class="s-copy" style="color:rgba(245,240,232,0.2);">©玉手箱 / 御重屋 2026</div>
+    </div>
+  </section>`;
+}
+
+// SLIDE 02: 問い | question
+function slide02Question() {
+  return `<section class="slide" data-section="question" data-notes="まず最初に、一つ問いかけさせてください。">
+    <div class="accent-top"></div>
+    <div class="s-wrap">
+      <div class="s-top"><span class="badge">A Question</span></div>
+      <div class="s-main">
+        <div class="t-label c-gold" style="margin-bottom:2cqw;">問い</div>
+        <div class="t-display" style="color:var(--c-black);">特別をどう<br>届けるか。</div>
+      </div>
+      <div class="s-copy">©玉手箱 / 御重屋 2026</div>
+    </div>
+  </section>`;
+}
+
+// SLIDE 03: タグライン + ブランドストーリー | tagline-story
+function slide03TaglineStory() {
+  return `<section class="slide" style="background:var(--c-black);" data-section="tagline-story" data-notes="玉手箱の答えはシンプルです。">
+    <div class="s-wrap" style="flex-direction:row; padding:0; gap:0;">
+      <!-- 左：タグライン -->
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:5cqw; border-right:1px solid rgba(200,168,75,0.12);">
+        <div class="t-label c-gold" style="margin-bottom:2.5cqw;">Tagline</div>
+        <div class="t-h1 c-white" style="line-height:1.5;">重は、<br>特別を宿す。</div>
+        <div class="t-en" style="color:var(--c-pt); margin-top:2cqw; font-size:1.1cqw;">The vessel holds the extraordinary.</div>
+      </div>
+      <!-- 右：ストーリー -->
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:5cqw;">
+        <div class="t-label c-gold" style="margin-bottom:2.5cqw;">Brand Story</div>
+        <div style="font-family:'Noto Serif JP',serif; font-size:1.6cqw; font-weight:200; letter-spacing:0.08em; line-height:2.6; color:var(--c-white);">
           お重の器には、幾重の時間が重なっている。<br>
-          開けるたびに記憶が宿り、<br>重ねるたびに歴史が刻まれる。<br>
-          玉手箱は、そんな器に選び抜いた逸品を<br>入れてお届けしています。<br>
+          開けるたびに記憶が宿り、<br>
+          重ねるたびに歴史が刻まれる。<br>
+          玉手箱は、そんな器に選び抜いた逸品を<br>
+          入れてお届けしています。<br>
           この重から始まる物語を、感じてください。
         </div>
       </div>
     </div>
+    <div class="s-copy" style="color:rgba(245,240,232,0.15);">©玉手箱 / 御重屋 2026</div>
   </section>`;
 }
 
-// SLIDE 04: Brand Code | F2 | brandcode
+// SLIDE 04: Brand Code | brandcode
 function slide04BrandCode() {
-  return `<section class="slide bg-white" data-section="brandcode" data-notes="玉手箱のブランドコードです。コアコードは『逸品を、伝統で。』お重という伝統の形が中の逸品を格上げする。その他にも4つのブランドコードがあり、蓋を開ける瞬間・漆黒と金と緋・選び抜く目利き・越境する和の美、これらがブランドの独自資産になります。">
-    <div class="accent-line-top"></div>
-    <div class="slide-content" style="justify-content:center; gap:3cqh;">
-      <div class="slide-label c-pt">Brand Code</div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3cqw; align-items:start;">
-        <!-- Core Code -->
-        <div style="border:1px solid #e0e0e0; padding:3cqw;">
-          <div class="slide-label" style="color:var(--c-gold); margin-bottom:1.5cqh;">Core Code</div>
-          <div style="font-size:2.8cqw; font-weight:200; letter-spacing:0.1em; color:var(--c-black); line-height:1.4; margin-bottom:1.5cqh;">逸品を、伝統で。</div>
-          <div class="slide-body" style="color:var(--c-pt);">お重という伝統の形が、中の逸品をさらに格上げする。器の品格と逸品の価値が重なったとき、はじめて玉手箱になる。</div>
-        </div>
-
-        <!-- Other Codes -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
-          <div style="border:1px solid #e0e0e0; padding:2cqw;">
-            <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">◎</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">蓋を開ける瞬間</div>
-            <div class="slide-body" style="color:var(--c-pt);">受け取った人が蓋を開けるその一瞬。玉手箱はこの体験のためにすべてを設計する。</div>
+  return `<section class="slide" data-section="brandcode" data-notes="玉手箱のブランドコードです。">
+    <div class="accent-top"></div>
+    <div class="s-wrap">
+      <div class="s-top"><span class="badge">Brand Code</span></div>
+      <div class="s-main" style="gap:3cqw;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5cqw;">
+          <!-- Core Code -->
+          <div style="border:1px solid #d0d0d0; padding:3cqw;">
+            <div class="t-label c-gold" style="margin-bottom:1.5cqw;">Core Code</div>
+            <div class="t-h2" style="color:var(--c-black); margin-bottom:1.5cqw; letter-spacing:0.1em;">逸品を、伝統で。</div>
+            <div class="t-small c-pt">お重という伝統の形が、中の逸品をさらに格上げする。器の品格と逸品の価値が重なったとき、はじめて玉手箱になる。</div>
           </div>
-          <div style="border:1px solid #e0e0e0; padding:2cqw;">
-            <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">⬛</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">漆黒×金×緋</div>
-            <div class="slide-body" style="color:var(--c-pt);">深い黒、金の輝き、緋のきわ。この三色の組み合わせが、玉手箱の視覚的な顔になる。</div>
-          </div>
-          <div style="border:1px solid #e0e0e0; padding:2cqw;">
-            <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">✦</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">選び抜く目利き</div>
-            <div class="slide-body" style="color:var(--c-pt);">何でもお重に入れるのではない。目利きで選んだ逸品だけを扱う。それが信頼の根拠になる。</div>
-          </div>
-          <div style="border:1px solid #e0e0e0; padding:2cqw;">
-            <div style="font-size:1.5cqw; margin-bottom:0.8cqh;">⊡</div>
-            <div class="slide-body" style="font-weight:400; color:var(--c-black); margin-bottom:0.5cqh;">越境する和の美</div>
-            <div class="slide-body" style="color:var(--c-pt);">お重という形は、日本語がわからない人にも伝わる。海外展開を見据えた普遍的な日本美。</div>
+          <!-- Other Codes -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
+            <div style="border:1px solid #d0d0d0; padding:2cqw;">
+              <div style="font-size:1.6cqw; margin-bottom:1cqw;">◎</div>
+              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">蓋を開ける瞬間</div>
+              <div class="t-small c-pt" style="font-size:0.85cqw;">受け取った人が蓋を開けるその一瞬。玉手箱はこの体験のためにすべてを設計する。</div>
+            </div>
+            <div style="border:1px solid #d0d0d0; padding:2cqw;">
+              <div style="font-size:1.6cqw; margin-bottom:1cqw;">⬛</div>
+              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">漆黒×金×緋</div>
+              <div class="t-small c-pt" style="font-size:0.85cqw;">深い黒、金の輝き、緋のきわ。この三色が玉手箱の視覚的な顔になる。</div>
+            </div>
+            <div style="border:1px solid #d0d0d0; padding:2cqw;">
+              <div style="font-size:1.6cqw; margin-bottom:1cqw;">✦</div>
+              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">選び抜く目利き</div>
+              <div class="t-small c-pt" style="font-size:0.85cqw;">何でもお重に入れるのではない。目利きで選んだ逸品だけを扱う姿勢が信頼になる。</div>
+            </div>
+            <div style="border:1px solid #d0d0d0; padding:2cqw;">
+              <div style="font-size:1.6cqw; margin-bottom:1cqw;">⊡</div>
+              <div class="t-small" style="font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">越境する和の美</div>
+              <div class="t-small c-pt" style="font-size:0.85cqw;">お重という形は、日本語がわからない人にも伝わる。海外展開を見据えた普遍的な日本美。</div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="s-copy">©玉手箱 / 御重屋 2026</div>
     </div>
   </section>`;
 }
 
-// SLIDE 05: Do's & Don'ts | F3 | dos
+// SLIDE 05: Do's & Don'ts | dos
 function slide05Dos() {
-  return `<section class="slide bg-white" data-section="dos" data-notes="玉手箱のブランドが守るべき世界観の境界線です。左が大切にすること、右がやらないこと。特に大事なのはお重の格を下げないこと。賑やかすぎるビジュアルや安売り感は、このブランドが最も避けるべき表現です。">
-    <div class="accent-line-top"></div>
-    <div class="slide-content" style="justify-content:center;">
-      <div class="slide-label c-pt" style="margin-bottom:2.5cqh;">Brand Direction</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4cqw;">
-        <div>
-          <div class="dos-col-title c-gold" style="display:flex; align-items:center; gap:1cqw; margin-bottom:2cqh;">
-            <div class="dos-dot" style="background:var(--c-gold);"></div>
-            Do's <span style="font-family:'Noto Sans JP',sans-serif; font-size:0.7cqw; opacity:0.5; margin-left:0.5cqw;">やること</span>
+  return `<section class="slide" data-section="dos" data-notes="玉手箱のブランドが守るべき世界観の境界線です。">
+    <div class="accent-top"></div>
+    <div class="s-wrap">
+      <div class="s-top"><span class="badge">Brand Direction</span></div>
+      <div class="s-main" style="flex-direction:row; gap:5cqw; align-items:stretch;">
+        <!-- Do's -->
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
+            <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:var(--c-gold);"></div>
+            <div class="t-label c-gold">Do's</div>
+            <div class="t-small c-pt" style="font-size:0.8cqw;">やること</div>
           </div>
-          <ul class="dos-list">
-            <li>開ける瞬間の体験を最優先に設計する</li>
-            <li>器（お重）の品格を常に保つ</li>
-            <li>選び抜いたという文脈を伝える</li>
-            <li>余白・静けさをデザインに活かす</li>
-            <li>日本の伝統美を現代の感覚で表現する</li>
-            <li>自分へのご褒美用途も大切にする</li>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:1.4cqw;">
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>開ける瞬間の体験を最優先に設計する</li>
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>器（お重）の品格を常に保つ</li>
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>選び抜いたという文脈を伝える</li>
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>余白・静けさをデザインに活かす</li>
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>日本の伝統美を現代の感覚で表現する</li>
+            <li class="t-small" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>自分へのご褒美用途も大切にする</li>
           </ul>
         </div>
-        <div style="border-left:1px solid #e0e0e0; padding-left:4cqw;">
-          <div class="dos-col-title" style="display:flex; align-items:center; gap:1cqw; margin-bottom:2cqh; color:var(--c-pt);">
-            <div class="dos-dot" style="background:var(--c-pt);"></div>
-            Don'ts <span style="font-family:'Noto Sans JP',sans-serif; font-size:0.7cqw; opacity:0.5; margin-left:0.5cqw;">やらないこと</span>
+        <!-- 区切り -->
+        <div style="width:1px; background:#ddd;"></div>
+        <!-- Don'ts -->
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
+            <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:var(--c-pt);"></div>
+            <div class="t-label c-pt">Don'ts</div>
+            <div class="t-small c-pt" style="font-size:0.8cqw;">やらないこと</div>
           </div>
-          <ul class="dos-list">
-            <li>賑やかすぎるビジュアル・POPな配色</li>
-            <li>安売り・数量限定の煽り文句</li>
-            <li>お重の格を下げるカジュアルな表現</li>
-            <li>情報を詰め込みすぎた窮屈なレイアウト</li>
-            <li>和のテイストを損なう洋風のコミュニケーション</li>
-            <li>「プレゼント」の文脈だけに偏る</li>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:1.4cqw;">
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>賑やかすぎるビジュアル・POPな配色</li>
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>安売り・数量限定の煽り文句</li>
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>お重の格を下げるカジュアルな表現</li>
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>情報を詰め込みすぎた窮屈なレイアウト</li>
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>和のテイストを損なう洋風のコミュニケーション</li>
+            <li class="t-small c-pt" style="padding-left:1.5cqw; position:relative;">
+              <span style="position:absolute;left:0;color:var(--c-pt);">—</span>「プレゼント」の文脈だけに偏る</li>
           </ul>
         </div>
       </div>
+      <div class="s-copy">©玉手箱 / 御重屋 2026</div>
     </div>
   </section>`;
 }
 
-// SLIDE 06: ロゴ① どーん | F5 | logo-main
+// SLIDE 06: ロゴ① どーん | logo-main
 function slide06LogoMain() {
-  return `<section class="slide" style="background:#fff;" data-section="logo-main" data-notes="玉手箱のロゴです。お重をイメージしたマーク、玉の字をシンボルに落款で手箱と記す構造。御重屋という屋号のもと、このロゴがブランドの顔になります。">
+  return `<section class="slide" style="background:#fff;" data-section="logo-main" data-notes="玉手箱のロゴです。">
     <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:8cqw;">
       <img src="../../brief/logo/03oju_logo-03.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
     </div>
+    <div class="s-copy" style="color:#aaa;">©玉手箱 / 御重屋 2026</div>
   </section>`;
 }
 
-// SLIDE 07: ロゴ② + コンセプト | F2 | logo-concept
+// SLIDE 07: ロゴ② + コンセプト | logo-concept
 function slide07LogoConcept() {
-  return `<section class="slide bg-white" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。マークは玉手箱そのもの、お重をイメージ。玉の字をシンボルに、落款に手箱と記して玉手箱として成立する構造になっています。ショルダー名は御重屋、英語はThe oju。海外展開も見据えた国際表記を用意しています。">
-    <div class="accent-line-top"></div>
-    <div class="slide-content" style="flex-direction:row; gap:0; padding:0; align-items:stretch;">
-      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:2cqw; border-right:1px solid #e0e0e0;">
+  return `<section class="slide" style="background:#fff;" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。">
+    <div class="accent-top"></div>
+    <div class="s-wrap" style="flex-direction:row; padding:0; gap:0;">
+      <!-- 左：ロゴ -->
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:5cqw; border-right:1px solid #e0e0e0;">
         <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
       </div>
-      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:5cqw; gap:2.5cqh;">
-        <div class="slide-label c-pt">Logo Concept</div>
-        <div style="display:flex; flex-direction:column; gap:2cqh;">
-          <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
-            <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Mark</div>
-            <div class="slide-body">玉手箱そのもの、お重をイメージしたマーク。</div>
+      <!-- 右：コンセプト -->
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:5cqw; gap:2.2cqw;">
+        <div class="badge" style="align-self:flex-start;">Logo Concept</div>
+        <div style="display:flex; flex-direction:column; gap:2cqw;">
+          <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
+            <div class="t-label c-gold" style="margin-bottom:0.6cqw;">Mark</div>
+            <div class="t-small">玉手箱そのもの、お重をイメージしたマーク。</div>
           </div>
-          <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
-            <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Symbol</div>
-            <div class="slide-body">「玉」の字をシンボルに落とし込んでいる。</div>
+          <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
+            <div class="t-label c-gold" style="margin-bottom:0.6cqw;">Symbol</div>
+            <div class="t-small">「玉」の字をシンボルに落とし込んでいる。</div>
           </div>
-          <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
-            <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Hanko</div>
-            <div class="slide-body">落款に「手箱」と記し、マークと合わせて「玉手箱」として成立する構造。</div>
+          <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
+            <div class="t-label c-gold" style="margin-bottom:0.6cqw;">Hanko</div>
+            <div class="t-small">落款に「手箱」と記し、マークと合わせて「玉手箱」として成立する構造。</div>
           </div>
-          <div style="border-left:2px solid var(--c-gold); padding-left:1.5cqw;">
-            <div class="slide-label" style="color:var(--c-gold); margin-bottom:0.6cqh;">Shoulder</div>
-            <div class="slide-body">ショルダー名は「御重屋」。英語は「The oju」。海外展開を見据えた国際表記。</div>
+          <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
+            <div class="t-label c-gold" style="margin-bottom:0.6cqw;">Shoulder / English</div>
+            <div class="t-small">ショルダー名は「御重屋」。英語は「The oju」。海外展開を見据えた国際表記。</div>
           </div>
         </div>
       </div>
     </div>
+    <div class="s-copy" style="color:#aaa;">©玉手箱 / 御重屋 2026</div>
   </section>`;
 }
 
-// SLIDE 08: ロゴ③ バリエーション | F5 | logo-variation
+// SLIDE 08: ロゴ③ バリエーション | logo-variation
 function slide08LogoVariation() {
   return `<section class="slide" style="background:#fff;" data-section="logo-variation" data-notes="ロゴのバリエーションです。">
     <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:8cqw;">
       <img src="../../brief/logo/03oju_logo_アートボード 1.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ バリエーション">
     </div>
+    <div class="s-copy" style="color:#aaa;">©玉手箱 / 御重屋 2026</div>
   </section>`;
 }
 
-// SLIDE 09: デザインコンセプト | F8 | concept
+// SLIDE 09: デザインコンセプト | concept
 function slide09Concept() {
-  return `<section class="slide bg-black" data-section="concept" data-notes="デザインコンセプトは『箔と漆と重』。金箔の輝き、漆の深み、お重の格。この3つの要素がビジュアルシステムのすべてを決めています。黒をベースに金と緋色をアクセントに使い、ベージュで柔らかさを添える。余白を語らせる、静的で格調ある構成です。">
-    <div class="accent-line-top red"></div>
-    <div class="concept-wrap">
-      <div class="slide-label c-gold" style="letter-spacing:0.5em;">Design Concept</div>
-      <div class="concept-name">箔と漆と重</div>
-      <div class="concept-grid">
-        <div class="concept-item">
-          <div class="concept-item-label">Tone</div>
-          <div class="concept-item-text">漆黒の静謐と<br>金の輝き、緋のきわ。<br>和の格調。</div>
-        </div>
-        <div class="concept-item">
-          <div class="concept-item-label">Palette</div>
-          <div class="concept-item-text">深い黒をベースに<br>ゴールドをアクセント。<br>ベージュで柔らかさを添え、<br>緋色で要所を締める。</div>
-        </div>
-        <div class="concept-item">
-          <div class="concept-item-label">Direction</div>
-          <div class="concept-item-text">余白を活かした<br>静的な構成。<br>情報より体験を優先する設計。</div>
+  return `<section class="slide" style="background:var(--c-black);" data-section="concept" data-notes="デザインコンセプトは『箔と漆と重』。">
+    <div class="accent-top red"></div>
+    <div class="s-wrap">
+      <div class="s-top"><span class="badge" style="background:rgba(200,168,75,0.15);color:var(--c-gold);">Design Concept</span></div>
+      <div class="s-main" style="gap:4cqw;">
+        <div class="t-h1 c-white" style="letter-spacing:0.2em;">箔と漆と重</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:3cqw; width:75cqw;">
+          <div>
+            <div class="t-label c-gold" style="margin-bottom:1.2cqw;">Tone</div>
+            <div class="t-small" style="color:rgba(245,240,232,0.55); line-height:2.2;">漆黒の静謐と<br>金の輝き、緋のきわ。<br>和の格調。</div>
+          </div>
+          <div>
+            <div class="t-label c-gold" style="margin-bottom:1.2cqw;">Palette</div>
+            <div class="t-small" style="color:rgba(245,240,232,0.55); line-height:2.2;">深い黒をベースに<br>ゴールドをアクセント。<br>ベージュで柔らかさ、<br>緋色で要所を締める。</div>
+          </div>
+          <div>
+            <div class="t-label c-gold" style="margin-bottom:1.2cqw;">Direction</div>
+            <div class="t-small" style="color:rgba(245,240,232,0.55); line-height:2.2;">余白を活かした<br>静的な構成。<br>情報より体験を<br>優先する設計。</div>
+          </div>
         </div>
       </div>
+      <div class="s-copy" style="color:rgba(245,240,232,0.15);">©玉手箱 / 御重屋 2026</div>
     </div>
   </section>`;
 }
 
-// SLIDE 10: KV | F5 | kv
+// SLIDE 10: KV | kv
 function slide10KV() {
-  return `<section class="slide" data-section="kv" data-notes="ビジュアルの方向性です。漆黒の背景に、お重箱が主役。蓋を開ける瞬間・半開きの構図で、中の逸品が輝く。光源を絞ったスポット的な照明、余白を多くとった構図で、和の静寂と格調を表現します。この世界観を軸に、すべてのビジュアルを展開していきます。">
-    <div class="kv-wrap">
-      <img src="../../brief/AdobeStock_680912265.png" alt="Key Visual">
-      <div class="kv-overlay">
-        <div class="slide-label" style="color:rgba(200,168,75,0.7); letter-spacing:0.5em;">Key Visual Image</div>
-        <div class="slide-h2 c-white" style="font-weight:200; letter-spacing:0.15em;">重は、特別を宿す。</div>
-        <div class="slide-en" style="color:rgba(245,240,232,0.5);">The vessel holds the extraordinary.</div>
+  return `<section class="slide" data-section="kv" data-notes="ビジュアルの方向性です。">
+    <div style="position:relative; width:100%; height:100%; overflow:hidden;">
+      <img src="../../brief/AdobeStock_680912265.png" style="width:100%; height:100%; object-fit:cover;" alt="Key Visual">
+      <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(13,13,13,0.72) 45%, transparent); display:flex; flex-direction:column; justify-content:center; padding:7cqw; gap:2.5cqw;">
+        <div class="t-label" style="color:rgba(200,168,75,0.6); letter-spacing:0.5em;">Key Visual Image</div>
+        <div class="t-h1 c-white" style="font-weight:200; letter-spacing:0.15em;">重は、特別を宿す。</div>
+        <div class="t-en" style="color:rgba(245,240,232,0.4);">The vessel holds the extraordinary.</div>
       </div>
     </div>
+    <div class="s-copy" style="color:rgba(245,240,232,0.2); z-index:1;">©玉手箱 / 御重屋 2026</div>
   </section>`;
 }
 
@@ -242,5 +284,5 @@ window.agendaItems = [
   { id: 'logo-concept',   label: 'ロゴ コンセプト' },
   { id: 'logo-variation', label: 'ロゴ バリエーション' },
   { id: 'concept',        label: 'デザインコンセプト' },
-  { id: 'kv',             label: 'Key Visual' },
+  { id: 'kv',             label: 'Key Visual Image' },
 ];
