@@ -306,3 +306,83 @@ html, body {
   justify-content: center; padding: 0 8cqw;
   gap: 2cqh;
 }
+
+/* ====================================================
+   レスポンシブ（SP）
+==================================================== */
+@media (max-width: 768px) {
+  /* タイポ縮小 */
+  .slide-title  { font-size: 8cqw; }
+  .slide-h1     { font-size: 7cqw; }
+  .slide-h2     { font-size: 5cqw; }
+  .slide-h3     { font-size: 3.5cqw; }
+  .slide-body   { font-size: 2.8cqw; }
+  .slide-en     { font-size: 2.5cqw; }
+  .slide-label  { font-size: 2cqw; }
+
+  /* ステートメント */
+  .statement-main { font-size: 7cqw; }
+  .statement-kicker { font-size: 2cqw; }
+
+  /* 表紙 */
+  .cover-logo { width: 60cqw; }
+
+  /* 左右→上下に切り替え */
+  .slide-content[style*="flex-direction:row"],
+  .slide-content[style*="flex-direction: row"] {
+    flex-direction: column !important;
+  }
+
+  /* タグライン+ストーリー */
+  [data-section="tagline-story"] .slide-content > div {
+    flex-direction: column !important;
+  }
+  [data-section="tagline-story"] .slide-content > div > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 4cqw 6cqw !important;
+  }
+  [data-section="tagline-story"] .slide-content > div > div:last-child {
+    border-bottom: none;
+  }
+
+  /* ロゴコンセプト */
+  [data-section="logo-concept"] .slide-content > div {
+    flex-direction: column !important;
+  }
+  [data-section="logo-concept"] .slide-content > div > div {
+    border-right: none !important;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 4cqw 5cqw !important;
+  }
+
+  /* Do's & Don'ts */
+  [data-section="dos"] .slide-content > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 3cqh;
+  }
+  [data-section="dos"] [style*="border-left"] {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 3cqh;
+  }
+
+  /* Brand Code */
+  [data-section="brandcode"] [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ロゴバリエーション */
+  .logo-wrap {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ナビ */
+  .nav-btn { font-size: 2.5cqw; }
+  .nav-counter { font-size: 2.5cqw; }
+
+  /* サイドバー */
+  .sidebar-title { font-size: 2cqw; }
+  .sidebar-item { font-size: 2cqw; }
+}
