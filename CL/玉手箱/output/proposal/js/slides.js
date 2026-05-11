@@ -72,29 +72,29 @@ function slide04BrandCode() {
           <!-- Core Code -->
           <div style="border:1px solid #d0d0d0; padding:3cqw;">
             <div class="t-label c-gold" style="margin-bottom:1.5cqw; font-weight:400;">Core Code</div>
-            <div class="t-h2" style="color:var(--c-black); margin-bottom:1.5cqw; letter-spacing:0.1em;">逸品を、伝統で。</div>
+            <div class="t-h2" style="color:var(--c-black); margin-bottom:1.5cqw; letter-spacing:0.1em; font-size:3.5cqw; font-weight:400;">逸品を、伝統で。</div>
             <div class="t-small" style="color:var(--c-black);">お重という伝統の形が、中の逸品をさらに格上げする。器の品格と逸品の価値が重なったとき、はじめて玉手箱になる。</div>
           </div>
           <!-- Other Codes -->
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5cqw;">
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">◎</div>
-              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">蓋を開ける瞬間</div>
+              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw; font-size:1.35cqw;">蓋を開ける瞬間</div>
               <div class="t-small" style="font-size:0.85cqw; color:var(--c-black);">受け取った人が蓋を開けるその一瞬。玉手箱はこの体験のためにすべてを設計する。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">⬛</div>
-              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">漆黒×金×緋</div>
+              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw; font-size:1.35cqw;">漆黒×金×緋</div>
               <div class="t-small" style="font-size:0.85cqw; color:var(--c-black);">深い黒、金の輝き、緋のきわ。この三色が玉手箱の視覚的な顔になる。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">✦</div>
-              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">選び抜く目利き</div>
+              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw; font-size:1.35cqw;">選び抜く目利き</div>
               <div class="t-small" style="font-size:0.85cqw; color:var(--c-black);">何でもお重に入れるのではない。目利きで選んだ逸品だけを扱う姿勢が信頼になる。</div>
             </div>
             <div style="border:1px solid #d0d0d0; padding:2cqw;">
               <div style="font-size:1.6cqw; margin-bottom:1cqw;">⊡</div>
-              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw;">越境する和の美</div>
+              <div class="t-small" style="font-weight:400; color:var(--c-black); margin-bottom:0.6cqw; font-size:1.35cqw;">越境する和の美</div>
               <div class="t-small" style="font-size:0.85cqw; color:var(--c-black);">お重という形は、日本語がわからない人にも伝わる。海外展開を見据えた普遍的な日本美。</div>
             </div>
           </div>
@@ -116,8 +116,8 @@ function slide05Dos() {
         <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
             <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:var(--c-gold);"></div>
-            <div class="t-label c-gold" style="font-weight:400;">Do's</div>
-            <div class="t-small" style="font-size:0.8cqw; color:var(--c-black);">やること</div>
+            <div class="t-label c-gold" style="font-weight:400; font-size:1.8cqw;">Do's</div>
+            <div class="t-small" style="font-size:1.6cqw; color:var(--c-black);">やること</div>
           </div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:1.4cqw;">
             <li class="t-small" style="padding-left:1.5cqw; position:relative; color:var(--c-black);">
@@ -138,8 +138,8 @@ function slide05Dos() {
         <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <div style="display:flex; align-items:center; gap:1cqw; margin-bottom:2.5cqw;">
             <div style="width:0.7cqw; height:0.7cqw; border-radius:50%; background:#999;"></div>
-            <div class="t-label" style="color:#999; font-weight:400;">Don'ts</div>
-            <div class="t-small" style="font-size:0.8cqw; color:var(--c-black);">やらないこと</div>
+            <div class="t-label" style="color:#999; font-weight:400; font-size:1.8cqw;">Don'ts</div>
+            <div class="t-small" style="font-size:1.6cqw; color:var(--c-black);">やらないこと</div>
           </div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:1.4cqw;">
             <li class="t-small" style="padding-left:1.5cqw; position:relative; color:var(--c-black);">
