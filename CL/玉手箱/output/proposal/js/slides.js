@@ -177,37 +177,33 @@ function slide06LogoMain() {
 function slide07LogoConcept() {
   return `<section class="slide" style="background:#fff;" data-section="logo-concept" data-notes="ロゴのコンセプトについてご説明します。">
     <div class="accent-top"></div><div class="accent-bottom"></div>
-    <div class="s-wrap" style="padding:0;">
-      <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
-      <div style="display:flex; width:100%; height:100%;">
-        <!-- 左：ロゴ 大きめ・左寄せ -->
-        <div style="flex:1.4; display:flex; align-items:center; justify-content:flex-start; padding:4cqw 2cqw 4cqw 4cqw;">
-          <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
+    <div style="position:absolute; top:4.5cqw; left:5cqw; z-index:1;"><span class="badge">Logo Concept</span></div>
+    <div style="display:flex; align-items:center; height:100%; padding:7cqw 8cqw 7cqw 10cqw; gap:8cqw;">
+      <!-- 左：ロゴ -->
+      <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+        <img src="../../brief/logo/03oju_logo-05.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ">
+      </div>
+      <!-- 右：コンセプト4項目 -->
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:2.8cqw;">
+        <div>
+          <div class="t-label c-gold" style="font-weight:400; margin-bottom:0.8cqw;">Mark</div>
+          <div class="t-small" style="color:var(--c-black);">玉手箱そのもの、お重をイメージしたマーク。</div>
         </div>
-        <!-- 右：コンセプト 中央寄り -->
-        <div style="flex:0.7; display:flex; flex-direction:column; justify-content:center; padding:4cqw 5cqw 4cqw 4cqw; gap:2.2cqw;">
-          <div style="display:flex; flex-direction:column; gap:2cqw;">
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Mark</div>
-              <div class="t-small" style="color:var(--c-black);">玉手箱そのもの、お重をイメージしたマーク。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Symbol</div>
-              <div class="t-small" style="color:var(--c-black);">「玉」の字をシンボルに落とし込んでいる。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Hanko</div>
-              <div class="t-small" style="color:var(--c-black);">落款に「手箱」と記し、マークと合わせて「玉手箱」として成立する構造。</div>
-            </div>
-            <div style="border-left:3px solid var(--c-gold); padding-left:1.5cqw;">
-              <div class="t-label c-gold" style="margin-bottom:0.6cqw; font-weight:400;">Shoulder / English</div>
-              <div class="t-small" style="color:var(--c-black);">ショルダー名は「御重屋」。英語は「The oju」。海外展開を見据えた国際表記。</div>
-            </div>
-          </div>
+        <div>
+          <div class="t-label c-gold" style="font-weight:400; margin-bottom:0.8cqw;">Symbol</div>
+          <div class="t-small" style="color:var(--c-black);">「玉」の字をシンボルに落とし込んでいる。</div>
+        </div>
+        <div>
+          <div class="t-label c-gold" style="font-weight:400; margin-bottom:0.8cqw;">Hanko</div>
+          <div class="t-small" style="color:var(--c-black);">落款に「手箱」と記し、マークと合わせて<br>「玉手箱」として成立する構造。</div>
+        </div>
+        <div>
+          <div class="t-label c-gold" style="font-weight:400; margin-bottom:0.8cqw;">Shoulder / English</div>
+          <div class="t-small" style="color:var(--c-black);">ショルダー名は「御重屋」。英語は「The oju」。<br>海外展開を見据えた国際表記。</div>
         </div>
       </div>
-      <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
     </div>
+    <div class="s-copy" style="color:#aaa;">©CRATER Inc. 2026</div>
   </section>`;
 }
 
