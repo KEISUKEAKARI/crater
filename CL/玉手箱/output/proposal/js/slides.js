@@ -4,7 +4,8 @@
 function slide01Cover() {
   return `<section class="slide bg-black" data-section="cover" data-notes="本日は玉手箱のブランドコンセプトをご提案させていただきます。お重という日本の伝統的な器に、選び抜いた逸品を入れてお届けするというコンセプトです。ブランドの世界観から、デザインの方向性まで順番にご覧いただきます。">
     <div class="cover-wrap">
-      <img src="../../brief/logo/logoshiro.svg" class="cover-logo" alt="玉手箱">
+      <div style="font-family:'EB Garamond',serif; font-size:1cqw; letter-spacing:0.5em; color:var(--c-pt); text-transform:uppercase; margin-bottom:1cqh;">The Oju</div>
+      <div style="font-family:'Noto Serif JP',serif; font-size:5cqw; font-weight:200; letter-spacing:0.2em; color:var(--c-white);">TAMATEBAKO</div>
       <div class="cover-divider"></div>
       <div class="cover-subtitle">Brand Concept Proposal</div>
       <div class="cover-date">2026</div>
