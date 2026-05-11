@@ -262,7 +262,6 @@ function slide10KV() {
 
 window.slideFactories = [
   slide01Cover,
-  slide02Question,
   slide03TaglineStory,
   slide04BrandCode,
   slide05Dos,
@@ -275,7 +274,6 @@ window.slideFactories = [
 
 window.agendaItems = [
   { id: 'cover',          label: '表紙' },
-  { id: 'question',       label: '問い' },
   { id: 'tagline-story',  label: 'タグライン / ストーリー' },
   { id: 'brandcode',      label: 'Brand Code' },
   { id: 'dos',            label: "Do's & Don'ts" },
