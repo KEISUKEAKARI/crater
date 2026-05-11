@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玉手箱 — Brand Concept Proposal</title>
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<!-- ハンバーガー -->
+<button class="hamburger light" id="hamburger" aria-label="メニュー">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- サイドバー -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">Contents</div>
+  <div id="sidebar-list"></div>
+</nav>
+<div class="backdrop" id="backdrop"></div>
+
+<!-- スライドステージ -->
+<div class="slide-stage"></div>
+
+<!-- ナビ -->
+<div class="nav">
+  <button class="nav-btn light" id="nav-prev">← PREV</button>
+  <span class="nav-counter light" id="nav-counter">1 / 9</span>
+  <button class="nav-btn light" id="nav-next">NEXT →</button>
+</div>
+
+<script src="js/slides.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+</body>
+</html>
