@@ -173,21 +173,9 @@ function slide07LogoConcept() {
 
 // SLIDE 08: ロゴ③ バリエーション | F5 | logo-variation
 function slide08LogoVariation() {
-  return `<section class="slide bg-white" data-section="logo-variation" data-notes="ロゴのバリエーションです。日本語版・英語版、黒背景・白背景の展開を用意しています。どの場面でも玉手箱らしさを維持できる設計になっています。">
-    <div class="accent-line-top"></div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; height:100%;">
-      <div style="display:flex; align-items:center; justify-content:center; padding:5cqw; border-right:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0;">
-        <img src="../../brief/logo/03oju_logo-03.svg" style="width:100%; height:auto;" alt="日本語版">
-      </div>
-      <div style="display:flex; align-items:center; justify-content:center; padding:5cqw; border-bottom:1px solid #e0e0e0;">
-        <img src="../../brief/logo/03oju_logo-04.svg" style="width:100%; height:auto;" alt="英語版">
-      </div>
-      <div style="display:flex; align-items:center; justify-content:center; padding:5cqw; background:var(--c-black); border-right:1px solid #333;">
-        <img src="../../brief/logo/03oju_logo-03.svg" style="width:100%; height:auto;" alt="黒背景 日本語版">
-      </div>
-      <div style="display:flex; align-items:center; justify-content:center; padding:5cqw; background:var(--c-black);">
-        <img src="../../brief/logo/logoshiro.svg" style="width:60%; height:auto;" alt="黒背景 英語版">
-      </div>
+  return `<section class="slide" style="background:#fff;" data-section="logo-variation" data-notes="ロゴのバリエーションです。">
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:8cqw;">
+      <img src="../../brief/logo/03oju_logo_アートボード 1.svg" style="width:100%; height:auto;" alt="玉手箱ロゴ バリエーション">
     </div>
   </section>`;
 }
