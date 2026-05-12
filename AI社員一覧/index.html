@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI社員一覧</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
+      background: #f0f0f0;
+      color: #111;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 32px 40px 28px;
+    }
+
+    header .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    header p {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ケイスケ特別枠 */
+    .keisuke-section {
+      margin-bottom: 48px;
+    }
+
+    .keisuke-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .keisuke-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #c8a84b, #e8d08a, #c8a84b);
+    }
+
+    .keisuke-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8a84b, #e8d08a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .keisuke-info {
+      flex: 1;
+    }
+
+    .keisuke-badge {
+      display: inline-block;
+      background: #c8a84b;
+      color: #111;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .keisuke-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .keisuke-role {
+      font-size: 12px;
+      color: #e8d08a;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .keisuke-desc {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .trigger-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .trigger-chip {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #ccc;
+    }
+
+    /* セクション */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      padding: 4px 10px;
+      border-radius: 3px;
+      color: #fff;
+    }
+
+    .label-apollos { background: #1a3a5c; }
+    .label-crater  { background: #1e2d3d; }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: #999;
+      margin-left: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 22px;
+      border: 1px solid #e0e0e0;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-color: #ccc;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .icon-apollos { background: #e8f0f8; }
+    .icon-crater  { background: #f0f4f8; }
+
+    .card-meta { flex: 1; }
+
+    .card-type {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .card-role {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .card-triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .chip {
+      background: #f4f4f4;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 10px;
+      color: #666;
+    }
+
+    .chip.apollos { background: #e8f0f8; color: #1a3a5c; }
+
+    @media (max-width: 768px) {
+      header { padding: 24px 20px 20px; }
+      .container { padding: 24px 16px 60px; }
+      .keisuke-card { flex-direction: column; gap: 16px; padding: 20px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">CRATER × APOLLOS</div>
+  <h1>AI社員一覧</h1>
+  <p>全 10 名 ／ 2026.05.12 現在</p>
+</header>
+
+<div class="container">
+
+  <!-- AIけいすけ -->
+  <div class="keisuke-section">
+    <div class="keisuke-card">
+      <div class="keisuke-icon">👤</div>
+      <div class="keisuke-info">
+        <div class="keisuke-badge">SPECIAL</div>
+        <div class="keisuke-name">AIけいすけ</div>
+        <div class="keisuke-role">クリエイティブ美意識チェッカー</div>
+        <div class="keisuke-desc">
+          ケイスケさんの美意識・判断軸・修正グセを移植したAI。<br>
+          コピー・デザイン・ブランド方向性など「提出前に一度通す」ための存在。<br>
+          「ケイスケさんならここ直す」を先読みして指摘する。
+        </div>
+        <div class="trigger-list">
+          <span class="trigger-chip">AIけいすけ</span>
+          <span class="trigger-chip">ケイスケ目線でチェック</span>
+          <span class="trigger-chip">ケイスケならどう言う</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APOLLOSチーム -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label label-apollos">APOLLOS</span>
+      <span class="section-title">認知戦略チーム</span>
+      <span class="section-count">4 名</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-apollos">🧭</div>
+          <div class="card-meta">
+            <div class="card-type">APOLLOS AI</div>
+            <div class="card-name">参謀AI</div>
+          </div>
+        </div>
+        <div class="card-role">状況判断 ／ 優先順位整理 ／ 他AI指揮</div>
+        <div class="card-desc">
+          APOLLOSの現状を把握し「今何をすべきか」を判断。他のAI社員に指示を出しながら自ら進める。ケイスケさんへは「やりました・次これやります」報告のみ。
+        </div>
+        <div class="card-triggers">
+          <span class="chip apollos">参謀</span>
+          <span class="chip apollos">進めて</span>
+          <span class="chip apollos">次何する</span>
+          <span class="chip apollos">APOLLOSどうする</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-apollos">🗂️</div>
+          <div class="card-meta">
+            <div class="card-type">APOLLOS AI</div>
+            <div class="card-name">司令塔AI</div>
+          </div>
+        </div>
+        <div class="card-role">案件振り分け ／ 進捗管理 ／ 報告</div>
+        <div class="card-desc">
+          全案件・タスクを統括するオーケストレーター。問い合わせの振り分け・進捗管理・ケイスケさんへの報告を担当する。
+        </div>
+        <div class="card-triggers">
+          <span class="chip apollos">案件どうなってる</span>
+          <span class="chip apollos">APOLLOS</span>
+          <span class="chip apollos">進捗</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-apollos">📋</div>
+          <div class="card-meta">
+            <div class="card-type">APOLLOS AI</div>
+            <div class="card-name">受注提案AI</div>
+          </div>
+        </div>
+        <div class="card-role">問い合わせ対応 ／ ヒアリング ／ 提案書作成</div>
+        <div class="card-desc">
+          APOLLOSへの問い合わせ対応・ヒアリング・提案書作成を担当。初回返信から見積もり・提案書のドラフトまで一貫して動く。
+        </div>
+        <div class="card-triggers">
+          <span class="chip apollos">提案書作って</span>
+          <span class="chip apollos">問い合わせ来た</span>
+          <span class="chip apollos">見積もり</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-apollos">📡</div>
+          <div class="card-meta">
+            <div class="card-type">APOLLOS AI</div>
+            <div class="card-name">認知戦略AI</div>
+          </div>
+        </div>
+        <div class="card-role">チャネル選定 ／ 戦略立案 ／ 認知設計</div>
+        <div class="card-desc">
+          クライアントの状況を分析し、認知チャネルの選定・戦略立案を担当。Meta・Google・SNS・PRなど最適な認知経路を設計する。
+        </div>
+        <div class="card-triggers">
+          <span class="chip apollos">戦略案出して</span>
+          <span class="chip apollos">どこで発信</span>
+          <span class="chip apollos">チャネル選定</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CRATERチーム -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label label-crater">CRATER</span>
+      <span class="section-title">デザイン・制作チーム</span>
+      <span class="section-count">5 名</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-crater">🎨</div>
+          <div class="card-meta">
+            <div class="card-type">CRATER AI</div>
+            <div class="card-name">VI設計者</div>
+          </div>
+        </div>
+        <div class="card-role">ブランドVI設計 ／ デザインシステム構築</div>
+        <div class="card-desc">
+          ビジュアルアイデンティティの世界観設計から、デザインシステム実装仕様まで一気通貫で担う。ブランドを「AIが読めるデザイン言語」に変換する専門家。
+        </div>
+        <div class="card-triggers">
+          <span class="chip">VI設計者</span>
+          <span class="chip">ブランドVI作って</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-crater">🧩</div>
+          <div class="card-meta">
+            <div class="card-type">CRATER AI</div>
+            <div class="card-name">ブランドマネージャー</div>
+          </div>
+        </div>
+        <div class="card-role">ブランド司令塔 ／ 方向性管理 ／ 一貫性確保</div>
+        <div class="card-desc">
+          ブランドの方向性・一貫性・表現品質を管理する司令塔。ブランドボード・デザインシステム・コピー方向性を統括する。
+        </div>
+        <div class="card-triggers">
+          <span class="chip">ブランドマネージャー</span>
+          <span class="chip">ブランド方針確認</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-crater">🛒</div>
+          <div class="card-meta">
+            <div class="card-type">CRATER AI</div>
+            <div class="card-name">Amazon担当</div>
+          </div>
+        </div>
+        <div class="card-role">ショップ開設 ／ 商品ページ ／ 広告設計</div>
+        <div class="card-desc">
+          Amazonショップ開設・商品リサーチ・商品ページ作成・広告設計・運用確認を担当。A+コンテンツ制作にも対応する。
+        </div>
+        <div class="card-triggers">
+          <span class="chip">Amazon担当</span>
+          <span class="chip">商品ページ作って</span>
+          <span class="chip">A+コンテンツ</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-crater">📸</div>
+          <div class="card-meta">
+            <div class="card-type">CRATER AI</div>
+            <div class="card-name">Instagram担当</div>
+          </div>
+        </div>
+        <div class="card-role">Instagram運用 ／ 投稿設計 ／ コンテンツ制作</div>
+        <div class="card-desc">
+          Instagram運用の戦略立案・投稿コンテンツ制作・キャプション作成などを担当。ブランドに合ったビジュアルコンテンツ方針を設計する。
+        </div>
+        <div class="card-triggers">
+          <span class="chip">Instagram担当</span>
+          <span class="chip">投稿作って</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-icon icon-crater">🏆</div>
+          <div class="card-meta">
+            <div class="card-type">CRATER AI</div>
+            <div class="card-name">公募・応募担当</div>
+          </div>
+        </div>
+        <div class="card-role">アワード ／ コンペ ／ 公募対応</div>
+        <div class="card-desc">
+          公募・アワード・コンペの要項を読み込み、適合判断・準備整理・勝ち残り戦略を提案する。締切・審査基準・過去受賞傾向を読み解く。
+        </div>
+        <div class="card-triggers">
+          <span class="chip">公募・応募担当</span>
+          <span class="chip">コンペ対応</span>
+          <span class="chip">アワード応募</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
