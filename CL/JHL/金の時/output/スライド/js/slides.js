@@ -1,59 +1,76 @@
 window.slideFactories = [];
 
-/* stage = 1920×1080px固定。スライドのトップdivにdisplayは書かない。
+/* stage = 1920×1080px固定。
    flex系 → class="slide slide-flex"
    grid系 → class="slide slide-grid"
-   CSSの .slide-flex.active / .slide-grid.active で表示を制御する */
+   CSSの .slide-flex.active / .slide-grid.active で制御 */
 
-// ─── スライド1: オープニング ───
+// ─── P1: オープニング ───
 window.slideFactories[0] = () => `
 <div class="slide slide-flex" id="s1" style="background:#FAF7F2;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
   <div style="position:absolute;top:50%;right:-100px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.14) 0%,transparent 62%);transform:translateY(-50%);pointer-events:none;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;position:relative;z-index:2;">Brand Proposal</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:240px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:0.9;position:relative;z-index:2;">金の時</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:52px;letter-spacing:0.55em;color:#C9A84C;margin-top:40px;position:relative;z-index:2;">Golden Moments</div>
-  <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#B8B3A8;letter-spacing:0.3em;margin-top:24px;position:relative;z-index:2;">金時草ブランド — JHL+</div>
+  <!-- ラベル -->
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Brand Proposal</div>
+  <!-- メイン見出し -->
+  <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.3;position:relative;z-index:2;">JHL+金時草製品のブランド設計</div>
+  <!-- クレーターロゴ -->
+  <div style="margin-top:80px;position:relative;z-index:2;">
+    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.4em;color:#B8B3A8;text-transform:uppercase;">CRATER Inc.</div>
+  </div>
 </div>
 `;
 
-// ─── スライド2: タグライン ───
+// ─── P2: タグライン ───
 window.slideFactories[1] = () => `
 <div class="slide slide-flex" id="s2" style="background:#F5F2EC;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
   <div style="position:absolute;font-family:'Crimson Pro',serif;font-style:italic;font-size:520px;color:rgba(201,168,76,0.06);right:-60px;bottom:-80px;line-height:1;pointer-events:none;user-select:none;">B</div>
   <div style="width:80px;height:1px;background:#E8D5A3;margin-bottom:56px;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;">Tagline</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:128px;font-weight:500;color:#2C2C2C;letter-spacing:0.07em;line-height:1.4;position:relative;z-index:2;">輝きは、<span style="color:#C9A84C;">準備から</span>始まる。</div>
-  <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:40px;color:#9A7B2E;letter-spacing:0.25em;margin-top:48px;opacity:0.7;position:relative;z-index:2;">Brilliance begins with preparation.</div>
+  <!-- ラベル -->
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;">Tagline</div>
+  <!-- メイン超大 -->
+  <div style="font-family:'Zen Old Mincho',serif;font-size:148px;font-weight:500;color:#2C2C2C;letter-spacing:0.07em;line-height:1.4;position:relative;z-index:2;">輝きは、<br>準備から始まる。</div>
+  <!-- 英語 小さめ -->
+  <div style="font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:26px;color:#9A7B2E;letter-spacing:0.2em;margin-top:40px;opacity:0.7;position:relative;z-index:2;">Brilliance begins with preparation.</div>
 </div>
 `;
 
-// ─── スライド3: ブランドストーリー ───
+// ─── P3: ブランドストーリー（フルワイド） ───
 window.slideFactories[2] = () => `
-<div class="slide slide-grid" id="s3" style="background:#FAF7F2;grid-template-columns:1fr 1fr;">
-  <div style="background:#EDEAE2;display:flex;flex-direction:column;justify-content:center;padding:0 96px;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;">Brand Story</div>
-    <div style="font-family:'Zen Old Mincho',serif;font-size:84px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.4;">語らずに、<br>ただ、<br>輝かせる。</div>
-    <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:28px;color:#9A7B2E;letter-spacing:0.15em;margin-top:48px;opacity:0.65;">Let it shine. Silently.</div>
-  </div>
-  <div style="display:flex;flex-direction:column;justify-content:center;padding:0 96px;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;">Story</div>
-    <div style="font-family:'Zen Old Mincho',serif;font-size:40px;font-weight:400;color:#2C2C2C;line-height:2.5;letter-spacing:0.08em;">加賀の地で4000年の歴史を持つ<span style="color:#9A7B2E;">金時草</span>。<br>その自然の恵みを届けることで、<br>今この瞬間から先の人生を、元気に・輝くように。<br><br>金の時とは、あなたの<span style="color:#9A7B2E;">黄金時代</span>。<br>それは今日から始まっている。</div>
+<div class="slide slide-flex" id="s3" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:0 220px;position:relative;">
+  <div style="position:absolute;font-family:'Zen Old Mincho',serif;font-size:600px;font-weight:700;color:rgba(201,168,76,0.04);right:-60px;bottom:-100px;line-height:1;pointer-events:none;user-select:none;">金</div>
+  <!-- ラベル -->
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;position:relative;z-index:2;">Story</div>
+  <!-- タイトル -->
+  <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:56px;position:relative;z-index:2;">今この瞬間以降の<br>人生が元気で輝くように。</div>
+  <!-- 本文 -->
+  <div style="font-family:'Noto Sans JP',sans-serif;font-size:28px;font-weight:300;color:#5C5956;line-height:2.2;letter-spacing:0.06em;position:relative;z-index:2;">
+    加賀の地で4000年の歴史を持つ金時草。その自然の恵みを届けることで、<br>
+    今この瞬間から先の人生を、元気に・輝くように。<br><br>
+    金の時とは、あなたの黄金時代。それは今日から始まっている。
   </div>
 </div>
 `;
 
-// ─── スライド4: コアコード ───
+// ─── P4: コアコード ───
 window.slideFactories[3] = () => `
 <div class="slide slide-flex" id="s4" style="background:#FAF7F2;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
   <div style="position:absolute;font-family:'Zen Old Mincho',serif;font-size:380px;font-weight:700;color:rgba(201,168,76,0.06);right:-40px;top:50%;transform:translateY(-50%);white-space:nowrap;pointer-events:none;line-height:1;">金時草</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Core Code</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:140px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;position:relative;z-index:2;">加賀野菜<br>「<span style="color:#C9A84C;">金時草</span>」<br>という唯一の素材</div>
-  <div style="font-family:'Noto Sans JP',sans-serif;font-size:26px;font-weight:300;color:#5C5956;line-height:2.2;margin-top:40px;max-width:900px;letter-spacing:0.05em;position:relative;z-index:2;">古来より「不老長寿の野菜」と呼ばれてきた加賀の伝統野菜。<br>アントシアニン・GABA・鉄分・カルシウムを豊富に含む。</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;margin-top:32px;text-transform:uppercase;opacity:0.65;position:relative;z-index:2;">Gynura Bicolor · 金沢 · 加賀</div>
+  <!-- ラベル -->
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Brand Core Code</div>
+  <!-- メイン超大 -->
+  <div style="font-family:'Zen Old Mincho',serif;font-size:128px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;position:relative;z-index:2;">不老長寿と呼ばれる野菜。</div>
+  <!-- 英語 小 -->
+  <div style="font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:26px;color:#9A7B2E;letter-spacing:0.2em;margin-top:16px;opacity:0.65;position:relative;z-index:2;">The Vegetable of Eternal Youth</div>
+  <!-- 本文 -->
+  <div style="font-family:'Noto Sans JP',sans-serif;font-size:26px;font-weight:300;color:#5C5956;line-height:2.2;margin-top:48px;max-width:1100px;letter-spacing:0.05em;position:relative;z-index:2;">
+    古来より「不老長寿の野菜」と呼ばれてきた加賀の伝統野菜。<br>
+    アントシアニン・GABA・鉄分・カルシウムを豊富に含む。<br>
+    <span style="font-size:22px;color:#B8B3A8;">※ 沖縄では「水前寺菜」として知られ、金時草と同じ植物。古くから両地域で愛されてきた。</span>
+  </div>
 </div>
 `;
 
-// ─── スライド5: ブランド4原則 ───
+// ─── P5: ブランド4原則（変更なし） ───
 window.slideFactories[4] = () => `
 <div class="slide slide-flex" id="s5" style="background:#F5F2EC;flex-direction:column;justify-content:center;padding:80px 160px;">
   <div style="margin-bottom:56px;">
@@ -89,36 +106,42 @@ window.slideFactories[4] = () => `
 </div>
 `;
 
-// ─── スライド6: ネーミング ───
+// ─── P6: ネーミング（上下レイアウト） ───
 window.slideFactories[5] = () => `
-<div class="slide slide-grid" id="s6" style="background:#FAF7F2;grid-template-columns:1fr 1.5fr;">
-  <div style="background:#EDEAE2;display:flex;flex-direction:column;justify-content:center;padding:0 80px;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;">Naming</div>
-    <div style="font-family:'Zen Old Mincho',serif;font-size:160px;font-weight:500;color:#2C2C2C;letter-spacing:0.04em;line-height:1;">金の時</div>
-    <div style="font-family:'Crimson Pro',serif;font-size:32px;letter-spacing:0.45em;color:#C9A84C;margin-top:24px;">Golden Moments</div>
+<div class="slide slide-grid" id="s6" style="background:#FAF7F2;grid-template-rows:1fr 1fr;grid-template-columns:1fr;">
+  <!-- 上：ブランド名 -->
+  <div style="display:flex;flex-direction:row;align-items:center;gap:80px;padding:0 220px;border-bottom:1px solid #E4E0D8;">
+    <div>
+      <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:16px;">Naming</div>
+      <div style="font-family:'Zen Old Mincho',serif;font-size:120px;font-weight:500;color:#2C2C2C;letter-spacing:0.04em;line-height:1;">金の時</div>
+      <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.45em;color:#C9A84C;margin-top:16px;">Golden Moments</div>
+    </div>
   </div>
-  <div style="display:flex;flex-direction:column;justify-content:center;padding:0 80px;gap:28px;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:8px;">3つの「金」</div>
-    <div style="background:#fff;border-radius:12px;padding:32px 36px;border-left:4px solid #E8D5A3;">
-      <div style="font-family:'Crimson Pro',serif;font-size:52px;color:#E8D5A3;line-height:1;margin-bottom:8px;">01</div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:32px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">金時草から</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;line-height:1.9;">加賀野菜「金時草」の「金」。成分の由来と産地を同時に伝える。</div>
-    </div>
-    <div style="background:#fff;border-radius:12px;padding:32px 36px;border-left:4px solid #E8D5A3;">
-      <div style="font-family:'Crimson Pro',serif;font-size:52px;color:#E8D5A3;line-height:1;margin-bottom:8px;">02</div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:32px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">金沢・加賀の金</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;line-height:1.9;">金沢は「金」の都市。伝統・信頼・上質さを一字で表す。</div>
-    </div>
-    <div style="background:#fff;border-radius:12px;padding:32px 36px;border-left:4px solid #E8D5A3;">
-      <div style="font-family:'Crimson Pro',serif;font-size:52px;color:#E8D5A3;line-height:1;margin-bottom:8px;">03</div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:32px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">黄金の時間</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;line-height:1.9;">名前そのものがコンセプト。輝く人生への準備という文脈。</div>
+  <!-- 下：3つの金 -->
+  <div style="display:flex;flex-direction:column;justify-content:center;padding:0 220px;">
+    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:24px;">3つの「金」</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;">
+      <div style="border-left:3px solid #E8D5A3;padding-left:28px;">
+        <div style="font-family:'Crimson Pro',serif;font-size:48px;color:#E8D5A3;line-height:1;margin-bottom:8px;">01</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:28px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">金時草から</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:#5C5956;line-height:1.9;">加賀野菜「金時草」の「金」。成分の由来と産地を同時に伝える。</div>
+      </div>
+      <div style="border-left:3px solid #E8D5A3;padding-left:28px;">
+        <div style="font-family:'Crimson Pro',serif;font-size:48px;color:#E8D5A3;line-height:1;margin-bottom:8px;">02</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:28px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">金箔シェア100%の金沢の金</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:#5C5956;line-height:1.9;">金沢は「金箔」の都市。伝統・信頼・上質さを一字で表す。</div>
+      </div>
+      <div style="border-left:3px solid #E8D5A3;padding-left:28px;">
+        <div style="font-family:'Crimson Pro',serif;font-size:48px;color:#E8D5A3;line-height:1;margin-bottom:8px;">03</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:28px;font-weight:600;color:#2C2C2C;margin-bottom:8px;">黄金の時間</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:#5C5956;line-height:1.9;">名前そのものがコンセプト。輝く人生への準備という文脈。</div>
+      </div>
     </div>
   </div>
 </div>
 `;
 
-// ─── スライド7: Do's & Don'ts ───
+// ─── P7: Do's & Don'ts ───
 window.slideFactories[6] = () => `
 <div class="slide slide-flex" id="s7" style="background:#F5F2EC;flex-direction:column;justify-content:center;padding:80px 160px;">
   <div style="margin-bottom:56px;">
@@ -144,7 +167,7 @@ window.slideFactories[6] = () => `
 </div>
 `;
 
-// ─── スライド8: カラーパレット ───
+// ─── P8: カラーパレット ───
 window.slideFactories[7] = () => `
 <div class="slide slide-flex" id="s8" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:80px 160px;">
   <div style="margin-bottom:64px;">
@@ -162,35 +185,11 @@ window.slideFactories[7] = () => `
 </div>
 `;
 
-// ─── スライド9: タイポグラフィ ───
+// ─── P9: エンド（グラデなし・シンプル） ───
 window.slideFactories[8] = () => `
-<div class="slide slide-grid" id="s9" style="background:#F5F2EC;grid-template-columns:1fr 1fr;">
-  <div style="background:#FAF7F2;display:flex;flex-direction:column;justify-content:center;padding:0 96px;border-right:1px solid #E4E0D8;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;">Display · Heading</div>
-    <div style="font-family:'Zen Old Mincho',serif;font-size:160px;font-weight:500;color:#2C2C2C;letter-spacing:0.04em;line-height:1;">金の時</div>
-    <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;margin-top:32px;letter-spacing:0.1em;">Zen Old Mincho · w400–700<br>ブランド名・タグライン・見出し</div>
-  </div>
-  <div style="display:flex;flex-direction:column;justify-content:center;padding:0 96px;gap:64px;">
-    <div>
-      <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:28px;">English · Label</div>
-      <div style="font-family:'Crimson Pro',serif;font-size:96px;color:#2C2C2C;letter-spacing:0.04em;line-height:1;">Golden<br><span style="font-style:italic;color:#9A7B2E;">Moments</span></div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;margin-top:24px;letter-spacing:0.1em;">Crimson Pro · Regular / Italic</div>
-    </div>
-    <div>
-      <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:28px;">Body · Caption</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:40px;font-weight:300;color:#2C2C2C;line-height:1.9;letter-spacing:0.08em;">加賀の地で育まれた金時草。</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;margin-top:24px;letter-spacing:0.1em;">Noto Sans JP · w300</div>
-    </div>
-  </div>
-</div>
-`;
-
-// ─── スライド10: エンド ───
-window.slideFactories[9] = () => `
-<div class="slide slide-flex" id="s10" style="background:#EDEAE2;flex-direction:column;justify-content:center;align-items:center;position:relative;">
-  <div style="position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.18) 0%,transparent 62%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:120px;font-weight:500;color:#2C2C2C;letter-spacing:0.1em;position:relative;z-index:2;">金の時</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.6em;color:#C9A84C;margin-top:24px;position:relative;z-index:2;">Golden Moments</div>
-  <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:24px;letter-spacing:0.25em;color:#9A7B2E;opacity:0.55;margin-top:48px;position:relative;z-index:2;">輝きは、準備から始まる。</div>
+<div class="slide slide-flex" id="s9" style="background:#EDEAE2;flex-direction:column;justify-content:center;align-items:center;position:relative;">
+  <div style="font-family:'Zen Old Mincho',serif;font-size:120px;font-weight:500;color:#2C2C2C;letter-spacing:0.1em;">金の時</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.6em;color:#C9A84C;margin-top:24px;">Golden Moments</div>
+  <div style="font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:22px;letter-spacing:0.25em;color:#9A7B2E;opacity:0.55;margin-top:48px;">輝きは、準備から始まる。</div>
 </div>
 `;
