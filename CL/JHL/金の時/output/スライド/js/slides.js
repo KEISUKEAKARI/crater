@@ -12,7 +12,7 @@ window.slideFactories[0] = () => `
   <!-- ラベル -->
   <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Brand Proposal</div>
   <!-- メイン見出し -->
-  <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.3;position:relative;z-index:2;">JHL+金時草製品のブランド設計</div>
+  <div style="font-family:'Zen Old Mincho',serif;font-size:68px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.3;position:relative;z-index:2;">JHL+金時草製品のブランド設計</div>
   <!-- クレーターロゴ -->
   <div style="margin-top:80px;position:relative;z-index:2;">
     <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.4em;color:#B8B3A8;text-transform:uppercase;">CRATER Inc.</div>
