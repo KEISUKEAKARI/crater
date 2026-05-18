@@ -34,27 +34,37 @@ window.slideFactories[1] = () => `
 
 // ─── P3: ブランドストーリー ───
 window.slideFactories[2] = () => `
-<div class="slide slide-flex" id="s3" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:0 220px;position:relative;">
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;position:relative;z-index:2;">Story</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:56px;position:relative;z-index:2;">今この瞬間以降の<br>人生が元気で輝くように。</div>
-  <div style="font-family:'Noto Sans JP',sans-serif;font-size:28px;font-weight:300;color:#5C5956;line-height:2.2;letter-spacing:0.06em;position:relative;z-index:2;">
-    加賀の地で4000年の歴史を持つ金時草。その自然の恵みを届けることで、<br>
-    今この瞬間から先の人生を、元気に・輝くように。<br><br>
-    金の時とは、あなたの黄金時代。それは今日から始まっている。
+<div class="slide slide-flex" id="s3" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 100px 80px 160px;position:relative;z-index:2;">
+    <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:48px;">Story</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:80px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:56px;">今この瞬間以降の<br>人生が元気で輝くように。</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.2;letter-spacing:0.06em;">
+      加賀の地で4000年の歴史を持つ金時草。<br>その自然の恵みを届けることで、<br>今この瞬間から先の人生を、元気に・輝くように。<br><br>
+      金の時とは、あなたの黄金時代。それは今日から始まっている。
+    </div>
+  </div>
+  <div style="width:680px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/680x1080/?japan,morning,wellness,woman" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.3),transparent);"></div>
   </div>
 </div>
 `;
 
 // ─── P4: コアコード ───
 window.slideFactories[3] = () => `
-<div class="slide slide-flex" id="s4" style="background:#FAF7F2;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Brand Core Code</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;position:relative;z-index:2;">不老長寿と呼ばれる野菜。</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:26px;color:#9A7B2E;letter-spacing:0.2em;margin-top:16px;opacity:0.65;position:relative;z-index:2;">The Vegetable of Eternal Youth</div>
-  <div style="font-family:'Noto Sans JP',sans-serif;font-size:26px;font-weight:300;color:#5C5956;line-height:2.2;margin-top:48px;max-width:1100px;letter-spacing:0.05em;position:relative;z-index:2;">
-    古来より「不老長寿の野菜」と呼ばれてきた加賀の伝統野菜。<br>
-    アントシアニン・GABA・鉄分・カルシウムを豊富に含む。<br>
-    <span style="font-size:22px;color:#B8B3A8;">※ 沖縄では「水前寺菜」として知られ、金時草と同じ植物。古くから両地域で愛されてきた。</span>
+<div class="slide slide-flex" id="s4" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 80px 80px 160px;position:relative;z-index:2;">
+    <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;">Brand Core Code</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;">不老長寿と<br>呼ばれる野菜。</div>
+    <div style="font-family:'Crimson Pro',serif;font-size:26px;color:#9A7B2E;letter-spacing:0.2em;margin-top:16px;opacity:0.65;">The Vegetable of Eternal Youth</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.2;margin-top:48px;letter-spacing:0.05em;">
+      古来より「不老長寿の野菜」と呼ばれてきた加賀の伝統野菜。<br>
+      アントシアニン・GABA・鉄分・カルシウムを豊富に含む。
+    </div>
+  </div>
+  <div style="width:640px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/640x1080/?green,leaf,herb,plant" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.4),transparent 40%);"></div>
   </div>
 </div>
 `;
@@ -246,31 +256,30 @@ window.slideFactories[11] = () => `
 
 // ─── P13: 定期購読モデルの提案 ───
 window.slideFactories[12] = () => `
-<div class="slide slide-flex" id="s13" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:80px 160px;">
-  <div style="margin-bottom:52px;">
-    <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Subscription Model</span>
-    <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:24px;">定期購読モデルのご提案</span>
+<div class="slide slide-flex" id="s13" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="width:520px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/520x1080/?morning,routine,wellness,healthy" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(250,247,242,0.35),transparent 50%);"></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
-    <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:48px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">続けることで、<br>輝きは深まる。</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;">金の時の価値は「継続」にあります。<br>一度きりではなく、毎月届く安心感と<br>習慣化によって顧客のLTVを最大化します。</div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 120px 60px 80px;">
+    <div style="margin-bottom:40px;">
+      <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Subscription Model</span>
+      <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:20px;">定期購読モデルのご提案</span>
     </div>
-    <div style="display:flex;flex-direction:column;gap:24px;">
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Point 01</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:32px;color:#2C2C2C;margin-bottom:10px;">離脱率の最小化</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">「忘れる」「面倒」をなくす定期配送で継続率を底上げ</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:88px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">続けることで、<br>輝きは深まる。</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.0;margin-bottom:32px;">金の時の価値は「継続」にあります。毎月届く安心感と習慣化によって顧客のLTVを最大化します。</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:90px;">Point 01</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">離脱率の最小化</div>
       </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Point 02</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:32px;color:#2C2C2C;margin-bottom:10px;">ブランドとの接点を増やす</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">毎月の届け物が「輝きのための準備」を思い起こさせる</div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:90px;">Point 02</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">ブランドとの接点を増やす</div>
       </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Point 03</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:32px;color:#2C2C2C;margin-bottom:10px;">収益の安定化</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">単発購入→定期へ誘導することでビジネスを安定させる</div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:90px;">Point 03</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">収益の安定化</div>
       </div>
     </div>
   </div>
@@ -324,38 +333,32 @@ window.slideFactories[14] = () => `
 
 // ─── P16: 台湾インフルエンサーEC戦略 ───
 window.slideFactories[15] = () => `
-<div class="slide slide-flex" id="s16" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:80px 160px;">
-  <div style="margin-bottom:52px;">
-    <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Taiwan Market</span>
-    <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:24px;">台湾市場への展開</span>
+<div class="slide slide-flex" id="s16" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 80px 60px 160px;">
+    <div style="margin-bottom:40px;">
+      <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Taiwan Market</span>
+      <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:20px;">台湾市場への展開</span>
+    </div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:88px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">日本の美しさを、<br>台湾へ届ける。</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.0;margin-bottom:32px;">台湾では日本のブランド・品質への信頼が高く、健康・美容市場も成長中です。インフルエンサーを起用した定期購読ECでブランドの世界観ごと届けます。</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:120px;">Strategy 01</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">インフルエンサー起用</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:120px;">Strategy 02</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">越境EC × 定期購読</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:120px;">Strategy 03</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">日本ブランドの信頼を武器に</div>
+      </div>
+    </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;">
-    <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:48px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">日本の美しさを、<br>台湾へ届ける。</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;margin-bottom:36px;">台湾では日本のブランド・品質への信頼が高く、<br>健康・美容市場も成長中です。<br>インフルエンサーを起用した定期購読ECで<br>ブランドの世界観ごと届けます。</div>
-      <div style="background:#F5F2EC;border-radius:12px;padding:28px 36px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:400;color:#2C2C2C;margin-bottom:8px;">ターゲット市場規模</div>
-        <div style="font-family:'Crimson Pro',serif;font-size:48px;color:#9A7B2E;letter-spacing:0.05em;">台湾 健康食品市場</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;margin-top:4px;">日本ブランドへの高い信頼・購買意欲</div>
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:24px;">
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Strategy 01</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:10px;">インフルエンサー起用</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">台湾で影響力を持つインフルエンサーが<br>「金の時」の世界観をPR</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Strategy 02</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:10px;">越境EC × 定期購読</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">越境ECサイトで定期購読を受け付け。<br>毎月日本から「輝き」を届ける仕組み</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;border-left:4px solid #C9A84C;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Strategy 03</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:10px;">日本ブランドの信頼を武器に</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;line-height:1.8;">「加賀・日本製」の品質保証が<br>台湾市場での差別化要因になる</div>
-      </div>
-    </div>
+  <div style="width:580px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/580x1080/?taiwan,asia,city,lifestyle" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.3));"></div>
   </div>
 </div>
 `;
