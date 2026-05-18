@@ -6,14 +6,19 @@ window.slideFactories = [];
 
 // ─── P1: 表紙 ───
 window.slideFactories[0] = () => `
-<div class="slide slide-flex" id="s1" style="background:#FAF7F2;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;right:0;width:480px;height:100%;background:linear-gradient(to left,rgba(201,168,76,0.08),transparent);pointer-events:none;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;position:relative;z-index:2;">Partnership Proposal</div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:64px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.4;position:relative;z-index:2;">加賀野菜「金時草」の力を、<br>台湾へ届けるご提案</div>
-  <div style="width:80px;height:2px;background:#C9A84C;margin:48px 0;position:relative;z-index:2;"></div>
-  <div style="font-family:'Zen Old Mincho',serif;font-size:36px;font-weight:400;color:#5C5956;letter-spacing:0.12em;position:relative;z-index:2;">ブランド「金の時」× パートナーシップ</div>
-  <div style="margin-top:72px;position:relative;z-index:2;">
-    <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.4em;color:#B8B3A8;text-transform:uppercase;">CRATER Inc. × Japan Health Lab</div>
+<div class="slide slide-flex" id="s1" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 80px 80px 160px;position:relative;z-index:2;">
+    <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;margin-bottom:40px;">Partnership Proposal</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:60px;font-weight:500;color:#2C2C2C;letter-spacing:0.05em;line-height:1.4;">加賀野菜「金時草」の力を、<br>台湾へ届けるご提案</div>
+    <div style="width:80px;height:2px;background:#C9A84C;margin:48px 0;"></div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:32px;font-weight:400;color:#5C5956;letter-spacing:0.12em;">ブランド「金の時」× パートナーシップ</div>
+    <div style="margin-top:72px;">
+      <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.4em;color:#B8B3A8;text-transform:uppercase;">CRATER Inc. × Japan Health Lab</div>
+    </div>
+  </div>
+  <div style="width:700px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/700x1080/?japan,garden,nature,elegant" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.5),transparent 40%);"></div>
   </div>
 </div>
 `;
@@ -30,66 +35,57 @@ window.slideFactories[1] = () => `
 
 // ─── P3: 加賀野菜の歴史と産地 ───
 window.slideFactories[2] = () => `
-<div class="slide slide-flex" id="s3" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:80px 160px;">
-  <div style="margin-bottom:56px;">
-    <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Kaga Vegetables</span>
-    <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:24px;">加賀野菜とは</span>
+<div class="slide slide-flex" id="s3" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 80px 60px 160px;">
+    <div style="margin-bottom:48px;">
+      <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Kaga Vegetables</span>
+      <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:20px;">加賀野菜とは</span>
+    </div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:72px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:32px;">石川・金沢が誇る、<br>伝統野菜。</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.1;margin-bottom:36px;">加賀野菜とは、石川県金沢市周辺で栽培される伝統的な野菜の総称です。加賀百万石の文化を背景に、数百年にわたって大切に育まれてきました。</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:60px;">産地</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">石川県金沢市 — 加賀百万石の地</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:60px;">歴史</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">江戸時代から受け継がれる伝統品種</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:24px 32px;border:1px solid #E4E0D8;display:flex;gap:20px;align-items:center;">
+        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;min-width:60px;">種類</div>
+        <div style="font-family:'Zen Old Mincho',serif;font-size:26px;color:#2C2C2C;">15種類の認定加賀野菜</div>
+      </div>
+    </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;">
-    <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:48px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">石川・金沢が誇る、<br>伝統野菜。</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;">加賀野菜とは、石川県金沢市周辺で栽培される伝統的な野菜の総称です。加賀百万石の文化を背景に、数百年にわたって大切に育まれてきました。</div>
-      <div style="margin-top:40px;font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.0;">独特の気候と土壌が生み出す豊かな風味と栄養価は、全国でも高く評価されています。</div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:24px;">
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">産地</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:34px;color:#2C2C2C;margin-bottom:8px;">石川県金沢市</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;">加賀百万石・日本文化の中心地</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">歴史</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:34px;color:#2C2C2C;margin-bottom:8px;">数百年の栽培の歴史</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;">江戸時代から受け継がれる伝統品種</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:18px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">種類</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:34px;color:#2C2C2C;margin-bottom:8px;">15種類の認定加賀野菜</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;">金時草はその中でも特に注目の品種</div>
-      </div>
-    </div>
+  <div style="width:600px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/600x1080/?kanazawa,japan,traditional,castle" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.3));"></div>
   </div>
 </div>
 `;
 
 // ─── P4: 金時草とは ───
 window.slideFactories[3] = () => `
-<div class="slide slide-flex" id="s4" style="background:#F5F2EC;flex-direction:column;justify-content:center;padding:80px 160px;">
-  <div style="margin-bottom:52px;">
-    <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Kinjisoˉ</span>
-    <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:24px;">金時草とは</span>
+<div class="slide slide-flex" id="s4" style="background:#F5F2EC;flex-direction:row;position:relative;">
+  <div style="width:560px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/560x1080/?green,leaf,herb,vegetable,purple" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(245,242,236,0.4),transparent 50%);"></div>
   </div>
-  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;">
-    <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;margin-bottom:16px;">不老長寿と<br>呼ばれる野菜。</div>
-      <div style="font-family:'Crimson Pro',serif;font-size:24px;letter-spacing:0.2em;color:#9A7B2E;margin-bottom:40px;opacity:0.7;">The Vegetable of Eternal Youth</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;">古来より「不老長寿の野菜」として伝承されてきた加賀の伝統野菜。表は緑、裏は深い紫色という美しいグラデーションが特徴です。沖縄では「水前寺菜」として同じ植物が親しまれています。</div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 140px 60px 80px;">
+    <div style="margin-bottom:40px;">
+      <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Kinjisoˉ</span>
+      <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:20px;">金時草とは</span>
     </div>
-    <div style="display:flex;flex-direction:column;gap:20px;">
-      <div style="background:#C9A84C;border-radius:16px;padding:40px 44px;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:12px;">含有成分</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:32px;color:#fff;margin-bottom:8px;">アントシアニン</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:rgba(255,255,255,0.85);">強力な抗酸化作用。深紫色の源</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:88px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.2;margin-bottom:16px;">不老長寿と<br>呼ばれる野菜。</div>
+    <div style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.2em;color:#9A7B2E;margin-bottom:36px;opacity:0.7;">The Vegetable of Eternal Youth</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.1;margin-bottom:28px;">古来より「不老長寿の野菜」として伝承されてきた加賀の伝統野菜。表は緑、裏は深い紫色という美しいグラデーションが特徴です。</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:#C9A84C;border-radius:12px;padding:20px 28px;display:flex;gap:16px;align-items:center;">
+        <div style="font-family:'Zen Old Mincho',serif;font-size:24px;color:#fff;">アントシアニン — 強力な抗酸化作用</div>
       </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:10px;">含有成分</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:6px;">GABA・鉄分・カルシウム</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:#5C5956;">現代人に必要な栄養素を豊富に含む</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 44px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:10px;">特徴</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:6px;">表緑・裏紫の美しい葉</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:19px;font-weight:300;color:#5C5956;">加賀の風土が育む唯一無二のビジュアル</div>
+      <div style="background:#fff;border-radius:12px;padding:20px 28px;border:1px solid #E4E0D8;display:flex;gap:16px;align-items:center;">
+        <div style="font-family:'Zen Old Mincho',serif;font-size:24px;color:#2C2C2C;">GABA・鉄分・カルシウムを豊富に含む</div>
       </div>
     </div>
   </div>
@@ -108,34 +104,29 @@ window.slideFactories[4] = () => `
 
 // ─── P6: 「金の時」ブランドの誕生 ───
 window.slideFactories[5] = () => `
-<div class="slide slide-flex" id="s6" style="background:#FAF7F2;flex-direction:column;justify-content:center;padding:80px 160px;">
-  <div style="margin-bottom:52px;">
-    <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Brand Identity</span>
-    <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:24px;">「金の時」ブランド</span>
+<div class="slide slide-flex" id="s6" style="background:#FAF7F2;flex-direction:row;position:relative;">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 80px 60px 160px;">
+    <div style="margin-bottom:40px;">
+      <span style="font-family:'Crimson Pro',serif;font-size:22px;letter-spacing:0.35em;color:#9A7B2E;text-transform:uppercase;">Brand Identity</span>
+      <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;font-weight:300;color:#5C5956;letter-spacing:0.15em;margin-left:20px;">「金の時」ブランド</span>
+    </div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.1em;line-height:1.2;margin-bottom:8px;">金の時</div>
+    <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-bottom:32px;">Golden Moments</div>
+    <div style="font-family:'Zen Old Mincho',serif;font-size:32px;color:#2C2C2C;letter-spacing:0.1em;margin-bottom:28px;">輝きは、準備から始まる。</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.1;margin-bottom:32px;">金時草の力を、現代の人々が日々の習慣として取り入れられるようにデザインされた高品質ブランド。</div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:#C9A84C;border-radius:12px;padding:22px 32px;">
+        <div style="font-family:'Zen Old Mincho',serif;font-size:28px;color:#fff;line-height:1.5;">続けることで、輝きは深まる。</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:22px 32px;border:1px solid #E4E0D8;display:flex;gap:16px;">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:18px;color:#9A7B2E;font-weight:400;">商品</span>
+        <span style="font-family:'Zen Old Mincho',serif;font-size:24px;color:#2C2C2C;">金時草サプリ 2g × 30包 スティックタイプ</span>
+      </div>
+    </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
-    <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#2C2C2C;letter-spacing:0.1em;line-height:1.2;margin-bottom:16px;">金の時</div>
-      <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-bottom:40px;">Golden Moments</div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:36px;color:#2C2C2C;letter-spacing:0.1em;margin-bottom:28px;">輝きは、準備から始まる。</div>
-      <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;font-weight:300;color:#5C5956;line-height:2.1;">金時草の力を、現代の人々が日々の習慣として取り入れられるようにデザインされた高品質ブランド。効能を語らず、輝く人生への準備を語ります。</div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:24px;">
-      <div style="background:#C9A84C;border-radius:16px;padding:40px 48px;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:12px;">Brand Concept</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:36px;color:#fff;line-height:1.5;">続けることで、<br>輝きは深まる。</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 48px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Product</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:8px;">金時草サプリメント</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;">2g × 30包 スティックタイプ<br>毎日の習慣に溶け込む設計</div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:36px 48px;border:1px solid #E4E0D8;">
-        <div style="font-family:'Crimson Pro',serif;font-size:16px;letter-spacing:0.3em;color:#9A7B2E;text-transform:uppercase;margin-bottom:12px;">Design Direction</div>
-        <div style="font-family:'Zen Old Mincho',serif;font-size:30px;color:#2C2C2C;margin-bottom:8px;">QUIET GOLD</div>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:300;color:#5C5956;">静謐・伝統・品格を纏う高級感</div>
-      </div>
-    </div>
+  <div style="width:580px;flex-shrink:0;position:relative;overflow:hidden;">
+    <img src="https://source.unsplash.com/580x1080/?gold,luxury,elegant,japanese" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.35));"></div>
   </div>
 </div>
 `;
@@ -170,7 +161,7 @@ window.slideFactories[8] = () => `
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;">
     <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:48px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:32px;">台湾でのビジネスを、<br>ともに創る。</div>
+      <div style="font-family:'Zen Old Mincho',serif;font-size:72px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:32px;">台湾でのビジネスを、<br>ともに創る。</div>
       <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;margin-bottom:32px;">台湾は日本ブランドへの信頼が高く、健康・美容市場も成長中です。パートナーとして発信いただき、越境ECを通じて商品をお届けするモデルをご提案します。</div>
       <div style="background:#F5F2EC;border-radius:12px;padding:28px 36px;border:1px solid #E4E0D8;">
         <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:400;color:#2C2C2C;margin-bottom:6px;">基本スタンス</div>
@@ -242,7 +233,7 @@ window.slideFactories[10] = () => `
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
     <div>
-      <div style="font-family:'Zen Old Mincho',serif;font-size:48px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.5;margin-bottom:40px;">日本の伝統を、<br>台湾の方々へ。</div>
+      <div style="font-family:'Zen Old Mincho',serif;font-size:72px;font-weight:500;color:#2C2C2C;letter-spacing:0.06em;line-height:1.4;margin-bottom:40px;">日本の伝統を、<br>台湾の方々へ。</div>
       <div style="font-family:'Noto Sans JP',sans-serif;font-size:24px;font-weight:300;color:#5C5956;line-height:2.1;">「不老長寿」という普遍的なテーマが、日本と台湾をつなぎます。クリエイターの信頼とブランドの世界観が合わさったとき、本当に価値のある商品が届けられると考えています。</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:20px;">
