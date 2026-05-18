@@ -17,7 +17,7 @@ window.slideFactories[0] = () => `
     </div>
   </div>
   <div style="width:700px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://source.unsplash.com/700x1080/?japan,garden,nature,elegant" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=700&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.5),transparent 40%);"></div>
   </div>
 </div>
@@ -59,7 +59,7 @@ window.slideFactories[2] = () => `
     </div>
   </div>
   <div style="width:600px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://source.unsplash.com/600x1080/?kanazawa,japan,traditional,castle" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=600&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.3));"></div>
   </div>
 </div>
@@ -69,7 +69,7 @@ window.slideFactories[2] = () => `
 window.slideFactories[3] = () => `
 <div class="slide slide-flex" id="s4" style="background:#F5F2EC;flex-direction:row;position:relative;">
   <div style="width:560px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://source.unsplash.com/560x1080/?green,leaf,herb,vegetable,purple" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1530213786676-41ad9f7736f2?w=560&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(245,242,236,0.4),transparent 50%);"></div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 140px 60px 80px;">
@@ -125,7 +125,7 @@ window.slideFactories[5] = () => `
     </div>
   </div>
   <div style="width:580px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://source.unsplash.com/580x1080/?gold,luxury,elegant,japanese" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=580&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.35));"></div>
   </div>
 </div>
