@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-lt: #E8D5A3;
+  --gold-dk: #9A7B2E;
+  --ch: #2C2C2C;
+  --gray: #5C5956;
+  --pt: #B8B3A8;
+  --pt-lt: #E4E0D8;
+  --bg: #F5F2EC;
+  --bg2: #EDEAE2;
+  --cream: #FAF7F2;
+  --white: #FFFFFF;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: #1a1a1a;
+  overflow: hidden;
+  font-family: 'Zen Old Mincho', serif;
+}
+
+/* ─── ステージ（1920×1080固定） ─── */
+#stage {
+  position: fixed;
+  top: 0; left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+}
+
+/* ─── スライド共通 ─── */
+.slide {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  overflow: hidden;
+  display: none;
+}
+.slide.active { display: block; }
+.slide-flex.active { display: flex; }
+.slide-grid.active { display: grid; }
+
+/* ─── ナビ ─── */
+#nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--pt-lt);
+  border-radius: 40px;
+  padding: 10px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+#nav button {
+  background: none; border: none; cursor: pointer;
+  color: var(--pt);
+  font-size: 18px;
+  padding: 4px 10px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+#nav button:hover { color: var(--gold-dk); }
+#slide-counter {
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--pt);
+  min-width: 56px;
+  text-align: center;
+}
+
+/* ─── クリックゾーン ─── */
+#click-prev, #click-next {
+  position: fixed;
+  top: 0; width: 50%; height: 100%;
+  cursor: pointer;
+  z-index: 50;
+}
+#click-prev { left: 0; }
+#click-next { right: 0; }
