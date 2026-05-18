@@ -176,11 +176,11 @@ window.slideFactories[7] = () => `
 
 // ─── P9: ブリッジ「Brand Design」───
 window.slideFactories[8] = () => `
-<div class="slide slide-flex" id="s9" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Section 03</div>
+<div class="slide slide-flex" id="s9" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Section 03</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">ブランドデザイン</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">Brand Design System</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">Brand Design System</div>
 </div>
 `;
 
@@ -236,11 +236,11 @@ window.slideFactories[10] = () => `
 
 // ─── P12: ブリッジ「Sales Strategy」───
 window.slideFactories[11] = () => `
-<div class="slide slide-flex" id="s12" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Section 04</div>
+<div class="slide slide-flex" id="s12" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Section 04</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">販売戦略</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">Sales Strategy</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">Sales Strategy</div>
 </div>
 `;
 
@@ -314,11 +314,11 @@ window.slideFactories[13] = () => `
 
 // ─── P15: ブリッジ「Global Strategy」───
 window.slideFactories[14] = () => `
-<div class="slide slide-flex" id="s15" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Section 05</div>
+<div class="slide slide-flex" id="s15" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Section 05</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">海外展開戦略</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">Global Strategy — Taiwan</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">Global Strategy — Taiwan</div>
 </div>
 `;
 

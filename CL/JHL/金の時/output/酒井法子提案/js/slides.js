@@ -20,11 +20,11 @@ window.slideFactories[0] = () => `
 
 // ─── P2: ブリッジ「加賀野菜とは」───
 window.slideFactories[1] = () => `
-<div class="slide slide-flex" id="s2" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Chapter 01</div>
+<div class="slide slide-flex" id="s2" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Chapter 01</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">加賀野菜とは</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">What is Kaga Vegetable?</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">What is Kaga Vegetable?</div>
 </div>
 `;
 
@@ -98,11 +98,11 @@ window.slideFactories[3] = () => `
 
 // ─── P5: ブリッジ「ブランド化という選択」───
 window.slideFactories[4] = () => `
-<div class="slide slide-flex" id="s5" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Chapter 02</div>
+<div class="slide slide-flex" id="s5" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Chapter 02</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:88px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">この力をどう届けるか</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">Brand Strategy</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">Brand Strategy</div>
 </div>
 `;
 
@@ -153,11 +153,11 @@ window.slideFactories[6] = () => `
 
 // ─── P8: ブリッジ「ビジネスのご提案」───
 window.slideFactories[7] = () => `
-<div class="slide slide-flex" id="s8" style="background:#2C2C2C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
-  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#C9A84C;"></div>
-  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;">Chapter 03</div>
+<div class="slide slide-flex" id="s8" style="background:#C9A84C;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 220px;position:relative;">
+  <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#2C2C2C;"></div>
+  <div style="font-family:'Crimson Pro',serif;font-size:20px;letter-spacing:0.5em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:40px;">Chapter 03</div>
   <div style="font-family:'Zen Old Mincho',serif;font-size:96px;font-weight:500;color:#FAF7F2;letter-spacing:0.06em;line-height:1.3;">ビジネスのご提案</div>
-  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:#C9A84C;margin-top:20px;opacity:0.8;">Business Partnership</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:28px;letter-spacing:0.4em;color:rgba(255,255,255,0.8);margin-top:20px;">Business Partnership</div>
 </div>
 `;
 

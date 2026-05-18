@@ -27,7 +27,8 @@ function renderAll() {
 }
 
 function goTo(n) {
-  current = (n + TOTAL) % TOTAL;
+  if (n < 0 || n >= TOTAL) return;
+  current = n;
   document.querySelectorAll('.slide').forEach((el, i) => {
     el.classList.toggle('active', i === current);
   });
