@@ -44,7 +44,7 @@ window.slideFactories[2] = () => `
     </div>
   </div>
   <div style="width:680px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://images.unsplash.com/TmgR2If58HM?w=680&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1765035058192-edd7ee3e0df0?w=680&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.3),transparent);"></div>
   </div>
 </div>
@@ -63,7 +63,7 @@ window.slideFactories[3] = () => `
     </div>
   </div>
   <div style="width:640px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://images.unsplash.com/_WoqSSsExpg?w=640&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1654713660297-cae1db5c9a84?w=640&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(250,247,242,0.4),transparent 40%);"></div>
   </div>
 </div>
@@ -258,7 +258,7 @@ window.slideFactories[11] = () => `
 window.slideFactories[12] = () => `
 <div class="slide slide-flex" id="s13" style="background:#FAF7F2;flex-direction:row;position:relative;">
   <div style="width:520px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://images.unsplash.com/u9k9ZusVNXA?w=520&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1624948465027-6f9b51067557?w=520&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(250,247,242,0.35),transparent 50%);"></div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 120px 60px 80px;">
@@ -357,7 +357,7 @@ window.slideFactories[15] = () => `
     </div>
   </div>
   <div style="width:580px;flex-shrink:0;position:relative;overflow:hidden;">
-    <img src="https://images.unsplash.com/_nhtb6RGTeU?w=580&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=580&h=1080&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,rgba(250,247,242,0.3));"></div>
   </div>
 </div>
